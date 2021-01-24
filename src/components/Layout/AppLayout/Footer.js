@@ -1,10 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { footerStyles } from "./styles";
+import { Grid, Typography } from "@material-ui/core";
+import { Menu } from "@material-ui/icons";
 
 const Footer = () => {
+  const classes = footerStyles();
+
   return (
-    <h1>APP FOOTER</h1>
-    
+    <div className={classes.root}>
+      <Grid container xs={12} spacing={3}>
+        <Grid item xs={12}>
+          <Typography style={{ textAlign: "center" }}>
+            APP FOOTER
+          </Typography>
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 

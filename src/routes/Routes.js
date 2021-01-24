@@ -1,5 +1,5 @@
 import React from "react";
-import { routes } from "./list";
+import { routes } from "./route-list";
 import { AppLayout, AuthLayout } from "../components/Layout";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
