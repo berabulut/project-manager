@@ -7,7 +7,7 @@ const Layout = (props) => (
   <Router>
     <Switch>
       {routes.map((val, key) => {
-        return <Route exact path={val.path} component={val.component} />
+        return <Route key={key} exact path={val.path} component={val.component} />
       })}
     </Switch>
   </Router>

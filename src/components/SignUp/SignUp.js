@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FirebaseAuth } from "../../provider/AuthProvider";
 import { AuthLayout, AuthTheme } from "../Layout";
+import { Alert } from "../Custom";
+import { Google } from "../Icons";
 import {
   Avatar,
   Container,
@@ -10,13 +13,44 @@ import {
   Grid,
   IconButton,
   InputAdornment,
+  Snackbar,
 } from "@material-ui/core";
 import { LockOutlined, Mail, Lock, Twitter, GitHub } from "@material-ui/icons";
-import { Google } from "../Icons";
 import { loginStyles, LoginTextField } from "./styles";
 
 const SignUp = () => {
   const classes = loginStyles(AuthTheme);
+  const { handleSignUp, inputs, setInputs, errors } = useContext(FirebaseAuth);
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alert, setAlert] = useState("");
+
+  useEffect(() => {
+    console.log('', errors)
+    if (errors.length > 0) {
+      setAlertOpen(true);
+      setAlert(errors[errors.length - 1]);
+    }
+  }, [errors]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSignUp();
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputs((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setAlertOpen(false);
+  };
+
   return (
     <AuthLayout>
       <div className={classes.root}>
@@ -33,10 +67,11 @@ const SignUp = () => {
             >
               Sign Up
             </Typography>
-            <form className={classes.form}>
+            <form onSubmit={handleSubmit} className={classes.form}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <LoginTextField
+                    onChange={handleChange}
                     variant="outlined"
                     type="dark"
                     required
@@ -60,6 +95,7 @@ const SignUp = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <LoginTextField
+                    onChange={handleChange}
                     variant="outlined"
                     required
                     fullWidth
@@ -156,6 +192,9 @@ const SignUp = () => {
           </div>
         </Container>
       </div>
+      <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">{alert}</Alert>
+      </Snackbar>
     </AuthLayout>
   );
 };
