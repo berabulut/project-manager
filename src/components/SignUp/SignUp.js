@@ -11,11 +11,11 @@ import {
   IconButton,
   InputAdornment,
 } from "@material-ui/core";
-import { LockOpenOutlined, Mail, Lock, Twitter, GitHub } from "@material-ui/icons";
+import { LockOutlined, Mail, Lock, Twitter, GitHub } from "@material-ui/icons";
 import { Google } from "../Icons";
 import { loginStyles, LoginTextField } from "./styles";
 
-const Login = () => {
+const SignUp = () => {
   const classes = loginStyles(AuthTheme);
   return (
     <AuthLayout>
@@ -24,14 +24,14 @@ const Login = () => {
           <CssBaseline />
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
-              <LockOpenOutlined />
+              <LockOutlined />
             </Avatar>
             <Typography
               className={classes.signUpText}
               component="h1"
               variant="h5"
             >
-              Login
+              Sign Up
             </Typography>
             <form className={classes.form}>
               <Grid container spacing={2}>
@@ -90,7 +90,7 @@ const Login = () => {
                 color="primary"
                 className={classes.submit}
               >
-                Login
+                Create Your Account
               </Button>
               <Grid
                 className={classes.gridContainer}
@@ -145,9 +145,9 @@ const Login = () => {
               >
                 <Grid item>
                   <Typography className={classes.infoText} variant="body2">
-                    Don't have an account yet?&nbsp;
-                    <Link className={classes.link} to="/signup" variant="body2">
-                      Sign up
+                    Already a member?&nbsp;
+                    <Link className={classes.link} to="/login" variant="body2">
+                      Login
                     </Link>
                   </Typography>
                 </Grid>
@@ -160,4 +160,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

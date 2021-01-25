@@ -1,15 +1,15 @@
 import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
 
-export const theme = createMuiTheme({
+export const AuthTheme = createMuiTheme({
   palette: {
     type: "dark",
     primary: {
-      main: "#2F80ED"
+      main: "#2F80ED",
     },
     info: {
-      main: "#BDBDBD"
-    }
-  }
+      main: "#BDBDBD",
+    },
+  },
 });
 
 export const containerStyles = makeStyles((theme) => ({
@@ -18,4 +18,31 @@ export const containerStyles = makeStyles((theme) => ({
     backgroundColor: "#252329",
     display: "grid",
   },
+}));
+
+export const footerStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  footer: {
+    padding: theme.spacing(3, 2),
+    marginTop: "auto",
+    backgroundColor: "#252329"
+  },
+  divider: {
+    backgroundColor: "#828282"
+  },
+  footerText: {
+    color: "#828282",
+    textAlign: "start",
+    fontWeight: "500",
+    paddingLeft: "10px"
+  },
+  gridContainer: {
+    marginTop: "15px",
+  },
+  linkGrid: {
+    textAlign: "center"
+  }
 }));
