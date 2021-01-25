@@ -26,7 +26,6 @@ const SignUp = () => {
   const [alert, setAlert] = useState("");
 
   useEffect(() => {
-    console.log('', errors)
     if (errors.length > 0) {
       setAlertOpen(true);
       setAlert(errors[errors.length - 1]);
