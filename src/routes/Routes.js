@@ -5,6 +5,7 @@ import { routes } from "./route-list";
 import { AppLayout, AuthLayout } from "../components/Layout";
 import { Login } from "../components/Login";
 
+
 const Layout = (props) => {
   const { token } = useContext(FirebaseAuth);
   return (
@@ -17,17 +18,19 @@ const Layout = (props) => {
               <Route
                 key={key}
                 component={val.component}
-                exact path={val.path}
+                exact
+                path={val.path}
               />
             );
           } else {
             return (
               <Route
                 key={key}
-                render={rProps =>
+                render={(rProps) =>
                   token === null ? <Login /> : <Component />
                 }
-                exact path={val.path}
+                exact
+                path={val.path}
               />
             );
           }

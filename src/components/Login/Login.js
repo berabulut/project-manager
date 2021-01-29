@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FirebaseAuth } from "../../provider/AuthProvider";
 import { AuthLayout, AuthTheme } from "../Layout";
 import { Alert } from "../Custom";
@@ -24,12 +24,23 @@ import {
 } from "@material-ui/icons";
 import { loginStyles, LoginTextField } from "./styles";
 
+
 const Login = () => {
   const classes = loginStyles(AuthTheme);
-  const { handleLogin, inputs, setInputs, errors } = useContext(FirebaseAuth);
+  const history = useHistory();
+  const { handleLogin, handleGoogleLogin, handleTwitterLogin, handleGithubLogin, setInputs, errors, token } = useContext(FirebaseAuth);
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alert, setAlert] = useState("");
+  
+  useEffect(() => {
+    if(!token) {
+      history.push("/login")
+    }
+    else {
+      history.push("/")
+    }
+  }, [token])
 
   useEffect(() => {
     if (errors.length > 0) {
@@ -156,6 +167,7 @@ const Login = () => {
                     aria-label="upload picture"
                     component="span"
                     className={classes.iconButton}
+                    onClick={() => handleGoogleLogin()}
                   >
                     <Google />
                   </IconButton>
@@ -165,6 +177,7 @@ const Login = () => {
                     aria-label="upload picture"
                     component="span"
                     className={classes.iconButton}
+                    onClick={() => handleTwitterLogin()}
                   >
                     <Twitter />
                   </IconButton>
@@ -174,6 +187,7 @@ const Login = () => {
                     aria-label="upload picture"
                     component="span"
                     className={classes.iconButton}
+                    onClick={() => handleGithubLogin()}
                   >
                     <GitHub />
                   </IconButton>

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FirebaseAuth } from "../../provider/AuthProvider";
 import { AuthLayout, AuthTheme } from "../Layout";
 import { Alert } from "../Custom";
@@ -20,10 +20,19 @@ import { loginStyles, LoginTextField } from "./styles";
 
 const SignUp = () => {
   const classes = loginStyles(AuthTheme);
-  const { handleSignUp, inputs, setInputs, errors } = useContext(FirebaseAuth);
+  const history = useHistory();
+  const { handleSignUp, inputs, setInputs, errors, token } = useContext(
+    FirebaseAuth
+  );
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alert, setAlert] = useState("");
+
+  useEffect(() => {
+    if (token) {
+      history.push("/");
+    } 
+  }, [token]);
 
   useEffect(() => {
     if (errors.length > 0) {
@@ -43,7 +52,7 @@ const SignUp = () => {
   };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -192,7 +201,9 @@ const SignUp = () => {
         </Container>
       </div>
       <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error">{alert}</Alert>
+        <Alert onClose={handleClose} severity="error">
+          {alert}
+        </Alert>
       </Snackbar>
     </AuthLayout>
   );
