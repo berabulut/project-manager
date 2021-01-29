@@ -1,0 +1,2 @@
+1. link authenticated user with db
+2. create profile page 

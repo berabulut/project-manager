@@ -25,7 +25,7 @@ const Footer = () => {
           </Grid>
           <Grid item xs={1} className={classes.linkGrid}>
             <Link
-              href="https://github.com/berabulut"
+              href="https://github.com/berabulut/project-manager"
               variant="body2"
               target="_blank"
               rel="noopener"

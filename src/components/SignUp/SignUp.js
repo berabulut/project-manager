@@ -21,7 +21,7 @@ import { loginStyles, LoginTextField } from "./styles";
 const SignUp = () => {
   const classes = loginStyles(AuthTheme);
   const history = useHistory();
-  const { handleSignUp, inputs, setInputs, errors, token } = useContext(
+  const { handleSignUp, handleGoogleLogin, handleTwitterLogin, handleGithubLogin, setInputs, errors, token } = useContext(
     FirebaseAuth
   );
 
@@ -159,6 +159,7 @@ const SignUp = () => {
                     aria-label="upload picture"
                     component="span"
                     className={classes.iconButton}
+                    onClick={() => handleGoogleLogin()}
                   >
                     <Google />
                   </IconButton>
@@ -168,6 +169,7 @@ const SignUp = () => {
                     aria-label="upload picture"
                     component="span"
                     className={classes.iconButton}
+                    onClick={() => handleTwitterLogin()}
                   >
                     <Twitter />
                   </IconButton>
@@ -177,6 +179,7 @@ const SignUp = () => {
                     aria-label="upload picture"
                     component="span"
                     className={classes.iconButton}
+                    onClick={() => handleGithubLogin()}
                   >
                     <GitHub />
                   </IconButton>
