@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid container>
         <Grid item xs={12}>
           <Typography style={{ textAlign: "center" }}>
             APP FOOTER
