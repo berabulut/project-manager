@@ -9,9 +9,6 @@ const Footer = () => {
     <div className={classes.root}>
       <Grid container>
         <Grid item xs={12}>
-          <Typography style={{ textAlign: "center" }}>
-            APP FOOTER
-          </Typography>
         </Grid>
       </Grid>
     </div>

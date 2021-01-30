@@ -1,11 +1,12 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import Menu from "./Menu";
 import { headerStyles } from "./styles";
 
 const Header = () => {
+  const history = useHistory();
   const classes = headerStyles();
 
   return (
@@ -16,6 +17,7 @@ const Header = () => {
             edge="start"
             className={classes.menuButton}
             aria-label="menu"
+            onClick={() => history.push("/")}
           >
             <DashboardIcon className={classes.menuIcon} />
             <Typography variant="h6" className={classes.menuTitle}>
@@ -25,7 +27,7 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             Devchallanges Board
           </Typography>
-          <Menu />
+          <Menu history={history} />
         </Toolbar>
       </AppBar>
     </div>

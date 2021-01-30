@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { FirebaseAuth } from "../../../provider/AuthProvider";
 import {
   IconButton,
   Typography,
@@ -14,14 +15,14 @@ import {
   ExitToApp,
 } from "@material-ui/icons";
 import { PopMenu, PopMenuItem, menuStyles } from "./styles";
-import { FirebaseAuth } from "../../../provider/AuthProvider";
 
-const Menu = () => {
+const Menu = ({ history }) => {
+  const { handleLogout } = useContext(FirebaseAuth);
+
   const classes = menuStyles();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
-
-  const { handleLogout } = useContext(FirebaseAuth);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -65,7 +66,7 @@ const Menu = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <PopMenuItem>
+        <PopMenuItem onClick={() => history.push("/profile")}>
           <ListItemIcon>
             <AccountCircle fontSize="small" />
           </ListItemIcon>
