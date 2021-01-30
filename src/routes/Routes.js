@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { FirebaseAuth } from "../provider/AuthProvider";
 import { routes } from "./route-list";
-import { AppLayout, AuthLayout } from "../components/Layout";
 import { Login } from "../components/Login";
 
 

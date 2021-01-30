@@ -1,7 +1,6 @@
 import React from "react";
 import { footerStyles } from "./styles";
 import { Grid, Typography } from "@material-ui/core";
-import { Menu } from "@material-ui/icons";
 
 const Footer = () => {
   const classes = footerStyles();
