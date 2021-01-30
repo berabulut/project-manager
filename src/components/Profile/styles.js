@@ -9,6 +9,35 @@ export const profileStyles = makeStyles((theme) => ({
     borderRadius: "12px",
   },
   gridContainer: {
-    padding: theme.spacing(4),
-  }
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
+    paddingTop: theme.spacing(3.1),
+    paddingBottom: theme.spacing(3.1),
+    display: "flex",
+    alignItems: "center",
+  },
+  pageTitle: {
+    marginTop: theme.spacing(10),
+    marginBottom: theme.spacing(5),
+    textAlign: "center",
+  },
+  divider: {
+    width: "100%",
+  },
+  avatar: {
+    width: "3em",
+    height: "3em",
+  },
+  button: {
+    marginTop: theme.spacing(4),
+    float: "right",
+  },
+  tableTitle: {
+    color: "#BDBDBD",
+    fontSize: "1em",
+  },
+  tableContent: {
+    fontSize: "1.1em",
+    fontWeight: "500",
+  },
 }));
