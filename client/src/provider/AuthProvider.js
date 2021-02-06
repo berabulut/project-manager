@@ -7,6 +7,7 @@ const AuthProvider = (props) => {
   const [inputs, setInputs] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("pmt_token"));
+  const [userData, setUserData] = useState({});
 
   const handleSignUp = () => {
     // middle man between firebase and signup

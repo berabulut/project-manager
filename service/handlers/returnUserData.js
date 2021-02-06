@@ -10,6 +10,7 @@ module.exports.login = async (event, context, callback) => {
           const response = {
             statusCode: 200,
             body: JSON.stringify({
+              statusCode: 200,
               userData: userData,
             }),
           };
@@ -19,6 +20,7 @@ module.exports.login = async (event, context, callback) => {
         const response = {
           statusCode: 500,
           body: JSON.stringify({
+            statusCode: 500,
             error: err,
           }),
         };
@@ -28,6 +30,7 @@ module.exports.login = async (event, context, callback) => {
       const response = {
         statusCode: 400,
         body: JSON.stringify({
+          statusCode: 400,
           message: "UID is undefined!",
         }),
       };

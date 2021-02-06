@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import { FirebaseConfig } from "./FirebaseConfig";
+import { handleSignIn } from "./UserMethods";
 
 const SignUp = (email, password, setErrors, setToken) => {
   firebase
@@ -8,6 +9,7 @@ const SignUp = (email, password, setErrors, setToken) => {
     .then(async (res) => {
       const token = await Object.entries(res.user)[5][1].b;
       //set token to localStorage
+      handleSignIn(res);
       await localStorage.setItem("pmt_token", token);
       //grab token from local storage and set to state.
       await setToken(token);
@@ -26,6 +28,7 @@ const Login = (email, password, setErrors, setToken) => {
     .then(async (res) => {
       const token = await Object.entries(res.user)[5][1].b;
       //set token to localStorage
+      handleSignIn(res);
       await localStorage.setItem("pmt_token", token);
       await setToken(token);
     })
@@ -43,7 +46,8 @@ const LoginWithGoogle = (setErrors, setToken) => {
     .then(async (res) => {
       const token = await Object.entries(res.user)[5][1].b;
       //set token to localStorage
-      console.log(res)
+      const userData = handleSignIn(res);
+      console.log({ userData });
       await localStorage.setItem("pmt_token", token);
       await setToken(token);
     })
@@ -61,6 +65,7 @@ const LoginWithGithub = (setErrors, setToken) => {
     .then(async (res) => {
       const token = await Object.entries(res.user)[5][1].b;
       //set token to localStorage
+      handleSignIn(res);
       await localStorage.setItem("pmt_token", token);
       await setToken(token);
     })
@@ -78,7 +83,7 @@ const LoginWithTwitter = (setErrors, setToken) => {
     .then(async (res) => {
       const token = await Object.entries(res.user)[5][1].b;
       //set token to localStorage
-      console.log(res)
+      handleSignIn(res);
       await localStorage.setItem("pmt_token", token);
       await setToken(token);
     })
