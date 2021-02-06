@@ -7,7 +7,7 @@ import Routes from "./routes/Routes";
 const App = () => {
   const { handleUserData, userData } = useContext(FirebaseAuth);
   useEffect(() => {
-    if (!userData.userData) {
+    if (!userData.name) {
       firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
           handleUserData(user.uid);
