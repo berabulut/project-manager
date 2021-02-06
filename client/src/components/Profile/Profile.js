@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { FirebaseAuth } from "../../provider/AuthProvider";
 import {
   Grid,
   Typography,
@@ -14,6 +15,7 @@ import { profileStyles } from "./styles";
 
 const Profile = () => {
   const classes = profileStyles();
+  const { userData } = useContext(FirebaseAuth);
   return (
     <AppLayout>
       <div className={classes.root}>
@@ -37,7 +39,7 @@ const Profile = () => {
                   className={classes.avatar}
                   variant="rounded"
                   alt="Cindy Baker"
-                  src="/static/images/avatar/3.jpg"
+                  src={userData !== undefined && userData.picture}
                 />
               </Grid>
             </Grid>
@@ -58,7 +60,7 @@ const Profile = () => {
                   variant="h6"
                   gutterBottom
                 >
-                  Xanthe Neal
+                  {userData !== undefined && userData.name}
                 </Typography>
               </Grid>
             </Grid>
@@ -79,7 +81,7 @@ const Profile = () => {
                   variant="h6"
                   gutterBottom
                 >
-                  xanthe.neal@gmail.com
+                  {userData !== undefined && userData.email}
                 </Typography>
               </Grid>
             </Grid>

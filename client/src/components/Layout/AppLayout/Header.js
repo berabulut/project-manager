@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
+
 import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import Menu from "./Menu";

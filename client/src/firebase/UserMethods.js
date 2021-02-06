@@ -1,4 +1,4 @@
-export const fetchUserData = async (uid) => {
+export const FetchUserData = async (uid, setUserData) => {
   try {
     let response = await fetch(
       process.env.REACT_APP_SERVICE_URL + `/returnUserData?uid=${uid}`,
@@ -8,7 +8,12 @@ export const fetchUserData = async (uid) => {
         }),
       }
     );
-    return await response.json();
+    const data = await response.json();
+    if (setUserData) {
+      setUserData(data.userData);
+    }
+
+    return data;
   } catch (err) {
     console.log(err);
   }
@@ -33,15 +38,17 @@ const createNewUserRecord = async (userData) => {
   }
 };
 
-export const handleSignIn = (response) => {
+export const handleSignIn = (response, setUserData) => {
   const isNewUser = response.additionalUserInfo.isNewUser;
 
   if (isNewUser === true) {
     const userData = handleSignInData(response);
     createNewUserRecord(userData);
-	return userData;
+    return userData;
   } else if (isNewUser === false) {
-    return fetchUserData(response.user.uid);
+    if (setUserData) {
+      FetchUserData(response.user.uid, setUserData);
+    }
   } else {
     console.log("handlesignin failed somehow");
   }

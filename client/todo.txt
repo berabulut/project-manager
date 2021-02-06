@@ -1,2 +1,2 @@
-1. link authenticated user with db
+1. fix cors error when fetching userData
 2. create profile page 

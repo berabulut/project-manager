@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FirebaseAuth } from "../../../provider/AuthProvider";
 import {
   IconButton,
@@ -17,7 +17,7 @@ import {
 import { PopMenu, PopMenuItem, menuStyles } from "./styles";
 
 const Menu = ({ history }) => {
-  const { handleLogout } = useContext(FirebaseAuth);
+  const { handleLogout, userData } = useContext(FirebaseAuth);
 
   const classes = menuStyles();
 
@@ -48,10 +48,10 @@ const Menu = ({ history }) => {
           variant="rounded"
           className={classes.avatar}
           alt="Remy Sharp"
-          src="/static/images/avatar/1.jpg"
+          src={userData !== undefined && userData.picture}
         />
         <Typography variant="subtitle2" className={classes.username}>
-          Xanthe Neal
+          {userData !== undefined ? userData.name : "Xanthe Neal"}
         </Typography>
         {open ? (
           <ArrowDropUp className={classes.arrowIcon} />

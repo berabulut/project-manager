@@ -9,6 +9,11 @@ module.exports.login = async (event, context, callback) => {
         if (userData) {
           const response = {
             statusCode: 200,
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Credentials": true,
+            },
             body: JSON.stringify({
               statusCode: 200,
               userData: userData,
@@ -19,6 +24,11 @@ module.exports.login = async (event, context, callback) => {
       } catch (err) {
         const response = {
           statusCode: 500,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+          },
           body: JSON.stringify({
             statusCode: 500,
             error: err,
@@ -29,6 +39,11 @@ module.exports.login = async (event, context, callback) => {
     } else {
       const response = {
         statusCode: 400,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
+        },
         body: JSON.stringify({
           statusCode: 400,
           message: "UID is undefined!",
