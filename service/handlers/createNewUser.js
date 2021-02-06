@@ -49,7 +49,7 @@ module.exports.create = async(event, context, callback) => {
           message: "UID is undefined",
         }),
       };
-      reject(response);
+      resolve(response);
     }
   })
   return promise;

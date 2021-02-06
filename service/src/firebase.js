@@ -49,6 +49,25 @@ const checkIfUserExists = (uid) =>
       });
   });
 
+const returnUserData = (uid) => new Promise(async(resolve, reject) => {
+  const ref = db.ref(`/users/${uid}`);
+  const userExists = await checkIfUserExists(uid);
+
+  if(userExists) {
+    ref.once("value", (snapshot) => {
+      const value = snapshot.val();
+      if (value !== undefined && value !== null) {
+        resolve(value);
+      } else {
+        reject("Couldn't resolve user data!");
+      }
+    })
+  }
+  else {
+    reject("User data doesn't exist!")
+  }
+})
+
 const testDB = () =>
   // fetch temperature data from firebase
   new Promise((resolve, reject) => {
@@ -64,4 +83,4 @@ const testDB = () =>
       });
   });
 
-module.exports = { testDB, createNewUser, checkIfUserExists };
+module.exports = { testDB, createNewUser, checkIfUserExists, returnUserData };

@@ -19,7 +19,7 @@ functions:
           method: post
           cors: true
   returnUserData:
-    handler: handlers/getData.hello
+    handler: handlers/returnUserData.login
     events:
       - http:
           path: returnUserData
