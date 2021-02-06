@@ -8,13 +8,21 @@ provider:
   runtime: nodejs12.x
   environment:
     SLS_DEBUG: ${env:SLS_DEBUG}
+    DATABASE_URL: ${env:DATABASE_URL}
 
 functions:
-  hello:
+  createNewUser:
+    handler: handlers/createNewUser.create
+    events:
+      - http:
+          path: createNewUser
+          method: post
+          cors: true
+  returnUserData:
     handler: handlers/getData.hello
     events:
       - http:
-          path: hello
+          path: returnUserData
           method: get
           cors: true
 
