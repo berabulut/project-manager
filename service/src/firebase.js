@@ -9,6 +9,46 @@ admin.initializeApp({
 
 const db = admin.database();
 
+const createNewUser = (uid, email, name, picture) =>
+  new Promise(async (resolve, reject) => {
+    const ref = db.ref(`/users/${uid}`);
+    const userExists = await checkIfUserExists(uid);
+    const data = {
+      uid: uid,
+      email: email,
+      name: name,
+      picture: picture,
+    };
+
+    if (!userExists) {
+      ref.set(data, (error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(true);
+        }
+      });
+    } else {
+      reject("User already exists!");
+    }
+  });
+
+const checkIfUserExists = (uid) =>
+  new Promise((resolve, reject) => {
+    const ref = db.ref(`/users/${uid}`);
+    ref
+      .once("value", (snapshot) => {
+        if (snapshot.val() !== undefined && snapshot.val() !== null) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
 const testDB = () =>
   // fetch temperature data from firebase
   new Promise((resolve, reject) => {
@@ -24,24 +64,4 @@ const testDB = () =>
       });
   });
 
-const createNewUser = (uid, email, name, picture) =>
-  new Promise((resolve, reject) => {
-    const ref = db.ref(`/users/${uid}`);
-    const data = {
-      uid: uid,
-      email: email,
-      name: name,
-      picture: picture,
-    } 
-
-    ref.set(data, (error) => {
-      if(error) {
-        reject(error)
-      }
-      else {
-        resolve(true)
-      }
-    })
-  });
-
-module.exports = { testDB, createNewUser };
+module.exports = { testDB, createNewUser, checkIfUserExists };

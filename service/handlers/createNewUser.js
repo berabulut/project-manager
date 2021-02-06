@@ -34,7 +34,7 @@ module.exports.create = async(event, context, callback) => {
             error: err
           }),
         };
-        reject(response);
+        resolve(response);
       })
     }
     else {
