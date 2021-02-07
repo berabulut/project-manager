@@ -1,7 +1,7 @@
 org: berabulut
 app: project-management-tool
 service: project-management-tool-service
-frameworkVersion: '2'
+frameworkVersion: "2"
 
 provider:
   name: aws
@@ -24,6 +24,14 @@ functions:
       - http:
           path: returnUserData
           method: get
+          cors: true
+
+  createNewBoard:
+    handler: handlers/createNewBoard.create
+    events:
+      - http:
+          path: createNewBoard
+          method: post
           cors: true
 
 plugins:

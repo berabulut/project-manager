@@ -1,4 +1,4 @@
-const { testDB, createNewUser, checkIfUserExists } = require("./src/firebase");
+const { testDB, createNewUser, checkIfUserExists } = require("./src/auth");
 
 testDB();
 

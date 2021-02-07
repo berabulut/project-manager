@@ -1,10 +1,10 @@
-const { createNewUser } = require("../src/auth");
+const { createNewBoard } = require("../src/boards");
 
 module.exports.create = async (event, context, callback) => {
   const promise = new Promise((resolve, reject) => {
-    const user = JSON.parse(event.body);
-    if (user.uid !== undefined) {
-      createNewUser(user.uid, user.email, user.name, user.picture)
+    const board = JSON.parse(event.body);
+    if (board.users !== undefined) {
+		createNewBoard(board.title, board.coverPhoto, board.visibility, board.users)
         .then((data) => {
           const response = {
             statusCode: 200,
@@ -15,7 +15,7 @@ module.exports.create = async (event, context, callback) => {
             },
             body: JSON.stringify({
               statusCode: 200,
-              message: "User created successfuly!",
+              message: "Board created successfuly!",
               data: data,
             }),
           };
@@ -31,7 +31,7 @@ module.exports.create = async (event, context, callback) => {
             },
             body: JSON.stringify({
               statusCode: 500,
-              message: "Couldn't create a user!",
+              message: "Couldn't create a board!",
               error: err,
             }),
           };
@@ -47,7 +47,7 @@ module.exports.create = async (event, context, callback) => {
         },
         body: JSON.stringify({
           statusCode: 400,
-          message: "UID is undefined",
+          message: "Title is undefined",
         }),
       };
       resolve(response);

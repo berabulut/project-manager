@@ -1,4 +1,4 @@
-const { returnUserData } = require("../src/firebase");
+const { returnUserData } = require("../src/auth");
 
 module.exports.login = async (event, context, callback) => {
   const promise = new Promise(async (resolve, reject) => {

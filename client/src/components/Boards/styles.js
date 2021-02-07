@@ -9,7 +9,7 @@ export const boardsStyles = makeStyles((theme) => ({
   button: {
 	  backgroundColor: "#2F80ED",
 	  borderRadius: "8px",
-	  padding: "5px 13px"
+	  padding: "6px 13px"
   },
   title: {
 	  letterSpacing: "-0.035em",
