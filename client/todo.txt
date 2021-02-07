@@ -1,2 +1,2 @@
 1. edit user data from profile
-2. 
+2. fix returnUserRelatedBoards

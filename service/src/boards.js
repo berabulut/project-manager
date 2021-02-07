@@ -29,24 +29,38 @@ const createNewBoard = (title, coverPhoto, visibility, users) =>
     });
   });
 
-const returnUserRelatedBoards = async (boards) =>
-  new Promise((resolve, reject) => {
+const returnUserRelatedBoards = (boards) =>
+  new Promise(async (resolve, reject) => {
     try {
-      let boardList = [];
-      boards.map(async (val, key) => {
-        // val here should be unique id of a board
-        const ref = db.ref(`/boards/${val}`);
-        ref.once("value", async (snapshot) => {
-          const value = await snapshot.val();
-          console.log(value);
-          if (value !== undefined && value !== null) {
-            boardList.push(value);
-          }
+      const response = new Promise((resolve, reject) => {
+        let data = [];
+        boards.map((val, key) => {
+          // val here should be unique id of a board
+          const ref = db.ref(`/boards/${val}`);
+          ref.once("value", (snapshot) => {
+            const value = snapshot.val();
+            if (value !== undefined && value !== null) {
+              data.push(value);
+              if (key === boards.length - 1) resolve(data);
+            }
+            if (key === boards.length - 1) resolve(data);
+          });
         });
-        if (key === boards.length - 1) {
-          resolve(await boardList);
-        }
       });
+
+      resolve(await response);
+
+      // boards.map((val, key) => {
+      //   // val here should be unique id of a board
+      //   const ref = db.ref(`/boards/${val}`);
+      //   ref.once("value",  (snapshot) => {
+      //     const value = await snapshot.val();
+      //     if (value !== undefined && value !== null) {
+      //       console.log({ value });
+      //       return value;
+      //     }
+      //   });
+      // })
     } catch (err) {
       reject(err);
     }
