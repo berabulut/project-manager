@@ -29,5 +29,27 @@ const createNewBoard = (title, coverPhoto, visibility, users) =>
     });
   });
 
+const returnUserRelatedBoards = async (boards) =>
+  new Promise((resolve, reject) => {
+    try {
+      let boardList = [];
+      boards.map(async (val, key) => {
+        // val here should be unique id of a board
+        const ref = db.ref(`/boards/${val}`);
+        ref.once("value", async (snapshot) => {
+          const value = await snapshot.val();
+          console.log(value);
+          if (value !== undefined && value !== null) {
+            boardList.push(value);
+          }
+        });
+        if (key === boards.length - 1) {
+          resolve(await boardList);
+        }
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
 
-module.exports = { createNewBoard };
+module.exports = { createNewBoard, returnUserRelatedBoards };

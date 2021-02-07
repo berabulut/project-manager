@@ -33,6 +33,13 @@ functions:
           path: createNewBoard
           method: post
           cors: true
+  returnUserRelatedBoards:
+    handler: handlers/returnUserRelatedBoards.boards
+    events:
+      - http:
+          path: returnUserRelatedBoards
+          method: post
+          cors: true
 
 plugins:
   - serverless-offline
