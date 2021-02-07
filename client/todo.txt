@@ -1,2 +1,2 @@
-1. fix cors error when fetching userData
-2. create profile page 
+1. edit user data from profile
+2. 

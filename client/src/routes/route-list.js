@@ -2,11 +2,12 @@ import { Login } from "../components/Login";
 import { Home } from "../components/Home";
 import { SignUp } from "../components/SignUp";
 import { Profile } from "../components/Profile";
+import { Boards } from "../components/Boards";
 
 export const routes = [
   {
     path: "/",
-    component: Home,
+    component: Boards,
   },
   {
     path: "/login",
