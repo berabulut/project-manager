@@ -11,7 +11,7 @@ const db = admin.database();
 
 const createNewBoard = (title, coverPhoto, visibility, users) =>
   new Promise((resolve, reject) => {
-    const ref = db.ref(`/boards/`);
+    const ref = db.ref(`/boards/`).push();
 
     const data = {
       title: title,
@@ -20,13 +20,44 @@ const createNewBoard = (title, coverPhoto, visibility, users) =>
       users: users,
     };
 
-    ref.push().set(data, (error) => {
+    const boardId = ref.key;
+
+    ref.set(data, (error) => {
       if (error) {
         reject(error);
       } else {
-        resolve(true);
+        linkUsersAndBoard(users, boardId)
+        .then(() => resolve(true))
+        .catch((err) => reject(err))
       }
     });
+  });
+
+const linkUsersAndBoard = (users, boardId) =>
+  new Promise((resolve, reject) => {
+    if (users !== undefined && users.length > 0) {
+      try {
+        users.map((val, key) => {
+          const ref = db.ref(`/users/${val.uid}/boards/`).push();
+          const data = {
+            boardId: boardId
+          }
+          ref.set(data, (error) => {
+            if(error) {
+              reject(error);
+            }
+            else {
+              resolve(true)
+            }
+          })
+
+        });
+      } catch (err) {
+        reject(err);
+      }
+    } else {
+      reject("No user provided!");
+    }
   });
 
 const returnUserRelatedBoards = (boards) =>
@@ -49,18 +80,6 @@ const returnUserRelatedBoards = (boards) =>
       });
 
       resolve(await response);
-
-      // boards.map((val, key) => {
-      //   // val here should be unique id of a board
-      //   const ref = db.ref(`/boards/${val}`);
-      //   ref.once("value",  (snapshot) => {
-      //     const value = await snapshot.val();
-      //     if (value !== undefined && value !== null) {
-      //       console.log({ value });
-      //       return value;
-      //     }
-      //   });
-      // })
     } catch (err) {
       reject(err);
     }

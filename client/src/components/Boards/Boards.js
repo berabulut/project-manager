@@ -8,6 +8,10 @@ import { boardsStyles } from "./styles";
 
 const Boards = () => {
   const classes = boardsStyles();
+  
+  const handleCreateButton = () => {
+    console.log('new board')
+  }
 
   return (
     <AppLayout>
@@ -32,15 +36,6 @@ const Boards = () => {
             </Box>
           </Box>
           <Grid container spacing={3}>
-            <Grid item lg={3} md={4} sm={6} xs={12}>
-              <Board />
-            </Grid>
-            <Grid item lg={3} md={4} sm={6} xs={12}>
-              <Board />
-            </Grid>
-            <Grid item lg={3} md={4} sm={6} xs={12}>
-              <Board />
-            </Grid>
             <Grid item lg={3} md={4} sm={6} xs={12}>
               <Board />
             </Grid>
