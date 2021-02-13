@@ -5,13 +5,14 @@ import {
   Typography,
   ListItemIcon,
   ListItemText,
-  Avatar,
   Divider,
+  Grid,
 } from "@material-ui/core";
-import { AccountCircle, ExitToApp } from "@material-ui/icons";
-import { PopMenu, PopMenuItem } from "./styles";
+import { Public, Lock } from "@material-ui/icons";
+import { PopMenu, PopMenuItem, visibilityStyles } from "./styles";
 
 const Menu = ({ open, anchorEl, handleClose }) => {
+  const classes = visibilityStyles();
 
   return (
     <div>
@@ -22,18 +23,34 @@ const Menu = ({ open, anchorEl, handleClose }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+        <Grid className={classes.header} container>
+          <Grid item xs={12}>
+            <Typography className={classes.headerTitle} variant="h3" component="p">
+              Visibility
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography className={classes.headerDescription} variant="p" component="p">
+              Choose who can see this board
+            </Typography>
+          </Grid>
+        </Grid>
         <PopMenuItem>
-          <ListItemIcon>
-            <AccountCircle fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="My Profile" />
-        </PopMenuItem>
-        <Divider />
-        <PopMenuItem>
-          <ListItemIcon>
-            <ExitToApp style={{ color: "#EB5757" }} fontSize="small" />
-          </ListItemIcon>
-          <ListItemText style={{ color: "#EB5757" }} primary="Logout" />
+          <Grid container>
+            <Grid item xs={3}>
+              <Public className={classes.itemIcon} />
+            </Grid>
+            <Grid item xs={9}>
+              <Typography className={classes.itemTitle} component="p" variant="p">
+                Public
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography className={classes.itemDescription} component="p" variant="p">
+                Anyone can see this board. Only board members can edit.
+              </Typography>
+            </Grid>
+          </Grid>
         </PopMenuItem>
       </PopMenu>
     </div>

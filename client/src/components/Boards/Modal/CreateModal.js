@@ -72,7 +72,7 @@ const CreateModal = ({ open, setOpen }) => {
             xs={12}
             justify="space-between"
           >
-            <Grid item xs={5}>
+            <Grid item xs={6}>
               <IconButton className={classes.button} aria-label="cover">
                 <Image className={classes.icons} />
                 <Typography className={classes.buttonText} variant="p">
@@ -80,8 +80,9 @@ const CreateModal = ({ open, setOpen }) => {
                 </Typography>
               </IconButton>
             </Grid>
-            <Grid item xs={5}>
+            <Grid  item xs={6}>
               <IconButton
+              style={{float: "right"}}
                 onClick={handleVisibility}
                 className={classes.button}
                 aria-label="cover"
