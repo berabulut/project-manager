@@ -1,6 +1,6 @@
 import firebase from "firebase";
 import { FirebaseConfig } from "./FirebaseConfig";
-import { handleSignIn } from "./UserMethods";
+import { handleSignIn } from "../functions/UserFunctions";
 
 const SignUp = (email, password, setErrors, setToken, setUserData) => {
   firebase

@@ -10,7 +10,7 @@ import { boardsStyles } from "./styles";
 const Boards = () => {
   const classes = boardsStyles();
   const [modalOpen, setModalOpen] = useState(false);
-  const { handleBoardCreation } = useContext(FirebaseAuth);
+  const { handleBoardCreation, handleImageSearch } = useContext(FirebaseAuth);
 
   const handleCreateButton = () => {
     setModalOpen(true);
@@ -34,7 +34,7 @@ const Boards = () => {
             </Box>
             <Box p={1}>
               <Button
-                onClick={handleCreateButton}
+                onClick={handleImageSearch}
                 variant="contained"
                 color="primary"
                 size="small"

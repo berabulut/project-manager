@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { AuthMethods } from "../firebase/AuthMethods";
-import { FetchUserData } from "../firebase/UserMethods";
-import { CreateNewBoard } from "../firebase/BoardMethods";
+import { FetchUserData } from "../functions/UserFunctions";
+import { CreateNewBoard } from "../functions/BoardFunctions";
+import { SearchImages } from "../api/unsplash";
 
 export const FirebaseAuth = React.createContext();
 
@@ -56,6 +57,10 @@ const AuthProvider = (props) => {
     CreateNewBoard(boardData);
   };
 
+  const handleImageSearch = () => {
+    SearchImages();
+  };
+
   return (
     <FirebaseAuth.Provider
       value={{
@@ -67,6 +72,7 @@ const AuthProvider = (props) => {
         handleTwitterLogin,
         handleUserData,
         handleBoardCreation,
+        handleImageSearch,
         inputs,
         setInputs,
         errors,

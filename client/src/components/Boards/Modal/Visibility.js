@@ -1,17 +1,16 @@
 import React, { useState, useContext, useEffect } from "react";
 import { FirebaseAuth } from "../../../provider/AuthProvider";
-import {
-  IconButton,
-  Typography,
-  ListItemIcon,
-  ListItemText,
-  Divider,
-  Grid,
-} from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core";
 import { Public, Lock } from "@material-ui/icons";
 import { PopMenu, PopMenuItem, visibilityStyles } from "./styles";
 
-const Menu = ({ open, anchorEl, handleClose, setBoardVisibility, boardVisibility }) => {
+const Menu = ({
+  open,
+  anchorEl,
+  handleClose,
+  setBoardVisibility,
+  boardVisibility,
+}) => {
   const classes = visibilityStyles();
 
   return (
@@ -43,7 +42,10 @@ const Menu = ({ open, anchorEl, handleClose, setBoardVisibility, boardVisibility
             </Typography>
           </Grid>
         </Grid>
-        <PopMenuItem style={{backgroundColor: boardVisibility === "Public" && "#e2f7df"}} onClick={() => setBoardVisibility("Public")}>
+        <PopMenuItem
+          style={{ backgroundColor: boardVisibility === "Public" && "#e2f7df" }}
+          onClick={() => setBoardVisibility("Public")}
+        >
           <Grid container>
             <Grid className={classes.firstRow} item xs={12} container>
               <Grid
@@ -51,7 +53,10 @@ const Menu = ({ open, anchorEl, handleClose, setBoardVisibility, boardVisibility
                 item
                 xs={1}
               >
-                <Public style={{color: "#61BD4F"}} className={classes.itemIcon} />
+                <Public
+                  style={{ color: "#61BD4F" }}
+                  className={classes.itemIcon}
+                />
               </Grid>
               <Grid item xs={9}>
                 <Typography
@@ -74,7 +79,12 @@ const Menu = ({ open, anchorEl, handleClose, setBoardVisibility, boardVisibility
             </Grid>
           </Grid>
         </PopMenuItem>
-        <PopMenuItem style={{backgroundColor: boardVisibility === "Private" && "#ffe2de"}} onClick={() => setBoardVisibility("Private")}>
+        <PopMenuItem
+          style={{
+            backgroundColor: boardVisibility === "Private" && "#ffe2de",
+          }}
+          onClick={() => setBoardVisibility("Private")}
+        >
           <Grid container>
             <Grid className={classes.firstRow} item xs={12} container>
               <Grid
@@ -82,7 +92,10 @@ const Menu = ({ open, anchorEl, handleClose, setBoardVisibility, boardVisibility
                 item
                 xs={1}
               >
-                <Lock style={{color: "#EB5A46"}} className={classes.itemIcon} />
+                <Lock
+                  style={{ color: "#EB5A46" }}
+                  className={classes.itemIcon}
+                />
               </Grid>
               <Grid item xs={9}>
                 <Typography

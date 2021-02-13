@@ -40,7 +40,7 @@ export const modalStyles = makeStyles((theme) => ({
   },
   image: {
     width: "100%",
-    height: "100px",
+    height: "136px",
     borderRadius: "8px",
     objectFit: "cover",
   },
