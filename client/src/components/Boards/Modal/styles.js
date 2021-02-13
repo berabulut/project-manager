@@ -46,7 +46,6 @@ export const modalStyles = makeStyles((theme) => ({
   },
   input: {
     width: "100%",
-    height: "25px",
     borderRadius: "8px",
     border: "2px solid #E0E0E0",
     paddingLeft: theme.spacing(2),
@@ -60,7 +59,6 @@ export const modalStyles = makeStyles((theme) => ({
     fontSize: "0.875rem",
   },
   button: {
-    textTransform: "initial",
     width: "90%",
     backgroundColor: "#F2F2F2",
     borderRadius: "8px",
@@ -86,6 +84,9 @@ export const modalStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     borderRadius: "8px",
     color: "#828282",
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+    
   },
   createButton: {
     borderRadius: "8px",
@@ -97,44 +98,47 @@ export const visibilityStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(1.5),
     paddingRight: theme.spacing(1.5),
     paddingTop: theme.spacing(1.8),
-    paddingBottom: theme.spacing(1.8),
-	outlineWidth: "0",
+    outlineWidth: "0",
   },
   headerTitle: {
-	  color: "black",
-	  fontWeight: "600",
-	  fontSize: "1rem"
+    color: "black",
+    fontWeight: "600",
+    fontSize: "1rem",
   },
   headerDescription: {
-	  color: "#828282",
-	  fontSize: "0.875rem"
+    marginTop: theme.spacing(0.5),
+    color: "#828282",
+    fontSize: "0.875rem",
+  },
+  firstRow: {
+    marginBottom: theme.spacing(1)
   },
   itemIcon: {
-	  fontSize: "1rem",	 
-	  color: "#828282" 
+    fontSize: "1rem",
+    color: "#828282",
   },
   itemTitle: {
-	  fontSize: "0.875rem",
-	  color: "#828282"
+    fontSize: "0.875rem",
+    color: "black",
+    paddingLeft: theme.spacing(1)
   },
   itemDescription: {
-	fontSize: "0.8rem",
-	color: "#828282"
-  }
+    fontSize: "0.75rem",
+    color: "#828282",
+  },
 }));
 
 export const PopMenuItem = withStyles((theme) => ({
   root: {
-    backgroundColor: "F2F2F2",
+    whiteSpace: "inherit",
     borderRadius: "8px",
     marginLeft: theme.spacing(1.5),
     marginRight: theme.spacing(1.5),
     marginTop: theme.spacing(1.8),
     marginBottom: theme.spacing(1.8),
-	paddingLeft: theme.spacing(1.5),
+    paddingLeft: theme.spacing(1.5),
     paddingRight: theme.spacing(1.5),
     paddingTop: theme.spacing(1.8),
-    paddingBottom: theme.spacing(1.8),
     "&:focus": {
       backgroundColor: "#F2F2F2",
     },
@@ -153,7 +157,7 @@ export const PopMenu = withStyles({
     border: "1px solid #E0E0E0",
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
     borderRadius: "12px",
-	width: "210px"
+    width: "300px",
   },
 })((props) => (
   <Menu

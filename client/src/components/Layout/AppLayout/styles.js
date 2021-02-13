@@ -13,6 +13,14 @@ export const AppTheme = createMuiTheme({
       main: "#F2F2F2"
     }
   },
+  overrides: {
+    MuiButton: {
+      // Name of the rule
+      label: {
+        textTransform: "initial",
+      }
+    },
+  }
 });
 
 export const footerStyles = makeStyles((theme) => ({

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Grid, Typography, Button, Modal, IconButton } from "@material-ui/core";
-import { Clear, Image, Lock, Add } from "@material-ui/icons";
+import { Clear, Image, Lock, Add, Public } from "@material-ui/icons";
 import { FirebaseAuth } from "provider/AuthProvider";
 import Visibility from "./Visibility";
 import { modalStyles } from "./styles";
@@ -10,9 +10,13 @@ const image =
 
 const CreateModal = ({ open, setOpen }) => {
   const classes = modalStyles();
+
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [openVisibility, setOpenVisibilty] = useState(false);
 
+  const [boardVisibility, setBoardVisibility] = useState("Private");
+  
   const handleClose = () => {
     setOpen(false);
   };
@@ -80,31 +84,32 @@ const CreateModal = ({ open, setOpen }) => {
                 </Typography>
               </IconButton>
             </Grid>
-            <Grid  item xs={6}>
+            <Grid item xs={6}>
               <IconButton
-              style={{float: "right"}}
+                style={{ float: "right", backgroundColor: boardVisibility === "Private" ? "#ffe2de" : "#e2f7df"}}
                 onClick={handleVisibility}
                 className={classes.button}
                 aria-label="cover"
               >
-                <Lock className={classes.icons} />
+                {boardVisibility === "Private" ? <Lock className={classes.icons} /> : <Public className={classes.icons}  />}
                 <Typography
                   className={classes.buttonText}
                   component="p"
                   variant="p"
                 >
-                  Private
+                  {boardVisibility}
                 </Typography>
               </IconButton>
               <Visibility
                 open={openVisibility}
                 anchorEl={anchorEl}
                 handleClose={handleVisibilityClose}
+                setBoardVisibility={setBoardVisibility}
+                boardVisibility={boardVisibility}
               />
             </Grid>
           </Grid>
           <Grid
-            className={classes.gridItem}
             item
             container
             xs={12}
