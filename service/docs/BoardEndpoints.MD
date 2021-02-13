@@ -7,7 +7,7 @@
 		- title
 		- coverPhoto
 		- visibility
-		- users
+		- users (expected array : [{"uid": "123"}, {"uid": "321"}])
 
 - ## Return User Related Boards
 
