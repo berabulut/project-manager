@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Grid, Typography, Container, Box, Button } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
-import CreateModal from "./CreateModal";
+import CreateModal from "./Modal/CreateModal";
 import { AppLayout } from "../Layout";
 import { Board } from "../Board";
 import { FirebaseAuth } from "../../provider/AuthProvider";

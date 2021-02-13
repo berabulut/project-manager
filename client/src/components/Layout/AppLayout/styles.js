@@ -1,5 +1,19 @@
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles, createMuiTheme } from "@material-ui/core/styles";
 import { Menu, MenuItem } from "@material-ui/core";
+
+export const AppTheme = createMuiTheme({
+  typography: {
+    fontFamily: "Poppins",
+  },
+  palette: {
+    primary: {
+      main: "#2F80ED",
+    },
+    secondary: {
+      main: "#F2F2F2"
+    }
+  },
+});
 
 export const footerStyles = makeStyles((theme) => ({
   root: {
