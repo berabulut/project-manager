@@ -38,7 +38,7 @@ const Boards = () => {
             if (users.length > 3) {
               if (key < 3) {
                 return (
-                  <Box alignSelf="center" className={classes.boardBox}>
+                  <Box key={key} alignSelf="center" className={classes.boardBox}>
                     <Avatar
                       className={classes.avatar}
                       alt="Remy Sharp"

@@ -37,7 +37,7 @@ const linkUsersAndBoard = (users, boardId) =>
   new Promise((resolve, reject) => {
     if (users !== undefined && users.length > 0) {
       try {
-        users.map((val, key) => {
+        users.map((val) => {
           const ref = db.ref(`/users/${val.uid}/boards/`).push();
           const data = {
             boardId: boardId

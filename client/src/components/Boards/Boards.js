@@ -34,7 +34,7 @@ const Boards = () => {
             </Box>
             <Box p={1}>
               <Button
-                onClick={handleImageSearch}
+                onClick={handleCreateButton}
                 variant="contained"
                 color="primary"
                 size="small"

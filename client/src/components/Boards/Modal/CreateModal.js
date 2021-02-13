@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import { Grid, Typography, Button, Modal, IconButton } from "@material-ui/core";
 import { Clear, Image, Lock, Add, Public } from "@material-ui/icons";
 import { FirebaseAuth } from "provider/AuthProvider";
-import Visibility from "./Visibility";
+import { VisibilityMenu } from "components/Visibility";
+import { Cover } from "components/Cover";
 import { modalStyles } from "./styles";
 
 const image =
@@ -11,25 +12,41 @@ const image =
 const CreateModal = ({ open, setOpen }) => {
   const classes = modalStyles();
 
-
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [visibilityAnchorEl, setVisibilityAnchorEl] = useState(null);
   const [openVisibility, setOpenVisibilty] = useState(false);
 
+  const [coverAnchorEl, setCoverAnchorEl] = useState(null);
+  const [openCover, setOpenCover] = useState(false);
+
+  const [boardTitle, setBoardTitle] = useState("");
   const [boardVisibility, setBoardVisibility] = useState("Private");
-  
+
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleVisibility = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleVisibilityClick = (event) => {
+    setVisibilityAnchorEl(event.currentTarget);
     setOpenVisibilty(true);
   };
 
   const handleVisibilityClose = () => {
-    setAnchorEl(null);
+    setVisibilityAnchorEl(null);
     setOpenVisibilty(false);
   };
+
+  const handleCoverClick = (event) => {
+    setCoverAnchorEl(event.currentTarget);
+    setOpenCover(true);
+  };
+
+  const handleCoverClose = () => {
+    setCoverAnchorEl(null);
+    setOpenCover(false);
+  };
+
+  
+
   return (
     <Modal
       className={classes.modal}
@@ -64,6 +81,8 @@ const CreateModal = ({ open, setOpen }) => {
             xs={12}
           >
             <input
+              value={boardTitle}
+              onChange={(e) => setBoardTitle(e.target.value)}
               placeholder="Add board title"
               type="text"
               className={classes.input}
@@ -77,44 +96,46 @@ const CreateModal = ({ open, setOpen }) => {
             justify="space-between"
           >
             <Grid item xs={6}>
-              <IconButton className={classes.button} aria-label="cover">
+              <IconButton onClick={handleCoverClick} className={classes.button} aria-label="cover">
                 <Image className={classes.icons} />
-                <Typography className={classes.buttonText} variant="p">
-                  Cover
-                </Typography>
+                <Typography className={classes.buttonText}>Cover</Typography>
               </IconButton>
+              <Cover
+                open={openVisibility}
+                anchorEl={coverAnchorEl}
+                handleClose={handleCoverClose}
+              />
             </Grid>
             <Grid item xs={6}>
               <IconButton
-                style={{ float: "right", backgroundColor: boardVisibility === "Private" ? "#ffe2de" : "#e2f7df"}}
-                onClick={handleVisibility}
+                style={{
+                  float: "right",
+                  backgroundColor:
+                    boardVisibility === "Private" ? "#ffe2de" : "#e2f7df",
+                }}
+                onClick={handleVisibilityClick}
                 className={classes.button}
                 aria-label="cover"
               >
-                {boardVisibility === "Private" ? <Lock className={classes.icons} /> : <Public className={classes.icons}  />}
-                <Typography
-                  className={classes.buttonText}
-                  component="p"
-                  variant="p"
-                >
+                {boardVisibility === "Private" ? (
+                  <Lock className={classes.icons} />
+                ) : (
+                  <Public className={classes.icons} />
+                )}
+                <Typography className={classes.buttonText} component="p">
                   {boardVisibility}
                 </Typography>
               </IconButton>
-              <Visibility
+              <VisibilityMenu
                 open={openVisibility}
-                anchorEl={anchorEl}
+                anchorEl={visibilityAnchorEl}
                 handleClose={handleVisibilityClose}
                 setBoardVisibility={setBoardVisibility}
                 boardVisibility={boardVisibility}
               />
             </Grid>
           </Grid>
-          <Grid
-            item
-            container
-            xs={12}
-            justify="flex-end"
-          >
+          <Grid item container xs={12} justify="flex-end">
             <Grid item xs={3}>
               <Button className={classes.cancelButton}>Cancel</Button>
             </Grid>

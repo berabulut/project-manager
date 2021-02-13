@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import { FirebaseAuth } from "../../../provider/AuthProvider";
+import { FirebaseAuth } from "provider/AuthProvider";
 import { Typography, Grid } from "@material-ui/core";
 import { Public, Lock } from "@material-ui/icons";
 import { PopMenu, PopMenuItem, visibilityStyles } from "./styles";
 
-const Menu = ({
+const VisibilityMenu = ({
   open,
   anchorEl,
   handleClose,
@@ -26,7 +26,6 @@ const Menu = ({
           <Grid item xs={12}>
             <Typography
               className={classes.headerTitle}
-              variant="p"
               component="p"
             >
               Visibility
@@ -35,7 +34,6 @@ const Menu = ({
           <Grid item xs={12}>
             <Typography
               className={classes.headerDescription}
-              variant="p"
               component="p"
             >
               Choose who can see this board
@@ -62,7 +60,6 @@ const Menu = ({
                 <Typography
                   className={classes.itemTitle}
                   component="p"
-                  variant="p"
                 >
                   Public
                 </Typography>
@@ -72,7 +69,6 @@ const Menu = ({
               <Typography
                 className={classes.itemDescription}
                 component="p"
-                variant="p"
               >
                 Anyone can see this board. Only board members can edit.
               </Typography>
@@ -101,7 +97,6 @@ const Menu = ({
                 <Typography
                   className={classes.itemTitle}
                   component="p"
-                  variant="p"
                 >
                   Private
                 </Typography>
@@ -111,7 +106,6 @@ const Menu = ({
               <Typography
                 className={classes.itemDescription}
                 component="p"
-                variant="p"
               >
                 Only board members can see and edit this board.
               </Typography>
@@ -123,4 +117,4 @@ const Menu = ({
   );
 };
 
-export default Menu;
+export default VisibilityMenu;
