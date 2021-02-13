@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Grid, Typography, Container, Box, Button } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
+import CreateModal from "./CreateModal";
 import { AppLayout } from "../Layout";
 import { Board } from "../Board";
 import { FirebaseAuth } from "../../provider/AuthProvider";
@@ -8,10 +9,18 @@ import { boardsStyles } from "./styles";
 
 const Boards = () => {
   const classes = boardsStyles();
-  
+  const [modalOpen, setModalOpen] = useState(false);
+  const { handleBoardCreation } = useContext(FirebaseAuth);
+
   const handleCreateButton = () => {
-    console.log('new board')
-  }
+    setModalOpen(true);
+    // handleBoardCreation({
+    //   title: "ıgıgıı",
+    //   coverPhoto: "img",
+    //   visibility: "visible",
+    //   users: [{ uid: "8uQFxfp10ZTBDMTf1V17MUQUdkq2" }],
+    // });
+  };
 
   return (
     <AppLayout>
@@ -25,6 +34,7 @@ const Boards = () => {
             </Box>
             <Box p={1}>
               <Button
+                onClick={handleCreateButton}
                 variant="contained"
                 color="primary"
                 size="small"
@@ -40,6 +50,7 @@ const Boards = () => {
               <Board />
             </Grid>
           </Grid>
+          <CreateModal open={modalOpen} setOpen={setModalOpen} />
         </Container>
       </div>
     </AppLayout>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AuthMethods } from "../firebase/AuthMethods";
 import { FetchUserData } from "../firebase/UserMethods";
+import { CreateNewBoard } from "../firebase/BoardMethods";
 
 export const FirebaseAuth = React.createContext();
 
@@ -22,7 +23,13 @@ const AuthProvider = (props) => {
   };
 
   const handleLogin = () => {
-    AuthMethods.login(inputs.email, inputs.password, setErrors, setToken, setUserData);
+    AuthMethods.login(
+      inputs.email,
+      inputs.password,
+      setErrors,
+      setToken,
+      setUserData
+    );
   };
 
   const handleGoogleLogin = () => {
@@ -45,6 +52,10 @@ const AuthProvider = (props) => {
     FetchUserData(uid, setUserData);
   };
 
+  const handleBoardCreation = (boardData) => {
+    CreateNewBoard(boardData);
+  };
+
   return (
     <FirebaseAuth.Provider
       value={{
@@ -55,6 +66,7 @@ const AuthProvider = (props) => {
         handleGithubLogin,
         handleTwitterLogin,
         handleUserData,
+        handleBoardCreation,
         inputs,
         setInputs,
         errors,
