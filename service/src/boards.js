@@ -27,8 +27,8 @@ const createNewBoard = (title, coverPhoto, visibility, users) =>
         reject(error);
       } else {
         linkUsersAndBoard(users, boardId)
-        .then(() => resolve(true))
-        .catch((err) => reject(err))
+          .then((data) => resolve(data))
+          .catch((err) => reject(err));
       }
     });
   });
@@ -40,17 +40,19 @@ const linkUsersAndBoard = (users, boardId) =>
         users.map((val) => {
           const ref = db.ref(`/users/${val.uid}/boards/`).push();
           const data = {
-            boardId: boardId
-          }
+            boardId: boardId,
+          };
           ref.set(data, (error) => {
-            if(error) {
+            if (error) {
               reject(error);
+            } else {
+              resolve({
+                [ref.key]: {
+                  boardId: boardId,
+                },
+              });
             }
-            else {
-              resolve(true)
-            }
-          })
-
+          });
         });
       } catch (err) {
         reject(err);
@@ -85,4 +87,32 @@ const returnUserRelatedBoards = (boards) =>
     }
   });
 
-module.exports = { createNewBoard, returnUserRelatedBoards };
+const returnBoardRelatedUsers = (users) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = new Promise((resolve, reject) => {
+        let data = [];
+        users.map((val, key) => {
+          //val here should be unique id of a users
+          const ref = db.ref(`/users/${val}`);
+          ref.once("value", (snapshot) => {
+            const value = snapshot.val();
+            if (value !== undefined && value !== null) {
+              data.push(value);
+              if (key === users.length - 1) resolve(data);
+            }
+            if (key === users.length - 1) resolve(data);
+          });
+        });
+      });
+      resolve(await response);
+    } catch (err) {
+      reject(err);
+    }
+  });
+
+module.exports = {
+  createNewBoard,
+  returnUserRelatedBoards,
+  returnBoardRelatedUsers,
+};

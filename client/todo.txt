@@ -1,2 +1,2 @@
-1. edit user data from profile
-2. fix returnUserRelatedBoards
+1. find a way out to display user images on boards
+2. add transitions and backdrops

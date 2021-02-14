@@ -53,6 +53,13 @@ const AuthProvider = (props) => {
     FetchUserData(uid, setUserData);
   };
 
+  const handleBoardCreation = (response) => {
+    let updateUser = {...userData};
+    
+    Object.assign(updateUser.boards, response)
+    setUserData(updateUser);
+  }
+
   return (
     <FirebaseAuth.Provider
       value={{
@@ -68,7 +75,8 @@ const AuthProvider = (props) => {
         errors,
         token,
         userData,
-        setUserData
+        setUserData,
+        handleBoardCreation
       }}
     >
       {props.children}

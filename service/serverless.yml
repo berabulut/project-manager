@@ -40,6 +40,13 @@ functions:
           path: returnUserRelatedBoards
           method: post
           cors: true
+  returnBoardRelatedUsers:
+    handler: handlers/returnBoardRelatedUsers.users
+    events:
+      - http:
+          path: returnBoardRelatedUsers
+          method: post
+          cors: true
 
 plugins:
   - serverless-offline

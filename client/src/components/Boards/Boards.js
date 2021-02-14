@@ -35,6 +35,23 @@ const Boards = () => {
       }
     });
 
+  // const parseUserId = (users) =>
+  //   new Promise((resolve, reject) => {
+  //     let body = [];
+  //     try {
+  //       users.map((val, key) => {
+  //         if (val.uid !== undefined) {
+  //           body.push(val.uid);
+  //         }
+  //         if (key === users.length - 1) {
+  //           resolve(body);
+  //         }
+  //       });
+  //     } catch (err) {
+  //       reject(err);
+  //     }
+  //   });
+
   useEffect(() => {
     if (
       userData.boards !== undefined &&
@@ -60,6 +77,10 @@ const Boards = () => {
         });
     }
   }, [userData]);
+
+  // useEffect(() => {
+
+  // }, [userData])
 
   return (
     <AppLayout>
@@ -89,7 +110,7 @@ const Boards = () => {
               boards.length > 0 &&
               boards.map((value, key) => {
                 return (
-                  <Grid item lg={3} md={4} sm={6} xs={12}>
+                  <Grid key={key} item lg={3} md={4} sm={6} xs={12}>
                     <Board
                       image={value.coverPhoto}
                       title={value.title}

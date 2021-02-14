@@ -50,6 +50,7 @@ const Cover = ({ open, anchorEl, handleClose, handleImageClick }) => {
             randomImages.map((val, key) => {
               return (
                 <Grid
+                  key={key}
                   className={classes.imageContainer}
                   container
                   justify="center"
@@ -73,6 +74,7 @@ const Cover = ({ open, anchorEl, handleClose, handleImageClick }) => {
             searchedImages.map((val, key) => {
               return (
                 <Grid
+                  key={key}
                   className={classes.imageContainer}
                   container
                   justify="center"

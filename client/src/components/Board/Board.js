@@ -15,8 +15,11 @@ import { boardStyles } from "./styles";
 //   { name: "asd" },
 // ];
 
-const Boards = ({image, title, users, visibility}) => {
+const Boards = ({ image, title, users, visibility }) => {
   const classes = boardStyles();
+  React.useEffect(() => {
+    console.log(users)
+  }, [])
 
   return (
     <div className={classes.root}>
@@ -27,7 +30,7 @@ const Boards = ({image, title, users, visibility}) => {
         </Typography>
         <Box display="flex">
           {users.map((val, key) => {
-            if (users.length > 3) {
+            if (users.length < 3) {
               if (key < 3) {
                 return (
                   <Box

@@ -13,7 +13,7 @@ const placeholder =
 const CreateModal = ({ open, setOpen }) => {
   const classes = modalStyles();
 
-  const { userData, setUserData } = useContext(FirebaseAuth);
+  const { userData, setUserData, handleBoardCreation } = useContext(FirebaseAuth);
 
   const [visibilityAnchorEl, setVisibilityAnchorEl] = useState(null);
   const [openVisibility, setOpenVisibilty] = useState(false);
@@ -44,9 +44,7 @@ const CreateModal = ({ open, setOpen }) => {
           if (response.statusCode === 200) {
             //push to userdata
             // close modal
-            let updateUser = userData;
-            Object.assign(updateUser.boards, boardData)
-            setUserData(updateUser);
+            handleBoardCreation(response.data)
             handleClose();
           }
         })

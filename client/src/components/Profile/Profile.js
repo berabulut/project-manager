@@ -54,7 +54,7 @@ const Profile = () => {
                   NAME
                 </Typography>
               </Grid>
-              <Grid alignContent="center" item xs={8}>
+              <Grid container alignContent="center" item xs={8}>
                 <Typography
                   className={classes.tableContent}
                   variant="h6"
