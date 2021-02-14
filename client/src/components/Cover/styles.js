@@ -24,9 +24,19 @@ export const coverStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(1.8),
     paddingBottom: theme.spacing(1.8)
   },
+  imageContainer: {
+    marginBottom: theme.spacing(1.25)
+  },
   image:{
-    width: "100",
-    objectFit: "cover"
+    width: "50px",
+    height: "50px",
+    objectFit: "cover",
+    borderRadius: "8px",
+    transition: "all .2s ease-in-out",
+    "&:hover": {
+      cursor: "pointer",
+      transform: "scale(1.05)"
+    }
   }
 }));
 

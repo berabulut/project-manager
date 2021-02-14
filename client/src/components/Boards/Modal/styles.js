@@ -4,8 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 export const modalStyles = makeStyles((theme) => ({
   modal: {
     display: "flex",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
+    paddingTop: theme.spacing(8)
   },
   container: {
     backgroundColor: "white",

@@ -2,15 +2,18 @@ import React, { useContext, useState } from "react";
 import { Grid, Typography, Button, Modal, IconButton } from "@material-ui/core";
 import { Clear, Image, Lock, Add, Public } from "@material-ui/icons";
 import { FirebaseAuth } from "provider/AuthProvider";
+import { CreateNewBoard } from "functions/BoardFunctions";
 import { VisibilityMenu } from "components/Visibility";
 import { Cover } from "components/Cover";
 import { modalStyles } from "./styles";
 
-const image =
+const placeholder =
   "https://images.unsplash.com/photo-1613085628218-d08b3a264f86?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80";
 
 const CreateModal = ({ open, setOpen }) => {
   const classes = modalStyles();
+
+  const { userData, setUserData } = useContext(FirebaseAuth);
 
   const [visibilityAnchorEl, setVisibilityAnchorEl] = useState(null);
   const [openVisibility, setOpenVisibilty] = useState(false);
@@ -20,6 +23,38 @@ const CreateModal = ({ open, setOpen }) => {
 
   const [boardTitle, setBoardTitle] = useState("");
   const [boardVisibility, setBoardVisibility] = useState("Private");
+
+  const [coverImageRegular, setCoverImageRegular] = useState();
+  const [coverImageRaw, setCoverImageRaw] = useState();
+
+  const handleCreate = () => {
+    if (coverImageRaw === undefined) {
+      console.log("Select a cover image");
+    } else if (boardTitle.trim().length <= 0) {
+      console.log("Board field cannot be empty");
+    } else {
+      const boardData = {
+        title: boardTitle,
+        coverPhoto: coverImageRaw,
+        visibility: boardVisibility,
+        users: [{ uid: userData.uid }],
+      };
+      CreateNewBoard(boardData)
+        .then((response) => {
+          if (response.statusCode === 200) {
+            //push to userdata
+            // close modal
+            let updateUser = userData;
+            Object.assign(updateUser.boards, boardData)
+            setUserData(updateUser);
+            handleClose();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -45,7 +80,10 @@ const CreateModal = ({ open, setOpen }) => {
     setOpenCover(false);
   };
 
-  
+  const handleImageClick = (regular, raw) => {
+    setCoverImageRegular(regular);
+    setCoverImageRaw(raw);
+  };
 
   return (
     <Modal
@@ -71,7 +109,14 @@ const CreateModal = ({ open, setOpen }) => {
             >
               <Clear />
             </IconButton>
-            <img className={classes.image} src={image} />
+            <img
+              className={classes.image}
+              src={
+                coverImageRegular !== undefined
+                  ? coverImageRegular
+                  : placeholder
+              }
+            />
           </Grid>
           <Grid
             className={classes.gridItem}
@@ -96,11 +141,16 @@ const CreateModal = ({ open, setOpen }) => {
             justify="space-between"
           >
             <Grid item xs={6}>
-              <IconButton onClick={handleCoverClick} className={classes.button} aria-label="cover">
+              <IconButton
+                onClick={handleCoverClick}
+                className={classes.button}
+                aria-label="cover"
+              >
                 <Image className={classes.icons} />
                 <Typography className={classes.buttonText}>Cover</Typography>
               </IconButton>
               <Cover
+                handleImageClick={handleImageClick}
                 open={openVisibility}
                 anchorEl={coverAnchorEl}
                 handleClose={handleCoverClose}
@@ -137,10 +187,13 @@ const CreateModal = ({ open, setOpen }) => {
           </Grid>
           <Grid item container xs={12} justify="flex-end">
             <Grid item xs={3}>
-              <Button className={classes.cancelButton}>Cancel</Button>
+              <Button onClick={handleClose} className={classes.cancelButton}>
+                Cancel
+              </Button>
             </Grid>
             <Grid item xs={3}>
               <Button
+                onClick={handleCreate}
                 variant="contained"
                 color="primary"
                 className={classes.createButton}

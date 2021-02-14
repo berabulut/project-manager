@@ -11,6 +11,6 @@
 
 - ## Return User Related Boards
 
-	- Post (i couldn't be bothered by passing params with get request)
+	- Post (i couldn't be bothered by passing an array with get request)
 	- Params :
-		- boards (the array we are receiving from user) 
+		- boardList (expected array : [ "boardId1", "boardId2"]) 

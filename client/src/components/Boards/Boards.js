@@ -1,26 +1,65 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Grid, Typography, Container, Box, Button } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import CreateModal from "./Modal/CreateModal";
 import { AppLayout } from "../Layout";
 import { Board } from "../Board";
-import { FirebaseAuth } from "../../provider/AuthProvider";
+import { FirebaseAuth } from "provider/AuthProvider";
+import { GetUserRelatedBoards } from "functions/BoardFunctions";
 import { boardsStyles } from "./styles";
 
 const Boards = () => {
   const classes = boardsStyles();
   const [modalOpen, setModalOpen] = useState(false);
-  const { handleBoardCreation, handleImageSearch } = useContext(FirebaseAuth);
+  const [boards, setBoards] = useState([]);
+  const { userData } = useContext(FirebaseAuth);
 
   const handleCreateButton = () => {
     setModalOpen(true);
-    // handleBoardCreation({
-    //   title: "ıgıgıı",
-    //   coverPhoto: "img",
-    //   visibility: "visible",
-    //   users: [{ uid: "8uQFxfp10ZTBDMTf1V17MUQUdkq2" }],
-    // });
   };
+
+  const parseBoardId = (boards) =>
+    new Promise((resolve, reject) => {
+      let body = [];
+      try {
+        boards.map((val, key) => {
+          if (val.boardId !== undefined) {
+            body.push(val.boardId);
+          }
+          if (key === boards.length - 1) {
+            resolve(body);
+          }
+        });
+      } catch (err) {
+        reject(err);
+      }
+    });
+
+  useEffect(() => {
+    if (
+      userData.boards !== undefined &&
+      Object.keys(userData.boards).length > 0
+    ) {
+      parseBoardId(Object.values(userData.boards))
+        .then((response) => {
+          const body = {
+            boardList: response,
+          };
+          GetUserRelatedBoards(body)
+            .then((response) => {
+              if (response.statusCode === 200) {
+                setBoards(response.boardData);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [userData]);
 
   return (
     <AppLayout>
@@ -46,9 +85,20 @@ const Boards = () => {
             </Box>
           </Box>
           <Grid container spacing={3}>
-            <Grid item lg={3} md={4} sm={6} xs={12}>
-              <Board />
-            </Grid>
+            {boards !== undefined &&
+              boards.length > 0 &&
+              boards.map((value, key) => {
+                return (
+                  <Grid item lg={3} md={4} sm={6} xs={12}>
+                    <Board
+                      image={value.coverPhoto}
+                      title={value.title}
+                      users={value.users}
+                      visibility={value.visibility}
+                    />
+                  </Grid>
+                );
+              })}
           </Grid>
           <CreateModal open={modalOpen} setOpen={setModalOpen} />
         </Container>

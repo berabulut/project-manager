@@ -53,18 +53,6 @@ const AuthProvider = (props) => {
     FetchUserData(uid, setUserData);
   };
 
-  const handleBoardCreation = (boardData) => {
-    CreateNewBoard(boardData);
-  };
-
-  const handleImageSearch = (query) => {
-    SearchImages(query);
-  };
-
-  const handleRandomImageSearch = (count = 12) => {
-    GetRandomImages(count);
-  };
-
   return (
     <FirebaseAuth.Provider
       value={{
@@ -75,14 +63,12 @@ const AuthProvider = (props) => {
         handleGithubLogin,
         handleTwitterLogin,
         handleUserData,
-        handleBoardCreation,
-        handleImageSearch,
-        handleRandomImageSearch,
         inputs,
         setInputs,
         errors,
         token,
         userData,
+        setUserData
       }}
     >
       {props.children}

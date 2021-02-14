@@ -5,14 +5,13 @@ import { Public, Lock } from "@material-ui/icons";
 import KeywordSearch from "./KeywordSearch";
 import { PopMenu, PopMenuItem, coverStyles } from "./styles";
 
-const Cover = ({ open, anchorEl, handleClose }) => {
+const Cover = ({ open, anchorEl, handleClose, handleImageClick }) => {
   const classes = coverStyles();
 
   const [searchedImages, setSearchedImages] = useState([]);
   const [randomImages, setRandomImages] = useState([]);
-  const { handleImageSearch, handleRandomImageSearch } = useContext(
-    FirebaseAuth
-  );
+
+  const [searchInput, setSearchInput] = useState("");
 
   return (
     <div>
@@ -40,23 +39,58 @@ const Cover = ({ open, anchorEl, handleClose }) => {
             <KeywordSearch
               setSearchedImages={setSearchedImages}
               setRandomImages={setRandomImages}
-              searchImage={handleImageSearch}
-              getRandomImage={handleRandomImageSearch}
+              searchInput={searchInput}
+              setSearchInput={setSearchInput}
             />
           </Grid>
         </Grid>
         <Grid className={classes.content} container>
-          {randomImages !== undefined && randomImages.map((val, key) => {
-            return (
-              <Grid item xs={3}>
-                <img
-                  className={classes.image}
-                  alt={val.alt_description}
-                  src={val.urls.full}
-                />
-              </Grid>
-            );
-          })}
+          {randomImages !== undefined &&
+            searchedImages.length <= 0 &&
+            randomImages.map((val, key) => {
+              return (
+                <Grid
+                  className={classes.imageContainer}
+                  container
+                  justify="center"
+                  item
+                  xs={3}
+                >
+                  <img
+                    onClick={() =>
+                      handleImageClick(val.urls.regular, val.urls.raw)
+                    }
+                    key={key}
+                    className={classes.image}
+                    alt={val.alt_description}
+                    src={val.urls.thumb}
+                  />
+                </Grid>
+              );
+            })}
+          {searchedImages !== undefined &&
+            searchedImages.length > 0 &&
+            searchedImages.map((val, key) => {
+              return (
+                <Grid
+                  className={classes.imageContainer}
+                  container
+                  justify="center"
+                  item
+                  xs={3}
+                >
+                  <img
+                    onClick={() =>
+                      handleImageClick(val.urls.regular, val.urls.raw)
+                    }
+                    key={key}
+                    className={classes.image}
+                    alt={val.alt_description}
+                    src={val.urls.thumb}
+                  />
+                </Grid>
+              );
+            })}
         </Grid>
       </PopMenu>
     </div>

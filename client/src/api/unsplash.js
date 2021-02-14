@@ -5,20 +5,34 @@ const unsplash = createApi({
   //...other fetch options
 });
 
-export const SearchImages = (query) => {
-  unsplash.search.getPhotos({ query: query }).then((result) => {
-    if (result.type === "success") {
-      console.log(result.response);
-      return result.response;
-    }
+export const SearchImages = (query) =>
+  new Promise((resolve, reject) => {
+    unsplash.search
+      .getPhotos({ query: query, orientation: "landscape", perPage: "12" })
+      .then((result) => {
+        if (result.type === "success") {
+          resolve(result.response);
+        } else {
+          reject(result.type);
+        }
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
-};
 
-export const GetRandomImages = (count) => {
-  unsplash.photos.getRandom({ count: count }).then((result) => {
-    if (result.type === "success") {
-      console.log(result.response);
-      return result.response;
-    }
+export const GetRandomImages = (count) =>
+  new Promise((resolve, reject) => {
+    unsplash.photos
+      .getRandom({ count: count, orientation: "landscape" })
+      .then((result) => {
+        if (result.type === "success") {
+          resolve(result.response);
+        } else {
+          reject(result.type);
+        }
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
-};
