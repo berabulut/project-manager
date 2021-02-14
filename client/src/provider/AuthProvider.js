@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AuthMethods } from "../firebase/AuthMethods";
 import { FetchUserData } from "../functions/UserFunctions";
 import { CreateNewBoard } from "../functions/BoardFunctions";
-import { SearchImages } from "../api/unsplash";
+import { SearchImages, GetRandomImages } from "../api/unsplash";
 
 export const FirebaseAuth = React.createContext();
 
@@ -57,8 +57,12 @@ const AuthProvider = (props) => {
     CreateNewBoard(boardData);
   };
 
-  const handleImageSearch = () => {
-    SearchImages();
+  const handleImageSearch = (query) => {
+    SearchImages(query);
+  };
+
+  const handleRandomImageSearch = (count = 12) => {
+    GetRandomImages(count);
   };
 
   return (
@@ -73,6 +77,7 @@ const AuthProvider = (props) => {
         handleUserData,
         handleBoardCreation,
         handleImageSearch,
+        handleRandomImageSearch,
         inputs,
         setInputs,
         errors,

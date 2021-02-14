@@ -6,9 +6,19 @@ const unsplash = createApi({
 });
 
 export const SearchImages = (query) => {
-  unsplash.search.getPhotos({ query: "dogs" }).then((result) => {
+  unsplash.search.getPhotos({ query: query }).then((result) => {
     if (result.type === "success") {
-	  console.log(result.response)
+      console.log(result.response);
+      return result.response;
+    }
+  });
+};
+
+export const GetRandomImages = (count) => {
+  unsplash.photos.getRandom({ count: count }).then((result) => {
+    if (result.type === "success") {
+      console.log(result.response);
+      return result.response;
     }
   });
 };
