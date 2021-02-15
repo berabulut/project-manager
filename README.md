@@ -16,7 +16,7 @@
 
 <br>
 
-![login]('./images/login.png')
+![login](./images/login.png)
 
 <br>
 
@@ -24,7 +24,7 @@
 
 <br>
 
-![profile]('./images/profile.png')
+![profile](./images/profile.png)
 
 <br>
 
@@ -34,7 +34,7 @@
 
 <br>
 
-![privacy]('./images/privacy.png')
+![privacy](./images/privacy.png)
 
 <br>
 
@@ -42,6 +42,6 @@
 
 <br>
 
-![boards]('./images/boards.png')
+![boards](./images/boards.png)
 
 <br>
