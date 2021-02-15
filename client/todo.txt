@@ -1,2 +1,2 @@
-1. find a way out to display user images on boards
-2. add transitions and backdrops
+1. add transitions and backdrops
+2. add feedback after events
