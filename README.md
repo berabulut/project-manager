@@ -32,6 +32,13 @@
 	- You can pick a cover image (Unsplash API)
 	- Set privacy 
 
+
+<br>
+
+![cover](./images/cover.png)
+
+<br>
+
 <br>
 
 ![privacy](./images/privacy.png)
