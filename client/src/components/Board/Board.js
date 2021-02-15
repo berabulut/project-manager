@@ -18,8 +18,8 @@ import { boardStyles } from "./styles";
 const Boards = ({ image, title, users, visibility }) => {
   const classes = boardStyles();
   React.useEffect(() => {
-    console.log(users)
-  }, [])
+    console.log(users);
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -30,18 +30,16 @@ const Boards = ({ image, title, users, visibility }) => {
         </Typography>
         <Box display="flex">
           {users.map((val, key) => {
-            if (users.length < 3) {
-              if (key < 3) {
-                return (
-                  <Box
-                    key={key}
-                    alignSelf="center"
-                    className={classes.boardBox}
-                  >
-                    <Avatar className={classes.avatar} alt="Remy Sharp" />
-                  </Box>
-                );
-              }
+            if (key < 3) {
+              return (
+                <Box key={key} alignSelf="center" className={classes.boardBox}>
+                  <Avatar
+                    src={val.picture}
+                    className={classes.avatar}
+                    alt="Remy Sharp"
+                  />
+                </Box>
+              );
             }
           })}
           {users.length > 3 && (

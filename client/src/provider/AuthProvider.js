@@ -11,6 +11,7 @@ const AuthProvider = (props) => {
   const [errors, setErrors] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("pmt_token"));
   const [userData, setUserData] = useState({});
+  const [boards, setBoards] = useState([]);
 
   const handleSignUp = () => {
     // middle man between firebase and signup
@@ -47,6 +48,8 @@ const AuthProvider = (props) => {
 
   const handleLogout = () => {
     AuthMethods.logout(setErrors, setToken);
+    setBoards([]);
+    setUserData([]);
   };
 
   const handleUserData = (uid) => {
@@ -55,9 +58,15 @@ const AuthProvider = (props) => {
 
   const handleBoardCreation = (response) => {
     let updateUser = {...userData};
+    if(updateUser.boards !== undefined && updateUser.boards !== null) {
+      Object.assign(updateUser.boards, response)
+      setUserData(updateUser);
+    }
+    else {
+      updateUser.boards = response;
+      setUserData(updateUser);
+    }
     
-    Object.assign(updateUser.boards, response)
-    setUserData(updateUser);
   }
 
   return (
@@ -76,6 +85,8 @@ const AuthProvider = (props) => {
         token,
         userData,
         setUserData,
+        boards,
+        setBoards,
         handleBoardCreation
       }}
     >

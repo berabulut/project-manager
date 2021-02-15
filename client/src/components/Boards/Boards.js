@@ -11,14 +11,13 @@ import { boardsStyles } from "./styles";
 const Boards = () => {
   const classes = boardsStyles();
   const [modalOpen, setModalOpen] = useState(false);
-  const [boards, setBoards] = useState([]);
-  const { userData } = useContext(FirebaseAuth);
+  const { userData, boards, setBoards } = useContext(FirebaseAuth);
 
   const handleCreateButton = () => {
     setModalOpen(true);
   };
 
-  const parseBoardId = (boards) =>
+  const parseBoardId = (boards) => // structuring boardIds for api call --> ["id1", "id2"] 
     new Promise((resolve, reject) => {
       let body = [];
       try {
@@ -35,25 +34,10 @@ const Boards = () => {
       }
     });
 
-  // const parseUserId = (users) =>
-  //   new Promise((resolve, reject) => {
-  //     let body = [];
-  //     try {
-  //       users.map((val, key) => {
-  //         if (val.uid !== undefined) {
-  //           body.push(val.uid);
-  //         }
-  //         if (key === users.length - 1) {
-  //           resolve(body);
-  //         }
-  //       });
-  //     } catch (err) {
-  //       reject(err);
-  //     }
-  //   });
 
   useEffect(() => {
     if (
+      userData !== undefined &&
       userData.boards !== undefined &&
       Object.keys(userData.boards).length > 0
     ) {
@@ -65,6 +49,7 @@ const Boards = () => {
           GetUserRelatedBoards(body)
             .then((response) => {
               if (response.statusCode === 200) {
+                console.log(response)
                 setBoards(response.boardData);
               }
             })
@@ -78,9 +63,7 @@ const Boards = () => {
     }
   }, [userData]);
 
-  // useEffect(() => {
 
-  // }, [userData])
 
   return (
     <AppLayout>
@@ -109,12 +92,13 @@ const Boards = () => {
             {boards !== undefined &&
               boards.length > 0 &&
               boards.map((value, key) => {
+                console.log(value)
                 return (
                   <Grid key={key} item lg={3} md={4} sm={6} xs={12}>
                     <Board
                       image={value.coverPhoto}
                       title={value.title}
-                      users={value.users}
+                      users={value.userData}
                       visibility={value.visibility}
                     />
                   </Grid>
