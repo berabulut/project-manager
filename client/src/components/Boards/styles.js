@@ -7,6 +7,11 @@ export const boardsStyles = makeStyles((theme) => ({
   container: {
     marginTop: theme.spacing(8),
   },
+  boardsContainer: {
+    [theme.breakpoints.down("xs")]: {
+      justifyContent: "center"
+    }
+  },
   button: {
     backgroundColor: "#2F80ED",
     borderRadius: "8px",

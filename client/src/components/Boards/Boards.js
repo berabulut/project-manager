@@ -49,7 +49,6 @@ const Boards = () => {
           GetUserRelatedBoards(body)
             .then((response) => {
               if (response.statusCode === 200) {
-                console.log(response)
                 setBoards(response.boardData);
               }
             })
@@ -88,13 +87,12 @@ const Boards = () => {
               </Button>
             </Box>
           </Box>
-          <Grid container spacing={3}>
+          <Grid className={classes.boardsContainer} container spacing={3}>
             {boards !== undefined &&
               boards.length > 0 &&
               boards.map((value, key) => {
-                console.log(value)
                 return (
-                  <Grid key={key} item lg={3} md={4} sm={6} xs={12}>
+                  <Grid container key={key} item lg={3} md={3} sm={4} xs={8}>
                     <Board
                       image={value.coverPhoto}
                       title={value.title}
