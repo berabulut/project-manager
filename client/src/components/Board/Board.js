@@ -17,10 +17,6 @@ import { boardStyles } from "./styles";
 
 const Boards = ({ image, title, users, visibility }) => {
   const classes = boardStyles();
-  React.useEffect(() => {
-    console.log(users);
-  }, []);
-
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>

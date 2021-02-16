@@ -1,4 +1,8 @@
-import { makeStyles, withStyles, createMuiTheme } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  withStyles,
+  createMuiTheme,
+} from "@material-ui/core/styles";
 import { Menu, MenuItem } from "@material-ui/core";
 
 export const AppTheme = createMuiTheme({
@@ -10,18 +14,25 @@ export const AppTheme = createMuiTheme({
       main: "#2F80ED",
     },
     secondary: {
-      main: "#F2F2F2"
-    }
+      main: "#F2F2F2",
+    },
   },
   overrides: {
     MuiButton: {
       // Name of the rule
       label: {
         textTransform: "initial",
-      }
+      },
     },
-  }
+  },
 });
+
+export const LayoutStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
+}));
 
 export const footerStyles = makeStyles((theme) => ({
   root: {
@@ -82,7 +93,7 @@ export const menuStyles = makeStyles((theme) => ({
   menuDivider: {
     width: "85%",
     margin: "auto",
-  }
+  },
 }));
 
 export const PopMenu = withStyles({
@@ -119,12 +130,12 @@ export const PopMenuItem = withStyles((theme) => ({
     "&:focus": {
       backgroundColor: "#F2F2F2",
     },
-    "& .MuiListItemIcon-root" : {
-      minWidth: "40px"
+    "& .MuiListItemIcon-root": {
+      minWidth: "40px",
     },
-    "& .MuiTypography-body1" : {
+    "& .MuiTypography-body1": {
       fontWeight: "bold",
-      fontSize: "0.9rem"
-    }
-  }
+      fontSize: "0.9rem",
+    },
+  },
 }))(MenuItem);

@@ -4,6 +4,7 @@ import { Add } from "@material-ui/icons";
 import CreateModal from "./Modal/CreateModal";
 import { AppLayout } from "../Layout";
 import { Board } from "../Board";
+import { Loading } from "../Loading";
 import { FirebaseAuth } from "provider/AuthProvider";
 import { GetUserRelatedBoards } from "functions/BoardFunctions";
 import { boardsStyles } from "./styles";
@@ -11,13 +12,17 @@ import { boardsStyles } from "./styles";
 const Boards = () => {
   const classes = boardsStyles();
   const [modalOpen, setModalOpen] = useState(false);
-  const { userData, boards, setBoards } = useContext(FirebaseAuth);
+  const { userData, boards, setBoards, handleBackdropClose } = useContext(
+    FirebaseAuth
+  );
 
   const handleCreateButton = () => {
     setModalOpen(true);
   };
 
-  const parseBoardId = (boards) => // structuring boardIds for api call --> ["id1", "id2"] 
+  const parseBoardId = (
+    boards // structuring boardIds for api call --> ["id1", "id2"]
+  ) =>
     new Promise((resolve, reject) => {
       let body = [];
       try {
@@ -34,7 +39,6 @@ const Boards = () => {
       }
     });
 
-
   useEffect(() => {
     if (
       userData !== undefined &&
@@ -46,14 +50,18 @@ const Boards = () => {
           const body = {
             boardList: response,
           };
+          console.log('body', body)
           GetUserRelatedBoards(body)
             .then((response) => {
+              console.log(response)
               if (response.statusCode === 200) {
                 setBoards(response.boardData);
+                handleBackdropClose();
               }
             })
             .catch((err) => {
               console.log(err);
+              handleBackdropClose();
             });
         })
         .catch((err) => {
@@ -61,8 +69,6 @@ const Boards = () => {
         });
     }
   }, [userData]);
-
-
 
   return (
     <AppLayout>
@@ -106,6 +112,7 @@ const Boards = () => {
           <CreateModal open={modalOpen} setOpen={setModalOpen} />
         </Container>
       </div>
+      <Loading />
     </AppLayout>
   );
 };

@@ -12,6 +12,7 @@ const AuthProvider = (props) => {
   const [token, setToken] = useState(localStorage.getItem("pmt_token"));
   const [userData, setUserData] = useState({});
   const [boards, setBoards] = useState([]);
+  const [openBackdrop, setOpenBackdrop] = useState(true);
 
   const handleSignUp = () => {
     // middle man between firebase and signup
@@ -53,21 +54,27 @@ const AuthProvider = (props) => {
   };
 
   const handleUserData = (uid) => {
-    FetchUserData(uid, setUserData);
+    FetchUserData(uid, setUserData, handleBackdropClose);
   };
 
   const handleBoardCreation = (response) => {
-    let updateUser = {...userData};
-    if(updateUser.boards !== undefined && updateUser.boards !== null) {
-      Object.assign(updateUser.boards, response)
+    let updateUser = { ...userData };
+    if (updateUser.boards !== undefined && updateUser.boards !== null) {
+      Object.assign(updateUser.boards, response);
       setUserData(updateUser);
-    }
-    else {
+    } else {
       updateUser.boards = response;
       setUserData(updateUser);
     }
-    
-  }
+  };
+
+  const handleBackdropClose = () => {
+    setOpenBackdrop(false);
+  };
+
+  const handleBackdropOpen = () => {
+    setOpenBackdrop(true);
+  };
 
   return (
     <FirebaseAuth.Provider
@@ -87,7 +94,10 @@ const AuthProvider = (props) => {
         setUserData,
         boards,
         setBoards,
-        handleBoardCreation
+        openBackdrop,
+        handleBackdropClose,
+        handleBackdropOpen,
+        handleBoardCreation,
       }}
     >
       {props.children}

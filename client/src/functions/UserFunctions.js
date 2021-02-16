@@ -1,4 +1,4 @@
-export const FetchUserData = async (uid, setUserData) => {
+export const FetchUserData = async (uid, setUserData, handleBackdropClose) => {
 	try {
 	  let response = await fetch(
 		process.env.REACT_APP_SERVICE_URL + `/returnUserData?uid=${uid}`,

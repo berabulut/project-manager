@@ -67,6 +67,8 @@ const returnUserRelatedBoards = (boards) =>
     try {
       const response = new Promise((resolve, reject) => {
         let data = [];
+        let counter = 0;
+
         boards.map((val, key) => {
           // val here should be unique id of a board
           const ref = db.ref(`/boards/${val}`);
@@ -79,7 +81,8 @@ const returnUserRelatedBoards = (boards) =>
                 data.push(value)
               })
               .then(() => {
-                if (key === boards.length - 1) resolve(data); // resolve promise if iterating last item of array
+                if (counter === boards.length - 1) resolve(data); // resolve promise if iterating last item of array
+                else counter = counter + 1;
               })
             }         
           });
@@ -106,8 +109,9 @@ const returnBoardRelatedUsers = (users) =>
             const value = snapshot.val();
             if (value !== undefined && value !== null) {
               data.push(value);
+              if (key === users.length - 1) resolve(data);
             }
-            if (key === users.length - 1) resolve(data);
+            
           });
         });
       });
