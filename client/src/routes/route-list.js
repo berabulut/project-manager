@@ -7,6 +7,9 @@ import { Boards } from "../components/Boards";
 export const routes = [
   {
     path: "/",
+  },
+  {
+    path: "/boards",
     component: Boards,
   },
   {

@@ -32,7 +32,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (token) {
-      history.push("/");
+      history.push("/boards");
     }
   }, [token]);
 

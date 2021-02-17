@@ -65,9 +65,23 @@ export const headerStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1.5),
     color: "#333333",
   },
-  title: {
-    flexGrow: 1,
+  divider: {
   },
+  allBoardsButton: {
+    borderRadius: "8px",
+    backgroundColor: "#F2F2F2"
+  },
+  allBoardsText: {
+    color: "#828282",
+    fontSize: "0.75rem",
+    fontWeight: "500",
+    lineHeight: "18px",
+    letterSpacing: "-0.035em",
+    fontFamily: "Poppins"
+  },
+  allBoardsIcon : {
+    color: "#828282"
+  }
 }));
 
 export const menuStyles = makeStyles((theme) => ({

@@ -35,7 +35,7 @@ const Login = () => {
     if (!token) {
       history.push("/login");
     } else {
-      history.push("/");
+      history.push("/boards");
     }
   }, [token]);
 
