@@ -34,9 +34,41 @@ export const LayoutStyles = makeStyles((theme) => ({
   },
 }));
 
+export const appStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: "100vh",
+    display: "grid",
+    boxShadow: "0px 2px 2px rgb(0 0 0 / 5%)",
+  },
+  children: {
+    minHeight: "80vh",
+    fontFamily: "Poppins",
+  },
+}));
+
 export const footerStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    display: "flex",
+    flexDirection: "column",
+  },
+  footer: {
+    padding: theme.spacing(3, 2),
+    marginTop: "auto",
+  },
+  divider: {
+    backgroundColor: "#333333",
+  },
+  footerText: {
+    color: "#333333",
+    textAlign: "start",
+    fontWeight: "500",
+    paddingLeft: "10px",
+  },
+  gridContainer: {
+    marginTop: "20px",
+  },
+  linkGrid: {
+    textAlign: "center",
   },
 }));
 
@@ -83,7 +115,7 @@ export const headerStyles = makeStyles((theme) => ({
     fontWeight: "500",
     letterSpacing: "-0.035em",
     paddingRight: theme.spacing(3),
-    borderRight: "1px solid #E0E0E0"
+    borderRight: "1px solid #E0E0E0",
   },
   allBoardsButton: {
     marginLeft: theme.spacing(3),
