@@ -65,11 +65,32 @@ export const headerStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1.5),
     color: "#333333",
   },
-  divider: {
+  boardsContainer: {
+    justifyContent: "flex-start",
+    [theme.breakpoints.down("sm")]: {
+      justifyContent: "space-evenly",
+    },
+  },
+  boardsContainer: {
+    display: "flex",
+    alignItems: "center",
+    flexGrow: "1",
+  },
+  title: {
+    textAlign: "center",
+    fontSize: "1.125rem",
+    lineHeight: "27px",
+    fontWeight: "500",
+    letterSpacing: "-0.035em",
+    paddingRight: theme.spacing(3),
+    borderRight: "1px solid #E0E0E0"
   },
   allBoardsButton: {
+    marginLeft: theme.spacing(3),
     borderRadius: "8px",
-    backgroundColor: "#F2F2F2"
+    backgroundColor: "#F2F2F2",
+    paddingTop: "6px",
+    paddingBottom: "6px",
   },
   allBoardsText: {
     color: "#828282",
@@ -77,11 +98,11 @@ export const headerStyles = makeStyles((theme) => ({
     fontWeight: "500",
     lineHeight: "18px",
     letterSpacing: "-0.035em",
-    fontFamily: "Poppins"
+    fontFamily: "Poppins",
   },
-  allBoardsIcon : {
-    color: "#828282"
-  }
+  allBoardsIcon: {
+    color: "#828282",
+  },
 }));
 
 export const menuStyles = makeStyles((theme) => ({
@@ -89,6 +110,7 @@ export const menuStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(3),
     color: "#333333",
     borderRadius: "0px",
+    minWidth: "250px",
     "&:hover": {
       background: "#ffffff",
     },

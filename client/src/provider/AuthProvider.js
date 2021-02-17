@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { AuthMethods } from "../firebase/AuthMethods";
 import { FetchUserData } from "../functions/UserFunctions";
-import { CreateNewBoard } from "../functions/BoardFunctions";
-import { SearchImages, GetRandomImages } from "../api/unsplash";
 
 export const FirebaseAuth = React.createContext();
 
-const AuthProvider = (props) => {
+const AuthProvider = (props) => {  
   const [inputs, setInputs] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("pmt_token"));
   const [userData, setUserData] = useState({});
   const [boards, setBoards] = useState([]);
   const [openBackdrop, setOpenBackdrop] = useState(true);
+  const [showAllBoards, setShowAllBoards] = useState(false);
 
   const handleSignUp = () => {
     // middle man between firebase and signup
@@ -95,6 +94,8 @@ const AuthProvider = (props) => {
         boards,
         setBoards,
         openBackdrop,
+        showAllBoards,
+        setShowAllBoards,
         handleBackdropClose,
         handleBackdropOpen,
         handleBoardCreation,

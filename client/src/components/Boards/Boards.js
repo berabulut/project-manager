@@ -12,7 +12,7 @@ import { boardsStyles } from "./styles";
 const Boards = () => {
   const classes = boardsStyles();
   const [modalOpen, setModalOpen] = useState(false);
-  const { userData, boards, setBoards, handleBackdropClose } = useContext(
+  const { userData, boards, setBoards, handleBackdropClose, setShowAllBoards } = useContext(
     FirebaseAuth
   );
 
