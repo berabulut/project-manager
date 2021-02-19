@@ -45,7 +45,6 @@ const KeywordSearch = ({
             onChange={(e) => setSearchInput(e.target.value)}
             placeholder="Keywords..."
             type="text"
-            style={{ height: "32px" }}
             className={classes.input}
           />
         </Grid>

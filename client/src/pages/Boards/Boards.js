@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { Grid, Typography, Container, Box, Button } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import { AppLayout } from "layouts";
@@ -9,10 +10,22 @@ import { boardsStyles } from "./styles";
 
 const Boards = () => {
   const classes = boardsStyles();
+  let history = useHistory();
+
   const [modalOpen, setModalOpen] = useState(false);
-  const { userData, boards, setBoards, handleBackdropClose, setShowAllBoards } = useContext(
-    FirebaseAuth
-  );
+  const {
+    userData,
+    boards,
+    setBoards,
+    handleBackdropClose,
+    handleBackdropOpen,
+    setShowAllBoards,
+  } = useContext(FirebaseAuth);
+
+  const handleBoardClick = (boardId) => {
+    console.log(boardId);
+    history.push("/board/" + boardId);
+  };
 
   const handleCreateButton = () => {
     setModalOpen(true);
@@ -43,15 +56,15 @@ const Boards = () => {
       userData.boards !== undefined &&
       Object.keys(userData.boards).length > 0
     ) {
+      handleBackdropOpen();
       parseBoardId(Object.values(userData.boards))
         .then((response) => {
           const body = {
             boardList: response,
           };
-          console.log('body', body)
           GetUserRelatedBoards(body)
             .then((response) => {
-              console.log(response)
+              console.log(response);
               if (response.statusCode === 200) {
                 setBoards(response.boardData);
                 handleBackdropClose();
@@ -97,12 +110,14 @@ const Boards = () => {
               boards.map((value, key) => {
                 return (
                   <Grid container key={key} item lg={3} md={3} sm={4} xs={8}>
-                    <Board
-                      image={value.coverPhoto}
-                      title={value.title}
-                      users={value.userData}
-                      visibility={value.visibility}
-                    />
+                    <div onClick={() => handleBoardClick(value.id)}>
+                      <Board
+                        image={value.coverPhoto}
+                        title={value.title}
+                        users={value.userData}
+                        visibility={value.visibility}
+                      />
+                    </div>
                   </Grid>
                 );
               })}

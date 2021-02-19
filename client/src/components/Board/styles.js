@@ -2,12 +2,14 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 export const boardStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    height: "100%"
   },
   paper: {
     padding: "12px",
     boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.05)",
     borderRadius: "12px",
     transition: "all .2s ease-in-out",
+    height: "100%",
     "&:hover":{
       cursor: "pointer",
       boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.25)",

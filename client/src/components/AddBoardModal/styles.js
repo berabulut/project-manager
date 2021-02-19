@@ -1,12 +1,12 @@
 import { makeStyles } from "@material-ui/core/styles";
-
+import { green } from "@material-ui/core/colors";
 
 export const modalStyles = makeStyles((theme) => ({
   modal: {
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
-    paddingTop: theme.spacing(8)
+    paddingTop: theme.spacing(8),
   },
   container: {
     backgroundColor: "white",
@@ -87,10 +87,22 @@ export const modalStyles = makeStyles((theme) => ({
     color: "#828282",
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
-    
   },
   createButton: {
     borderRadius: "8px",
   },
+  createButtonSuccess: {
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700],
+    },
+  },
+  buttonProgress: {
+    color: green[500],
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: -12,
+    marginLeft: -12,
+  },
 }));
-

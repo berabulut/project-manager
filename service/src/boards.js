@@ -12,15 +12,17 @@ const db = admin.database();
 const createNewBoard = (title, coverPhoto, visibility, users) =>
   new Promise((resolve, reject) => {
     const ref = db.ref(`/boards/`).push();
+    const boardId = ref.key;
 
     const data = {
+      id: boardId,
       title: title,
       coverPhoto: coverPhoto,
       visibility: visibility,
       users: users,
     };
 
-    const boardId = ref.key;
+
 
     ref.set(data, (error) => {
       if (error) {

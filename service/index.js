@@ -1,6 +1,4 @@
-const { testDB, createNewUser, checkIfUserExists } = require("./src/auth");
-
-testDB();
+const {  createNewUser, checkIfUserExists } = require("./src/auth");
 
 createNewUser("uwu412312", "blabla@gmail.com", "isim", "resim url")
   .then(() => {

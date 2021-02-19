@@ -48,6 +48,7 @@ export const keywordSearchStyles = makeStyles((theme) => ({
   },
   input: {
     width: "100%",
+    height: "100%",
     paddingLeft: theme.spacing(2),
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),

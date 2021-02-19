@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Grid, Typography, Button, Modal, IconButton } from "@material-ui/core";
+import { Grid, Typography, Button, Modal, IconButton, CircularProgress } from "@material-ui/core";
 import { Clear, Image, Lock, Add, Public } from "@material-ui/icons";
 import { FirebaseAuth } from "provider/AuthProvider";
 import { CreateNewBoard } from "functions/BoardFunctions";
@@ -26,12 +26,18 @@ const AddBoardModal = ({ open, setOpen }) => {
   const [coverImageRegular, setCoverImageRegular] = useState();
   const [coverImageRaw, setCoverImageRaw] = useState();
 
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   const handleCreate = () => {
     if (coverImageRaw === undefined) {
       console.log("Select a cover image");
     } else if (boardTitle.trim().length <= 0) {
       console.log("Board field cannot be empty");
     } else {
+
+      setLoading(true);
+
       const boardData = {
         title: boardTitle,
         coverPhoto: coverImageRaw,
@@ -41,13 +47,14 @@ const AddBoardModal = ({ open, setOpen }) => {
       CreateNewBoard(boardData)
         .then((response) => {
           if (response.statusCode === 200) {
-            //push to userdata
-            // close modal
             handleBoardCreation(response.data)
+            setSuccess(true);
+            setLoading(false);
             handleClose();
           }
         })
         .catch((err) => {
+          setLoading(false);
           console.log(err);
         });
     }
@@ -193,9 +200,10 @@ const AddBoardModal = ({ open, setOpen }) => {
                 onClick={handleCreate}
                 variant="contained"
                 color="primary"
-                className={classes.createButton}
+                className={success ? classes.createButtonSuccess : classes.createButton}
                 startIcon={<Add />}
               >
+                 {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                 Create
               </Button>
             </Grid>

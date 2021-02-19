@@ -11,6 +11,7 @@ export const FetchUserData = async (uid, setUserData, handleBackdropClose) => {
 	  const data = await response.json();
 	  if (setUserData) {
 		setUserData(data.userData);
+		handleBackdropClose();
 	  }
   
 	  return data;

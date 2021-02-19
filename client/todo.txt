@@ -1,2 +1,1 @@
-1. add transitions and backdrops
-2. add feedback after events
+1. why boards page rerenders after history.push from another page
