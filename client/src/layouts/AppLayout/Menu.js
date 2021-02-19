@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { FirebaseAuth } from "../../../provider/AuthProvider";
+import { FirebaseAuth } from "../../provider/AuthProvider";
 import {
   IconButton,
   Typography,

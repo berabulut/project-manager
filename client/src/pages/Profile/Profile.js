@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { FirebaseAuth } from "../../provider/AuthProvider";
+import { FirebaseAuth } from "provider/AuthProvider";
 import {
   Grid,
   Typography,
@@ -10,7 +9,7 @@ import {
   Avatar,
   Button,
 } from "@material-ui/core";
-import { AppLayout } from "../Layout";
+import { AppLayout } from "layouts";
 import { profileStyles } from "./styles";
 
 const Profile = () => {

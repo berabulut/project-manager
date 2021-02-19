@@ -1,5 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
-import { FirebaseAuth } from "provider/AuthProvider";
+import React from "react";
 import { Typography, Grid } from "@material-ui/core";
 import { Public, Lock } from "@material-ui/icons";
 import { PopMenu, PopMenuItem, visibilityStyles } from "./styles";
@@ -24,18 +23,12 @@ const VisibilityMenu = ({
       >
         <Grid className={classes.header} container>
           <Grid item xs={12}>
-            <Typography
-              className={classes.headerTitle}
-              component="p"
-            >
+            <Typography className={classes.headerTitle} component="p">
               Visibility
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Typography
-              className={classes.headerDescription}
-              component="p"
-            >
+            <Typography className={classes.headerDescription} component="p">
               Choose who can see this board
             </Typography>
           </Grid>
@@ -57,19 +50,13 @@ const VisibilityMenu = ({
                 />
               </Grid>
               <Grid item xs={9}>
-                <Typography
-                  className={classes.itemTitle}
-                  component="p"
-                >
+                <Typography className={classes.itemTitle} component="p">
                   Public
                 </Typography>
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              <Typography
-                className={classes.itemDescription}
-                component="p"
-              >
+              <Typography className={classes.itemDescription} component="p">
                 Anyone can see this board. Only board members can edit.
               </Typography>
             </Grid>
@@ -94,19 +81,13 @@ const VisibilityMenu = ({
                 />
               </Grid>
               <Grid item xs={9}>
-                <Typography
-                  className={classes.itemTitle}
-                  component="p"
-                >
+                <Typography className={classes.itemTitle} component="p">
                   Private
                 </Typography>
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              <Typography
-                className={classes.itemDescription}
-                component="p"
-              >
+              <Typography className={classes.itemDescription} component="p">
                 Only board members can see and edit this board.
               </Typography>
             </Grid>

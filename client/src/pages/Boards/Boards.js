@@ -1,10 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Grid, Typography, Container, Box, Button } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
-import CreateModal from "./Modal/CreateModal";
-import { AppLayout } from "../Layout";
-import { Board } from "../Board";
-import { Loading } from "../Loading";
+import { AppLayout } from "layouts";
+import { Board, AddBoardModal, Loading } from "components";
 import { FirebaseAuth } from "provider/AuthProvider";
 import { GetUserRelatedBoards } from "functions/BoardFunctions";
 import { boardsStyles } from "./styles";
@@ -109,7 +107,7 @@ const Boards = () => {
                 );
               })}
           </Grid>
-          <CreateModal open={modalOpen} setOpen={setModalOpen} />
+          <AddBoardModal open={modalOpen} setOpen={setModalOpen} />
         </Container>
       </div>
       <Loading />

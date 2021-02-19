@@ -1,8 +1,4 @@
-import { Login } from "../components/Login";
-import { Home } from "../components/Home";
-import { SignUp } from "../components/SignUp";
-import { Profile } from "../components/Profile";
-import { Boards } from "../components/Boards";
+import { Login, SignUp, Profile, Boards, Board } from "pages";
 
 export const routes = [
   {
@@ -23,5 +19,9 @@ export const routes = [
   {
     path: "/profile",
     component: Profile,
+  },
+  {
+    path: "/board/:id",
+    component: Board,
   },
 ];

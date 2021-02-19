@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { LockOutlined, Mail, Lock, Twitter, GitHub } from "@material-ui/icons";
 import { Google } from "../Icons";
-import { AuthTheme } from "../Layout";
+import { AuthTheme } from "layouts";
 import { formStyles, LoginTextField } from "./styles";
 
 const AuthForm = ({

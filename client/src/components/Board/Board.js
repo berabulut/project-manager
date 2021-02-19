@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Paper, Typography, Box, Avatar } from "@material-ui/core";
-import { Add } from "@material-ui/icons";
 import { boardStyles } from "./styles";
 
 // const address =

@@ -1,11 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
-import { FirebaseAuth } from "provider/AuthProvider";
+import React, { useState } from "react";
 import { Typography, Grid } from "@material-ui/core";
-import { Public, Lock } from "@material-ui/icons";
 import KeywordSearch from "./KeywordSearch";
-import { PopMenu, PopMenuItem, coverStyles } from "./styles";
+import { PopMenu, coverStyles } from "./styles";
 
-const Cover = ({ open, anchorEl, handleClose, handleImageClick }) => {
+const CoverMenu = ({ open, anchorEl, handleClose, handleImageClick }) => {
   const classes = coverStyles();
 
   const [searchedImages, setSearchedImages] = useState([]);
@@ -99,4 +97,4 @@ const Cover = ({ open, anchorEl, handleClose, handleImageClick }) => {
   );
 };
 
-export default Cover;
+export default CoverMenu;

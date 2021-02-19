@@ -3,14 +3,13 @@ import { Grid, Typography, Button, Modal, IconButton } from "@material-ui/core";
 import { Clear, Image, Lock, Add, Public } from "@material-ui/icons";
 import { FirebaseAuth } from "provider/AuthProvider";
 import { CreateNewBoard } from "functions/BoardFunctions";
-import { VisibilityMenu } from "components/Visibility";
-import { Cover } from "components/Cover";
+import { VisibilityMenu, CoverMenu } from "components";
 import { modalStyles } from "./styles";
 
 const placeholder =
   "https://images.unsplash.com/photo-1613085628218-d08b3a264f86?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80";
 
-const CreateModal = ({ open, setOpen }) => {
+const AddBoardModal = ({ open, setOpen }) => {
   const classes = modalStyles();
 
   const { userData, setUserData, handleBoardCreation } = useContext(FirebaseAuth);
@@ -147,7 +146,7 @@ const CreateModal = ({ open, setOpen }) => {
                 <Image className={classes.icons} />
                 <Typography className={classes.buttonText}>Cover</Typography>
               </IconButton>
-              <Cover
+              <CoverMenu
                 handleImageClick={handleImageClick}
                 open={openVisibility}
                 anchorEl={coverAnchorEl}
@@ -207,4 +206,4 @@ const CreateModal = ({ open, setOpen }) => {
   );
 };
 
-export default CreateModal;
+export default AddBoardModal;

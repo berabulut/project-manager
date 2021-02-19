@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { FirebaseAuth } from "../../provider/AuthProvider";
-import { AuthLayout, AuthTheme } from "../Layout";
-import { AuthForm } from "../AuthForm";
-import { Alert } from "../Custom";
+import { AuthLayout, AuthTheme } from "layouts";
+import { AuthForm, Alert } from "components";
+import { FirebaseAuth } from "provider/AuthProvider";
 import { Container, CssBaseline, Snackbar } from "@material-ui/core";
 import { loginStyles } from "./styles";
 

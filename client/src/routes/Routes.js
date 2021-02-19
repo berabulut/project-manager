@@ -5,9 +5,9 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import { FirebaseAuth } from "../provider/AuthProvider";
+import { FirebaseAuth } from "provider/AuthProvider";
 import { routes } from "./route-list";
-import { Login } from "../components/Login";
+import { Login } from "pages";
 
 const Layout = (props) => {
   const { token } = useContext(FirebaseAuth);

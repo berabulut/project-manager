@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import { Grid, IconButton } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { SearchImages, GetRandomImages } from "api/unsplash";
