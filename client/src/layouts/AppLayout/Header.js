@@ -9,7 +9,7 @@ import { headerStyles } from "./styles";
 const Header = () => {
   let history = useHistory();
   const classes = headerStyles();
-  const { showAllBoards } = useContext(FirebaseAuth);
+  const { showAllBoards, renderedBoard } = useContext(FirebaseAuth);
 
   return (
     <div className={classes.root}>
@@ -29,7 +29,7 @@ const Header = () => {
           {showAllBoards === true ? (
             <div className={classes.boardsContainer}>
               <Typography className={classes.title}>
-                Devchallanges Board
+                {renderedBoard.title}
               </Typography>
               <IconButton
                 onClick={() => history.push("/boards")}

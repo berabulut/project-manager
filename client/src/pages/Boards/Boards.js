@@ -19,11 +19,9 @@ const Boards = () => {
     setBoards,
     handleBackdropClose,
     handleBackdropOpen,
-    setShowAllBoards,
   } = useContext(FirebaseAuth);
 
   const handleBoardClick = (boardId) => {
-    console.log(boardId);
     history.push("/board/" + boardId);
   };
 
@@ -64,7 +62,6 @@ const Boards = () => {
           };
           GetUserRelatedBoards(body)
             .then((response) => {
-              console.log(response);
               if (response.statusCode === 200) {
                 setBoards(response.boardData);
                 handleBackdropClose();
