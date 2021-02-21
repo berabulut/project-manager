@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { AuthMethods } from "../firebase/AuthMethods";
-import { FetchUserData } from "../functions/UserFunctions";
+import { AuthMethods } from "firebase/AuthMethods";
+import { FetchUserData } from "functions/UserFunctions";
+import { HandleUserRelatedBoards } from "helpers/Board";
 
 export const FirebaseAuth = React.createContext();
 
@@ -54,7 +55,18 @@ const AuthProvider = (props) => {
   };
 
   const handleUserData = (uid) => {
-    FetchUserData(uid, setUserData, handleBackdropClose);
+    FetchUserData(uid, setUserData, handleBackdropClose)
+      .then((data) => {
+        HandleUserRelatedBoards(
+          data,
+          handleBackdropOpen,
+          setBoards,
+          handleBackdropClose
+        );
+      })
+      .catch((err) => {
+        console.log("Couldn't fetch user data reload page : ", err);
+      });
   };
 
   const handleBoardCreation = (response) => {
@@ -83,8 +95,8 @@ const AuthProvider = (props) => {
 
   const hideShowAllBoards = () => {
     setRenderedBoard();
-    setShowAllBoards(false)
-  }
+    setShowAllBoards(false);
+  };
 
   return (
     <FirebaseAuth.Provider

@@ -5,7 +5,7 @@ import { Add } from "@material-ui/icons";
 import { AppLayout } from "layouts";
 import { Board, AddBoardModal, Loading } from "components";
 import { FirebaseAuth } from "provider/AuthProvider";
-import { GetUserRelatedBoards } from "functions/BoardFunctions";
+import { HandleUserRelatedBoards } from "helpers/Board";
 import { boardsStyles } from "./styles";
 
 const Boards = () => {
@@ -29,54 +29,7 @@ const Boards = () => {
     setModalOpen(true);
   };
 
-  const parseBoardId = (
-    boards // structuring boardIds for api call --> ["id1", "id2"]
-  ) =>
-    new Promise((resolve, reject) => {
-      let body = [];
-      try {
-        boards.map((val, key) => {
-          if (val.boardId !== undefined) {
-            body.push(val.boardId);
-          }
-          if (key === boards.length - 1) {
-            resolve(body);
-          }
-        });
-      } catch (err) {
-        reject(err);
-      }
-    });
 
-  useEffect(() => {
-    if (
-      userData !== undefined &&
-      userData.boards !== undefined &&
-      Object.keys(userData.boards).length > 0
-    ) {
-      handleBackdropOpen();
-      parseBoardId(Object.values(userData.boards))
-        .then((response) => {
-          const body = {
-            boardList: response,
-          };
-          GetUserRelatedBoards(body)
-            .then((response) => {
-              if (response.statusCode === 200) {
-                setBoards(response.boardData);
-                handleBackdropClose();
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-              handleBackdropClose();
-            });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [userData]);
 
   return (
     <AppLayout>

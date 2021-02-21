@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { FirebaseAuth } from "provider/AuthProvider";
 import { AppLayout } from "layouts";
 import { boardPageStyles } from "./styles";
-import { cleanup } from "@testing-library/react";
+import { HandleUserRelatedBoards, FindExactBoard } from "helpers/Board";
 
 const Profile = () => {
   const classes = boardPageStyles();
@@ -16,14 +16,14 @@ const Profile = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    for (let board of boards) {
-      if (board.id === id) {
-        handleBoardPageRender(board);
-        break;
-      }
-    }
+    FindExactBoard(id, boards, handleBoardPageRender);
     return () => hideShowAllBoards();
   }, []);
+
+  useEffect(() => {
+    console.log(boards)
+    FindExactBoard(id, boards, handleBoardPageRender);
+  }, [boards]);
 
   return (
     <AppLayout>
