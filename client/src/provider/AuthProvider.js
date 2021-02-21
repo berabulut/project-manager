@@ -22,7 +22,8 @@ const AuthProvider = (props) => {
       inputs.email,
       inputs.password,
       setErrors,
-      setToken
+      setToken,
+      handleBackdropClose
     );
   };
 
@@ -32,20 +33,21 @@ const AuthProvider = (props) => {
       inputs.password,
       setErrors,
       setToken,
-      setUserData
+      setUserData,
+      handleBackdropClose
     );
   };
 
   const handleGoogleLogin = () => {
-    AuthMethods.googleLogin(setErrors, setToken, setUserData);
+    AuthMethods.googleLogin(setErrors, setToken, setUserData, handleBackdropClose);
   };
 
   const handleGithubLogin = () => {
-    AuthMethods.githubLogin(setErrors, setToken, setUserData);
+    AuthMethods.githubLogin(setErrors, setToken, setUserData, handleBackdropClose);
   };
 
   const handleTwitterLogin = () => {
-    AuthMethods.twitterLogin(setErrors, setToken, setUserData);
+    AuthMethods.twitterLogin(setErrors, setToken, setUserData, handleBackdropClose);
   };
 
   const handleLogout = () => {

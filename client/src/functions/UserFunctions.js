@@ -42,7 +42,7 @@ const createNewUserRecord = async (userData) => {
   }
 };
 
-export const handleSignIn = (response, setUserData) => {
+export const handleSignIn = (response, setUserData, handleBackdropClose) => {
   const isNewUser = response.additionalUserInfo.isNewUser;
 
   if (isNewUser === true) {
@@ -51,7 +51,7 @@ export const handleSignIn = (response, setUserData) => {
     return userData;
   } else if (isNewUser === false) {
     if (setUserData) {
-      FetchUserData(response.user.uid, setUserData);
+      FetchUserData(response.user.uid, setUserData, handleBackdropClose);
     }
   } else {
     console.log("handlesignin failed somehow");
