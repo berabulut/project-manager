@@ -139,7 +139,6 @@ export const headerStyles = makeStyles((theme) => ({
 
 export const menuStyles = makeStyles((theme) => ({
   popButton: {
-    marginRight: theme.spacing(3),
     color: "#333333",
     borderRadius: "0px",
     minWidth: "250px",

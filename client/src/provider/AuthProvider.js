@@ -14,6 +14,7 @@ const AuthProvider = (props) => {
   const [openBackdrop, setOpenBackdrop] = useState(true);
   const [showAllBoards, setShowAllBoards] = useState(false);
   const [renderedBoard, setRenderedBoard] = useState();
+  const [showFooter, setShowFooter] = useState(true);
 
   const handleSignUp = () => {
     // middle man between firebase and signup
@@ -118,6 +119,8 @@ const AuthProvider = (props) => {
         setUserData,
         boards,
         setBoards,
+        showFooter,
+        setShowFooter,
         openBackdrop,
         renderedBoard,
         showAllBoards,
