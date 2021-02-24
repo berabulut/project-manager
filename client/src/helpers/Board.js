@@ -1,4 +1,5 @@
 import { GetUserRelatedBoards } from "functions/BoardFunctions";
+import { UIHelpers } from "helpers/";
 
 const parseBoardId = (
   boards // structuring boardIds for api call --> ["id1", "id2"]
@@ -19,12 +20,11 @@ const parseBoardId = (
     }
   });
 
-export const HandleUserRelatedBoards = (
+const HandleUserRelatedBoards = (
   // fetching user related boards and seting them to context
   userData,
-  handleBackdropOpen,
   setBoards,
-  handleBackdropClose
+  setOpenBackdrop
 ) =>
   new Promise((resolve, reject) => {
     if (
@@ -32,7 +32,7 @@ export const HandleUserRelatedBoards = (
       userData.boards !== undefined &&
       Object.keys(userData.boards).length > 0
     ) {
-      handleBackdropOpen();
+      UIHelpers.HandleBackdropOpen(setOpenBackdrop);
       parseBoardId(Object.values(userData.boards))
         .then((response) => {
           const body = {
@@ -42,32 +42,49 @@ export const HandleUserRelatedBoards = (
             .then((response) => {
               if (response.statusCode === 200) {
                 setBoards(response.boardData);
-                handleBackdropClose();
-                resolve(true)
+                UIHelpers.HandleBackdropClose(setOpenBackdrop);
+                resolve(true);
               }
             })
             .catch((err) => {
-              console.log(err);
-              reject(err)
-              handleBackdropClose();
+              UIHelpers.HandleBackdropClose(setOpenBackdrop);
+              reject(err);
             });
         })
         .catch((err) => {
           console.log(err);
-          reject(err)
+          reject(err);
         });
-    }
-    else {
-      reject('userData or boards are undefined')
+    } else {
+      reject("userData or boards are undefined");
     }
   });
 
-export const FindExactBoard = (id, boards, handleBoardPageRender) => {
+const FindExactBoard = (id, boards, setRenderedBoard, setShowAllBoards) => {
   for (let board of boards) {
     if (board.id === id) {
-      handleBoardPageRender(board);
+      UIHelpers.HandleBoardPageRender(board, setRenderedBoard, setShowAllBoards);
       console.log(board);
       break;
     }
   }
 };
+
+const HandleBoardCreation = (response, userData, setUserData) => {
+  let updateUser = { ...userData };
+  if (updateUser.boards !== undefined && updateUser.boards !== null) {
+    Object.assign(updateUser.boards, response);
+    setUserData(updateUser);
+  } else {
+    updateUser.boards = response;
+    setUserData(updateUser);
+  }
+};
+
+const BoardHelpers = {
+  HandleUserRelatedBoards: HandleUserRelatedBoards,
+  HandleBoardCreation: HandleBoardCreation,
+  FindExactBoard: FindExactBoard,
+};
+
+export default BoardHelpers;

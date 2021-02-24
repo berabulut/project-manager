@@ -1,15 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { FirebaseAuth } from "provider/AuthProvider";
 import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
 import { Dashboard, Apps } from "@material-ui/icons";
 import Menu from "./Menu";
 import { headerStyles } from "./styles";
+import { UIContext } from "provider/UIProvider";
 
 const Header = () => {
   let history = useHistory();
   const classes = headerStyles();
-  const { showAllBoards, renderedBoard } = useContext(FirebaseAuth);
+  const { showAllBoards, renderedBoard } = useContext(UIContext);
 
   return (
     <div className={classes.root}>

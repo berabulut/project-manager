@@ -2,14 +2,21 @@ import firebase from "firebase";
 import { FirebaseConfig } from "./FirebaseConfig";
 import { handleSignIn } from "../functions/UserFunctions";
 
-const SignUp = (email, password, setErrors, setToken, setUserData, handleBackdropClose) => {
+const SignUp = (
+  email,
+  password,
+  setErrors,
+  setToken,
+  setUserData,
+  setOpenBackdrop
+) => {
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(async (res) => {
       const token = await Object.entries(res.user)[5][1].b;
       //set token to localStorage
-      handleSignIn(res, setUserData, handleBackdropClose);
+      handleSignIn(res, setUserData, setOpenBackdrop);
       await localStorage.setItem("pmt_token", token);
       //grab token from local storage and set to state.
       await setToken(token);
@@ -19,7 +26,14 @@ const SignUp = (email, password, setErrors, setToken, setUserData, handleBackdro
     });
 };
 
-const Login = (email, password, setErrors, setToken, setUserData, handleBackdropClose) => {
+const Login = (
+  email,
+  password,
+  setErrors,
+  setToken,
+  setUserData,
+  setOpenBackdrop
+) => {
   //change from create users to...
   firebase
     .auth()
@@ -28,7 +42,7 @@ const Login = (email, password, setErrors, setToken, setUserData, handleBackdrop
     .then(async (res) => {
       const token = await Object.entries(res.user)[5][1].b;
       //set token to localStorage
-      handleSignIn(res, setUserData, handleBackdropClose);
+      handleSignIn(res, setUserData, setOpenBackdrop);
       await localStorage.setItem("pmt_token", token);
       await setToken(token);
     })
@@ -37,7 +51,7 @@ const Login = (email, password, setErrors, setToken, setUserData, handleBackdrop
     });
 };
 
-const LoginWithGoogle = (setErrors, setToken, setUserData, handleBackdropClose) => {
+const LoginWithGoogle = (setErrors, setToken, setUserData, setOpenBackdrop) => {
   let provider = new firebase.auth.GoogleAuthProvider();
 
   firebase
@@ -46,7 +60,7 @@ const LoginWithGoogle = (setErrors, setToken, setUserData, handleBackdropClose) 
     .then(async (res) => {
       const token = await Object.entries(res.user)[5][1].b;
       //set token to localStorage
-      handleSignIn(res, setUserData, handleBackdropClose);
+      handleSignIn(res, setUserData, setOpenBackdrop);
       await localStorage.setItem("pmt_token", token);
       await setToken(token);
     })
@@ -55,7 +69,7 @@ const LoginWithGoogle = (setErrors, setToken, setUserData, handleBackdropClose) 
     });
 };
 
-const LoginWithGithub = (setErrors, setToken, setUserData, handleBackdropClose) => {
+const LoginWithGithub = (setErrors, setToken, setUserData, setOpenBackdrop) => {
   let provider = new firebase.auth.GithubAuthProvider();
 
   firebase
@@ -64,7 +78,7 @@ const LoginWithGithub = (setErrors, setToken, setUserData, handleBackdropClose) 
     .then(async (res) => {
       const token = await Object.entries(res.user)[5][1].b;
       //set token to localStorage
-      handleSignIn(res, setUserData, handleBackdropClose);
+      handleSignIn(res, setUserData, setOpenBackdrop);
       await localStorage.setItem("pmt_token", token);
       await setToken(token);
     })
@@ -73,7 +87,12 @@ const LoginWithGithub = (setErrors, setToken, setUserData, handleBackdropClose) 
     });
 };
 
-const LoginWithTwitter = (setErrors, setToken, setUserData, handleBackdropClose) => {
+const LoginWithTwitter = (
+  setErrors,
+  setToken,
+  setUserData,
+  setOpenBackdrop
+) => {
   let provider = new firebase.auth.TwitterAuthProvider();
 
   firebase
@@ -82,7 +101,7 @@ const LoginWithTwitter = (setErrors, setToken, setUserData, handleBackdropClose)
     .then(async (res) => {
       const token = await Object.entries(res.user)[5][1].b;
       //set token to localStorage
-      handleSignIn(res, setUserData, handleBackdropClose);
+      handleSignIn(res, setUserData, setOpenBackdrop);
       await localStorage.setItem("pmt_token", token);
       await setToken(token);
     })

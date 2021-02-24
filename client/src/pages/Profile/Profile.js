@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
-import { FirebaseAuth } from "provider/AuthProvider";
+import { UserContext } from "provider/UserProvider";
+import { AppLayout } from "layouts";
+import { profileStyles } from "./styles";
 import {
   Grid,
   Typography,
@@ -9,12 +11,11 @@ import {
   Avatar,
   Button,
 } from "@material-ui/core";
-import { AppLayout } from "layouts";
-import { profileStyles } from "./styles";
+
 
 const Profile = () => {
   const classes = profileStyles();
-  const { userData } = useContext(FirebaseAuth);
+  const { userData } = useContext(UserContext);
   return (
     <AppLayout>
       <div className={classes.root}>

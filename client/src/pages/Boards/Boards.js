@@ -1,25 +1,20 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Grid, Typography, Container, Box, Button } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import { AppLayout } from "layouts";
 import { Board, AddBoardModal, Loading } from "components";
-import { FirebaseAuth } from "provider/AuthProvider";
-import { HandleUserRelatedBoards } from "helpers/Board";
+import { UserContext } from "provider/UserProvider";
 import { boardsStyles } from "./styles";
 
 const Boards = () => {
+  
   const classes = boardsStyles();
+  
   let history = useHistory();
 
   const [modalOpen, setModalOpen] = useState(false);
-  const {
-    userData,
-    boards,
-    setBoards,
-    handleBackdropClose,
-    handleBackdropOpen,
-  } = useContext(FirebaseAuth);
+  const { boards } = useContext(UserContext);
 
   const handleBoardClick = (boardId) => {
     history.push("/board/" + boardId);
@@ -28,8 +23,6 @@ const Boards = () => {
   const handleCreateButton = () => {
     setModalOpen(true);
   };
-
-
 
   return (
     <AppLayout>

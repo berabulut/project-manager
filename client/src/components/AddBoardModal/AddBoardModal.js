@@ -1,8 +1,16 @@
 import React, { useContext, useState } from "react";
-import { Grid, Typography, Button, Modal, IconButton, CircularProgress } from "@material-ui/core";
+import {
+  Grid,
+  Typography,
+  Button,
+  Modal,
+  IconButton,
+  CircularProgress,
+} from "@material-ui/core";
 import { Clear, Image, Lock, Add, Public } from "@material-ui/icons";
-import { FirebaseAuth } from "provider/AuthProvider";
+import { UserContext } from "provider/UserProvider";
 import { CreateNewBoard } from "functions/BoardFunctions";
+import { BoardHelpers } from "helpers/";
 import { VisibilityMenu, CoverMenu } from "components";
 import { modalStyles } from "./styles";
 
@@ -12,7 +20,7 @@ const placeholder =
 const AddBoardModal = ({ open, setOpen }) => {
   const classes = modalStyles();
 
-  const { userData, setUserData, handleBoardCreation } = useContext(FirebaseAuth);
+  const { userData, setUserData } = useContext(UserContext);
 
   const [visibilityAnchorEl, setVisibilityAnchorEl] = useState(null);
   const [openVisibility, setOpenVisibilty] = useState(false);
@@ -35,7 +43,6 @@ const AddBoardModal = ({ open, setOpen }) => {
     } else if (boardTitle.trim().length <= 0) {
       console.log("Board field cannot be empty");
     } else {
-
       setLoading(true);
 
       const boardData = {
@@ -47,7 +54,7 @@ const AddBoardModal = ({ open, setOpen }) => {
       CreateNewBoard(boardData)
         .then((response) => {
           if (response.statusCode === 200) {
-            handleBoardCreation(response.data)
+            BoardHelpers.HandleBoardCreation(response.data, userData, setUserData);
             setSuccess(true);
             setLoading(false);
             handleClose();
@@ -200,10 +207,17 @@ const AddBoardModal = ({ open, setOpen }) => {
                 onClick={handleCreate}
                 variant="contained"
                 color="primary"
-                className={success ? classes.createButtonSuccess : classes.createButton}
+                className={
+                  success ? classes.createButtonSuccess : classes.createButton
+                }
                 startIcon={<Add />}
               >
-                 {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                {loading && (
+                  <CircularProgress
+                    size={24}
+                    className={classes.buttonProgress}
+                  />
+                )}
                 Create
               </Button>
             </Grid>

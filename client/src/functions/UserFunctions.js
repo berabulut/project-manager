@@ -1,4 +1,6 @@
-export const FetchUserData = (uid, setUserData, handleBackdropClose) =>
+import { UIHelpers } from "helpers/";
+
+export const FetchUserData = (uid, setUserData, setOpenBackdrop) =>
   new Promise(async (resolve, reject) => {
     try {
       let response = await fetch(
@@ -12,7 +14,7 @@ export const FetchUserData = (uid, setUserData, handleBackdropClose) =>
       const data = await response.json();
       if (setUserData) {
         setUserData(data.userData);
-        handleBackdropClose();
+        UIHelpers.HandleBackdropClose(setOpenBackdrop);
         resolve(data.userData);
       }
 
@@ -42,7 +44,7 @@ const createNewUserRecord = async (userData) => {
   }
 };
 
-export const handleSignIn = (response, setUserData, handleBackdropClose) => {
+export const handleSignIn = (response, setUserData, setOpenBackdrop) => {
   const isNewUser = response.additionalUserInfo.isNewUser;
 
   if (isNewUser === true) {
@@ -51,7 +53,7 @@ export const handleSignIn = (response, setUserData, handleBackdropClose) => {
     return userData;
   } else if (isNewUser === false) {
     if (setUserData) {
-      FetchUserData(response.user.uid, setUserData, handleBackdropClose);
+      FetchUserData(response.user.uid, setUserData, setOpenBackdrop);
     }
   } else {
     console.log("handlesignin failed somehow");

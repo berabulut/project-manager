@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { AuthMethods } from "firebase/AuthMethods";
-import { FetchUserData } from "functions/UserFunctions";
-import { HandleUserRelatedBoards } from "helpers/Board";
+import { UserHelpers, BoardHelpers, UIHelpers } from "helpers/";
 
 export const FirebaseAuth = React.createContext();
 
@@ -9,12 +8,7 @@ const AuthProvider = (props) => {
   const [inputs, setInputs] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("pmt_token"));
-  const [userData, setUserData] = useState({});
-  const [boards, setBoards] = useState([]);
-  const [openBackdrop, setOpenBackdrop] = useState(true);
-  const [showAllBoards, setShowAllBoards] = useState(false);
-  const [renderedBoard, setRenderedBoard] = useState();
-  const [showFooter, setShowFooter] = useState(true);
+
 
   const handleSignUp = () => {
     // middle man between firebase and signup
@@ -24,7 +18,7 @@ const AuthProvider = (props) => {
       inputs.password,
       setErrors,
       setToken,
-      handleBackdropClose
+      props.setOpenBackdrop
     );
   };
 
@@ -34,71 +28,27 @@ const AuthProvider = (props) => {
       inputs.password,
       setErrors,
       setToken,
-      setUserData,
-      handleBackdropClose
+      props.setUserData,
+      props.setOpenBackdrop
     );
   };
 
   const handleGoogleLogin = () => {
-    AuthMethods.googleLogin(setErrors, setToken, setUserData, handleBackdropClose);
+    AuthMethods.googleLogin(setErrors, setToken, props.setUserData, props.setOpenBackdrop);
   };
 
   const handleGithubLogin = () => {
-    AuthMethods.githubLogin(setErrors, setToken, setUserData, handleBackdropClose);
+    AuthMethods.githubLogin(setErrors, setToken, props.setUserData, props.setOpenBackdrop);
   };
 
   const handleTwitterLogin = () => {
-    AuthMethods.twitterLogin(setErrors, setToken, setUserData, handleBackdropClose);
+    AuthMethods.twitterLogin(setErrors, setToken, props.setUserData, props.setOpenBackdrop);
   };
 
   const handleLogout = () => {
     AuthMethods.logout(setErrors, setToken);
-    setBoards([]);
-    setUserData([]);
-  };
-
-  const handleUserData = (uid) => {
-    FetchUserData(uid, setUserData, handleBackdropClose)
-      .then((data) => {
-        HandleUserRelatedBoards(
-          data,
-          handleBackdropOpen,
-          setBoards,
-          handleBackdropClose
-        );
-      })
-      .catch((err) => {
-        console.log("Couldn't fetch user data reload page : ", err);
-      });
-  };
-
-  const handleBoardCreation = (response) => {
-    let updateUser = { ...userData };
-    if (updateUser.boards !== undefined && updateUser.boards !== null) {
-      Object.assign(updateUser.boards, response);
-      setUserData(updateUser);
-    } else {
-      updateUser.boards = response;
-      setUserData(updateUser);
-    }
-  };
-
-  const handleBackdropClose = () => {
-    setOpenBackdrop(false);
-  };
-
-  const handleBackdropOpen = () => {
-    setOpenBackdrop(true);
-  };
-
-  const handleBoardPageRender = (board) => {
-    setRenderedBoard(board);
-    setShowAllBoards(true);
-  };
-
-  const hideShowAllBoards = () => {
-    setRenderedBoard();
-    setShowAllBoards(false);
+    props.setBoards([]);
+    props.setUserData([]);
   };
 
   return (
@@ -110,25 +60,10 @@ const AuthProvider = (props) => {
         handleGoogleLogin,
         handleGithubLogin,
         handleTwitterLogin,
-        handleUserData,
         inputs,
         setInputs,
         errors,
         token,
-        userData,
-        setUserData,
-        boards,
-        setBoards,
-        showFooter,
-        setShowFooter,
-        openBackdrop,
-        renderedBoard,
-        showAllBoards,
-        hideShowAllBoards,
-        handleBackdropClose,
-        handleBackdropOpen,
-        handleBoardCreation,
-        handleBoardPageRender,
       }}
     >
       {props.children}
