@@ -2,7 +2,7 @@ import React from "react";
 
 export const UserContext = React.createContext();
 
-const UserProvider = ({userData, setUserData, boards, setBoards, children}) => {
+const UserProvider = ({userData, setUserData, boards, setBoards, setOpenBackdrop, children}) => {
 
 
   return (
@@ -11,7 +11,8 @@ const UserProvider = ({userData, setUserData, boards, setBoards, children}) => {
         userData,
         setUserData,
         boards,
-        setBoards
+        setBoards,
+        setOpenBackdrop
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import firebase from "firebase";
 import { FirebaseConfig } from "./firebase/FirebaseConfig";
 import AuthProvider from "provider/AuthProvider";
@@ -31,10 +31,11 @@ const App = () => {
     }
   }, []);
 
+
   return (
     <UIProvider openBackdrop={openBackdrop} setOpenBackdrop={setOpenBackdrop}>
       <AuthProvider setUserData={setUserData} setBoards={setBoards} setOpenBackdrop={setOpenBackdrop}>
-        <UserProvider userData={userData} setUserData={setUserData} boards={boards} setBoards={setBoards}>
+        <UserProvider userData={userData} setUserData={setUserData} boards={boards} setBoards={setBoards} setOpenBackdrop={setOpenBackdrop}>
           <div className="App">
             <Routes />
           </div>

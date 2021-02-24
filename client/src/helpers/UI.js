@@ -16,6 +16,7 @@ const HandleBackdropOpen = (setOpenBackdrop) => {
   setOpenBackdrop(true);
 };
 
+
 const UIHelpers = {
   HandleBoardPageRender: HandleBoardPageRender,
   HideShowAllBoards: HideShowAllBoards,

@@ -20,7 +20,9 @@ const placeholder =
 const AddBoardModal = ({ open, setOpen }) => {
   const classes = modalStyles();
 
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData, setUserData, setBoards, setOpenBackdrop } = useContext(
+    UserContext
+  );
 
   const [visibilityAnchorEl, setVisibilityAnchorEl] = useState(null);
   const [openVisibility, setOpenVisibilty] = useState(false);
@@ -54,10 +56,22 @@ const AddBoardModal = ({ open, setOpen }) => {
       CreateNewBoard(boardData)
         .then((response) => {
           if (response.statusCode === 200) {
-            BoardHelpers.HandleBoardCreation(response.data, userData, setUserData);
-            setSuccess(true);
-            setLoading(false);
-            handleClose();
+            BoardHelpers.HandleBoardCreation(
+              response.data,
+              userData,
+              setUserData,
+              setBoards,
+              setOpenBackdrop
+            )
+              .then(() => {
+                setSuccess(true);
+                setLoading(false);
+                handleClose();
+              })
+              .catch((err) => {
+                setLoading(false);
+                console.log(err);
+              });
           }
         })
         .catch((err) => {

@@ -1,5 +1,5 @@
 import { GetUserRelatedBoards } from "functions/BoardFunctions";
-import { UIHelpers } from "helpers/";
+import { UIHelpers, UserHelpers } from "helpers/";
 
 const parseBoardId = (
   boards // structuring boardIds for api call --> ["id1", "id2"]
@@ -74,17 +74,41 @@ const FindExactBoard = (id, boards, setRenderedBoard, setShowAllBoards) => {
   }
 };
 
-const HandleBoardCreation = (response, userData, setUserData) => {
-  let updateUser = { ...userData };
-  if (updateUser.boards !== undefined && updateUser.boards !== null) {
-    Object.assign(updateUser.boards, response);
-    setUserData(updateUser);
-    
-  } else {
-    updateUser.boards = response;
-    setUserData(updateUser);
-  }
-};
+const HandleBoardCreation = (
+  response,
+  userData,
+  setUserData,
+  setBoards,
+  setOpenBackdrop
+) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      let updateUser = { ...userData };
+      if (updateUser.boards !== undefined && updateUser.boards !== null) {
+        Object.assign(updateUser.boards, response);
+        setUserData(updateUser);
+        const data = await UserHelpers.HandleUserData(
+          userData.uid,
+          setUserData,
+          setBoards,
+          setOpenBackdrop
+        );
+        resolve(data);
+      } else {
+        updateUser.boards = response;
+        setUserData(updateUser);
+        const data = await UserHelpers.HandleUserData(
+          userData.uid,
+          setUserData,
+          setBoards,
+          setOpenBackdrop
+        );
+        resolve(data);
+      }
+    } catch (err) {
+      reject(err);
+    }
+  });
 
 const BoardHelpers = {
   HandleUserRelatedBoards: HandleUserRelatedBoards,
