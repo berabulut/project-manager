@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Typography, Container } from "@material-ui/core";
-import { FirebaseAuth } from "provider/AuthProvider";
+import { Container } from "@material-ui/core";
+import { UIContext } from "provider/UIProvider";
+import { UserContext } from "provider/UserProvider";
 import { AppLayout } from "layouts";
 import { boardPageStyles } from "./styles";
-import { HandleUserRelatedBoards, FindExactBoard } from "helpers/Board";
+import { BoardHelpers, UIHelpers } from "helpers/";
 import TopSection from "./TopSection";
 import ListArea from "./ListArea";
 
@@ -12,25 +13,25 @@ const Profile = () => {
   const classes = boardPageStyles();
   const {
     renderedBoard,
-    boards,
-    handleBoardPageRender,
-    hideShowAllBoards,
-    setShowFooter
-  } = useContext(FirebaseAuth);
+    setShowFooter,
+    setRenderedBoard,
+    setShowAllBoards,
+  } = useContext(UIContext);
+  const { boards } = useContext(UserContext);
   const { id } = useParams();
 
   useEffect(() => {
-    FindExactBoard(id, boards, handleBoardPageRender);
+    BoardHelpers.FindExactBoard(id, boards, setRenderedBoard, setShowAllBoards);
     setShowFooter(false);
     return () => {
-      hideShowAllBoards()
+      UIHelpers.HideShowAllBoards(renderedBoard, setRenderedBoard, setShowAllBoards);
       setShowFooter(true);
     };
   }, []);
 
   useEffect(() => {
-    FindExactBoard(id, boards, handleBoardPageRender);
-  }, [boards]); 
+    BoardHelpers.FindExactBoard(id, boards, setRenderedBoard, setShowAllBoards);
+  }, [boards]);
 
   return (
     <AppLayout>

@@ -7,12 +7,12 @@ import {
   Divider,
   Link,
 } from "@material-ui/core";
-import { FirebaseAuth } from "provider/AuthProvider";
+import { UIContext } from "provider/UIProvider";
 import GitHubIcon from "@material-ui/icons/GitHub";
 
 const Footer = () => {
   const classes = footerStyles();
-  const { showFooter } = React.useContext(FirebaseAuth);
+  const { showFooter } = React.useContext(UIContext);
 
   return (
     <div style={{display: showFooter === true ? "flex" : "none"}} className={classes.root}>

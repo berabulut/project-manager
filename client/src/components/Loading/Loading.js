@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { FirebaseAuth } from "provider/AuthProvider";
 import { Backdrop, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { UIContext } from "provider/UIProvider";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Loading = () => {
   const classes = useStyles();
-  const { openBackdrop } = useContext(FirebaseAuth);
+  const { openBackdrop } = useContext(UIContext);
   return (
     <Backdrop className={classes.backdrop} open={openBackdrop}>
       <CircularProgress color="inherit" />

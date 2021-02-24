@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Grid, Typography, IconButton, Avatar } from "@material-ui/core";
 import { Public, Lock, MoreHoriz, Add } from "@material-ui/icons";
 import { VisibilityMenu } from "components";
-import { FirebaseAuth } from "provider/AuthProvider";
 import { topSectionStyles } from "./styles";
 
 const TopSection = ({ board }) => {
