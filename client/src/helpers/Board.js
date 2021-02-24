@@ -79,13 +79,10 @@ const HandleBoardCreation = (response, userData, setUserData) => {
   if (updateUser.boards !== undefined && updateUser.boards !== null) {
     Object.assign(updateUser.boards, response);
     setUserData(updateUser);
-    console.log({response})
-    console.log({userData})
+    
   } else {
     updateUser.boards = response;
     setUserData(updateUser);
-    console.log({response})
-    console.log({userData})
   }
 };
 
