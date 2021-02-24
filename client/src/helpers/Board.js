@@ -7,14 +7,14 @@ const parseBoardId = (
   new Promise((resolve, reject) => {
     let body = [];
     try {
-      boards.map((val, key) => {
-        if (val.boardId !== undefined) {
-          body.push(val.boardId);
+      for (let i = 0; i < boards.length; i++) {
+        if (boards[i].boardId !== undefined) {
+          body.push(boards[i].boardId);
         }
-        if (key === boards.length - 1) {
+        if (i === boards.length - 1) {
           resolve(body);
         }
-      });
+      }
     } catch (err) {
       reject(err);
     }
@@ -63,7 +63,11 @@ const HandleUserRelatedBoards = (
 const FindExactBoard = (id, boards, setRenderedBoard, setShowAllBoards) => {
   for (let board of boards) {
     if (board.id === id) {
-      UIHelpers.HandleBoardPageRender(board, setRenderedBoard, setShowAllBoards);
+      UIHelpers.HandleBoardPageRender(
+        board,
+        setRenderedBoard,
+        setShowAllBoards
+      );
       console.log(board);
       break;
     }
@@ -75,9 +79,13 @@ const HandleBoardCreation = (response, userData, setUserData) => {
   if (updateUser.boards !== undefined && updateUser.boards !== null) {
     Object.assign(updateUser.boards, response);
     setUserData(updateUser);
+    console.log({response})
+    console.log({userData})
   } else {
     updateUser.boards = response;
     setUserData(updateUser);
+    console.log({response})
+    console.log({userData})
   }
 };
 

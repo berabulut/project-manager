@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { AuthMethods } from "firebase/AuthMethods";
-import { UserHelpers, BoardHelpers, UIHelpers } from "helpers/";
 
 export const FirebaseAuth = React.createContext();
 
@@ -8,7 +7,6 @@ const AuthProvider = (props) => {
   const [inputs, setInputs] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("pmt_token"));
-
 
   const handleSignUp = () => {
     // middle man between firebase and signup
@@ -34,15 +32,30 @@ const AuthProvider = (props) => {
   };
 
   const handleGoogleLogin = () => {
-    AuthMethods.googleLogin(setErrors, setToken, props.setUserData, props.setOpenBackdrop);
+    AuthMethods.googleLogin(
+      setErrors,
+      setToken,
+      props.setUserData,
+      props.setOpenBackdrop
+    );
   };
 
   const handleGithubLogin = () => {
-    AuthMethods.githubLogin(setErrors, setToken, props.setUserData, props.setOpenBackdrop);
+    AuthMethods.githubLogin(
+      setErrors,
+      setToken,
+      props.setUserData,
+      props.setOpenBackdrop
+    );
   };
 
   const handleTwitterLogin = () => {
-    AuthMethods.twitterLogin(setErrors, setToken, props.setUserData, props.setOpenBackdrop);
+    AuthMethods.twitterLogin(
+      setErrors,
+      setToken,
+      props.setUserData,
+      props.setOpenBackdrop
+    );
   };
 
   const handleLogout = () => {

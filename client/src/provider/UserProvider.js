@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 export const UserContext = React.createContext();
 
-const UserProvider = (props) => {
-  let userData = props.userData;
-  let setUserData = props.setUserData;
-  let boards = props.boards;
-  let setBoards = props.setBoards;
+const UserProvider = ({userData, setUserData, boards, setBoards, children}) => {
+
 
   return (
     <UserContext.Provider
@@ -17,7 +14,7 @@ const UserProvider = (props) => {
         setBoards
       }}
     >
-      {props.children}
+      {children}
     </UserContext.Provider>
   );
 };

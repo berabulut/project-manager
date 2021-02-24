@@ -11,7 +11,7 @@ import Routes from "./routes/Routes";
 const App = () => {
   const [openBackdrop, setOpenBackdrop] = useState(true);
   const [userData, setUserData] = useState({});
-  const [boards, setBoards] = useState([]);
+  const [boards, setBoards] = useState([]); 
 
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const App = () => {
         }
       });
     }
-  }, []);
+  }, [userData]);
 
   return (
     <UIProvider openBackdrop={openBackdrop} setOpenBackdrop={setOpenBackdrop}>
