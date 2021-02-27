@@ -43,4 +43,16 @@ export const columnStyles = (theme) => ({
     flexGrow: "1",
     minHeight: "100px",
   },
+  footer: {
+
+  },
+  addAnotherCard: {
+    borderRadius: "8px",
+    width: "100%",
+    textAlign: "start"
+  },
+  buttonText: {
+    fontSize: "0.875rem",
+    fontWeight: "500"
+  }
 });

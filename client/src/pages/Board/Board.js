@@ -8,7 +8,7 @@ import { boardPageStyles } from "./styles";
 import { BoardHelpers, UIHelpers } from "helpers/";
 import TopSection from "./TopSection";
 import ListArea from "./ListArea";
-import TestDnd from "components/DND/index";
+
 
 const Board = () => {
   const classes = boardPageStyles();
