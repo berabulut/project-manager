@@ -26,7 +26,7 @@ const TopSection = ({ board }) => {
     <div className={classes.root}>
       <Grid container>
         <Grid item container xs={5}>
-          <Grid item lg={2} md={3} sm={4} xs={5}>
+          <Grid item style={{minWidth: "120px"}}>
             <IconButton
               onClick={handleVisibilityClick}
               className={classes.button}
