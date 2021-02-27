@@ -1,20 +1,32 @@
-import React from 'react';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import initialData from './initial-data';
-import Column from './column';
+import React from "react";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import initialData from "./initial-data";
+import Column from "./column";
 
-class InnerList extends React.PureComponent {
+class InnerList extends React.Component {
   render() {
-    const { column, taskMap, index } = this.props;
-    const tasks = column.taskIds.map(taskId => taskMap[taskId]);
-    return <Column column={column} tasks={tasks} index={index} />;
+    const { column, taskMap, index, createNewTask } = this.props;
+    const tasks = column.taskIds.map((taskId) => taskMap[taskId]);
+    return (
+      <div>
+        <Column
+          column={column}
+          tasks={tasks}
+          index={index}
+          createNewTask={createNewTask}
+        />
+      </div>
+    );
   }
 }
 
 class TestDrag extends React.Component {
-  state = initialData;
+  constructor(props) {
+    super(props);
+    this.state = initialData;
+  }
 
-  onDragEnd = result => {
+  onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
 
     if (!destination) {
@@ -28,7 +40,8 @@ class TestDrag extends React.Component {
       return;
     }
 
-    if (type === 'column') { // triggers when reordering lists not tasks
+    if (type === "column") {
+      // triggers when reordering lists not tasks
       const newColumnOrder = Array.from(this.state.columnOrder);
       newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, draggableId);
@@ -38,7 +51,7 @@ class TestDrag extends React.Component {
         columnOrder: newColumnOrder,
       };
 
-      console.log(newState)
+      console.log(newState);
 
       this.setState(newState);
       return;
@@ -47,7 +60,8 @@ class TestDrag extends React.Component {
     const home = this.state.columns[source.droppableId];
     const foreign = this.state.columns[destination.droppableId];
 
-    if (home === foreign) { // triggers when reordering in the same list
+    if (home === foreign) {
+      // triggers when reordering in the same list
       const newTaskIds = Array.from(home.taskIds);
       newTaskIds.splice(source.index, 1);
       newTaskIds.splice(destination.index, 0, draggableId);
@@ -65,7 +79,7 @@ class TestDrag extends React.Component {
         },
       };
 
-      console.log(newState)
+      console.log(newState);
 
       this.setState(newState);
       return;
@@ -86,8 +100,8 @@ class TestDrag extends React.Component {
       taskIds: foreignTaskIds,
     };
 
-
-    const newState = { // only triggered by moving from one list to another
+    const newState = {
+      // only triggered by moving from one list to another
       ...this.state,
       columns: {
         ...this.state.columns,
@@ -98,6 +112,23 @@ class TestDrag extends React.Component {
     this.setState(newState);
   };
 
+  createNewTask = (index) => {
+    let updatedState = {...this.state};
+    const taskCount = Object.keys(updatedState.tasks).length;
+
+    const taskId = `task-${taskCount + 1}`;
+    const columnId = `column-${index + 1}`;
+
+    updatedState.tasks[taskId] = {
+      id: taskId,
+      content: "agu bugu",
+    };
+
+    updatedState.columns[columnId].taskIds.push(taskId);
+
+    this.setState({ updatedState });
+  };
+
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -106,9 +137,9 @@ class TestDrag extends React.Component {
           direction="horizontal"
           type="column"
         >
-          {provided => (
+          {(provided) => (
             <div
-              style={{display: "flex"}}
+              style={{ display: "flex" }}
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
@@ -120,6 +151,7 @@ class TestDrag extends React.Component {
                     column={column}
                     taskMap={this.state.tasks}
                     index={index}
+                    createNewTask={this.createNewTask}
                   />
                 );
               })}
@@ -132,4 +164,4 @@ class TestDrag extends React.Component {
   }
 }
 
-export default TestDrag
+export default TestDrag;
