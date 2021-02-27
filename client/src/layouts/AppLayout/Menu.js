@@ -1,5 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
-import { FirebaseAuth } from "../../provider/AuthProvider";
+import React, { useState, useContext } from "react";
+import { FirebaseAuth } from "provider/AuthProvider";
+import { UserContext } from "provider/UserProvider";
 import {
   IconButton,
   Typography,
@@ -17,7 +18,8 @@ import {
 import { PopMenu, PopMenuItem, menuStyles } from "./styles";
 
 const Menu = ({ history }) => {
-  const { handleLogout, userData } = useContext(FirebaseAuth);
+  const { handleLogout } = useContext(FirebaseAuth);
+  const { userData } = useContext(UserContext);
 
   const classes = menuStyles();
 

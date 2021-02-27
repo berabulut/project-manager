@@ -1,21 +1,46 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import TestDnd from "components/DND/index";
-import { FirebaseAuth } from "provider/AuthProvider";
+import { Container } from "@material-ui/core";
+import { UIContext } from "provider/UIProvider";
+import { UserContext } from "provider/UserProvider";
 import { AppLayout } from "layouts";
 import { boardPageStyles } from "./styles";
+import { BoardHelpers, UIHelpers } from "helpers/";
+import TopSection from "./TopSection";
+import ListArea from "./ListArea";
+import TestDnd from "components/DND/index";
 
 const Board = () => {
   const classes = boardPageStyles();
-  const { userData } = useContext(FirebaseAuth);
+  const {
+    renderedBoard,
+    setShowFooter,
+    setRenderedBoard,
+    setShowAllBoards,
+  } = useContext(UIContext);
+  const { boards } = useContext(UserContext);
   const { id } = useParams();
 
+  useEffect(() => {
+    BoardHelpers.FindExactBoard(id, boards, setRenderedBoard, setShowAllBoards);
+    setShowFooter(false);
+    return () => {
+      UIHelpers.HideShowAllBoards(renderedBoard, setRenderedBoard, setShowAllBoards);
+      setShowFooter(true);
+    };
+  }, []);
+
+  useEffect(() => {
+    BoardHelpers.FindExactBoard(id, boards, setRenderedBoard, setShowAllBoards);
+  }, [boards]);
 
   return (
     <AppLayout>
       <div className={classes.root}>
-        <h1>{id}</h1>
-        <TestDnd />
+        <Container className={classes.container} component="main" maxWidth="xl">
+          <TopSection board={renderedBoard} />
+          <ListArea board={renderedBoard} />
+        </Container>
       </div>
     </AppLayout>
   );

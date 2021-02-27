@@ -1,85 +1,28 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Grid, Typography, Container, Box, Button } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import { AppLayout } from "layouts";
 import { Board, AddBoardModal, Loading } from "components";
-import { FirebaseAuth } from "provider/AuthProvider";
-import { GetUserRelatedBoards } from "functions/BoardFunctions";
+import { UserContext } from "provider/UserProvider";
 import { boardsStyles } from "./styles";
 
 const Boards = () => {
+  
   const classes = boardsStyles();
+  
   let history = useHistory();
 
   const [modalOpen, setModalOpen] = useState(false);
-  const {
-    userData,
-    boards,
-    setBoards,
-    handleBackdropClose,
-    handleBackdropOpen,
-    setShowAllBoards,
-  } = useContext(FirebaseAuth);
+  const { boards } = useContext(UserContext);
 
   const handleBoardClick = (boardId) => {
-    console.log(boardId);
     history.push("/board/" + boardId);
   };
 
   const handleCreateButton = () => {
     setModalOpen(true);
   };
-
-  const parseBoardId = (
-    boards // structuring boardIds for api call --> ["id1", "id2"]
-  ) =>
-    new Promise((resolve, reject) => {
-      let body = [];
-      try {
-        boards.map((val, key) => {
-          if (val.boardId !== undefined) {
-            body.push(val.boardId);
-          }
-          if (key === boards.length - 1) {
-            resolve(body);
-          }
-        });
-      } catch (err) {
-        reject(err);
-      }
-    });
-
-  useEffect(() => {
-    if (
-      userData !== undefined &&
-      userData.boards !== undefined &&
-      Object.keys(userData.boards).length > 0
-    ) {
-      handleBackdropOpen();
-      parseBoardId(Object.values(userData.boards))
-        .then((response) => {
-          const body = {
-            boardList: response,
-          };
-          GetUserRelatedBoards(body)
-            .then((response) => {
-              console.log(response);
-              if (response.statusCode === 200) {
-                setBoards(response.boardData);
-                handleBackdropClose();
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-              handleBackdropClose();
-            });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [userData]);
 
   return (
     <AppLayout>

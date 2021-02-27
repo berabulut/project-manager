@@ -7,13 +7,15 @@ import {
   Divider,
   Link,
 } from "@material-ui/core";
+import { UIContext } from "provider/UIProvider";
 import GitHubIcon from "@material-ui/icons/GitHub";
 
 const Footer = () => {
   const classes = footerStyles();
+  const { showFooter } = React.useContext(UIContext);
 
   return (
-    <div className={classes.root}>
+    <div style={{display: showFooter === true ? "flex" : "none"}} className={classes.root}>
       <CssBaseline />
       <footer className={classes.footer}>
         <Divider className={classes.divider} />

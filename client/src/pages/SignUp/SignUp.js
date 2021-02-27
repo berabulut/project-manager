@@ -3,8 +3,9 @@ import { useHistory } from "react-router-dom";
 import { FirebaseAuth } from "provider/AuthProvider";
 import { AuthLayout, AuthTheme } from "layouts";
 import { AuthForm, Alert } from "components";
-import { Container, CssBaseline, Snackbar } from "@material-ui/core";
 import { loginStyles } from "./styles";
+import { Container, CssBaseline, Snackbar } from "@material-ui/core";
+
 
 const SignUp = () => {
   const classes = loginStyles(AuthTheme);
