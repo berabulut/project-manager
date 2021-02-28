@@ -7,6 +7,8 @@ import { columnStyles } from "./styles";
 import InnerList from "./inner-list";
 
 class Column extends React.Component {
+
+
   render() {
     const { classes, createNewTask, column } = this.props;
     return (

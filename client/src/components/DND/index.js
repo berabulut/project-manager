@@ -1,11 +1,11 @@
 import React from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { IconButton, Grid, Typography } from "@material-ui/core";
+import { IconButton, Grid, Typography, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import { Add } from "@material-ui/icons";
+import { Add, Close } from "@material-ui/icons";
 import initialData from "./initial-data";
 import Column from "./column";
-import { columnStyles } from "./styles";
+import { columnStyles, PopMenu } from "./styles";
 
 class InnerList extends React.Component {
   render() {
@@ -28,6 +28,7 @@ class TestDrag extends React.Component {
   constructor(props) {
     super(props);
     this.state = initialData;
+    this.state.anchorEl = null;
   }
 
   onDragEnd = (result) => {
@@ -138,7 +139,6 @@ class TestDrag extends React.Component {
 
     const taskId = `task-${taskCount + 1}`;
 
-
     updatedState.tasks[taskId] = {
       id: taskId,
       content: "agu bugu",
@@ -147,7 +147,20 @@ class TestDrag extends React.Component {
     updatedState.columns[columnId].taskIds.push(taskId);
 
     this.setState({ updatedState });
+  };
 
+  handleAddAnotherListButtonClick = (event) => {
+    this.setState({
+      ...this.state,
+      anchorEl: event.currentTarget,
+    });
+  };
+
+  handleNameInputClose = () => {
+    this.setState({
+      ...this.state,
+      anchorEl: null,
+    });
   };
 
   render() {
@@ -178,20 +191,64 @@ class TestDrag extends React.Component {
                 );
               })}
               {provided.placeholder}
-              <IconButton
-                onClick={() => this.createNewList()}
-                className={classes.addAnotherList}
-                aria-label="cover"
-              >
-                <Grid item xs={10}>
-                  <Typography className={classes.buttonText} component="p">
-                    Add another list
-                  </Typography>
-                </Grid>
-                <Grid item container xs={2}>
-                  <Add className={classes.menuIcon} />
-                </Grid>
-              </IconButton>
+              <div>
+                <IconButton
+                  onClick={(e) => this.handleAddAnotherListButtonClick(e)}
+                  className={classes.addAnotherList}
+                  aria-label="add-another-list"
+                >
+                  <Grid item xs={10}>
+                    <Typography className={classes.buttonText} component="p">
+                      Add another list
+                    </Typography>
+                  </Grid>
+                  <Grid item container xs={2}>
+                    <Add className={classes.menuIcon} />
+                  </Grid>
+                </IconButton>
+                <PopMenu
+                  anchorEl={this.state.anchorEl}
+                  keepMounted
+                  open={Boolean(this.state.anchorEl)}
+                  onClose={this.handleNameInputClose}
+                >
+                  <Grid style={{ padding: "8px 8px", outline: "0" }} container>
+                    <Grid item xs={12}>
+                      <input
+                        placeholder="Keywords..."
+                        type="text"
+                        className={classes.listNameInput}
+                      />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      container
+                      alignItems="center"
+                      style={{ paddingTop: "4px" }}
+                    >
+                      <Grid item xs={4}>
+                        <Button
+                          className={classes.addList}
+                          variant="contained"
+                          color="primary"
+                        >
+                          Add List
+                        </Button>
+                      </Grid>
+                      <Grid item xs={2}>
+                        <IconButton
+                          className={classes.cancelButton}
+                          onClick={this.handleNameInputClose}
+                          aria-label="add-list"
+                        >
+                          <Close />
+                        </IconButton>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </PopMenu>
+              </div>
             </div>
           )}
         </Droppable>
