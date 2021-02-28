@@ -9,7 +9,8 @@ import { BoardHelpers, UIHelpers } from "helpers/";
 import TopSection from "./TopSection";
 import ListArea from "./ListArea";
 
-const Profile = () => {
+
+const Board = () => {
   const classes = boardPageStyles();
   const {
     renderedBoard,
@@ -45,4 +46,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Board;
