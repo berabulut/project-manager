@@ -8,7 +8,7 @@ import InnerList from "./inner-list";
 
 class Column extends React.Component {
   render() {
-    const { classes, createNewTask, index } = this.props;
+    const { classes, createNewTask, column } = this.props;
     return (
       <Draggable draggableId={this.props.column.id} index={this.props.index}>
         {(provided) => (
@@ -41,7 +41,7 @@ class Column extends React.Component {
                 <IconButton
                   className={classes.addAnotherCard}
                   aria-label="cover"
-                  onClick={() => createNewTask(index)}
+                  onClick={() => createNewTask(column.id)}
                 >
                   <Grid item xs={10}>
                     <Typography className={classes.buttonText} component="p">

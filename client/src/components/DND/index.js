@@ -125,18 +125,19 @@ class TestDrag extends React.Component {
     updatedState.columns[columnId] = {
       id: columnId,
       title: "agu bugu",
-      taskIds: []
+      taskIds: [],
     };
 
     updatedState.columnOrder.push(columnId);
+    this.setState({ updatedState });
   };
 
-  createNewTask = (index) => {
+  createNewTask = (columnId) => {
     let updatedState = { ...this.state };
     const taskCount = Object.keys(updatedState.tasks).length;
 
     const taskId = `task-${taskCount + 1}`;
-    const columnId = `column-${index + 1}`;
+
 
     updatedState.tasks[taskId] = {
       id: taskId,
@@ -146,6 +147,7 @@ class TestDrag extends React.Component {
     updatedState.columns[columnId].taskIds.push(taskId);
 
     this.setState({ updatedState });
+
   };
 
   render() {
