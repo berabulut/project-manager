@@ -1,7 +1,11 @@
 import React from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { IconButton, Grid, Typography } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import { Add } from "@material-ui/icons";
 import initialData from "./initial-data";
 import Column from "./column";
+import { columnStyles } from "./styles";
 
 class InnerList extends React.Component {
   render() {
@@ -112,8 +116,23 @@ class TestDrag extends React.Component {
     this.setState(newState);
   };
 
+  createNewList = () => {
+    let updatedState = { ...this.state };
+    const listCount = Object.keys(updatedState.columns).length;
+
+    const columnId = `column-${listCount + 1}`;
+
+    updatedState.columns[columnId] = {
+      id: columnId,
+      title: "agu bugu",
+      taskIds: []
+    };
+
+    updatedState.columnOrder.push(columnId);
+  };
+
   createNewTask = (index) => {
-    let updatedState = {...this.state};
+    let updatedState = { ...this.state };
     const taskCount = Object.keys(updatedState.tasks).length;
 
     const taskId = `task-${taskCount + 1}`;
@@ -130,6 +149,7 @@ class TestDrag extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable
@@ -156,6 +176,20 @@ class TestDrag extends React.Component {
                 );
               })}
               {provided.placeholder}
+              <IconButton
+                onClick={() => this.createNewList()}
+                className={classes.addAnotherList}
+                aria-label="cover"
+              >
+                <Grid item xs={10}>
+                  <Typography className={classes.buttonText} component="p">
+                    Add another list
+                  </Typography>
+                </Grid>
+                <Grid item container xs={2}>
+                  <Add className={classes.menuIcon} />
+                </Grid>
+              </IconButton>
             </div>
           )}
         </Droppable>
@@ -164,4 +198,4 @@ class TestDrag extends React.Component {
   }
 }
 
-export default TestDrag;
+export default withStyles(columnStyles)(TestDrag);
