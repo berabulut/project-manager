@@ -14,7 +14,6 @@ export const modalStyles = makeStyles((theme) => ({
 export const PopMenu = withStyles({
   paper: {
     border: "1px solid #E0E0E0",
-    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
     borderRadius: "8px",
     borderTop: "none",
     borderTopLeftRadius:"0px",

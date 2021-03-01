@@ -10,12 +10,14 @@ const AddElementModal = ({ anchorEl, handleClose, createNewList }) => {
 
   const handleSubmit = () => {
     if (nameInput !== undefined && nameInput.trim().length <= 0) {
-      setError("Field cannot be empty!")
+      setError("Field cannot be empty!");
     } else if (nameInput !== undefined && nameInput.trim().length > 0) {
       setError();
       createNewList(nameInput);
+      handleClose();
+      setNameInput("");
     } else {
-      setError("Field cannot be empty!")
+      setError("Field cannot be empty!");
     }
   };
 
@@ -30,9 +32,9 @@ const AddElementModal = ({ anchorEl, handleClose, createNewList }) => {
       keepMounted
       open={Boolean(anchorEl)}
       onClose={() => {
-        handleClose()
-        setError()
-        setNameInput("")
+        handleClose();
+        setError();
+        setNameInput("");
       }}
     >
       <Grid style={{ padding: "8px 8px", outline: "0" }} container>
@@ -68,9 +70,9 @@ const AddElementModal = ({ anchorEl, handleClose, createNewList }) => {
             <IconButton
               className={classes.cancelButton}
               onClick={() => {
-                handleClose()
-                setError()
-                setNameInput("")
+                handleClose();
+                setError();
+                setNameInput("");
               }}
               aria-label="add-list"
             >

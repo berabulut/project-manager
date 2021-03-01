@@ -181,15 +181,17 @@ class TestDrag extends React.Component {
             >
               {this.state.columnOrder.map((columnId, index) => {
                 const column = this.state.columns[columnId];
-                return (
-                  <InnerList
-                    key={column.id}
-                    column={column}
-                    taskMap={this.state.tasks}
-                    index={index}
-                    createNewTask={this.createNewTask}
-                  />
-                );
+                if (column !== undefined) {
+                  return (
+                    <InnerList
+                      key={column.id}
+                      column={column}
+                      taskMap={this.state.tasks}
+                      index={index}
+                      createNewTask={this.createNewTask}
+                    />
+                  );
+                }
               })}
               {provided.placeholder}
               <div>
@@ -207,7 +209,11 @@ class TestDrag extends React.Component {
                     <Add className={classes.menuIcon} />
                   </Grid>
                 </IconButton>
-                <AddListModal anchorEl={this.state.anchorEl} handleClose={this.handleNameInputClose} createNewList={this.createNewList}/>
+                <AddListModal
+                  anchorEl={this.state.anchorEl}
+                  handleClose={this.handleNameInputClose}
+                  createNewList={this.createNewList}
+                />
               </div>
             </div>
           )}

@@ -65,7 +65,6 @@ class Column extends React.Component {
                   aria-label="cover"
                   onClick={(e) => {
                     this.handleAddAnotherCardButtonClick(e)
-                    //createNewTask(column.id)
                   }}
                 >
                   <Grid item xs={10}>

@@ -1,2 +1,1 @@
-1. why boards page rerenders after history.push from another page
-2. add consumer context and refactor providers
+1. refactor dnd code
