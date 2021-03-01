@@ -28,8 +28,9 @@ class InnerList extends React.Component {
 class TestDrag extends React.Component {
   constructor(props) {
     super(props);
-    this.state = initialData;
-    this.state.anchorEl = null;
+    this.state = {
+      anchorEl: null,
+    };
   }
 
   onDragEnd = (result) => {
@@ -120,34 +121,68 @@ class TestDrag extends React.Component {
 
   createNewList = (title) => {
     let updatedState = { ...this.state };
-    const listCount = Object.keys(updatedState.columns).length;
+    let listCount;
+    let columnId;
 
-    const columnId = `column-${listCount + 1}`;
-
-    updatedState.columns[columnId] = {
-      id: columnId,
-      title: title,
-      taskIds: [],
-    };
-
-    updatedState.columnOrder.push(columnId);
-    this.setState({ updatedState });
+    if (updatedState.columns !== undefined) {
+      // board doesn't have any list
+      listCount = Object.keys(updatedState.columns).length;
+      columnId = `column-${listCount + 1}`;
+      updatedState.columns[columnId] = {
+        id: columnId,
+        title: title,
+        taskIds: [],
+      };
+      updatedState.columnOrder.push(columnId);
+      this.setState(updatedState);
+    } else {
+      listCount = 0;
+      columnId = `column-${listCount + 1}`;
+      updatedState.columns = {
+        [columnId]: {
+          id: columnId,
+          title: title,
+          taskIds: [],
+        },
+      };
+      updatedState.columnOrder = [columnId];
+      this.setState(updatedState);
+    }
   };
 
   createNewTask = (columnId, title) => {
     let updatedState = { ...this.state };
-    const taskCount = Object.keys(updatedState.tasks).length;
+    let taskCount;
+    let taskId;
 
-    const taskId = `task-${taskCount + 1}`;
+    if (updatedState.tasks !== undefined) {
+      taskCount = Object.keys(updatedState.tasks).length;
+      taskId = `task-${taskCount + 1}`;
+      updatedState.tasks[taskId] = {
+        id: taskId,
+        title: title,
+      };
+      updatedState.columns[columnId].taskIds.push(taskId);
+      this.setState(updatedState);
+    } else {
+      taskCount = 0;
+      taskId = `task-${taskCount + 1}`;
+      updatedState.tasks = {
+        [taskId]: {
+          id: taskId,
+          title: title,
+        },
+      };
+      updatedState.columns[columnId].taskIds.push(taskId);
 
-    updatedState.tasks[taskId] = {
-      id: taskId,
-      title: title,
-    };
-
-    updatedState.columns[columnId].taskIds.push(taskId);
-
-    this.setState({ updatedState });
+      // updatedState.tasks[taskId] = {
+      //   id: taskId,
+      //   title: title,
+      // };
+  
+      // updatedState.columns[columnId].taskIds.push(taskId);
+      this.setState(updatedState);
+    }
   };
 
   handleAddAnotherListButtonClick = (event) => {
@@ -179,22 +214,23 @@ class TestDrag extends React.Component {
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {this.state.columnOrder.map((columnId, index) => {
-                const column = this.state.columns[columnId];
-                if (column !== undefined) {
-                  return (
-                    <InnerList
-                      key={column.id}
-                      column={column}
-                      taskMap={this.state.tasks}
-                      index={index}
-                      createNewTask={this.createNewTask}
-                    />
-                  );
-                }
-              })}
+              {this.state.columnOrder !== undefined &&
+                this.state.columnOrder.map((columnId, index) => {
+                  const column = this.state.columns[columnId];
+                  if (column !== undefined) {
+                    return (
+                      <InnerList
+                        key={column.id}
+                        column={column}
+                        taskMap={this.state.tasks}
+                        index={index}
+                        createNewTask={this.createNewTask}
+                      />
+                    );
+                  }
+                })}
               {provided.placeholder}
-              <div>
+              <div style={{ padding: "0px 8px" }}>
                 <IconButton
                   onClick={(e) => this.handleAddAnotherListButtonClick(e)}
                   className={classes.addAnotherList}
