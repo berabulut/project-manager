@@ -17,7 +17,7 @@ class Task extends React.Component {
             {...provided.dragHandleProps}
             ref={provided.innerRef}
           >
-            {this.props.task.content}
+            {this.props.task.title}
           </div>
         )}
       </Draggable>

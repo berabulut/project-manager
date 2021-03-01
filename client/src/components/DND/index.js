@@ -134,7 +134,7 @@ class TestDrag extends React.Component {
     this.setState({ updatedState });
   };
 
-  createNewTask = (columnId) => {
+  createNewTask = (columnId, title) => {
     let updatedState = { ...this.state };
     const taskCount = Object.keys(updatedState.tasks).length;
 
@@ -142,7 +142,7 @@ class TestDrag extends React.Component {
 
     updatedState.tasks[taskId] = {
       id: taskId,
-      content: "agu bugu",
+      title: title,
     };
 
     updatedState.columns[columnId].taskIds.push(taskId);

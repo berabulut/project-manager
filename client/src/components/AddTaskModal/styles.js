@@ -16,6 +16,9 @@ export const PopMenu = withStyles({
     border: "1px solid #E0E0E0",
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
     borderRadius: "8px",
+    borderTop: "none",
+    borderTopLeftRadius:"0px",
+    borderTopRightRadius:"0px",
     width: "250px",
   },
 })((props) => (
@@ -47,13 +50,15 @@ export const NameInput = withStyles({
     "& .MuiOutlinedInput-root": {
       fontSize: "0.875rem",
       "& fieldset": {
-        border: "2px solid #2F80ED"
+        border: "1px solid rgb(0 0 0 / 14%)",
+        borderRadius: "4px",
+        //border: "2px solid #2F80ED"
       },
       "&:hover fieldset": {
-        borderColor: "#2F80ED",
+        border: "1px solid rgb(0 0 0 / 20%)",
       },
       "&.Mui-focused fieldset": {
-        borderColor: "#2F80ED",
+        border: "1px solid rgb(0 0 0 / 20%)",
       },
     },
     "& .MuiFormHelperText-contained": {

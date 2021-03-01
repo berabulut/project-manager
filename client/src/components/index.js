@@ -6,3 +6,4 @@ export { default as VisibilityMenu } from "./VisibilityMenu/VisibilityMenu";
 export { default as Alert } from "./Alert/Alert";
 export { default as Loading } from "./Loading/Loading";
 export { default as AddListModal } from "./AddListModal/AddListModal";
+export { default as AddTaskModal } from "./AddTaskModal/AddTaskModal";
