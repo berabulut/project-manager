@@ -1,11 +1,12 @@
 import React from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { IconButton, Grid, Typography, Button } from "@material-ui/core";
+import { AddListModal } from "components";
 import { withStyles } from "@material-ui/core/styles";
-import { Add, Close } from "@material-ui/icons";
+import { Add } from "@material-ui/icons";
 import initialData from "./initial-data";
 import Column from "./column";
-import { columnStyles, PopMenu } from "./styles";
+import { columnStyles } from "./styles";
 
 class InnerList extends React.Component {
   render() {
@@ -117,7 +118,7 @@ class TestDrag extends React.Component {
     this.setState(newState);
   };
 
-  createNewList = () => {
+  createNewList = (title) => {
     let updatedState = { ...this.state };
     const listCount = Object.keys(updatedState.columns).length;
 
@@ -125,7 +126,7 @@ class TestDrag extends React.Component {
 
     updatedState.columns[columnId] = {
       id: columnId,
-      title: "agu bugu",
+      title: title,
       taskIds: [],
     };
 
@@ -206,48 +207,7 @@ class TestDrag extends React.Component {
                     <Add className={classes.menuIcon} />
                   </Grid>
                 </IconButton>
-                <PopMenu
-                  anchorEl={this.state.anchorEl}
-                  keepMounted
-                  open={Boolean(this.state.anchorEl)}
-                  onClose={this.handleNameInputClose}
-                >
-                  <Grid style={{ padding: "8px 8px", outline: "0" }} container>
-                    <Grid item xs={12}>
-                      <input
-                        placeholder="Keywords..."
-                        type="text"
-                        className={classes.listNameInput}
-                      />
-                    </Grid>
-                    <Grid
-                      item
-                      xs={12}
-                      container
-                      alignItems="center"
-                      style={{ paddingTop: "4px" }}
-                    >
-                      <Grid item xs={4}>
-                        <Button
-                          className={classes.addList}
-                          variant="contained"
-                          color="primary"
-                        >
-                          Add List
-                        </Button>
-                      </Grid>
-                      <Grid item xs={2}>
-                        <IconButton
-                          className={classes.cancelButton}
-                          onClick={this.handleNameInputClose}
-                          aria-label="add-list"
-                        >
-                          <Close />
-                        </IconButton>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </PopMenu>
+                <AddListModal anchorEl={this.state.anchorEl} handleClose={this.handleNameInputClose} createNewList={this.createNewList}/>
               </div>
             </div>
           )}

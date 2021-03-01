@@ -1,5 +1,3 @@
-import { withStyles } from "@material-ui/core/styles";
-import { Menu } from "@material-ui/core";
 
 export const taskStyles = (theme) => ({
   container: {
@@ -68,55 +66,5 @@ export const columnStyles = (theme) => ({
   listNameMenu: {
     width: "250px",
   },
-  listNameInput: {
-    width: "100%",
-    height: "100%",
-    paddingLeft: theme.spacing(2),
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-    outlineWidth: "0",
-    color: "#757575",
-    letterSpacing: "-0.035em",
-    fontWeight: "500",
-    fontFamily: "Poppins",
-    fontSize: "0.875rem",
-    border: "none",
-    borderRadius: "3px",
-    border: "2px solid #E0E0E0",
-    transition: "0.3s",
-    "&:hover": {
-      borderColor: "#757575",
-    },
-  },
-  addList: {
-    fontSize: "0.825rem",
-    padding: "6px 12px",
-  },
-  cancelButton: {
-    padding: "8px",
-  },
 });
 
-export const PopMenu = withStyles({
-  paper: {
-    border: "1px solid #E0E0E0",
-    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
-    borderRadius: "8px",
-    width: "250px",
-  },
-})((props) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: "top",
-      horizontal: "center",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "center",
-    }}
-    {...props}
-    MenuListProps={{ disablePadding: true }}
-  />
-));
