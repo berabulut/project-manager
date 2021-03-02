@@ -174,27 +174,46 @@ class TestDrag extends React.Component {
     let updatedState = { ...this.state };
     let taskCount;
     let taskId;
+    let task;
+    const boardId = this.context.renderedBoard.id;
+    let body;
 
     if (updatedState.tasks !== undefined) {
       taskCount = Object.keys(updatedState.tasks).length;
       taskId = `task-${taskCount + 1}`;
-      updatedState.tasks[taskId] = {
+      task = {
         id: taskId,
         title: title,
-      };
+      }
+      updatedState.tasks[taskId] = task;
       updatedState.lists[listId].taskIds.push(taskId);
       this.setState(updatedState);
+      body = {
+        boardId : boardId,
+        task : task,
+        listId : listId,
+        taskIds : updatedState.lists[listId].taskIds
+      }
+      CreateNewTask(body);
     } else {
       taskCount = 0;
       taskId = `task-${taskCount + 1}`;
+      task = {
+        id: taskId,
+        title: title,
+      }
       updatedState.tasks = {
-        [taskId]: {
-          id: taskId,
-          title: title,
-        },
+        [taskId]: task,
       };
       updatedState.lists[listId].taskIds.push(taskId);
       this.setState(updatedState);
+      body = {
+        boardId : boardId,
+        task : task,
+        listId : listId,
+        taskIds : updatedState.lists[listId].taskIds
+      }
+      CreateNewTask(body);
     }
   };
 

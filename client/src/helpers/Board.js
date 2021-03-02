@@ -1,4 +1,4 @@
-import { GetUserRelatedBoards } from "functions/BoardFunctions";
+import { GetUserRelatedBoards, CreateNewTask, CreateNewList } from "functions/BoardFunctions";
 import { UIHelpers, UserHelpers } from "helpers/";
 
 const parseBoardId = (
@@ -110,9 +110,6 @@ const HandleBoardCreation = (
     }
   });
 
-const HandleListCreation = () => new Promise((resolve, reject)=> {
-  
-})
 
 const BoardHelpers = {
   HandleUserRelatedBoards: HandleUserRelatedBoards,
