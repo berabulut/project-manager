@@ -3,7 +3,7 @@ import { IconButton, Grid, Button } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import { modalStyles, PopMenu, NameInput } from "./styles";
 
-const AddElementModal = ({ anchorEl, handleClose, createNewTask, column }) => {
+const AddElementModal = ({ anchorEl, handleClose, createNewTask, list }) => {
   const classes = modalStyles();
   const [error, setError] = useState();
   const [nameInput, setNameInput] = useState("");
@@ -13,7 +13,7 @@ const AddElementModal = ({ anchorEl, handleClose, createNewTask, column }) => {
       setError("Field cannot be empty!");
     } else if (nameInput !== undefined && nameInput.trim().length > 0) {
       setError();
-      createNewTask(column.id, nameInput);
+      createNewTask(list.id, nameInput);
       handleClose();
       setNameInput("");
     } else {

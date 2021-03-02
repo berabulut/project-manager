@@ -15,14 +15,14 @@ functions:
     handler: handlers/createNewUser.create
     events:
       - http:
-          path: createNewUser
+          path: user
           method: post
           cors: true
   returnUserData:
     handler: handlers/returnUserData.login
     events:
       - http:
-          path: returnUserData
+          path: user
           method: get
           cors: true
 
@@ -30,21 +30,35 @@ functions:
     handler: handlers/createNewBoard.create
     events:
       - http:
-          path: createNewBoard
+          path: board
           method: post
           cors: true
   returnUserRelatedBoards:
     handler: handlers/returnUserRelatedBoards.boards
     events:
       - http:
-          path: returnUserRelatedBoards
+          path: userRelatedBoards
           method: post
           cors: true
   returnBoardRelatedUsers:
     handler: handlers/returnBoardRelatedUsers.users
     events:
       - http:
-          path: returnBoardRelatedUsers
+          path: boardRelatedUsers
+          method: post
+          cors: true
+  createNewList:
+    handler: handlers/createNewList.create
+    events:
+      - http:
+          path: list
+          method: post
+          cors: true
+  createNewTask:
+    handler: handlers/task.create
+    events:
+      - http:
+          path: task
           method: post
           cors: true
 

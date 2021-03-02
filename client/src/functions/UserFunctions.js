@@ -4,7 +4,7 @@ export const FetchUserData = (uid, setUserData, setOpenBackdrop) =>
   new Promise(async (resolve, reject) => {
     try {
       let response = await fetch(
-        process.env.REACT_APP_SERVICE_URL + `/returnUserData?uid=${uid}`,
+        process.env.REACT_APP_SERVICE_URL + `/user?uid=${uid}`,
         {
           headers: new Headers({
             "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const FetchUserData = (uid, setUserData, setOpenBackdrop) =>
 const createNewUserRecord = async (userData) => {
   try {
     let response = await fetch(
-      process.env.REACT_APP_SERVICE_URL + `/createNewUser`,
+      process.env.REACT_APP_SERVICE_URL + `/user`,
       {
         method: "POST",
         headers: new Headers({

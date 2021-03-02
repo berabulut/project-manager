@@ -22,8 +22,6 @@ const createNewBoard = (title, coverPhoto, visibility, users) =>
       users: users,
     };
 
-
-
     ref.set(data, (error) => {
       if (error) {
         reject(error);
@@ -78,15 +76,16 @@ const returnUserRelatedBoards = (boards) =>
             const value = snapshot.val();
             if (value !== undefined && value !== null) {
               returnBoardRelatedUsers(value.users) // we are also returning users' data related to board
-              .then((response) => {
-                value.userData = response;
-                data.push(value)
-              })
-              .then(() => {
-                if (counter === boards.length - 1) resolve(data); // resolve promise if iterating last item of array
-                else counter = counter + 1;
-              })
-            }         
+                .then((response) => {
+                  value.userData = response;
+                  data.push(value);
+                })
+                .then(() => {
+                  if (counter === boards.length - 1) resolve(data);
+                  // resolve promise if iterating last item of array
+                  else counter = counter + 1;
+                });
+            }
           });
         });
       });
@@ -97,7 +96,55 @@ const returnUserRelatedBoards = (boards) =>
     }
   });
 
- 
+const createNewList = (boardId, list, listOrder) =>
+  new Promise((resolve, reject) => {
+    try {
+      const ref = db.ref(`/boards/${boardId}/lists/${list.id}`);
+      ref.set(list, async (error) => {
+        if (error) {
+          reject(error);
+        } else {
+          let response = await handleListOrder(boardId, listOrder);
+          resolve(response);
+        }
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
+
+const handleListOrder = (boardId, listOrder) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const ref = db.ref(`/boards/${boardId}/listOrder`);
+
+      ref.set(listOrder, (error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(true);
+        }
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
+
+const createNewTask = (boardId, task, listId, taskIds) => new Promise((resolve, reject) => {
+  try {
+    const ref = db.ref(`/boards/${boardId}/tasks/${task.id}`);
+    ref.set(task, async(error) => {
+      if (error) {
+        reject(error);
+      } else {
+        const response = await linkTaskAndList(boardId, listId, taskIds)
+        resolve(response);
+      }
+    });
+  } catch (err) {
+    reject(err);
+  }
+})
 
 const returnBoardRelatedUsers = (users) =>
   new Promise(async (resolve, reject) => {
@@ -113,7 +160,6 @@ const returnBoardRelatedUsers = (users) =>
               data.push(value);
               if (key === users.length - 1) resolve(data);
             }
-            
           });
         });
       });
@@ -123,8 +169,25 @@ const returnBoardRelatedUsers = (users) =>
     }
   });
 
+const linkTaskAndList = (boardId, listId, taskIds) => new Promise((resolve, reject) => {
+  try {
+    const ref = db.ref(`/boards/${boardId}/lists/${listId}/taskIds`);
+    ref.set(taskIds, (error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(true);
+      }
+    });
+  } catch (err) {
+    reject(err);
+  }
+})
+
 module.exports = {
   createNewBoard,
+  createNewTask,
+  createNewList,
   returnUserRelatedBoards,
   returnBoardRelatedUsers,
 };

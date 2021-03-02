@@ -1,21 +1,22 @@
 import React from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { IconButton, Grid, Typography, Button } from "@material-ui/core";
-import { AddListModal } from "components";
+import { IconButton, Grid, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Add } from "@material-ui/icons";
-import initialData from "./initial-data";
+import { AddListModal } from "components";
+import { UIContext } from "provider/UIProvider";
+import { CreateNewTask, CreateNewList } from "functions/BoardFunctions";
 import Column from "./column";
 import { columnStyles } from "./styles";
 
 class InnerList extends React.Component {
   render() {
-    const { column, taskMap, index, createNewTask } = this.props;
-    const tasks = column.taskIds.map((taskId) => taskMap[taskId]);
+    const { list, taskMap, index, createNewTask } = this.props;
+    const tasks = list.taskIds.map((taskId) => taskMap[taskId]);
     return (
       <div>
         <Column
-          column={column}
+          list={list}
           tasks={tasks}
           index={index}
           createNewTask={createNewTask}
@@ -26,6 +27,8 @@ class InnerList extends React.Component {
 }
 
 class TestDrag extends React.Component {
+  static contextType = UIContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -47,15 +50,15 @@ class TestDrag extends React.Component {
       return;
     }
 
-    if (type === "column") {
+    if (type === "list") {
       // triggers when reordering lists not tasks
-      const newColumnOrder = Array.from(this.state.columnOrder);
-      newColumnOrder.splice(source.index, 1);
-      newColumnOrder.splice(destination.index, 0, draggableId);
+      const newListOrder = Array.from(this.state.listOrder);
+      newListOrder.splice(source.index, 1);
+      newListOrder.splice(destination.index, 0, draggableId);
 
       const newState = {
         ...this.state,
-        columnOrder: newColumnOrder,
+        listOrder: newListOrder,
       };
 
       console.log(newState);
@@ -64,8 +67,8 @@ class TestDrag extends React.Component {
       return;
     }
 
-    const home = this.state.columns[source.droppableId];
-    const foreign = this.state.columns[destination.droppableId];
+    const home = this.state.lists[source.droppableId];
+    const foreign = this.state.lists[destination.droppableId];
 
     if (home === foreign) {
       // triggers when reordering in the same list
@@ -80,8 +83,8 @@ class TestDrag extends React.Component {
 
       const newState = {
         ...this.state,
-        columns: {
-          ...this.state.columns,
+        lists: {
+          ...this.state.lists,
           [newHome.id]: newHome,
         },
       };
@@ -110,8 +113,8 @@ class TestDrag extends React.Component {
     const newState = {
       // only triggered by moving from one list to another
       ...this.state,
-      columns: {
-        ...this.state.columns,
+      lists: {
+        ...this.state.lists,
         [newHome.id]: newHome,
         [newForeign.id]: newForeign,
       },
@@ -122,35 +125,52 @@ class TestDrag extends React.Component {
   createNewList = (title) => {
     let updatedState = { ...this.state };
     let listCount;
-    let columnId;
+    let listId;
+    let body;
+    let list;
+    const boardId = this.context.renderedBoard.id;
 
-    if (updatedState.columns !== undefined) {
+    if (updatedState.lists !== undefined) {
       // board doesn't have any list
-      listCount = Object.keys(updatedState.columns).length;
-      columnId = `column-${listCount + 1}`;
-      updatedState.columns[columnId] = {
-        id: columnId,
+      listCount = Object.keys(updatedState.lists).length;
+      listId = `list-${listCount + 1}`;
+      list = {
+        id: listId,
         title: title,
         taskIds: [],
       };
-      updatedState.columnOrder.push(columnId);
+      updatedState.lists[listId] = list;
+      updatedState.listOrder.push(listId);
       this.setState(updatedState);
+      body = {
+        boardId: boardId,
+        list: list,
+        listOrder: updatedState.listOrder,
+      };
+      CreateNewList(body);
     } else {
       listCount = 0;
-      columnId = `column-${listCount + 1}`;
-      updatedState.columns = {
-        [columnId]: {
-          id: columnId,
-          title: title,
-          taskIds: [],
-        },
+      listId = `list-${listCount + 1}`;
+      list = {
+        id: listId,
+        title: title,
+        taskIds: [],
       };
-      updatedState.columnOrder = [columnId];
+      updatedState.lists = {
+        [listId]: list,
+      };
+      updatedState.listOrder = [listId];
       this.setState(updatedState);
+      body = {
+        boardId: boardId,
+        list: list,
+        listOrder: updatedState.listOrder,
+      };
+      CreateNewList(body);
     }
   };
 
-  createNewTask = (columnId, title) => {
+  createNewTask = (listId, title) => {
     let updatedState = { ...this.state };
     let taskCount;
     let taskId;
@@ -162,7 +182,7 @@ class TestDrag extends React.Component {
         id: taskId,
         title: title,
       };
-      updatedState.columns[columnId].taskIds.push(taskId);
+      updatedState.lists[listId].taskIds.push(taskId);
       this.setState(updatedState);
     } else {
       taskCount = 0;
@@ -173,14 +193,7 @@ class TestDrag extends React.Component {
           title: title,
         },
       };
-      updatedState.columns[columnId].taskIds.push(taskId);
-
-      // updatedState.tasks[taskId] = {
-      //   id: taskId,
-      //   title: title,
-      // };
-  
-      // updatedState.columns[columnId].taskIds.push(taskId);
+      updatedState.lists[listId].taskIds.push(taskId);
       this.setState(updatedState);
     }
   };
@@ -203,25 +216,21 @@ class TestDrag extends React.Component {
     const { classes } = this.props;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable
-          droppableId="all-columns"
-          direction="horizontal"
-          type="column"
-        >
+        <Droppable droppableId="all-lists" direction="horizontal" type="list">
           {(provided) => (
             <div
               style={{ display: "flex" }}
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {this.state.columnOrder !== undefined &&
-                this.state.columnOrder.map((columnId, index) => {
-                  const column = this.state.columns[columnId];
-                  if (column !== undefined) {
+              {this.state.listOrder !== undefined &&
+                this.state.listOrder.map((listId, index) => {
+                  const list = this.state.lists[listId];
+                  if (list !== undefined) {
                     return (
                       <InnerList
-                        key={column.id}
-                        column={column}
+                        key={list.id}
+                        list={list}
                         taskMap={this.state.tasks}
                         index={index}
                         createNewTask={this.createNewTask}

@@ -110,6 +110,10 @@ const HandleBoardCreation = (
     }
   });
 
+const HandleListCreation = () => new Promise((resolve, reject)=> {
+  
+})
+
 const BoardHelpers = {
   HandleUserRelatedBoards: HandleUserRelatedBoards,
   HandleBoardCreation: HandleBoardCreation,

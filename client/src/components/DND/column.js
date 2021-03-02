@@ -30,9 +30,9 @@ class Column extends React.Component {
   };
 
   render() {
-    const { classes, createNewTask, column } = this.props;
+    const { classes, createNewTask, list, index } = this.props;
     return (
-      <Draggable draggableId={this.props.column.id} index={this.props.index}>
+      <Draggable draggableId={list.id} index={index}>
         {(provided) => (
           <div
             className={classes.container}
@@ -40,9 +40,9 @@ class Column extends React.Component {
             ref={provided.innerRef}
           >
             <div className={classes.title} {...provided.dragHandleProps}>
-              {this.props.column.title}
+              {this.props.list.title}
             </div>
-            <Droppable droppableId={this.props.column.id} type="task">
+            <Droppable droppableId={list.id} type="task">
               {(provided, snapshot) => (
                 <div
                   className={
@@ -76,7 +76,7 @@ class Column extends React.Component {
                     <Add className={classes.menuIcon} />
                   </Grid>
                 </IconButton>
-                <AddTaskModal anchorEl={this.state.anchorEl} handleClose={this.handleNameInputClose} createNewTask={createNewTask} column={column} />
+                <AddTaskModal anchorEl={this.state.anchorEl} handleClose={this.handleNameInputClose} createNewTask={createNewTask} list={list} />
               </Grid>
             </div>
           </div>
