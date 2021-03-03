@@ -10,6 +10,9 @@ provider:
     SLS_DEBUG: ${env:SLS_DEBUG}
     DATABASE_URL: ${env:DATABASE_URL}
 
+package:
+ individually: false
+
 functions:
   createNewUser:
     handler: handlers/createNewUser.create
@@ -25,7 +28,6 @@ functions:
           path: user
           method: get
           cors: true
-
   createNewBoard:
     handler: handlers/createNewBoard.create
     events:
@@ -48,10 +50,17 @@ functions:
           method: post
           cors: true
   createNewList:
-    handler: handlers/createNewList.create
+    handler: handlers/list.create
     events:
       - http:
           path: list
+          method: post
+          cors: true
+  reorderLists:
+    handler: handlers/list.reorder
+    events:
+      - http:
+          path: list-reorder
           method: post
           cors: true
   createNewTask:
@@ -59,6 +68,20 @@ functions:
     events:
       - http:
           path: task
+          method: post
+          cors: true
+  reorderTasks:
+    handler: handlers/task.reorder
+    events:
+      - http:
+          path: task-reorder
+          method: post
+          cors: true
+  switchTasks:
+    handler: handlers/task.switch
+    events:
+      - http:
+          path: task-switch
           method: post
           cors: true
 

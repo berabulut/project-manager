@@ -2,6 +2,9 @@ import {
   GetUserRelatedBoards,
   CreateNewTask,
   CreateNewList,
+  ReorderLists,
+  ReorderTasks,
+  SwitchTasks,
 } from "functions/BoardFunctions";
 import { UIHelpers, UserHelpers } from "helpers/";
 
@@ -156,11 +159,67 @@ const HandleTaskCreation = (boards, boardId, listId, tasks, task, taskIds) =>
     }
   });
 
+const HandleListReordering = (boardId, listOrder) =>
+  new Promise((resolve, reject) => {
+    if (boardId && listOrder) {
+      console.log({
+        boardId: boardId,
+        listOrder: listOrder,
+      })
+      ReorderLists({
+        boardId: boardId,
+        listOrder: listOrder,
+      });
+      resolve(true);
+    } else {
+      reject("Missing parameters");
+    }
+  });
+
+const HandleTaskReordering = (boardId, listId, taskIds) =>
+  new Promise((resolve, reject) => {
+    if (boardId && listId && taskIds) {
+      console.log({
+        boardId: boardId,
+        listId: listId,
+        taskIds: taskIds,
+      })
+      ReorderTasks({
+        boardId: boardId,
+        listId: listId,
+        taskIds: taskIds,
+      });
+      resolve(true);
+    } else {
+      reject("Missing parameters");
+    }
+  });
+
+const HandleTaskSwitching = (boardId, lists) =>
+  new Promise((resolve, reject) => {
+    if (boardId && lists) {
+      console.log({
+        boardId: boardId,
+        lists: lists,
+      })
+      SwitchTasks({
+        boardId: boardId,
+        lists: lists,
+      });
+      resolve(true);
+    } else {
+      reject("Missing parameters");
+    }
+  });
+
 const BoardHelpers = {
   HandleUserRelatedBoards: HandleUserRelatedBoards,
   HandleBoardCreation: HandleBoardCreation,
   HandleListCreation: HandleListCreation,
   HandleTaskCreation: HandleTaskCreation,
+  HandleListReordering: HandleListReordering,
+  HandleTaskReordering: HandleTaskReordering,
+  HandleTaskSwitching: HandleTaskSwitching,
   FindExactBoard: FindExactBoard,
 };
 

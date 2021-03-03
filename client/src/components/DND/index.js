@@ -59,6 +59,7 @@ class TestDrag extends React.Component {
 
   onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
+    const boardId = this.props.board.id;
 
     if (!destination) {
       return;
@@ -77,12 +78,12 @@ class TestDrag extends React.Component {
       newListOrder.splice(source.index, 1);
       newListOrder.splice(destination.index, 0, draggableId);
 
-      const newState = {
+      const updatedState = {
         ...this.state,
         listOrder: newListOrder,
       };
-
-      this.setState(newState);
+      this.setState(updatedState);
+      BoardHelpers.HandleListReordering(boardId, newListOrder)
       return;
     }
 
@@ -107,8 +108,8 @@ class TestDrag extends React.Component {
           [newHome.id]: newHome,
         },
       };
-
       this.setState(newState);
+      BoardHelpers.HandleTaskReordering(boardId, newHome.id, newTaskIds)
       return;
     }
 
@@ -138,6 +139,7 @@ class TestDrag extends React.Component {
         },
       };
       this.setState(newState);
+      BoardHelpers.HandleTaskSwitching(boardId, newState.lists)
     }
   };
 
