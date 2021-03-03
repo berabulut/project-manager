@@ -60,6 +60,7 @@ class TestDrag extends React.Component {
   onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
     const boardId = this.props.board.id;
+    const boards = this.context.boards;
 
     if (!destination) {
       return;
@@ -83,7 +84,9 @@ class TestDrag extends React.Component {
         listOrder: newListOrder,
       };
       this.setState(updatedState);
-      BoardHelpers.HandleListReordering(boardId, newListOrder)
+      BoardHelpers.HandleListReordering(boards, boardId, newListOrder)
+        .then((boards) => this.context.setBoards(boards))
+        .catch((err) => console.log(err));
       return;
     }
 
@@ -109,7 +112,9 @@ class TestDrag extends React.Component {
         },
       };
       this.setState(newState);
-      BoardHelpers.HandleTaskReordering(boardId, newHome.id, newTaskIds)
+      BoardHelpers.HandleTaskReordering(boards, boardId, newHome.id, newTaskIds)
+        .then((boards) => this.context.setBoards(boards))
+        .catch((err) => console.log(err));
       return;
     }
 
@@ -139,7 +144,9 @@ class TestDrag extends React.Component {
         },
       };
       this.setState(newState);
-      BoardHelpers.HandleTaskSwitching(boardId, newState.lists)
+      BoardHelpers.HandleTaskSwitching(boards, boardId, newState.lists)
+        .then((boards) => this.context.setBoards(boards))
+        .catch((err) => console.log(err));
     }
   };
 
@@ -170,8 +177,7 @@ class TestDrag extends React.Component {
         updatedState.listOrder
       )
         .then((boards) => {
-          console.log(boards);
-          // this.context.setBoards(boards)
+          this.context.setBoards(boards);
         })
         .catch((err) => console.log(err));
     } else {
@@ -195,7 +201,7 @@ class TestDrag extends React.Component {
         updatedState.listOrder
       )
         .then((boards) => {
-           this.context.setBoards(boards)
+          this.context.setBoards(boards);
         })
         .catch((err) => console.log(err));
     }
