@@ -1,5 +1,5 @@
-import React from 'react';
-import Task from './task';
+import React from "react";
+import Task from "./task";
 
 class InnerList extends React.Component {
   shouldComponentUpdate(nextProps) {
@@ -9,9 +9,13 @@ class InnerList extends React.Component {
     return true;
   }
   render() {
-    return this.props.tasks.map((task, index) => (
-      <Task key={task.id} task={task} index={index} />
-    ));
+    return this.props.tasks ? (
+      this.props.tasks.map((task, index) => (
+        <Task key={task.id} task={task} index={index} />
+      ))
+    ) : (
+      <></>
+    );
   }
 }
 

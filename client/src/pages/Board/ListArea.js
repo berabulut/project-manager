@@ -17,7 +17,7 @@ const ListArea = ({ board }) => {
         className={classes.container}
         container
       >
-        <TestDnd />
+        <TestDnd board={board} />
       </Grid>
     </div>
   );

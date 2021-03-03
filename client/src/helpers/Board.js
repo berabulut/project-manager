@@ -1,4 +1,8 @@
-import { GetUserRelatedBoards, CreateNewTask, CreateNewList } from "functions/BoardFunctions";
+import {
+  GetUserRelatedBoards,
+  CreateNewTask,
+  CreateNewList,
+} from "functions/BoardFunctions";
 import { UIHelpers, UserHelpers } from "helpers/";
 
 const parseBoardId = (
@@ -110,10 +114,53 @@ const HandleBoardCreation = (
     }
   });
 
+const HandleListCreation = (boards, boardId, lists, list, listOrder) =>
+  new Promise((resolve, reject) => {
+    if (boards && boardId) {
+      for (let i = 0; i < boards.length; i++) {
+        let board = boards[i];
+        if (board.id === boardId) {
+          board.lists = lists;
+          board.listOrder = listOrder;
+          CreateNewList({
+            boardId: boardId,
+            list: list,
+            listOrder: listOrder,
+          });
+          resolve(boards);
+        }
+      }
+    } else {
+      reject("Boards or boardId is empty!");
+    }
+  });
+
+const HandleTaskCreation = (boards, boardId, listId, tasks, task, taskIds) =>
+  new Promise((resolve, reject) => {
+    if (boards && boardId) {
+      for (let i = 0; i < boards.length; i++) {
+        let board = boards[i];
+        if (board.id === boardId) {
+          board.tasks = tasks;
+          CreateNewTask({
+            boardId: boardId,
+            task: task,
+            listId: listId,
+            taskIds: taskIds,
+          });
+          resolve(boards);
+        }
+      }
+    } else {
+      reject("Boards or boardId is empty!");
+    }
+  });
 
 const BoardHelpers = {
   HandleUserRelatedBoards: HandleUserRelatedBoards,
   HandleBoardCreation: HandleBoardCreation,
+  HandleListCreation: HandleListCreation,
+  HandleTaskCreation: HandleTaskCreation,
   FindExactBoard: FindExactBoard,
 };
 

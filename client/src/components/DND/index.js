@@ -4,15 +4,18 @@ import { IconButton, Grid, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Add } from "@material-ui/icons";
 import { AddListModal } from "components";
-import { UIContext } from "provider/UIProvider";
-import { CreateNewTask, CreateNewList } from "functions/BoardFunctions";
+import { UserContext } from "provider/UserProvider";
+import { BoardHelpers } from "helpers";
 import Column from "./column";
 import { columnStyles } from "./styles";
 
 class InnerList extends React.Component {
   render() {
     const { list, taskMap, index, createNewTask } = this.props;
-    const tasks = list.taskIds.map((taskId) => taskMap[taskId]);
+    let tasks;
+    if (list.taskIds) {
+      tasks = list.taskIds.map((taskId) => taskMap[taskId]);
+    }
     return (
       <div>
         <Column
@@ -27,13 +30,31 @@ class InnerList extends React.Component {
 }
 
 class TestDrag extends React.Component {
-  static contextType = UIContext;
-
   constructor(props) {
     super(props);
     this.state = {
       anchorEl: null,
     };
+  }
+  static contextType = UserContext;
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.board !== this.props.board) {
+      const board = this.props.board;
+      if (board) {
+        if (board.lists) {
+          this.setState({
+            listOrder: board.listOrder,
+            lists: board.lists,
+          });
+          if (board.tasks) {
+            this.setState({
+              tasks: board.tasks,
+            });
+          }
+        }
+      }
+    }
   }
 
   onDragEnd = (result) => {
@@ -61,8 +82,6 @@ class TestDrag extends React.Component {
         listOrder: newListOrder,
       };
 
-      console.log(newState);
-
       this.setState(newState);
       return;
     }
@@ -89,46 +108,45 @@ class TestDrag extends React.Component {
         },
       };
 
-      console.log(newState);
-
       this.setState(newState);
       return;
     }
 
     // moving from one list to another
-    const homeTaskIds = Array.from(home.taskIds);
-    homeTaskIds.splice(source.index, 1);
-    const newHome = {
-      ...home,
-      taskIds: homeTaskIds,
-    };
+    if (home.taskIds && foreign.taskIds) {
+      const homeTaskIds = Array.from(home.taskIds);
+      homeTaskIds.splice(source.index, 1);
+      const newHome = {
+        ...home,
+        taskIds: homeTaskIds,
+      };
+      // i am checking it because sometimes it's bugged
+      const foreignTaskIds = Array.from(foreign.taskIds);
+      foreignTaskIds.splice(destination.index, 0, draggableId);
+      const newForeign = {
+        ...foreign,
+        taskIds: foreignTaskIds,
+      };
 
-    const foreignTaskIds = Array.from(foreign.taskIds);
-    foreignTaskIds.splice(destination.index, 0, draggableId);
-    const newForeign = {
-      ...foreign,
-      taskIds: foreignTaskIds,
-    };
-
-    const newState = {
-      // only triggered by moving from one list to another
-      ...this.state,
-      lists: {
-        ...this.state.lists,
-        [newHome.id]: newHome,
-        [newForeign.id]: newForeign,
-      },
-    };
-    this.setState(newState);
+      const newState = {
+        // only triggered by moving from one list to another
+        ...this.state,
+        lists: {
+          ...this.state.lists,
+          [newHome.id]: newHome,
+          [newForeign.id]: newForeign,
+        },
+      };
+      this.setState(newState);
+    }
   };
 
   createNewList = (title) => {
     let updatedState = { ...this.state };
     let listCount;
     let listId;
-    let body;
     let list;
-    const boardId = this.context.renderedBoard.id;
+    const boardId = this.props.board.id;
 
     if (updatedState.lists !== undefined) {
       // board doesn't have any list
@@ -142,12 +160,18 @@ class TestDrag extends React.Component {
       updatedState.lists[listId] = list;
       updatedState.listOrder.push(listId);
       this.setState(updatedState);
-      body = {
-        boardId: boardId,
-        list: list,
-        listOrder: updatedState.listOrder,
-      };
-      CreateNewList(body);
+      BoardHelpers.HandleListCreation(
+        this.context.boards,
+        boardId,
+        updatedState.lists,
+        list,
+        updatedState.listOrder
+      )
+        .then((boards) => {
+          console.log(boards);
+          // this.context.setBoards(boards)
+        })
+        .catch((err) => console.log(err));
     } else {
       listCount = 0;
       listId = `list-${listCount + 1}`;
@@ -161,12 +185,17 @@ class TestDrag extends React.Component {
       };
       updatedState.listOrder = [listId];
       this.setState(updatedState);
-      body = {
-        boardId: boardId,
-        list: list,
-        listOrder: updatedState.listOrder,
-      };
-      CreateNewList(body);
+      BoardHelpers.HandleListCreation(
+        this.context.boards,
+        boardId,
+        updatedState.lists,
+        list,
+        updatedState.listOrder
+      )
+        .then((boards) => {
+           this.context.setBoards(boards)
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -175,8 +204,7 @@ class TestDrag extends React.Component {
     let taskCount;
     let taskId;
     let task;
-    const boardId = this.context.renderedBoard.id;
-    let body;
+    const boardId = this.props.board.id;
 
     if (updatedState.tasks !== undefined) {
       taskCount = Object.keys(updatedState.tasks).length;
@@ -184,36 +212,50 @@ class TestDrag extends React.Component {
       task = {
         id: taskId,
         title: title,
-      }
+      };
       updatedState.tasks[taskId] = task;
-      updatedState.lists[listId].taskIds.push(taskId);
+      if (updatedState.lists[listId].taskIds)
+        updatedState.lists[listId].taskIds.push(taskId);
+      else updatedState.lists[listId].taskIds = [taskId];
       this.setState(updatedState);
-      body = {
-        boardId : boardId,
-        task : task,
-        listId : listId,
-        taskIds : updatedState.lists[listId].taskIds
-      }
-      CreateNewTask(body);
+      BoardHelpers.HandleTaskCreation(
+        this.context.boards,
+        boardId,
+        listId,
+        updatedState.tasks,
+        task,
+        updatedState.lists[listId].taskIds
+      )
+        .then((boards) => {
+          this.context.setBoards(boards);
+        })
+        .catch((err) => console.log(err));
     } else {
       taskCount = 0;
       taskId = `task-${taskCount + 1}`;
       task = {
         id: taskId,
         title: title,
-      }
+      };
       updatedState.tasks = {
         [taskId]: task,
       };
-      updatedState.lists[listId].taskIds.push(taskId);
+      if (updatedState.lists[listId].taskIds)
+        updatedState.lists[listId].taskIds.push(taskId);
+      else updatedState.lists[listId].taskIds = [taskId];
       this.setState(updatedState);
-      body = {
-        boardId : boardId,
-        task : task,
-        listId : listId,
-        taskIds : updatedState.lists[listId].taskIds
-      }
-      CreateNewTask(body);
+      BoardHelpers.HandleTaskCreation(
+        this.context.boards,
+        boardId,
+        listId,
+        updatedState.tasks,
+        task,
+        updatedState.lists[listId].taskIds
+      )
+        .then((boards) => {
+          this.context.setBoards(boards);
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -242,7 +284,8 @@ class TestDrag extends React.Component {
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {this.state.listOrder !== undefined &&
+              {this.state.listOrder &&
+                this.state.lists &&
                 this.state.listOrder.map((listId, index) => {
                   const list = this.state.lists[listId];
                   if (list !== undefined) {
