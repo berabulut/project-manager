@@ -56,6 +56,24 @@ class TestDrag extends React.Component {
       }
     }
   }
+  componentDidMount(){
+    if(this.props.board) {
+      const board = this.props.board;
+      if (board) {
+        if (board.lists) {
+          this.setState({
+            listOrder: board.listOrder,
+            lists: board.lists,
+          });
+          if (board.tasks) {
+            this.setState({
+              tasks: board.tasks,
+            });
+          }
+        }
+      } 
+    }
+  }
 
   onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;

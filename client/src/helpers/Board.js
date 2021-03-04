@@ -67,7 +67,9 @@ const HandleUserRelatedBoards = (
     }
   });
 
-const FindExactBoard = (id, boards, setRenderedBoard, setShowAllBoards) => {
+const FindExactBoard = (id, boards, setRenderedBoard, setShowAllBoards, setOpenBackdrop) => {
+  UIHelpers.HandleBackdropOpen(setOpenBackdrop);
+  
   for (let board of boards) {
     if (board.id === id) {
       UIHelpers.HandleBoardPageRender(
@@ -75,6 +77,7 @@ const FindExactBoard = (id, boards, setRenderedBoard, setShowAllBoards) => {
         setRenderedBoard,
         setShowAllBoards
       );
+    UIHelpers.HandleBackdropClose(setOpenBackdrop);
       console.log(board);
       break;
     }

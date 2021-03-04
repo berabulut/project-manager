@@ -17,12 +17,13 @@ const Board = () => {
     setShowFooter,
     setRenderedBoard,
     setShowAllBoards,
+    setOpenBackdrop
   } = useContext(UIContext);
   const { boards } = useContext(UserContext);
   const { id } = useParams();
 
   useEffect(() => {
-    BoardHelpers.FindExactBoard(id, boards, setRenderedBoard, setShowAllBoards);
+    BoardHelpers.FindExactBoard(id, boards, setRenderedBoard, setShowAllBoards, setOpenBackdrop);
     setShowFooter(false);
     return () => {
       UIHelpers.HideShowAllBoards(renderedBoard, setRenderedBoard, setShowAllBoards);
@@ -31,7 +32,7 @@ const Board = () => {
   }, []);
 
   useEffect(() => {
-    BoardHelpers.FindExactBoard(id, boards, setRenderedBoard, setShowAllBoards);
+    BoardHelpers.FindExactBoard(id, boards, setRenderedBoard, setShowAllBoards, setOpenBackdrop);
   }, [boards]);
 
   return (

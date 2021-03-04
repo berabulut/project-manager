@@ -1,26 +1,44 @@
 
 export const taskStyles = (theme) => ({
   container: {
-    border: "1px solid lightgrey",
-    borderRadius: "2px",
-    padding: "8px",
     marginBottom: "8px",
-    backgroundColor: "white",
   },
   dragging: {
-    border: "1px solid lightgrey",
-    borderRadius: "2px",
-    padding: "8px",
     marginBottom: "8px",
-    backgroundColor: "lightgreen",
   },
+  paper: {
+    padding: "12px",
+    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.05)",
+    borderRadius: "12px",
+    transition: "all .2s ease-in-out",
+    height: "100%",
+    "&:hover":{
+      cursor: "pointer",
+      boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.25)",
+    }
+  },
+  cover: {
+    width: "100%",
+    borderRadius: "12px",
+  },
+  title: {
+    fontWeight: "500",
+    letterSpacing: "-0.035em",
+    marginBottom: theme.spacing(1.5),
+  },
+  boardBox: {
+    marginRight: theme.spacing(1),
+  },
+  avatar: {
+    borderRadius: "8px"
+  }
 });
 
 export const columnStyles = (theme) => ({
   container: {
     margin: "8px",
     border: "1px solid lightgrey",
-    backgroundColor: "white",
+    backgroundColor: "#f7f7f7",
     borderRadius: "8px",
     width: "250px",
     display: "flex",
@@ -28,6 +46,7 @@ export const columnStyles = (theme) => ({
   },
   title: {
     padding: "8px",
+    fontWeight: "600"
   },
   taskList: {
     padding: "8px",
