@@ -35,7 +35,7 @@ export const modalStyles = makeStyles((theme) => ({
     },
   },
   gridContainer: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(2.5),
   },
   gridItem: {
     marginBottom: theme.spacing(3),
@@ -64,7 +64,8 @@ export const modalStyles = makeStyles((theme) => ({
   description: {
     fontSize: "1rem",
     lineHeight: "21px",
-    letterSpacing: "-0.035em"
+    letterSpacing: "-0.035em",
+    whiteSpace: "pre-line"
   }
 }));
 

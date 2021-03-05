@@ -1,24 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Grid, Typography, Button, Modal, IconButton } from "@material-ui/core";
 import { Clear, Edit } from "@material-ui/icons";
-import { SectionTitle, LightButton } from "components";
+import { SectionTitle, LightButton, Attachment } from "components";
 import EditDescription from "./EditDescription";
 import { modalStyles } from "./styles";
 
 const placeholder =
-  "https://images.unsplash.com/photo-1613085628218-d08b3a264f86?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80";
+  "https://images.unsplash.com/photo-1613085628218-d08b3a264f86?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop";
 
-const descriptionPlaceholder = `Ideas are created and share here through a card. 
-Here you can describe what you'd like to accomplish.
-For example you can follow three simple questions to create the card related to your idea:
-
-  * Why  ? (Why do you wish to do it ?)
-  * What ? (What it  is it, what are the goals, who is concerned)
-  * How  ? (How do you think you can do it ? What are the required steps ?)
-
-After creation, you can move your card to the todo list.`;
-
-const EditTaskModal = ({ open, handleClose, coverImageRegular, editDescription, description }) => {
+const EditTaskModal = ({
+  open,
+  handleClose,
+  coverImageRegular,
+  editDescription,
+  description,
+}) => {
   const classes = modalStyles();
   const [displayEditArea, setDisplayEditArea] = useState(false);
 
@@ -28,7 +24,7 @@ const EditTaskModal = ({ open, handleClose, coverImageRegular, editDescription, 
 
   const closeEditArea = () => {
     setDisplayEditArea(false);
-  }
+  };
 
   return (
     <Modal
@@ -40,6 +36,7 @@ const EditTaskModal = ({ open, handleClose, coverImageRegular, editDescription, 
     >
       <div className={classes.container}>
         <Grid className={classes.gridContainer} container direction="column">
+          {/* image - close button */}
           <Grid
             className={classes.gridItem}
             item
@@ -59,17 +56,18 @@ const EditTaskModal = ({ open, handleClose, coverImageRegular, editDescription, 
               src={
                 coverImageRegular !== undefined
                   ? coverImageRegular
-                  : placeholder
+                  : `${placeholder}&w=1280&q=80`
               }
             />
           </Grid>
-          <Grid className={classes.gridItem} item container xs={10}>
-            {/*this is the left side of modal in big screens */}
+          {/*this is the left side of modal in big screens */}
+          <Grid className={classes.gridItem} item container xs={9}>
             <Grid item xs={12}>
               <Typography className={classes.taskTitle}>
                 ✋🏿 Move anything that is actually started here
               </Typography>
             </Grid>
+            {/*inlist - inprogress */}
             <Grid item container xs={12}>
               <Grid item>
                 <Typography
@@ -88,16 +86,30 @@ const EditTaskModal = ({ open, handleClose, coverImageRegular, editDescription, 
                 </Typography>
               </Grid>
             </Grid>
+            {/*description - edit */}
             <Grid item container xs={12} style={{ marginBottom: "16px" }}>
-              <Grid item container alignItems="center" xs={2}>
+              <Grid
+                item
+                container
+                alignItems="center"
+                style={{ width: "100px" }}
+              >
                 <SectionTitle title="Description" icon="description" />
               </Grid>
               <Grid item xs={2}>
-                <LightButton handleClick={handleEditButtonClick} icon="edit" text="Edit" />
+                <LightButton
+                  handleClick={handleEditButtonClick}
+                  icon="edit"
+                  text="Edit"
+                />
               </Grid>
             </Grid>
+            {/*description itself */}
             <Grid
-              style={{ display: displayEditArea ? "none" : "flex" }}
+              style={{
+                display: displayEditArea ? "none" : "flex",
+                marginBottom: "24px",
+              }}
               item
               container
               xs={12}
@@ -106,16 +118,47 @@ const EditTaskModal = ({ open, handleClose, coverImageRegular, editDescription, 
                 {description}
               </Typography>
             </Grid>
+            {/*edit description */}
             <Grid
-              style={{ display: displayEditArea ? "flex" : "none" }}
+              style={{
+                display: displayEditArea ? "flex" : "none",
+                marginBottom: "24px",
+              }}
               item
               container
               xs={12}
             >
-              <EditDescription descriptionValue={description} editDescription={editDescription} handleClose={closeEditArea} />
+              <EditDescription
+                descriptionValue={description}
+                editDescription={editDescription}
+                handleClose={closeEditArea}
+              />
+            </Grid>
+            {/* Attachment - Add */}
+            <Grid item container xs={12} style={{ marginBottom: "16px" }}>
+              <Grid
+                item
+                container
+                alignItems="center"
+                style={{ width: "100px" }}
+              >
+                <SectionTitle title="Attachment" icon="description" />
+              </Grid>
+              <Grid item xs={2}>
+                <LightButton icon="add" text="Add" />
+              </Grid>
+            </Grid>
+            {/*  attachment itself*/}
+            <Grid item container xs={12}>
+              <Grid item xs={12} style={{marginBottom: "32px"}}>
+                <Attachment image={{ src: placeholder, alt: "kekw" }} date="July 5, 2020" title="Reasoning by Ranganath Krishnamani" />
+              </Grid>
+              <Grid item xs={12} style={{marginBottom: "32px"}}>
+                <Attachment file={{ text: "TXT" }} date="July 5, 2020" title="Gatsby-config.js" />
+              </Grid>
             </Grid>
           </Grid>
-          <Grid className={classes.gridContainer} item container xs={2}></Grid>
+          <Grid className={classes.gridContainer} item container xs={3}></Grid>
         </Grid>
       </div>
     </Modal>

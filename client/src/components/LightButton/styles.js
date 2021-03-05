@@ -5,7 +5,6 @@ export const buttonStyles = makeStyles((theme) => ({
     border: "1px solid #BDBDBD",
     borderRadius: "8px",
     height: "24px",
-	marginLeft: theme.spacing(1)
   },
   text: {
     lineHeight: "15px",
