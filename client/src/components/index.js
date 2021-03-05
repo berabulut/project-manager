@@ -8,3 +8,5 @@ export { default as Loading } from "./Loading/Loading";
 export { default as AddListModal } from "./AddListModal/AddListModal";
 export { default as AddTaskModal } from "./AddTaskModal/AddTaskModal";
 export { default as EditTaskModal } from "./EditTaskModal/EditTaskModal";
+export { default as SectionTitle } from "./SectionTitle/SectionTitle";
+export { default as LightButton } from "./LightButton/LightButton";

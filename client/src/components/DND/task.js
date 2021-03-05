@@ -13,6 +13,7 @@ class Task extends React.Component {
     super(props);
     this.state = {
       modalVisible: false,
+      description : "",
     };
   }
 
@@ -23,6 +24,10 @@ class Task extends React.Component {
   closeEditModal = () => {
     this.setState({ modalVisible: false });
   };
+
+  handleDescriptionChange = (description) => {
+    this.setState({ description: description })
+  } 
 
   render() {
     const { classes, users, image } = this.props;
@@ -83,6 +88,8 @@ class Task extends React.Component {
             <EditTaskModal
               open={this.state.modalVisible}
               handleClose={this.closeEditModal}
+              editDescription={this.handleDescriptionChange}
+              description={this.state.description}
             />
           </div>
         )}
