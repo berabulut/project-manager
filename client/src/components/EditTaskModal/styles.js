@@ -71,6 +71,9 @@ export const modalStyles = makeStyles((theme) => ({
     letterSpacing: "-0.035em",
     whiteSpace: "pre-line",
   },
+  buttonContainer: {
+    maxHeight: "60px"
+  }
 }));
 
 export const editStyles = makeStyles((theme) => ({

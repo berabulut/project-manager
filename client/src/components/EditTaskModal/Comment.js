@@ -39,7 +39,6 @@ const Comment = ({ comment }) => {
 				{text}
 		   </Typography>
 	   </Grid>
-	   <Divider />
 	</Grid>
   );
 };

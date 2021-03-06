@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Grid, Typography, Modal, IconButton } from "@material-ui/core";
 import { Clear } from "@material-ui/icons";
-import { SectionTitle, LightButton, Attachment } from "components";
+import { SectionTitle, LightButton, GrayButton, Attachment } from "components";
 import EditDescription from "./EditDescription";
 import WriteComment from "./WriteComment";
 import Comment from "./Comment";
@@ -37,7 +37,7 @@ const EditTaskModal = ({
       aria-describedby="simple-modal-description"
     >
       <div className={classes.container}>
-        <Grid className={classes.gridContainer} container direction="column">
+        <Grid className={classes.gridContainer} container>
           {/* image - close button */}
           <Grid
             className={classes.gridItem}
@@ -63,7 +63,7 @@ const EditTaskModal = ({
             />
           </Grid>
           {/*this is the left side of modal in big screens */}
-          <Grid className={classes.gridItem} item container xs={9}>
+          <Grid className={classes.gridItem} item container xs={8}>
             <Grid item xs={12}>
               <Typography className={classes.taskTitle}>
                 ✋🏿 Move anything that is actually started here
@@ -168,7 +168,7 @@ const EditTaskModal = ({
               </Grid>
             </Grid>
             {/*  write a comment*/}
-            <Grid item container xs={12} style={{marginBottom: "8px"}}>
+            <Grid item container xs={12} style={{ marginBottom: "8px" }}>
               <WriteComment />
             </Grid>
             {/* comments */}
@@ -178,7 +178,44 @@ const EditTaskModal = ({
               <Comment />
             </Grid>
           </Grid>
-          <Grid className={classes.gridContainer} item container xs={3}></Grid>
+          <Grid
+            style={{ height: "200px" }}
+            className={classes.gridItem}
+            item
+            container
+            xs={4}
+          >
+            <Grid item container justify="flex-start" style={{paddingLeft: "24px"}}>
+              <SectionTitle title="Actions" icon="people" />
+            </Grid>
+            <Grid
+              className={classes.buttonContainer}
+              item
+              container
+              justify="flex-end"
+              xs={12}
+            >
+              <GrayButton icon="people" text="Members" />
+            </Grid>
+            <Grid
+              className={classes.buttonContainer}
+              item
+              container
+              justify="flex-end"
+              xs={12}
+            >
+              <GrayButton icon="label" text="Labels" />
+            </Grid>
+            <Grid
+              className={classes.buttonContainer}
+              item
+              container
+              justify="flex-end"
+              xs={12}
+            >
+              <GrayButton icon="cover" text="Cover" />
+            </Grid>
+          </Grid>
         </Grid>
       </div>
     </Modal>

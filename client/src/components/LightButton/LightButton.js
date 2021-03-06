@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography, IconButton } from "@material-ui/core";
+import { Typography, IconButton } from "@material-ui/core";
 import { Edit, Add } from "@material-ui/icons";
 import { buttonStyles } from "./styles";
 

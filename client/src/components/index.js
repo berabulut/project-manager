@@ -11,3 +11,4 @@ export { default as EditTaskModal } from "./EditTaskModal/EditTaskModal";
 export { default as SectionTitle } from "./SectionTitle/SectionTitle";
 export { default as LightButton } from "./LightButton/LightButton";
 export { default as Attachment } from "./Attachment/Attachment";
+export { default as GrayButton } from "./GrayButton/GrayButton";
