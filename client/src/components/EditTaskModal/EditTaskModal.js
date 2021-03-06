@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Grid, Typography, Button, Modal, IconButton } from "@material-ui/core";
-import { Clear, Edit } from "@material-ui/icons";
+import React, { useState } from "react";
+import { Grid, Typography, Modal, IconButton } from "@material-ui/core";
+import { Clear } from "@material-ui/icons";
 import { SectionTitle, LightButton, Attachment } from "components";
 import EditDescription from "./EditDescription";
 import WriteComment from "./WriteComment";
+import Comment from "./Comment";
 import { modalStyles } from "./styles";
 
 const placeholder =
@@ -167,8 +168,14 @@ const EditTaskModal = ({
               </Grid>
             </Grid>
             {/*  write a comment*/}
-            <Grid item container xs={12}>
+            <Grid item container xs={12} style={{marginBottom: "8px"}}>
               <WriteComment />
+            </Grid>
+            {/* comments */}
+            <Grid item container xs={12}>
+              <Comment />
+              <Comment />
+              <Comment />
             </Grid>
           </Grid>
           <Grid className={classes.gridContainer} item container xs={3}></Grid>

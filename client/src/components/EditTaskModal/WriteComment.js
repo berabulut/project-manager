@@ -1,9 +1,9 @@
 import React from "react";
-import { Grid, Button, Modal, Avatar } from "@material-ui/core";
-import { commentStyles, CommentInput } from "./styles";
+import { Grid, Button, Avatar } from "@material-ui/core";
+import { writeCommentStyles, CommentInput } from "./styles";
 
 const EditDescription = () => {
-  const classes = commentStyles();
+  const classes = writeCommentStyles();
   return (
     <Grid container className={classes.container} justify="space-around">
       <Grid item xs={1}>

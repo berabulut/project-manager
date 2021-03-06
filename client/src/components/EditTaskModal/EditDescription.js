@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Grid, Typography, Button, Modal, IconButton } from "@material-ui/core";
+import React, {  useState } from "react";
+import { Grid,  Button,  IconButton } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import { editStyles, EditInput } from "./styles";
 
