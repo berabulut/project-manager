@@ -84,6 +84,14 @@ functions:
           path: task-switch
           method: post
           cors: true
+  returnImages:
+    handler: handlers/images.list
+    events:
+      - http:
+          path: list-images
+          method: get
+          cors: true
+  
 
 plugins:
   - serverless-offline

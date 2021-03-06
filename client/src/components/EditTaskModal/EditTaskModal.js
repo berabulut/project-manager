@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { Grid, Typography, Modal, IconButton } from "@material-ui/core";
 import { Clear } from "@material-ui/icons";
-import { SectionTitle, LightButton, GrayButton, Attachment } from "components";
+import {
+  SectionTitle,
+  LightButton,
+  GrayButton,
+  Attachment,
+  CoverMenu,
+  LabelsMenu,
+} from "components";
 import EditDescription from "./EditDescription";
 import WriteComment from "./WriteComment";
 import Comment from "./Comment";
@@ -18,7 +25,11 @@ const EditTaskModal = ({
   description,
 }) => {
   const classes = modalStyles();
+
   const [displayEditArea, setDisplayEditArea] = useState(false);
+
+  const [coverAnchorEl, setCoverAnchorEl] = useState(null);
+  const [labelAnchorEl, setLabelAnchorEl] = useState(null);
 
   const handleEditButtonClick = () => {
     setDisplayEditArea(!displayEditArea);
@@ -26,6 +37,26 @@ const EditTaskModal = ({
 
   const closeEditArea = () => {
     setDisplayEditArea(false);
+  };
+
+  const handleCoverButtonClick = (event) => {
+    setCoverAnchorEl(event.currentTarget);
+  };
+
+  const handleCoverMenuClose = () => {
+    setCoverAnchorEl(null);
+  };
+
+  const handleLabelButtonClick = (event) => {
+    setLabelAnchorEl(event.currentTarget);
+  };
+
+  const handleLabelMenuClose = () => {
+    setLabelAnchorEl(null);
+  };
+
+  const addImageToTask = () => {
+    return;
   };
 
   return (
@@ -185,7 +216,12 @@ const EditTaskModal = ({
             container
             xs={4}
           >
-            <Grid item container justify="flex-start" style={{paddingLeft: "24px"}}>
+            <Grid
+              item
+              container
+              justify="flex-start"
+              style={{ paddingLeft: "24px" }}
+            >
               <SectionTitle title="Actions" icon="people" />
             </Grid>
             <Grid
@@ -204,7 +240,8 @@ const EditTaskModal = ({
               justify="flex-end"
               xs={12}
             >
-              <GrayButton icon="label" text="Labels" />
+              <GrayButton icon="label" text="Labels" handleClick={handleLabelButtonClick} />
+              <LabelsMenu anchorEl={labelAnchorEl} handleClose={handleLabelMenuClose} />
             </Grid>
             <Grid
               className={classes.buttonContainer}
@@ -213,7 +250,16 @@ const EditTaskModal = ({
               justify="flex-end"
               xs={12}
             >
-              <GrayButton icon="cover" text="Cover" />
+              <GrayButton
+                icon="cover"
+                text="Cover"
+                handleClick={handleCoverButtonClick}
+              />
+              <CoverMenu
+                anchorEl={coverAnchorEl}
+                handleClose={handleCoverMenuClose}
+                handleImageClick={addImageToTask}
+              />
             </Grid>
           </Grid>
         </Grid>

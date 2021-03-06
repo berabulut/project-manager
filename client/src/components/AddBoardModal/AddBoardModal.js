@@ -28,7 +28,6 @@ const AddBoardModal = ({ open, setOpen }) => {
   const [openVisibility, setOpenVisibilty] = useState(false);
 
   const [coverAnchorEl, setCoverAnchorEl] = useState(null);
-  const [openCover, setOpenCover] = useState(false);
 
   const [boardTitle, setBoardTitle] = useState("");
   const [boardVisibility, setBoardVisibility] = useState("Private");
@@ -97,12 +96,10 @@ const AddBoardModal = ({ open, setOpen }) => {
 
   const handleCoverClick = (event) => {
     setCoverAnchorEl(event.currentTarget);
-    setOpenCover(true);
   };
 
   const handleCoverClose = () => {
     setCoverAnchorEl(null);
-    setOpenCover(false);
   };
 
   const handleImageClick = (regular, raw) => {

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Grid, IconButton } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
-import { SearchImages, GetRandomImages } from "api/unsplash";
+import { SearchImages, GetRandomImages, GetImages } from "api/unsplash";
 import { keywordSearchStyles } from "./styles";
 
 const KeywordSearch = ({
@@ -13,13 +13,13 @@ const KeywordSearch = ({
   const classes = keywordSearchStyles();
 
   useEffect(() => {
-    GetRandomImages(12)
-      .then((result) => {
-        setRandomImages(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // GetRandomImages(12)
+    //   .then((result) => {
+    //     setRandomImages(result);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }, []);
 
   const handleSearch = () => {

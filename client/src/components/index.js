@@ -12,3 +12,4 @@ export { default as SectionTitle } from "./SectionTitle/SectionTitle";
 export { default as LightButton } from "./LightButton/LightButton";
 export { default as Attachment } from "./Attachment/Attachment";
 export { default as GrayButton } from "./GrayButton/GrayButton";
+export { default as LabelsMenu } from "./LabelsMenu/LabelsMenu";

@@ -3,7 +3,7 @@ import { Typography, Grid } from "@material-ui/core";
 import KeywordSearch from "./KeywordSearch";
 import { PopMenu, coverStyles } from "./styles";
 
-const CoverMenu = ({ open, anchorEl, handleClose, handleImageClick }) => {
+const CoverMenu = ({ anchorEl, handleClose, handleImageClick }) => {
   const classes = coverStyles();
 
   const [searchedImages, setSearchedImages] = useState([]);
