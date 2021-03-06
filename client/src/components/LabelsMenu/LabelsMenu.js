@@ -6,8 +6,24 @@ import { colors } from "./colors";
 const LabelsMenu = ({ anchorEl, handleClose }) => {
   const classes = menuStyles();
 
-  const [searchInput, setSearchInput] = useState("");
-  const [selectedColor, setSelectedColor] = useState(1917); 
+  const [input, setInput] = useState("");
+  const [selectedColor, setSelectedColor] = useState(1917);
+
+  const [error, setError] = useState();
+
+  const handleButtonClick = () => {
+    if (input.trim() <= 0) {
+      setError("Label title cannot be empty!");
+    } else if (selectedColor === 1917) {
+      setError("Select a color!");
+    } else {
+      console.log({
+        input: input,
+        color: colors[selectedColor],
+      });
+      setError();
+    }
+  };
 
   return (
     <div>
@@ -32,8 +48,8 @@ const LabelsMenu = ({ anchorEl, handleClose }) => {
         <Grid className={classes.content} container>
           <Grid item container xs={12} className={classes.inputContainer}>
             <input
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
               placeholder="Keywords..."
               type="text"
               className={classes.input}
@@ -54,15 +70,24 @@ const LabelsMenu = ({ anchorEl, handleClose }) => {
                   key={key}
                   onClick={() => setSelectedColor(key)}
                   className={classes.color}
-                  style={{ backgroundColor: val.color, transform: selectedColor === key && "scale(1.05)"}}
+                  style={{
+                    backgroundColor: val.color,
+                    transform: selectedColor === key && "scale(1.05)",
+                  }}
                 ></div>
               </Grid>
             );
           })}
         </Grid>
         <Grid container>
+          {error && (
+            <Grid item container xs={12} justify="center">
+              <Typography className={classes.error}>{error}</Typography>
+            </Grid>
+          )}
           <Grid item container justify="center" xs={12}>
             <Button
+              onClick={handleButtonClick}
               className={classes.addButton}
               variant="contained"
               color="primary"
