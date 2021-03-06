@@ -3,6 +3,7 @@ import { Grid, Typography, Button, Modal, IconButton } from "@material-ui/core";
 import { Clear, Edit } from "@material-ui/icons";
 import { SectionTitle, LightButton, Attachment } from "components";
 import EditDescription from "./EditDescription";
+import WriteComment from "./WriteComment";
 import { modalStyles } from "./styles";
 
 const placeholder =
@@ -150,12 +151,24 @@ const EditTaskModal = ({
             </Grid>
             {/*  attachment itself*/}
             <Grid item container xs={12}>
-              <Grid item xs={12} style={{marginBottom: "32px"}}>
-                <Attachment image={{ src: placeholder, alt: "kekw" }} date="July 5, 2020" title="Reasoning by Ranganath Krishnamani" />
+              <Grid item xs={12} style={{ marginBottom: "32px" }}>
+                <Attachment
+                  image={{ src: placeholder, alt: "kekw" }}
+                  date="July 5, 2020"
+                  title="Reasoning by Ranganath Krishnamani"
+                />
               </Grid>
-              <Grid item xs={12} style={{marginBottom: "32px"}}>
-                <Attachment file={{ text: "TXT" }} date="July 5, 2020" title="Gatsby-config.js" />
+              <Grid item xs={12} style={{ marginBottom: "32px" }}>
+                <Attachment
+                  file={{ text: "TXT" }}
+                  date="July 5, 2020"
+                  title="Gatsby-config.js"
+                />
               </Grid>
+            </Grid>
+            {/*  write a comment*/}
+            <Grid item container xs={12}>
+              <WriteComment />
             </Grid>
           </Grid>
           <Grid className={classes.gridContainer} item container xs={3}></Grid>

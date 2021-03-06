@@ -1,6 +1,5 @@
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import {  TextField } from "@material-ui/core";
-
+import { TextField } from "@material-ui/core";
 
 export const modalStyles = makeStyles((theme) => ({
   modal: {
@@ -8,6 +7,11 @@ export const modalStyles = makeStyles((theme) => ({
     alignItems: "flex-start",
     justifyContent: "center",
     paddingTop: theme.spacing(8),
+    overflow: "scroll",
+    "&::-webkit-scrollbar": {
+      width: "0",
+      background: "transparent",
+    },
   },
   container: {
     backgroundColor: "white",
@@ -65,8 +69,8 @@ export const modalStyles = makeStyles((theme) => ({
     fontSize: "1rem",
     lineHeight: "21px",
     letterSpacing: "-0.035em",
-    whiteSpace: "pre-line"
-  }
+    whiteSpace: "pre-line",
+  },
 }));
 
 export const editStyles = makeStyles((theme) => ({
@@ -79,6 +83,28 @@ export const editStyles = makeStyles((theme) => ({
   },
 }));
 
+export const commentStyles = makeStyles((theme) => ({
+  container: {
+    border: "1px solid #E0E0E0",
+    boxSizing: "border-box",
+    boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
+    borderRadius: "12px",
+    minHeight: "100px",
+    padding: theme.spacing(2)
+  },
+  commentButton: {
+    width: "100%",
+    marginRight: "10px",
+    marginTop: "5px",
+    borderRadius: "8px",
+    fontWeight: 500,
+    fontSize: "0.775rem",
+    lineHeight: "14px",
+    letterSpacing: "-0.035em",
+    height: "32px"
+  }
+}));
+
 export const EditInput = withStyles({
   root: {
     width: "100%",
@@ -86,7 +112,7 @@ export const EditInput = withStyles({
       color: "#2F80ED",
     },
     "& .MuiFormLabel-root": {
-      fontSize: "0.875rem"
+      fontSize: "0.875rem",
     },
     "& .MuiOutlinedInput-root": {
       fontSize: "0.875rem",
@@ -104,11 +130,44 @@ export const EditInput = withStyles({
     },
     "& .MuiFormHelperText-contained": {
       color: "red",
-      marginLeft: "3px"
-    }
+      marginLeft: "3px",
+    },
   },
   input: {
-    fontSize: "0.875rem"
-  }
+    fontSize: "0.875rem",
+  },
 })(TextField);
 
+export const CommentInput = withStyles({
+  root: {
+    width: "100%",
+    "& label.Mui-focused": {
+      color: "#2F80ED",
+    },
+    "& .MuiFormLabel-root": {
+      fontSize: "0.875rem",
+    },
+    "& .MuiOutlinedInput-root": {
+      fontSize: "0.875rem",
+      padding: "18.5px 0px 18.5px 14px",
+      "& fieldset": {
+        border: "0px solid rgb(0 0 0 / 14%)",
+        borderRadius: "4px",
+        //border: "2px solid #2F80ED"
+      },
+      "&:hover fieldset": {
+        border: "0px solid rgb(0 0 0 / 20%)",
+      },
+      "&.Mui-focused fieldset": {
+        border: "1px solid rgb(0 0 0 / 20%)",
+      },
+    },
+    "& .MuiFormHelperText-contained": {
+      color: "red",
+      marginLeft: "3px",
+    },
+  },
+  input: {
+    fontSize: "0.875rem",
+  },
+})(TextField);
