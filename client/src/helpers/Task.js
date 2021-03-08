@@ -1,11 +1,24 @@
-const HandleDescriptionEdit = (boards, boardId, listId, tasks, task, taskIds) =>
-  new Promise((resolve, reject) => {
+import { UpdateTaskProperty } from "functions/BoardFunctions";
 
+const HandleTaskPropertyUpdate = (board, taskId, property, data) =>
+  new Promise((resolve, reject) => {
+    if (board && taskId && property && data) {
+      board.tasks[taskId][property] = data;
+      UpdateTaskProperty({
+        boardId: board.id,
+        taskId: taskId,
+        property: "description",
+        data: data || " ",
+      })
+        .then(() => resolve(board))
+        .catch((err) => reject(err));
+    } else {
+      reject("Missing parameters");
+    }
   });
 
-  const TaskHelpers = {
-	HandleDescriptionEdit: HandleDescriptionEdit,
-  };
-  
-  export default TaskHelpers;
-  
+const TaskHelpers = {
+  HandleTaskPropertyUpdate: HandleTaskPropertyUpdate,
+};
+
+export default TaskHelpers;

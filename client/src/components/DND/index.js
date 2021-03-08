@@ -38,9 +38,9 @@ class TestDrag extends React.Component {
   }
   static contextType = UserContext;
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.board !== this.props.board) {
-      const board = this.props.board;
+  componentDidUpdate(prevProps) {
+    const board = this.context.renderedBoard;
+    if (prevProps.board !== board) {
       if (board) {
         if (board.lists) {
           this.setState({
@@ -56,9 +56,10 @@ class TestDrag extends React.Component {
       }
     }
   }
-  componentDidMount(){
-    if(this.props.board) {
-      const board = this.props.board;
+  componentDidMount() {
+    console.log(this.props);
+    if (this.context.renderedBoard) {
+      const board = this.context.renderedBoard;
       if (board) {
         if (board.lists) {
           this.setState({
@@ -71,14 +72,13 @@ class TestDrag extends React.Component {
             });
           }
         }
-      } 
+      }
     }
   }
 
   onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
-    const boardId = this.props.board.id;
-    const boards = this.context.boards;
+    const board = this.context.renderedBoard;
 
     if (!destination) {
       return;
@@ -102,8 +102,8 @@ class TestDrag extends React.Component {
         listOrder: newListOrder,
       };
       this.setState(updatedState);
-      BoardHelpers.HandleListReordering(boards, boardId, newListOrder)
-        .then((boards) => this.context.setBoards(boards))
+      BoardHelpers.HandleListReordering(board, newListOrder)
+        .then((renderedBoard) => this.context.setRenderedBoard(renderedBoard))
         .catch((err) => console.log(err));
       return;
     }
@@ -130,8 +130,8 @@ class TestDrag extends React.Component {
         },
       };
       this.setState(newState);
-      BoardHelpers.HandleTaskReordering(boards, boardId, newHome.id, newTaskIds)
-        .then((boards) => this.context.setBoards(boards))
+      BoardHelpers.HandleTaskReordering(board, newHome.id, newTaskIds)
+        .then((renderedBoard) => this.context.setRenderedBoard(renderedBoard))
         .catch((err) => console.log(err));
       return;
     }
@@ -162,8 +162,8 @@ class TestDrag extends React.Component {
         },
       };
       this.setState(newState);
-      BoardHelpers.HandleTaskSwitching(boards, boardId, newState.lists)
-        .then((boards) => this.context.setBoards(boards))
+      BoardHelpers.HandleTaskSwitching(board, newState.lists)
+        .then((renderedBoard) => this.context.setRenderedBoard(renderedBoard))
         .catch((err) => console.log(err));
     }
   };
@@ -173,7 +173,7 @@ class TestDrag extends React.Component {
     let listCount;
     let listId;
     let list;
-    const boardId = this.props.board.id;
+    const board = this.context.renderedBoard;
 
     if (updatedState.lists !== undefined) {
       // board doesn't have any list
@@ -188,14 +188,13 @@ class TestDrag extends React.Component {
       updatedState.listOrder.push(listId);
       this.setState(updatedState);
       BoardHelpers.HandleListCreation(
-        this.context.boards,
-        boardId,
+        board,
         updatedState.lists,
         list,
         updatedState.listOrder
       )
-        .then((boards) => {
-          this.context.setBoards(boards);
+        .then((renderedBoard) => {
+          this.context.setRenderedBoard(renderedBoard);
         })
         .catch((err) => console.log(err));
     } else {
@@ -212,14 +211,13 @@ class TestDrag extends React.Component {
       updatedState.listOrder = [listId];
       this.setState(updatedState);
       BoardHelpers.HandleListCreation(
-        this.context.boards,
-        boardId,
+        board,
         updatedState.lists,
         list,
         updatedState.listOrder
       )
-        .then((boards) => {
-          this.context.setBoards(boards);
+        .then((renderedBoard) => {
+          this.context.setRenderedBoard(renderedBoard);
         })
         .catch((err) => console.log(err));
     }
@@ -230,7 +228,7 @@ class TestDrag extends React.Component {
     let taskCount;
     let taskId;
     let task;
-    const boardId = this.props.board.id;
+    const board = this.context.renderedBoard;
 
     if (updatedState.tasks !== undefined) {
       taskCount = Object.keys(updatedState.tasks).length;
@@ -245,15 +243,14 @@ class TestDrag extends React.Component {
       else updatedState.lists[listId].taskIds = [taskId];
       this.setState(updatedState);
       BoardHelpers.HandleTaskCreation(
-        this.context.boards,
-        boardId,
+        board,
         listId,
         updatedState.tasks,
         task,
         updatedState.lists[listId].taskIds
       )
-        .then((boards) => {
-          this.context.setBoards(boards);
+        .then((renderedBoard) => {
+          this.context.setRenderedBoard(renderedBoard);
         })
         .catch((err) => console.log(err));
     } else {
@@ -271,15 +268,14 @@ class TestDrag extends React.Component {
       else updatedState.lists[listId].taskIds = [taskId];
       this.setState(updatedState);
       BoardHelpers.HandleTaskCreation(
-        this.context.boards,
-        boardId,
+        board,
         listId,
         updatedState.tasks,
         task,
         updatedState.lists[listId].taskIds
       )
-        .then((boards) => {
-          this.context.setBoards(boards);
+        .then((renderedBoard) => {
+          this.context.setRenderedBoard(renderedBoard);
         })
         .catch((err) => console.log(err));
     }

@@ -2,11 +2,15 @@ import React, { useState } from "react";
 
 export const UIContext = React.createContext();
 
-const UIProvider = ({children, openBackdrop, setOpenBackdrop}) => {
+const UIProvider = ({
+  children,
+  openBackdrop,
+  setOpenBackdrop,
+  renderedBoard,
+  setRenderedBoard,
+}) => {
   const [showAllBoards, setShowAllBoards] = useState(false);
-  const [renderedBoard, setRenderedBoard] = useState();
   const [showFooter, setShowFooter] = useState(true);
-
 
   return (
     <UIContext.Provider
@@ -18,7 +22,7 @@ const UIProvider = ({children, openBackdrop, setOpenBackdrop}) => {
         showAllBoards,
         setShowAllBoards,
         setRenderedBoard,
-        renderedBoard
+        renderedBoard,
       }}
     >
       {children}

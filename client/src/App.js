@@ -11,7 +11,8 @@ import Routes from "./routes/Routes";
 const App = () => {
   const [openBackdrop, setOpenBackdrop] = useState(true);
   const [userData, setUserData] = useState({});
-  const [boards, setBoards] = useState([]); 
+  const [boards, setBoards] = useState([]);
+  const [renderedBoard, setRenderedBoard] = useState(); 
 
 
   useEffect(() => {
@@ -31,15 +32,12 @@ const App = () => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log('tetik')
-  }, [])
 
 
   return (
-    <UIProvider openBackdrop={openBackdrop} setOpenBackdrop={setOpenBackdrop}>
+    <UIProvider openBackdrop={openBackdrop} setOpenBackdrop={setOpenBackdrop} renderedBoard={renderedBoard} setRenderedBoard={setRenderedBoard}>
       <AuthProvider setUserData={setUserData} setBoards={setBoards} setOpenBackdrop={setOpenBackdrop}>
-        <UserProvider userData={userData} setUserData={setUserData} boards={boards} setBoards={setBoards} setOpenBackdrop={setOpenBackdrop}>
+        <UserProvider userData={userData} setUserData={setUserData} boards={boards} setBoards={setBoards} setOpenBackdrop={setOpenBackdrop} renderedBoard={renderedBoard} setRenderedBoard={setRenderedBoard}>
           <div className="App">
             <Routes />
           </div>

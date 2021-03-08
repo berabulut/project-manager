@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Paper, Typography, Box, Avatar } from "@material-ui/core";
 import { EditTaskModal } from "components";
 import { UIContext } from "provider/UIProvider";
+import { TaskHelpers } from "helpers";
 import { UpdateTaskProperty } from "functions/BoardFunctions";
 import { taskStyles } from "./styles";
 
@@ -31,19 +32,19 @@ class Task extends React.Component {
 
   handleDescriptionChange = (description) => {
     this.setState({ description: description });
-    UpdateTaskProperty({
-      boardId: this.context.renderedBoard.id,
-      taskId: this.props.task.id,
-      property: "description",
-      data: description
-    })
-    .catch((err) => console.log(err))
+    TaskHelpers.HandleTaskPropertyUpdate(
+      this.context.renderedBoard,
+      this.props.task.id,
+      "description",
+      description
+    ).catch((err) => console.log(err));
   };
 
   componentDidMount() {
     this.setState({
-      description: this.props.task.description || ""
-    })
+      description: this.props.task.description || " ",
+    });
+    console.log(this.context)
   }
 
   render() {

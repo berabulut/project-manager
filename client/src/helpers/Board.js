@@ -67,9 +67,15 @@ const HandleUserRelatedBoards = (
     }
   });
 
-const FindExactBoard = (id, boards, setRenderedBoard, setShowAllBoards, setOpenBackdrop) => {
+const FindExactBoard = (
+  id,
+  boards,
+  setRenderedBoard,
+  setShowAllBoards,
+  setOpenBackdrop
+) => {
   UIHelpers.HandleBackdropOpen(setOpenBackdrop);
-  
+
   for (let board of boards) {
     if (board.id === id) {
       UIHelpers.HandleBoardPageRender(
@@ -77,7 +83,7 @@ const FindExactBoard = (id, boards, setRenderedBoard, setShowAllBoards, setOpenB
         setRenderedBoard,
         setShowAllBoards
       );
-    UIHelpers.HandleBackdropClose(setOpenBackdrop);
+      UIHelpers.HandleBackdropClose(setOpenBackdrop);
       console.log(board);
       break;
     }
@@ -120,101 +126,76 @@ const HandleBoardCreation = (
     }
   });
 
-const HandleListCreation = (boards, boardId, lists, list, listOrder) =>
+const HandleListCreation = (board, lists, list, listOrder) =>
   new Promise((resolve, reject) => {
-    if (boards && boardId) {
-      for (let i = 0; i < boards.length; i++) {
-        let board = boards[i];
-        if (board.id === boardId) {
-          board.lists = lists;
-          board.listOrder = listOrder;
-          CreateNewList({
-            boardId: boardId,
-            list: list,
-            listOrder: listOrder,
-          });
-          resolve(boards);
-        }
-      }
+    if ((board && lists, list, listOrder)) {
+      board.lists = lists;
+      board.listOrder = listOrder;
+      CreateNewList({
+        boardId: board.id,
+        list: list,
+        listOrder: listOrder,
+      });
+      resolve(board);
     } else {
       reject("Boards or boardId is empty!");
     }
   });
 
-const HandleTaskCreation = (boards, boardId, listId, tasks, task, taskIds) =>
+const HandleTaskCreation = (board, listId, tasks, task, taskIds) =>
   new Promise((resolve, reject) => {
-    if (boards && boardId) {
-      for (let i = 0; i < boards.length; i++) {
-        let board = boards[i];
-        if (board.id === boardId) {
-          board.tasks = tasks;
-          CreateNewTask({
-            boardId: boardId,
-            task: task,
-            listId: listId,
-            taskIds: taskIds,
-          });
-          resolve(boards);
-        }
-      }
+    if (board && listId && tasks && tasks && task && taskIds) {
+      board.tasks = tasks;
+      CreateNewTask({
+        boardId: board.id,
+        task: task,
+        listId: listId,
+        taskIds: taskIds,
+      });
+      resolve(board);
     } else {
-      reject("Boards or boardId is empty!");
+      reject("Missing parameter empty!");
     }
   });
 
-const HandleListReordering = (boards, boardId, listOrder) =>
+const HandleListReordering = (board, listOrder) =>
   new Promise((resolve, reject) => {
-    if (boards && boardId && listOrder) {
-      for (let i = 0; i < boards.length; i++) {
-        let board = boards[i];
-        if (board.id === boardId) {
-          board.listOrder = listOrder;
-          ReorderLists({
-            boardId: boardId,
-            listOrder: listOrder,
-          });
-          resolve(boards);
-        }
-      }
+    if (board && listOrder) {
+      board.listOrder = listOrder;
+      ReorderLists({
+        boardId: board.id,
+        listOrder: listOrder,
+      });
+      resolve(board);
     } else {
       reject("Missing parameters");
     }
   });
 
-const HandleTaskReordering = (boards, boardId, listId, taskIds) =>
+const HandleTaskReordering = (board, listId, taskIds) =>
   new Promise((resolve, reject) => {
-    if (boards && boardId && listId && taskIds) {
-      for (let i = 0; i < boards.length; i++) {
-        let board = boards[i];
-        if (board.id === boardId) {
-          board.lists[listId].taskIds = taskIds;
-          ReorderTasks({
-            boardId: boardId,
-            listId: listId,
-            taskIds: taskIds,
-          });
-          resolve(boards);
-        }
-      }
+    if (board && listId && taskIds) {
+      board.lists[listId].taskIds = taskIds;
+      ReorderTasks({
+        boardId: board.id,
+        listId: listId,
+        taskIds: taskIds,
+      });
+      resolve(board);
     } else {
       reject("Missing parameters");
     }
   });
 
-const HandleTaskSwitching = (boards ,boardId, lists) =>
+const HandleTaskSwitching = (board, lists) =>
   new Promise((resolve, reject) => {
-    if (boards && boardId && lists) {
-      for (let i = 0; i < boards.length; i++) {
-        let board = boards[i];
-        if (board.id === boardId) {
-          board.lists = lists;
-          SwitchTasks({
-            boardId: boardId,
-            lists: lists,
-          });
-          resolve(boards);
-        }
-      }
+    if (board && lists) {
+      board.lists = lists;
+      SwitchTasks({
+        boardId: board.id,
+        lists: lists,
+      });
+      resolve(board);
     } else {
       reject("Missing parameters");
     }

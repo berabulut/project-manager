@@ -23,7 +23,7 @@ const EditDescription = ({
       <Grid item xs={12}>
         <EditInput
           onChange={handleChange}
-          value={description}
+          value={description.trim()}
           label="Description"
           variant="outlined"
           margin="dense"

@@ -2,9 +2,16 @@ import React from "react";
 
 export const UserContext = React.createContext();
 
-const UserProvider = ({userData, setUserData, boards, setBoards, setOpenBackdrop, children}) => {
-
-
+const UserProvider = ({
+  userData,
+  setUserData,
+  boards,
+  setBoards,
+  setOpenBackdrop,
+  renderedBoard,
+  setRenderedBoard,
+  children,
+}) => {
   return (
     <UserContext.Provider
       value={{
@@ -12,7 +19,9 @@ const UserProvider = ({userData, setUserData, boards, setBoards, setOpenBackdrop
         setUserData,
         boards,
         setBoards,
-        setOpenBackdrop
+        setOpenBackdrop,
+        renderedBoard,
+        setRenderedBoard,
       }}
     >
       {children}

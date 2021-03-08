@@ -9,7 +9,6 @@ import { BoardHelpers, UIHelpers } from "helpers/";
 import TopSection from "./TopSection";
 import ListArea from "./ListArea";
 
-
 const Board = () => {
   const classes = boardPageStyles();
   const {
@@ -17,22 +16,38 @@ const Board = () => {
     setShowFooter,
     setRenderedBoard,
     setShowAllBoards,
-    setOpenBackdrop
+    setOpenBackdrop,
   } = useContext(UIContext);
   const { boards } = useContext(UserContext);
   const { id } = useParams();
 
   useEffect(() => {
-    BoardHelpers.FindExactBoard(id, boards, setRenderedBoard, setShowAllBoards, setOpenBackdrop);
+    BoardHelpers.FindExactBoard(
+      id,
+      boards,
+      setRenderedBoard,
+      setShowAllBoards,
+      setOpenBackdrop
+    );
     setShowFooter(false);
     return () => {
-      UIHelpers.HideShowAllBoards(renderedBoard, setRenderedBoard, setShowAllBoards);
+      UIHelpers.HideShowAllBoards(
+        renderedBoard,
+        setRenderedBoard,
+        setShowAllBoards
+      );
       setShowFooter(true);
     };
   }, []);
 
   useEffect(() => {
-    BoardHelpers.FindExactBoard(id, boards, setRenderedBoard, setShowAllBoards, setOpenBackdrop);
+    BoardHelpers.FindExactBoard(
+      id,
+      boards,
+      setRenderedBoard,
+      setShowAllBoards,
+      setOpenBackdrop
+    );
   }, [boards]);
 
   return (
@@ -40,7 +55,7 @@ const Board = () => {
       <div className={classes.root}>
         <Container className={classes.container} component="main" maxWidth="xl">
           <TopSection board={renderedBoard} />
-          <ListArea board={renderedBoard} />
+          <ListArea board={renderedBoard}/>
         </Container>
       </div>
     </AppLayout>
