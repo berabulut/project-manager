@@ -122,7 +122,7 @@ export const commentStyles = makeStyles((theme) => ({
   },
   comment: {
     fontWeight: "normal",
-    fontSize: "1rem",
+    fontSize: "0.875rem",
     lineHeight: "19px",
     letterSpacing: "-0.035em",
     whiteSpace: "pre-line",

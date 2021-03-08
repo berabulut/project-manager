@@ -1,42 +1,39 @@
 import React from "react";
-import { Grid, Typography, Avatar, Divider } from "@material-ui/core";
+import { Grid, Typography, Avatar } from "@material-ui/core";
 import { commentStyles } from "./styles";
 
-const text = `“The gladdest moment in human life, methinks, is a departure into unknown lands.” – Sir Richard Burton`
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, deleteComment }) => {
   const classes = commentStyles();
   return (
     <Grid container className={classes.container}>
-      <Grid item container xs={12} justify="space-around">
+      <Grid item container xs={12} justify="space-between">
         <Grid item xs={1}>
-          <Avatar variant="rounded" className={classes.avatar}>
-            A
-          </Avatar>
+          <Avatar src={comment.picture} variant="rounded" className={classes.avatar} />
         </Grid>
-        <Grid item container xs={7} style={{paddingLeft: "14px"}}>
+        <Grid item container xs={7} style={{paddingLeft: "7px"}}>
           <Grid item xs={12}>
-            <Typography className={classes.userName}>Mikael Stanley</Typography>
+            <Typography className={classes.userName}>{comment.name}</Typography>
           </Grid>
           <Grid item xs={12}>
-            <Typography className={classes.date}>24 August at 20:43</Typography>
+            <Typography className={classes.date}>{comment.time}</Typography>
           </Grid>
         </Grid>
         <Grid item container xs={3} justify="flex-end">
           <Grid item xs={3}>
             <Typography onClick={() => console.log('asd ')} className={classes.commentButton}>Edit</Typography>
           </Grid>
-          <Grid item xs={1} style={{marginLeft: "5px", marginRight: "10px"}}>
+          <Grid item xs={1} style={{marginLeft: "5px", marginRight: "10px", marginTop: "-2.5px"}}>
             -
           </Grid>
           <Grid item xs={3}>
-            <Typography className={classes.commentButton}>Delete</Typography>
+            <Typography onClick={() => deleteComment(comment.id)} className={classes.commentButton}>Delete</Typography>
           </Grid>
         </Grid>
       </Grid>
 	   <Grid item container xs={12} style={{marginTop: "16px"}}>
 		   <Typography className={classes.comment}>
-				{text}
+				{comment.text}
 		   </Typography>
 	   </Grid>
 	</Grid>

@@ -34,7 +34,7 @@ const Attachment = ({ image, file, date, title }) => {
           <Grid item xs={3}>
             <LightButton text="Download" />
           </Grid>
-		  <Grid item xs={3} style={{marginLeft: "8px"}}>
+		  <Grid item xs={3} style={{marginLeft: "14px"}}>
             <LightButton text="Delete" />
           </Grid>
         </Grid>

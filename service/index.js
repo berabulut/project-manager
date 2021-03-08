@@ -1,4 +1,4 @@
-const { createNewList } = require("./src/boards");
+const { createUniqueId } = require("./src/boards");
 
 const column = {
   id: "column-1",
@@ -6,10 +6,6 @@ const column = {
   taskIds: ["task-1", "task-2", "task-3", "task-4"],
 };
 
-createNewList("-MTwRJpcATRziUfZq-iL", column, ['column-1', 'column-2'])
-  .then((response) => {
-    console.log(response);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+createUniqueId()
+.then((data) => console.log(data))
+.catch((err) => console.log(err))

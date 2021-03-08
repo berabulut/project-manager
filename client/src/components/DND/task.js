@@ -5,7 +5,6 @@ import { Paper, Typography, Box, Avatar } from "@material-ui/core";
 import { EditTaskModal } from "components";
 import { UIContext } from "provider/UIProvider";
 import { TaskHelpers } from "helpers";
-import { UpdateTaskProperty } from "functions/BoardFunctions";
 import { taskStyles } from "./styles";
 
 // const image =
@@ -17,6 +16,7 @@ class Task extends React.Component {
     this.state = {
       modalVisible: false,
       description: "",
+      comments: [],
     };
   }
 
@@ -40,11 +40,44 @@ class Task extends React.Component {
     ).catch((err) => console.log(err));
   };
 
+  submitComment = (comment) => {
+    this.setState(
+      {
+        comments: [...this.state.comments, comment],
+      },
+      () => {
+        TaskHelpers.HandleTaskPropertyUpdate(
+          this.context.renderedBoard,
+          this.props.task.id,
+          "comments",
+          this.state.comments
+        ).catch((err) => console.log(err));
+      }
+    );
+  };
+  deleteComment = (commentId) => {
+    let comments = this.state.comments;
+    for (let i = 0; i < comments.length; i++) {
+      const comment = comments[i];
+      if (comment.id === commentId) { // remove id matched comment
+        comments.splice(i, 1);
+        this.setState({ comments: comments }, () => {
+          TaskHelpers.HandleTaskPropertyUpdate(
+            this.context.renderedBoard,
+            this.props.task.id,
+            "comments",
+            this.state.comments
+          ).catch((err) => console.log(err));
+        });
+      }
+    }
+  };
+
   componentDidMount() {
     this.setState({
       description: this.props.task.description || " ",
+      comments: this.props.task.comments || [],
     });
-    console.log(this.context)
   }
 
   render() {
@@ -108,6 +141,9 @@ class Task extends React.Component {
               handleClose={this.closeEditModal}
               editDescription={this.handleDescriptionChange}
               description={this.state.description}
+              comments={this.state.comments}
+              submitComment={this.submitComment}
+              deleteComment={this.deleteComment}
             />
           </div>
         )}

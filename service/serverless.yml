@@ -91,6 +91,13 @@ functions:
           path: update-task
           method: put
           cors: true
+  createId:
+    handler: handlers/uniqueId.create
+    events: 
+      - http:
+          path: id
+          method: get
+          cors: true          
   returnImages:
     handler: handlers/images.list
     events:

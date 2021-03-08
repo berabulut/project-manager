@@ -7,7 +7,7 @@ const HandleTaskPropertyUpdate = (board, taskId, property, data) =>
       UpdateTaskProperty({
         boardId: board.id,
         taskId: taskId,
-        property: "description",
+        property: property,
         data: data || " ",
       })
         .then(() => resolve(board))

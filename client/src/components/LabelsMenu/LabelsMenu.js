@@ -67,9 +67,9 @@ const LabelsMenu = ({ anchorEl, handleClose }) => {
                 justify="center"
                 xs={3}
                 style={{ marginBottom: "8px" }}
+                key={key}
               >
                 <div
-                  key={key}
                   onClick={() => setSelectedColor(key)}
                   className={classes.color}
                   style={{

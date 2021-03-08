@@ -23,6 +23,9 @@ const EditTaskModal = ({
   coverImageRegular,
   editDescription,
   description,
+  comments,
+  submitComment,
+  deleteComment
 }) => {
   const classes = modalStyles();
 
@@ -200,13 +203,15 @@ const EditTaskModal = ({
             </Grid>
             {/*  write a comment*/}
             <Grid item container xs={12} style={{ marginBottom: "8px" }}>
-              <WriteComment />
+              <WriteComment handleButtonClick={submitComment} />
             </Grid>
             {/* comments */}
             <Grid item container xs={12}>
-              <Comment />
-              <Comment />
-              <Comment />
+              {comments && comments.map((val, key) => {
+                return (
+                  <Comment key={key} comment={val} deleteComment={deleteComment} />
+                )
+              })}
             </Grid>
           </Grid>
           <Grid

@@ -57,7 +57,6 @@ class TestDrag extends React.Component {
     }
   }
   componentDidMount() {
-    console.log(this.props);
     if (this.context.renderedBoard) {
       const board = this.context.renderedBoard;
       if (board) {
@@ -139,7 +138,7 @@ class TestDrag extends React.Component {
       return;
     }
 
-    // codes below only works when moving a task  one list to another
+    // codes below only works when moving a task one list to another
     const homeTaskIds = Array.from(home.taskIds);
     homeTaskIds.splice(source.index, 1);
     const newHome = {
