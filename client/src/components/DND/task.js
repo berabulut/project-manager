@@ -3,6 +3,8 @@ import { Draggable } from "react-beautiful-dnd";
 import { withStyles } from "@material-ui/core/styles";
 import { Paper, Typography, Box, Avatar } from "@material-ui/core";
 import { EditTaskModal } from "components";
+import { UIContext } from "provider/UIProvider";
+import { UpdateTaskProperty } from "functions/BoardFunctions";
 import { taskStyles } from "./styles";
 
 // const image =
@@ -13,9 +15,11 @@ class Task extends React.Component {
     super(props);
     this.state = {
       modalVisible: false,
-      description : "",
+      description: "",
     };
   }
+
+  static contextType = UIContext;
 
   handleTaskClick = () => {
     this.setState({ modalVisible: true });
@@ -26,8 +30,21 @@ class Task extends React.Component {
   };
 
   handleDescriptionChange = (description) => {
-    this.setState({ description: description })
-  } 
+    this.setState({ description: description });
+    UpdateTaskProperty({
+      boardId: this.context.renderedBoard.id,
+      taskId: this.props.task.id,
+      property: "description",
+      data: description
+    })
+    .catch((err) => console.log(err))
+  };
+
+  componentDidMount() {
+    this.setState({
+      description: this.props.task.description || ""
+    })
+  }
 
   render() {
     const { classes, users, image } = this.props;

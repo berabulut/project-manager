@@ -145,3 +145,20 @@ export const SwitchTasks = (body) => new Promise(async(resolve, reject) => {
   }
 })
 
+export const UpdateTaskProperty = (body) => new Promise(async(resolve, reject) => {
+  try {
+    let response = await fetch(
+      process.env.REACT_APP_SERVICE_URL + `/update-task`,
+      {
+        method: "PUT",
+        headers: new Headers({
+          "Content-type": "application/json; charset=UTF-8",
+        }),
+        body: JSON.stringify(body),
+      }
+    );
+    resolve(await response.json());
+  } catch (err) {
+    reject(err);
+  }
+})

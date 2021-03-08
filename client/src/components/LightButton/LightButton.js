@@ -6,9 +6,6 @@ import { buttonStyles } from "./styles";
 const LightButton = ({ icon, text, handleClick }) => {
   const classes = buttonStyles();
 
-  React.useEffect(() => {
-    console.log(icon)
-  })
 
   return (
     <IconButton onClick={handleClick} className={classes.button} aria-label="edit">

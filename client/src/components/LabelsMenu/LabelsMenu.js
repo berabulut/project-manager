@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Typography, Grid, Button } from "@material-ui/core";
+import { UpdateTaskProperty } from "functions/BoardFunctions";
 import { PopMenu, menuStyles } from "./styles";
 import { colors } from "./colors";
+import { Update } from "@material-ui/icons";
 
 const LabelsMenu = ({ anchorEl, handleClose }) => {
   const classes = menuStyles();

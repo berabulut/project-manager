@@ -84,6 +84,13 @@ functions:
           path: task-switch
           method: post
           cors: true
+  updateTask:
+    handler: handlers/task.update
+    events:
+      - http:
+          path: update-task
+          method: put
+          cors: true
   returnImages:
     handler: handlers/images.list
     events:
@@ -91,6 +98,7 @@ functions:
           path: list-images
           method: get
           cors: true
+
   
 
 plugins:

@@ -31,6 +31,10 @@ const App = () => {
     }
   }, []);
 
+  useEffect(() => {
+    console.log('tetik')
+  }, [])
+
 
   return (
     <UIProvider openBackdrop={openBackdrop} setOpenBackdrop={setOpenBackdrop}>

@@ -17,6 +17,7 @@ const EditDescription = ({
   useState(() => {
     setDescription(descriptionValue);
   }, [descriptionValue]);
+
   return (
     <Grid container>
       <Grid item xs={12}>

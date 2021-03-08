@@ -96,6 +96,29 @@ const returnUserRelatedBoards = (boards) =>
     }
   });
 
+const returnBoardRelatedUsers = (users) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = new Promise((resolve, reject) => {
+        let data = [];
+        users.map((val, key) => {
+          //val here should be unique id of a users
+          const ref = db.ref(`/users/${val.uid}`);
+          ref.once("value", (snapshot) => {
+            const value = snapshot.val();
+            if (value !== undefined && value !== null) {
+              data.push(value);
+              if (key === users.length - 1) resolve(data);
+            }
+          });
+        });
+      });
+      resolve(await response);
+    } catch (err) {
+      reject(err);
+    }
+  });
+
 const createNewList = (boardId, list, listOrder) =>
   new Promise((resolve, reject) => {
     try {
@@ -112,53 +135,6 @@ const createNewList = (boardId, list, listOrder) =>
       reject(err);
     }
   });
-
-const handleListOrder = (boardId, listOrder) =>
-  new Promise((resolve, reject) => {
-    const ref = db.ref(`/boards/${boardId}/listOrder`);
-
-    ref.set(listOrder, (error) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(true);
-      }
-    });
-  });
-
-const reorderLists = (boardId, listOrder) =>
-  new Promise((resolve, reject) => {
-    const ref = db.ref(`/boards/${boardId}/listOrder`);
-    ref.set(listOrder, (error) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(true);
-      }
-    });
-  });
-
-const reorderTasksInSameList = (boardId, listId, taskIds) => new Promise((resolve, reject) => {
-  const ref = db.ref(`/boards/${boardId}/lists/${listId}/taskIds`);
-  ref.set(taskIds, (error) => {
-    if (error) {
-      reject(error);
-    } else {
-      resolve(true);
-    }
-  });
-})
-
-const switchTasksBetweenLists = (boardId, lists) => new Promise((resolve, reject) => {
-  const ref = db.ref(`/boards/${boardId}/lists`);
-  ref.set(lists, (error) => {
-    if(error) {
-      reject(error)
-    } else {
-      resolve(true)
-    }
-  })
-})
 
 const createNewTask = (boardId, task, listId, taskIds) =>
   new Promise((resolve, reject) => {
@@ -193,33 +169,73 @@ const linkTaskAndList = (boardId, listId, taskIds) =>
     }
   });
 
-const returnBoardRelatedUsers = (users) =>
-  new Promise(async (resolve, reject) => {
-    try {
-      const response = new Promise((resolve, reject) => {
-        let data = [];
-        users.map((val, key) => {
-          //val here should be unique id of a users
-          const ref = db.ref(`/users/${val.uid}`);
-          ref.once("value", (snapshot) => {
-            const value = snapshot.val();
-            if (value !== undefined && value !== null) {
-              data.push(value);
-              if (key === users.length - 1) resolve(data);
-            }
-          });
-        });
-      });
-      resolve(await response);
-    } catch (err) {
-      reject(err);
-    }
+const handleListOrder = (boardId, listOrder) =>
+  new Promise((resolve, reject) => {
+    const ref = db.ref(`/boards/${boardId}/listOrder`);
+
+    ref.set(listOrder, (error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(true);
+      }
+    });
   });
+
+const reorderLists = (boardId, listOrder) =>
+  new Promise((resolve, reject) => {
+    const ref = db.ref(`/boards/${boardId}/listOrder`);
+    ref.set(listOrder, (error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(true);
+      }
+    });
+  });
+
+const reorderTasksInSameList = (boardId, listId, taskIds) =>
+  new Promise((resolve, reject) => {
+    const ref = db.ref(`/boards/${boardId}/lists/${listId}/taskIds`);
+    ref.set(taskIds, (error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(true);
+      }
+    });
+  });
+
+const switchTasksBetweenLists = (boardId, lists) =>
+  new Promise((resolve, reject) => {
+    const ref = db.ref(`/boards/${boardId}/lists`);
+    ref.set(lists, (error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(true);
+      }
+    });
+  });
+
+const updateTaskProperty = (boardId, taskId, property, data) =>
+  new Promise((resolve, reject) => {
+    const ref = db.ref(`/boards/${boardId}/tasks/${taskId}/${property}`);
+    ref.set(data, (error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(true);
+      }
+    });
+  });
+
 module.exports = {
   createNewBoard,
-  createNewTask,
   createNewList,
   reorderLists,
+  createNewTask,
+  updateTaskProperty,
   reorderTasksInSameList,
   switchTasksBetweenLists,
   returnUserRelatedBoards,
