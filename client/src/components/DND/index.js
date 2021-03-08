@@ -80,10 +80,12 @@ class TestDrag extends React.Component {
     const { destination, source, draggableId, type } = result;
     const board = this.context.renderedBoard;
 
+    // no list to drop
     if (!destination) {
       return;
     }
 
+    // dropping to same list same place
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
@@ -91,8 +93,8 @@ class TestDrag extends React.Component {
       return;
     }
 
+    // triggers when reordering lists 
     if (type === "list") {
-      // triggers when reordering lists not tasks
       const newListOrder = Array.from(this.state.listOrder);
       newListOrder.splice(source.index, 1);
       newListOrder.splice(destination.index, 0, draggableId);
@@ -111,8 +113,9 @@ class TestDrag extends React.Component {
     const home = this.state.lists[source.droppableId];
     const foreign = this.state.lists[destination.droppableId];
 
+
+    // triggers when reordering tasks in the same list
     if (home === foreign) {
-      // triggers when reordering in the same list
       const newTaskIds = Array.from(home.taskIds);
       newTaskIds.splice(source.index, 1);
       newTaskIds.splice(destination.index, 0, draggableId);
@@ -136,36 +139,38 @@ class TestDrag extends React.Component {
       return;
     }
 
-    // moving from one list to another
-    if (home.taskIds && foreign.taskIds) {
-      const homeTaskIds = Array.from(home.taskIds);
-      homeTaskIds.splice(source.index, 1);
-      const newHome = {
-        ...home,
-        taskIds: homeTaskIds,
-      };
-      // i am checking it because sometimes it's bugged
-      const foreignTaskIds = Array.from(foreign.taskIds);
-      foreignTaskIds.splice(destination.index, 0, draggableId);
-      const newForeign = {
-        ...foreign,
-        taskIds: foreignTaskIds,
-      };
+    // codes below only works when moving a task  one list to another
+    const homeTaskIds = Array.from(home.taskIds);
+    homeTaskIds.splice(source.index, 1);
+    const newHome = {
+      ...home,
+      taskIds: homeTaskIds,
+    };
 
-      const newState = {
-        // only triggered by moving from one list to another
-        ...this.state,
-        lists: {
-          ...this.state.lists,
-          [newHome.id]: newHome,
-          [newForeign.id]: newForeign,
-        },
-      };
-      this.setState(newState);
-      BoardHelpers.HandleTaskSwitching(board, newState.lists)
-        .then((renderedBoard) => this.context.setRenderedBoard(renderedBoard))
-        .catch((err) => console.log(err));
+    let foreignTaskIds;
+    if (foreignTaskIds) {
+      foreignTaskIds = Array.from(foreign.taskIds);
+    } else {
+      foreignTaskIds = [];
     }
+    foreignTaskIds.splice(destination.index, 0, draggableId);
+    const newForeign = {
+      ...foreign,
+      taskIds: foreignTaskIds,
+    };
+
+    const newState = {
+      ...this.state,
+      lists: {
+        ...this.state.lists,
+        [newHome.id]: newHome,
+        [newForeign.id]: newForeign,
+      },
+    };
+    this.setState(newState);
+    BoardHelpers.HandleTaskSwitching(board, newState.lists)
+      .then((renderedBoard) => this.context.setRenderedBoard(renderedBoard))
+      .catch((err) => console.log(err));
   };
 
   createNewList = (title) => {
