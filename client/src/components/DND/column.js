@@ -53,7 +53,7 @@ class Column extends React.Component {
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >
-                  <InnerList tasks={this.props.tasks} />
+                  <InnerList list={list} tasks={this.props.tasks} />
                   {provided.placeholder}
                 </div>
               )}

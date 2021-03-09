@@ -2,10 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 import { Grid, Button, Avatar } from "@material-ui/core";
 import { GetUniqueId } from "functions/BoardFunctions";
 import { UserContext } from "provider/UserProvider";
-import { writeCommentStyles, CommentInput } from "./styles";
+import { inputStyles, CommentInput } from "./styles";
 
 const EditDescription = ({ handleButtonClick }) => {
-  const classes = writeCommentStyles();
+  const classes = inputStyles();
 
   const { userData } = useContext(UserContext);
   const [comment, setComment] = useState("");

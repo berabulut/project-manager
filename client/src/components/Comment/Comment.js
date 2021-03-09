@@ -1,15 +1,25 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Grid, Typography, Avatar } from "@material-ui/core";
+import {
+  Grid,
+  Typography,
+  Avatar,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+} from "@material-ui/core";
 import { UserContext } from "provider/UserProvider";
 import { EditInput } from "components";
 import { commentStyles } from "./styles";
 
 const Comment = ({ comment, deleteComment, editComment }) => {
   const classes = commentStyles();
+
   const { userData } = useContext(UserContext);
+  const [owner, setOwner] = useState(false);
 
   const [displayEditArea, setDisplayEditArea] = useState(false);
-  const [owner, setOwner] = useState(false);
+  const [displayDeleteDialog, setDisplayDeleteDialog] = useState(false);
 
   const handleEditButtonClick = () => {
     setDisplayEditArea(!displayEditArea);
@@ -21,6 +31,19 @@ const Comment = ({ comment, deleteComment, editComment }) => {
 
   const handleEditComment = (input) => {
     editComment(comment.id, input);
+  };
+
+  const handleDeleteButtonClick = () => {
+    setDisplayDeleteDialog(!displayDeleteDialog);
+  };
+
+  const closeDeleteDialog = () => {
+    setDisplayDeleteDialog(false);
+  };
+
+  const handleDeleteComment = () => {
+    deleteComment(comment.id);
+    closeDeleteDialog();
   };
 
   useEffect(() => {
@@ -71,12 +94,30 @@ const Comment = ({ comment, deleteComment, editComment }) => {
               </Grid>
               <Grid item xs={3}>
                 <Typography
-                  onClick={() => deleteComment(comment.id)}
+                  onClick={handleDeleteButtonClick}
                   className={classes.commentButton}
                 >
                   Delete
                 </Typography>
               </Grid>
+              <Dialog
+                open={displayDeleteDialog}
+                onClose={closeDeleteDialog}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle>
+                  {"Delete this comment?"}
+                </DialogTitle>
+                <DialogActions>
+                  <Button onClick={closeDeleteDialog} color="primary">
+                    Go Back
+                  </Button>
+                  <Button onClick={handleDeleteComment} color="primary" autoFocus>
+                    Delete
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </>
           )}
         </Grid>

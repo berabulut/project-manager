@@ -147,6 +147,7 @@ export const SwitchTasks = (body) => new Promise(async(resolve, reject) => {
 
 export const UpdateTaskProperty = (body) => new Promise(async(resolve, reject) => {
   try {
+    console.log('bodey', body)
     let response = await fetch(
       process.env.REACT_APP_SERVICE_URL + `/update-task`,
       {

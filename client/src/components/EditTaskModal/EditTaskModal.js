@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Grid, Typography, Modal, IconButton } from "@material-ui/core";
-import { Clear } from "@material-ui/icons";
+import { Clear, Add } from "@material-ui/icons";
 import {
   SectionTitle,
   LightButton,
@@ -10,8 +10,8 @@ import {
   LabelsMenu,
   Comment,
   EditInput,
+  CommentInput,
 } from "components";
-import WriteComment from "./WriteComment";
 import { modalStyles } from "./styles";
 
 const placeholder =
@@ -21,12 +21,15 @@ const EditTaskModal = ({
   open,
   handleClose,
   coverImageRegular,
+  listTitle,
   editDescription,
   description,
   comments,
   submitComment,
   deleteComment,
   editComment,
+  attachments,
+  addAttachment,
 }) => {
   const classes = modalStyles();
 
@@ -63,14 +66,13 @@ const EditTaskModal = ({
     return;
   };
 
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    addAttachment(file);
+  };
+
   return (
-    <Modal
-      className={classes.modal}
-      open={open}
-      onClose={() => handleClose()}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-    >
+    <Modal className={classes.modal} open={open} onClose={() => handleClose()}>
       <div className={classes.container}>
         <Grid className={classes.gridContainer} container>
           {/* image - close button */}
@@ -119,7 +121,7 @@ const EditTaskModal = ({
                   style={{ marginLeft: "8px" }}
                   className={classes.listTitle}
                 >
-                  In Progress
+                  {listTitle}
                 </Typography>
               </Grid>
             </Grid>
@@ -183,29 +185,54 @@ const EditTaskModal = ({
                 <SectionTitle title="Attachment" icon="description" />
               </Grid>
               <Grid item xs={2}>
-                <LightButton icon="add" text="Add" />
+                <input
+                  id="icon-button-file"
+                  type="file"
+                  style={{ display: "none" }}
+                  onChange={handleFileUpload}
+                />
+                <label htmlFor="icon-button-file">
+                  <IconButton
+                    aria-label="upload file"
+                    component="span"
+                    className={classes.uploadButton}
+                  >
+                    <Add className={classes.uploadButtonIcon} />
+                    <Typography
+                      style={{ marginLeft: "8px" }}
+                      className={classes.uploadButtonText}
+                    >
+                      Add
+                    </Typography>
+                  </IconButton>
+                </label>
               </Grid>
             </Grid>
             {/*  attachment itself*/}
             <Grid item container xs={12}>
-              <Grid item xs={12} style={{ marginBottom: "32px" }}>
+              {/* <Grid item xs={12} style={{ marginBottom: "32px" }}>
                 <Attachment
                   image={{ src: placeholder, alt: "kekw" }}
                   date="July 5, 2020"
                   title="Reasoning by Ranganath Krishnamani"
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12} style={{ marginBottom: "32px" }}>
-                <Attachment
-                  file={{ text: "TXT" }}
-                  date="July 5, 2020"
-                  title="Gatsby-config.js"
-                />
+                {attachments.map((attachment, key) => {
+                  return (
+                    <Attachment
+                      key={key}
+                      file={{ text: "TXT" }}
+                      date="July 5, 2020"
+                      title={attachment.name}
+                    />
+                  );
+                })}
               </Grid>
             </Grid>
             {/*  write a comment*/}
             <Grid item container xs={12} style={{ marginBottom: "8px" }}>
-              <WriteComment handleButtonClick={submitComment} />
+              <CommentInput handleButtonClick={submitComment} />
             </Grid>
             {/* comments */}
             <Grid item container xs={12}>

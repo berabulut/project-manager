@@ -8,10 +8,12 @@ class InnerList extends React.Component {
     }
     return true;
   }
+
   render() {
-    return this.props.tasks ? (
-      this.props.tasks.map((task, index) => (
-        <Task key={task.id} task={task} index={index} />
+    const { tasks, list } = this.props;
+    return tasks ? (
+      tasks.map((task, index) => (
+        <Task key={task.id} task={task} index={index} listTitle={list.title} />
       ))
     ) : (
       <></>

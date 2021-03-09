@@ -230,16 +230,16 @@ const updateTaskProperty = (boardId, taskId, property, data) =>
     });
   });
 
-  const createUniqueId = () => new Promise((resolve, reject) => {
+const createUniqueId = () =>
+  new Promise((resolve, reject) => {
     try {
       const ref = db.ref(`/uniqueId`).push();
       const uniqueId = ref.key;
-      resolve(uniqueId)
+      resolve(uniqueId);
+    } catch (err) {
+      reject(err);
     }
-    catch(err) {
-      reject(err)
-    }
-  })
+  });
 
 module.exports = {
   createNewBoard,
@@ -251,5 +251,5 @@ module.exports = {
   switchTasksBetweenLists,
   returnUserRelatedBoards,
   returnBoardRelatedUsers,
-  createUniqueId
+  createUniqueId,
 };

@@ -4,6 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { Paper, Typography, Box, Avatar } from "@material-ui/core";
 import { EditTaskModal } from "components";
 import { UIContext } from "provider/UIProvider";
+import { GetUniqueId } from "functions/BoardFunctions";
+import { UploadFile } from "firebase/Upload";
 import { TaskHelpers } from "helpers";
 import { taskStyles } from "./styles";
 
@@ -17,6 +19,7 @@ class Task extends React.Component {
       modalVisible: false,
       description: "",
       comments: [],
+      attachments: [],
     };
   }
 
@@ -59,7 +62,8 @@ class Task extends React.Component {
     let comments = this.state.comments;
     for (let i = 0; i < comments.length; i++) {
       const comment = comments[i];
-      if (comment.id === commentId) { // remove id matched comment
+      if (comment.id === commentId) {
+        // remove id matched comment
         comments.splice(i, 1);
         this.setState({ comments: comments }, () => {
           TaskHelpers.HandleTaskPropertyUpdate(
@@ -75,7 +79,8 @@ class Task extends React.Component {
   editComment = (commentId, comment) => {
     let comments = this.state.comments;
     for (let i = 0; i < comments.length; i++) {
-      if (comments[i].id === commentId) { // remove id matched comment
+      if (comments[i].id === commentId) {
+        // remove id matched comment
         comments[i].text = comment;
         this.setState({ comments: comments }, () => {
           TaskHelpers.HandleTaskPropertyUpdate(
@@ -87,12 +92,29 @@ class Task extends React.Component {
         });
       }
     }
-  }
+  };
+
+  addAttachment = (file) => {
+    this.setState({ attachments: [...this.state.attachments, file] }, () => {
+      TaskHelpers.HandleTaskPropertyUpdate(
+        this.context.renderedBoard,
+        this.props.task.id,
+        "attachments",
+        this.state.attachments
+      )
+        .then(async () => {
+          const id = await GetUniqueId();
+          UploadFile(file, id);
+        })
+        .catch((err) => console.log(err));
+    });
+  };
 
   componentDidMount() {
     this.setState({
       description: this.props.task.description || " ",
       comments: this.props.task.comments || [],
+      attachments: this.props.task.attachments || [],
     });
   }
 
@@ -156,11 +178,14 @@ class Task extends React.Component {
               open={this.state.modalVisible}
               handleClose={this.closeEditModal}
               editDescription={this.handleDescriptionChange}
+              listTitle={this.props.listTitle}
               description={this.state.description}
               comments={this.state.comments}
               submitComment={this.submitComment}
               deleteComment={this.deleteComment}
               editComment={this.editComment}
+              attachments={this.state.attachments}
+              addAttachment={this.addAttachment}
             />
           </div>
         )}

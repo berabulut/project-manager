@@ -4,6 +4,7 @@ const HandleTaskPropertyUpdate = (board, taskId, property, data) =>
   new Promise((resolve, reject) => {
     if (board && taskId && property && data) {
       board.tasks[taskId][property] = data;
+      console.log(board)
       UpdateTaskProperty({
         boardId: board.id,
         taskId: taskId,
