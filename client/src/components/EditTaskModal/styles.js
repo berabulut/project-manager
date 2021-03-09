@@ -72,63 +72,9 @@ export const modalStyles = makeStyles((theme) => ({
     whiteSpace: "pre-line",
   },
   buttonContainer: {
-    maxHeight: "60px"
-  }
-}));
-
-export const editStyles = makeStyles((theme) => ({
-  addList: {
-    fontSize: "0.825rem",
-    padding: "6px 12px",
-  },
-  cancelButton: {
-    padding: "8px",
+    maxHeight: "60px",
   },
 }));
-
-export const commentStyles = makeStyles((theme) => ({
-  container: {
-    minHeight: "100px",
-    padding: theme.spacing(2),
-    borderBottom: "1px solid #F2F2F2",
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
-  },
-  userName: {
-    fontWeight: 500,
-    fontSize: "0.85rem",
-    lineHeight: "18px",
-    letterSpacing: "-0.035em",
-    color: "black"
-  },
-  date: {
-    fontWeight: 500,
-    fontSize: "0.725rem",
-    lineHeight: "14px",
-    letterSpacing: "-0.035em",
-    color: "#BDBDBD",
-  },
-  commentButton: {
-    fontWeight: "500",
-    fontSize: "0.725rem",
-    lineHeight: "15px",
-    letterSpacing: "-0.035em",
-    color: "rgba(130,130,130,0.7)",
-    textDecoration: "underline",
-    "&:hover": {
-      cursor: "pointer",
-      color: "rgba(130,130,130,1)"
-    }
-  },
-  comment: {
-    fontWeight: "normal",
-    fontSize: "0.875rem",
-    lineHeight: "19px",
-    letterSpacing: "-0.035em",
-    whiteSpace: "pre-line",
-  },
-}));
-
 
 export const writeCommentStyles = makeStyles((theme) => ({
   container: {
@@ -137,7 +83,7 @@ export const writeCommentStyles = makeStyles((theme) => ({
     boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
     borderRadius: "12px",
     minHeight: "100px",
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
   },
   commentButton: {
     width: "100%",
@@ -148,42 +94,9 @@ export const writeCommentStyles = makeStyles((theme) => ({
     fontSize: "0.775rem",
     lineHeight: "14px",
     letterSpacing: "-0.035em",
-    height: "32px"
-  }
+    height: "32px",
+  },
 }));
-
-export const EditInput = withStyles({
-  root: {
-    width: "100%",
-    "& label.Mui-focused": {
-      color: "#2F80ED",
-    },
-    "& .MuiFormLabel-root": {
-      fontSize: "0.875rem",
-    },
-    "& .MuiOutlinedInput-root": {
-      fontSize: "0.875rem",
-      "& fieldset": {
-        border: "1px solid rgb(0 0 0 / 14%)",
-        borderRadius: "4px",
-        //border: "2px solid #2F80ED"
-      },
-      "&:hover fieldset": {
-        border: "1px solid rgb(0 0 0 / 20%)",
-      },
-      "&.Mui-focused fieldset": {
-        border: "1px solid rgb(0 0 0 / 20%)",
-      },
-    },
-    "& .MuiFormHelperText-contained": {
-      color: "red",
-      marginLeft: "3px",
-    },
-  },
-  input: {
-    fontSize: "0.875rem",
-  },
-})(TextField);
 
 export const CommentInput = withStyles({
   root: {

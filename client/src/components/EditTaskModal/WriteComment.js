@@ -22,7 +22,8 @@ const EditDescription = ({ handleButtonClick }) => {
     } else {
       const id = await GetUniqueId();
       handleButtonClick({
-        id: id,
+        id: id.data,
+        uid: userData.uid,
         name: userData.name,
         picture: userData.picture,
         text: comment,

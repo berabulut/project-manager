@@ -7,7 +7,7 @@ import { Menu, MenuItem } from "@material-ui/core";
 
 export const AppTheme = createMuiTheme({
   typography: {
-    fontFamily: "Poppins",
+    fontFamily: "Poppins !important",
   },
   palette: {
     primary: {

@@ -8,10 +8,10 @@ import {
   Attachment,
   CoverMenu,
   LabelsMenu,
+  Comment,
+  EditInput,
 } from "components";
-import EditDescription from "./EditDescription";
 import WriteComment from "./WriteComment";
-import Comment from "./Comment";
 import { modalStyles } from "./styles";
 
 const placeholder =
@@ -25,7 +25,8 @@ const EditTaskModal = ({
   description,
   comments,
   submitComment,
-  deleteComment
+  deleteComment,
+  editComment,
 }) => {
   const classes = modalStyles();
 
@@ -164,10 +165,11 @@ const EditTaskModal = ({
               container
               xs={12}
             >
-              <EditDescription
-                descriptionValue={description}
-                editDescription={editDescription}
+              <EditInput
+                value={description}
+                editInput={editDescription}
                 handleClose={closeEditArea}
+                label="Description"
               />
             </Grid>
             {/* Attachment - Add */}
@@ -207,11 +209,17 @@ const EditTaskModal = ({
             </Grid>
             {/* comments */}
             <Grid item container xs={12}>
-              {comments && comments.map((val, key) => {
-                return (
-                  <Comment key={key} comment={val} deleteComment={deleteComment} />
-                )
-              })}
+              {comments &&
+                comments.map((val, key) => {
+                  return (
+                    <Comment
+                      key={key}
+                      comment={val}
+                      deleteComment={deleteComment}
+                      editComment={editComment}
+                    />
+                  );
+                })}
             </Grid>
           </Grid>
           <Grid
@@ -245,8 +253,15 @@ const EditTaskModal = ({
               justify="flex-end"
               xs={12}
             >
-              <GrayButton icon="label" text="Labels" handleClick={handleLabelButtonClick} />
-              <LabelsMenu anchorEl={labelAnchorEl} handleClose={handleLabelMenuClose} />
+              <GrayButton
+                icon="label"
+                text="Labels"
+                handleClick={handleLabelButtonClick}
+              />
+              <LabelsMenu
+                anchorEl={labelAnchorEl}
+                handleClose={handleLabelMenuClose}
+              />
             </Grid>
             <Grid
               className={classes.buttonContainer}

@@ -1,30 +1,26 @@
-import React, {  useState } from "react";
-import { Grid,  Button,  IconButton } from "@material-ui/core";
+import React, { useState } from "react";
+import { Grid, Button, IconButton } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import { editStyles, EditInput } from "./styles";
 
-const EditDescription = ({
-  handleClose,
-  editDescription,
-  descriptionValue,
-}) => {
+const EditComment = ({ handleClose, editInput, value, label }) => {
   const classes = editStyles();
-  const [description, setDescription] = useState(descriptionValue);
+  const [input, setInput] = useState(value);
+
   const handleChange = (e) => {
-    const { value } = e.target;
-    setDescription(value);
+    setInput(e.target.value);
   };
   useState(() => {
-    setDescription(descriptionValue);
-  }, [descriptionValue]);
+    setInput(value);
+  }, [value]);
 
   return (
     <Grid container>
       <Grid item xs={12}>
         <EditInput
           onChange={handleChange}
-          value={description.trim()}
-          label="Description"
+          value={input.trim()}
+          label={label}
           variant="outlined"
           margin="dense"
           multiline
@@ -45,7 +41,7 @@ const EditDescription = ({
             variant="contained"
             color="primary"
             onClick={() => {
-              editDescription(description);
+              editInput(input);
               handleClose();
             }}
           >
@@ -58,7 +54,7 @@ const EditDescription = ({
             className={classes.cancelButton}
             aria-label="cancel"
             onClick={() => {
-              setDescription(descriptionValue);
+              setInput(value);
               handleClose();
             }}
           >
@@ -70,4 +66,4 @@ const EditDescription = ({
   );
 };
 
-export default EditDescription;
+export default EditComment;

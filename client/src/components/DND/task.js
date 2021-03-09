@@ -72,6 +72,22 @@ class Task extends React.Component {
       }
     }
   };
+  editComment = (commentId, comment) => {
+    let comments = this.state.comments;
+    for (let i = 0; i < comments.length; i++) {
+      if (comments[i].id === commentId) { // remove id matched comment
+        comments[i].text = comment;
+        this.setState({ comments: comments }, () => {
+          TaskHelpers.HandleTaskPropertyUpdate(
+            this.context.renderedBoard,
+            this.props.task.id,
+            "comments",
+            this.state.comments
+          ).catch((err) => console.log(err));
+        });
+      }
+    }
+  }
 
   componentDidMount() {
     this.setState({
@@ -144,6 +160,7 @@ class Task extends React.Component {
               comments={this.state.comments}
               submitComment={this.submitComment}
               deleteComment={this.deleteComment}
+              editComment={this.editComment}
             />
           </div>
         )}
