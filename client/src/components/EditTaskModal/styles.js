@@ -88,7 +88,7 @@ export const modalStyles = makeStyles((theme) => ({
     fontSize: "1rem",
   },
   uploadError: {
-    fontSize: "0.875rem",
+    fontSize: "0.825rem",
     color: "#f44336",
     marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(0.5)

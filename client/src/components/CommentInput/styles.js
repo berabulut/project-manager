@@ -21,6 +21,19 @@ export const inputStyles = makeStyles((theme) => ({
     letterSpacing: "-0.035em",
     height: "32px",
   },
+  commentError: {
+    fontSize: "0.825rem",
+    color: "#f44336",
+    marginTop: theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5),
+    paddingLeft: theme.spacing(0.5)
+  },
+  buttonProgress: {
+    color: "yellow",
+    position: "absolute",
+    marginTop: -25,
+    marginLeft: 35,
+  },
 }));
 
 export const CommentInput = withStyles({
@@ -36,12 +49,12 @@ export const CommentInput = withStyles({
       fontSize: "0.875rem",
       padding: "18.5px 0px 18.5px 14px",
       "& fieldset": {
-        border: "0px solid rgb(0 0 0 / 14%)",
+        border: "1px solid rgb(0 0 0 / 14%)",
         borderRadius: "4px",
         //border: "2px solid #2F80ED"
       },
       "&:hover fieldset": {
-        border: "0px solid rgb(0 0 0 / 20%)",
+        border: "1px solid rgb(0 0 0 / 20%)",
       },
       "&.Mui-focused fieldset": {
         border: "1px solid rgb(0 0 0 / 20%)",

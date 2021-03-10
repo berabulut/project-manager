@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   Typography,
@@ -56,7 +56,7 @@ const EditTaskModal = ({
 
   const [displayEditArea, setDisplayEditArea] = useState(false);
   const [displayProgress, setDisplayProgress] = useState(false);
-  const[uploadError, setUploadError] = useState(); 
+  const [uploadError, setUploadError] = useState();
 
   const [coverAnchorEl, setCoverAnchorEl] = useState(null);
   const [labelAnchorEl, setLabelAnchorEl] = useState(null);
@@ -94,7 +94,7 @@ const EditTaskModal = ({
     setUploadError();
     if (file) {
       if (file.size > 5000000) {
-        setUploadError("Upload limit is 5mb! ")
+        setUploadError("Upload limit is 5mb! ");
       } else {
         setDisplayProgress(true);
         const now = new Date();
@@ -115,6 +115,12 @@ const EditTaskModal = ({
       }
     }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setUploadError();
+    }, 5000)
+  }, [uploadError])
 
   return (
     <Modal className={classes.modal} open={open} onClose={() => handleClose()}>
@@ -252,11 +258,27 @@ const EditTaskModal = ({
                   </IconButton>
                 </label>
               </Grid>
-              <Grid style={{marginTop: "8px", display: displayProgress ? "block" : "none"}} item xs={12}>
+              <Grid
+                style={{
+                  marginTop: "8px",
+                  display: displayProgress ? "block" : "none",
+                }}
+                item
+                xs={12}
+              >
                 <LinearProgress />
               </Grid>
-              <Grid style={{marginTop: "8px", display: uploadError ? "block" : "none"}} item xs={12}>
-                <Typography className={classes.uploadError}>{uploadError}</Typography>
+              <Grid
+                style={{
+                  marginTop: "8px",
+                  display: uploadError ? "block" : "none",
+                }}
+                item
+                xs={12}
+              >
+                <Typography className={classes.uploadError}>
+                  {uploadError}
+                </Typography>
               </Grid>
             </Grid>
             {/*  attachment itself*/}

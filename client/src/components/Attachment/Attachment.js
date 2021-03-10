@@ -89,7 +89,6 @@ const Attachment = ({
                 <Button
                   onClick={handleDeleteComment}
                   style={{ color: "#f44336" }}
-                  autoFocus
                 >
                   Delete
                 </Button>

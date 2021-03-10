@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Grid, Button, Avatar } from "@material-ui/core";
+import { Grid, Button, Avatar, Typography, CircularProgress } from "@material-ui/core";
 import { GetUniqueId } from "functions/BoardFunctions";
 import { UserContext } from "provider/UserProvider";
 import { inputStyles, CommentInput } from "./styles";
@@ -10,18 +10,23 @@ const EditDescription = ({ handleButtonClick }) => {
   const { userData } = useContext(UserContext);
   const [comment, setComment] = useState("");
   const [time, setTime] = useState();
+  const [commentError, setCommentError] = useState();
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { value } = e.target;
     setComment(value);
   };
 
-  const handleCommentButton = async() => {
+  const handleCommentButton = async () => {
+    setLoading(true);
+    setCommentError();
     if (comment.trim() <= 0) {
-      console.log("comment empty");
+      setCommentError("You can't submit empty comment");
+      setLoading(false);
     } else {
       const id = await GetUniqueId();
-      handleButtonClick({
+      const response = await handleButtonClick({
         id: id.data,
         uid: userData.uid,
         name: userData.name,
@@ -29,6 +34,12 @@ const EditDescription = ({ handleButtonClick }) => {
         text: comment,
         time: time || "24 August at 20:43",
       });
+      if (response) {
+        setLoading(false);
+      } else {
+        setLoading(false);
+        setCommentError(`Couldn't submit the comment!`);
+      }
       setComment(" ");
     }
   };
@@ -45,39 +56,58 @@ const EditDescription = ({ handleButtonClick }) => {
     setTime(day + " " + month + " at " + time);
   }, [comment]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setCommentError();
+    }, 5000);
+  }, [commentError]);
+
   return (
-    <Grid container className={classes.container} justify="space-around">
-      <Grid item xs={1}>
-        <Avatar
-          src={userData !== undefined && userData.picture}
-          variant="rounded"
-          className={classes.avatar}
-        />
-      </Grid>
-      <Grid item xs={10}>
-        <CommentInput
-          value={comment.trim()}
-          onChange={handleChange}
-          label="Write a comment..."
-          variant="outlined"
-          multiline
-          rowsMax={4}
-          rows={1}
-        />
-      </Grid>
-      <Grid item container xs={12} justify="flex-end">
-        <Grid item xs={3}>
-          <Button
-            className={classes.commentButton}
-            variant="contained"
-            color="primary"
-            onClick={handleCommentButton}
-          >
-            Comment
-          </Button>
+    <>
+      <Grid container className={classes.container} justify="space-around">
+        <Grid item xs={1}>
+          <Avatar
+            src={userData !== undefined && userData.picture}
+            variant="rounded"
+            className={classes.avatar}
+          />
+        </Grid>
+        <Grid item xs={10}>
+          <CommentInput
+            value={comment.trim()}
+            onChange={handleChange}
+            label="Write a comment..."
+            variant="outlined"
+            multiline
+            rowsMax={4}
+            rows={1}
+          />
+        </Grid>
+        <Grid item container xs={12} justify="flex-end">
+          <Grid item xs={3}>
+            <Button
+              className={classes.commentButton}
+              variant="contained"
+              color="primary"
+              onClick={handleCommentButton}
+            >
+              Comment
+            </Button>
+            {loading && (
+              <CircularProgress size={24} className={classes.buttonProgress} />
+            )}
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+      <Grid
+        style={{ marginTop: "8px", display: commentError ? "block" : "none" }}
+        item
+        container
+        xs={12}
+      >
+        <Typography className={classes.commentError}>{commentError}</Typography>
+      </Grid>
+    </>
   );
 };
 

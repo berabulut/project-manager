@@ -43,21 +43,27 @@ class Task extends React.Component {
     ).catch((err) => console.log(err));
   };
 
-  submitComment = (comment) => {
-    this.setState(
-      {
-        comments: [...this.state.comments, comment],
-      },
-      () => {
-        TaskHelpers.HandleTaskPropertyUpdate(
-          this.context.renderedBoard,
-          this.props.task.id,
-          "comments",
-          this.state.comments
-        ).catch((err) => console.log(err));
-      }
-    );
-  };
+  submitComment = (comment) =>
+    new Promise((resolve, reject) => {
+      this.setState(
+        {
+          comments: [...this.state.comments, comment],
+        },
+        async () => {
+          const response = await TaskHelpers.HandleTaskPropertyUpdate(
+            this.context.renderedBoard,
+            this.props.task.id,
+            "comments",
+            this.state.comments
+          );
+          if (response) {
+            resolve("Property updated successfully!");
+          } else {
+            reject("Property update failed");
+          }
+        }
+      );
+    });
   deleteComment = (commentId) => {
     let comments = this.state.comments;
     for (let i = 0; i < comments.length; i++) {
@@ -120,9 +126,9 @@ class Task extends React.Component {
               this.state.attachments
             );
             if (response) {
-              resolve(true);
+              resolve("Property updated successfully!");
             } else {
-              reject();
+              reject("Property update failed");
             }
           }
         );
