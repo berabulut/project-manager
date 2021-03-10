@@ -6,21 +6,20 @@ const storageRef = storage.ref();
 
 export const UploadFile = (file, id) =>
   new Promise((resolve, reject) => {
-    const fileRef = storageRef.child(id + '/' + file.name);
+    const fileRef = storageRef.child(id + "/" + file.name);
     fileRef
       .put(file)
-      .then((snapshot) => {
-        resolve(snapshot);
-      })
       .catch((err) => {
         reject(err);
+      })
+      .then(async () => {
+        resolve(await CreateDownloadUrl(id, file.name));
       });
   });
 
 export const CreateDownloadUrl = (id, name) =>
   new Promise((resolve, reject) => {
-    var fileRef = storageRef.child(id + '/' + name);
-
+    var fileRef = storageRef.child(id + "/" + name);
     // Get the download URL
     fileRef
       .getDownloadURL()

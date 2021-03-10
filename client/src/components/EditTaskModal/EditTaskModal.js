@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Grid, Typography, Modal, IconButton } from "@material-ui/core";
+import {
+  Grid,
+  Typography,
+  Modal,
+  IconButton,
+  LinearProgress,
+} from "@material-ui/core";
 import { Clear, Add } from "@material-ui/icons";
 import {
   SectionTitle,
@@ -17,6 +23,20 @@ import { modalStyles } from "./styles";
 const placeholder =
   "https://images.unsplash.com/photo-1613085628218-d08b3a264f86?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop";
 
+const imageFormats = [
+  "APNG",
+  "AVIF",
+  "GIF",
+  "PNG",
+  "SVG",
+  "WEBP",
+  "JPEG",
+  "JPG",
+  "JFIF",
+  "PJPEG",
+  "PJP",
+];
+
 const EditTaskModal = ({
   open,
   handleClose,
@@ -30,11 +50,13 @@ const EditTaskModal = ({
   editComment,
   attachments,
   addAttachment,
-  deleteAttachment
+  deleteAttachment,
 }) => {
   const classes = modalStyles();
 
   const [displayEditArea, setDisplayEditArea] = useState(false);
+  const [displayProgress, setDisplayProgress] = useState(false);
+  const[uploadError, setUploadError] = useState(); 
 
   const [coverAnchorEl, setCoverAnchorEl] = useState(null);
   const [labelAnchorEl, setLabelAnchorEl] = useState(null);
@@ -67,11 +89,32 @@ const EditTaskModal = ({
     return;
   };
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = async (e) => {
     const file = e.target.files[0];
-    addAttachment(file);
+    setUploadError();
+    if (file) {
+      if (file.size > 5000000) {
+        setUploadError("Upload limit is 5mb! ")
+      } else {
+        setDisplayProgress(true);
+        const now = new Date();
+        const day = now.getDate();
+        const month = now.toLocaleString("en-EN", { month: "long" });
+        const year = now.getFullYear();
+        file.uploadDate = `${month} ${day}, ${year}`;
+        file.fileType = file.type
+          .slice(file.type.lastIndexOf("/") + 1, file.type.length)
+          .toUpperCase();
+        const response = await addAttachment(file);
+        if (response) {
+          setDisplayProgress(false);
+        } else {
+          setDisplayProgress(false);
+          setUploadError("Upload failed try uploading it later!");
+        }
+      }
+    }
   };
-
 
   return (
     <Modal className={classes.modal} open={open} onClose={() => handleClose()}>
@@ -209,29 +252,43 @@ const EditTaskModal = ({
                   </IconButton>
                 </label>
               </Grid>
+              <Grid style={{marginTop: "8px", display: displayProgress ? "block" : "none"}} item xs={12}>
+                <LinearProgress />
+              </Grid>
+              <Grid style={{marginTop: "8px", display: uploadError ? "block" : "none"}} item xs={12}>
+                <Typography className={classes.uploadError}>{uploadError}</Typography>
+              </Grid>
             </Grid>
             {/*  attachment itself*/}
             <Grid item container xs={12}>
-              {/* <Grid item xs={12} style={{ marginBottom: "32px" }}>
-                <Attachment
-                  image={{ src: placeholder, alt: "kekw" }}
-                  date="July 5, 2020"
-                  title="Reasoning by Ranganath Krishnamani"
-                />
-              </Grid> */}
               <Grid item xs={12} style={{ marginBottom: "32px" }}>
                 {attachments &&
                   attachments.map((attachment, key) => {
-                    return (
-                      <Attachment
-                        key={key}
-                        file={{ text: "TXT" }}
-                        date="July 5, 2020"
-                        title={attachment.name}
-                        id={attachment.id}
-                        deleteAttachment={deleteAttachment}
-                      />
-                    );
+                    if (imageFormats.includes(attachment.fileType)) {
+                      return (
+                        <Attachment
+                          key={key}
+                          id={attachment.id}
+                          title={attachment.name}
+                          date={attachment.uploadDate}
+                          image={true}
+                          fileUrl={attachment.fileUrl}
+                          deleteAttachment={deleteAttachment}
+                        />
+                      );
+                    } else {
+                      return (
+                        <Attachment
+                          key={key}
+                          id={attachment.id}
+                          title={attachment.name}
+                          date={attachment.uploadDate}
+                          fileUrl={attachment.fileUrl}
+                          fileType={attachment.fileType}
+                          deleteAttachment={deleteAttachment}
+                        />
+                      );
+                    }
                   })}
               </Grid>
             </Grid>

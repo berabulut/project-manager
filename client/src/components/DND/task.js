@@ -94,10 +94,11 @@ class Task extends React.Component {
     }
   };
 
-  addAttachment = async (file) => {
-    const id = await GetUniqueId();
-    UploadFile(file, id.data)
-      .then(() => {
+  addAttachment = (file) =>
+    new Promise(async (resolve, reject) => {
+      const id = await GetUniqueId();
+      const fileUrl = await UploadFile(file, id.data);
+      if (fileUrl) {
         this.setState(
           {
             attachments: [
@@ -105,22 +106,29 @@ class Task extends React.Component {
               {
                 id: id.data,
                 name: file.name,
-                uploadDate: file.lastModifiedDate,
+                uploadDate: file.uploadDate,
+                fileType: file.fileType,
+                fileUrl: fileUrl,
               },
             ],
           },
-          () => {
-            TaskHelpers.HandleTaskPropertyUpdate(
+          async () => {
+            const response = await TaskHelpers.HandleTaskPropertyUpdate(
               this.context.renderedBoard,
               this.props.task.id,
               "attachments",
               this.state.attachments
             );
+            if (response) {
+              resolve(true);
+            } else {
+              reject();
+            }
           }
         );
-      })
-      .catch((err) => console.log(err));
-  };
+      }
+    });
+
   deleteAttachment = (attachmentId) => {
     let attachments = this.state.attachments;
     for (let i = 0; i < attachments.length; i++) {
@@ -128,7 +136,7 @@ class Task extends React.Component {
       if (attachment.id === attachmentId) {
         // remove id matched comment
         attachments.splice(i, 1);
-        this.setState({ comments: attachments }, () => {
+        this.setState({ attachments: attachments }, () => {
           TaskHelpers.HandleTaskPropertyUpdate(
             this.context.renderedBoard,
             this.props.task.id,

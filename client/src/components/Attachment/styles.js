@@ -4,8 +4,10 @@ export const attachmentStyles = makeStyles((theme) => ({
   image: {
     width: "100%",
 	height: "66px",
-    objectFit: "cover",
-	borderRadius: "8px"
+	padding: "16px",
+    objectFit: "scale-down",
+	borderRadius: "8px",
+	backgroundColor: "#F2F2F2"
   },
   filePlaceholder: {
 	  borderRadius: "8px",

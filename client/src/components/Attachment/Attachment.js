@@ -11,9 +11,16 @@ import {
 import { LightButton } from "components";
 import { attachmentStyles } from "./styles";
 
-const Attachment = ({ image, file, date, title, id, deleteAttachment }) => {
+const Attachment = ({
+  id,
+  title,
+  date,
+  fileUrl,
+  fileType,
+  image,
+  deleteAttachment,
+}) => {
   const classes = attachmentStyles();
-  const [url, setUrl] = useState();
   const [displayDeleteDialog, setDisplayDeleteDialog] = useState(false);
 
   const handleDeleteButtonClick = () => {
@@ -29,36 +36,22 @@ const Attachment = ({ image, file, date, title, id, deleteAttachment }) => {
     closeDeleteDialog();
   };
 
-  useEffect(() => {
-    if (id) {
-      CreateDownloadUrl(id, title)
-        .then((url) => {
-          setUrl(url);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [id, title]);
-
   return (
     <Grid container>
       <Grid item style={{ width: "100px" }}>
         {image ? (
-          <img
-            className={classes.image}
-            src={`${image.src}&w=360&q=80`}
-            alt={image.alt}
-          />
+          <img className={classes.image} src={`${fileUrl}`} alt={title} />
         ) : (
-          file && (
+          fileType && (
             <div className={classes.filePlaceholder}>
-              <Typography className={classes.text}>{file.text}</Typography>
+              <Typography className={classes.text}>{fileType}</Typography>
             </div>
           )
         )}
       </Grid>
       <Grid item xs={9} style={{ paddingLeft: "16px" }}>
         <Grid item xs={12}>
-          <Typography className={classes.date}>Added {date}</Typography>
+          <Typography className={classes.date}>Added on {date}</Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography className={classes.title}>{title}</Typography>
@@ -66,8 +59,8 @@ const Attachment = ({ image, file, date, title, id, deleteAttachment }) => {
         <Grid item container xs={12}>
           <Grid item xs={3}>
             <a
-              href={url}
-              download
+              href={fileUrl}
+              download="safd.png"
               target="_blank"
               rel="noopener noreferrer"
               style={{ textDecoration: "none" }}
@@ -93,7 +86,11 @@ const Attachment = ({ image, file, date, title, id, deleteAttachment }) => {
                 <Button onClick={closeDeleteDialog} color="primary">
                   Go Back
                 </Button>
-                <Button onClick={handleDeleteComment} color="primary" autoFocus>
+                <Button
+                  onClick={handleDeleteComment}
+                  style={{ color: "#f44336" }}
+                  autoFocus
+                >
                   Delete
                 </Button>
               </DialogActions>

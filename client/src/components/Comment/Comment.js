@@ -113,7 +113,7 @@ const Comment = ({ comment, deleteComment, editComment }) => {
                   <Button onClick={closeDeleteDialog} color="primary">
                     Go Back
                   </Button>
-                  <Button onClick={handleDeleteComment} color="primary" autoFocus>
+                  <Button onClick={handleDeleteComment} style={{color: "#f44336"}} autoFocus>
                     Delete
                   </Button>
                 </DialogActions>

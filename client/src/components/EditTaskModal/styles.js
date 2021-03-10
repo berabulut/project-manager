@@ -87,4 +87,10 @@ export const modalStyles = makeStyles((theme) => ({
   uploadButtonIcon: {
     fontSize: "1rem",
   },
+  uploadError: {
+    fontSize: "0.875rem",
+    color: "#f44336",
+    marginTop: theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5)
+  }
 }));
