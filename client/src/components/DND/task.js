@@ -5,7 +5,7 @@ import { Paper, Typography, Box, Avatar } from "@material-ui/core";
 import { EditTaskModal } from "components";
 import { UIContext } from "provider/UIProvider";
 import { GetUniqueId } from "functions/BoardFunctions";
-import { UploadFile } from "firebase/Upload";
+import { UploadFile, CreateDownloadUrl } from "firebase/Upload";
 import { TaskHelpers } from "helpers";
 import { taskStyles } from "./styles";
 
@@ -94,20 +94,50 @@ class Task extends React.Component {
     }
   };
 
-  addAttachment = (file) => {
-    this.setState({ attachments: [...this.state.attachments, file] }, () => {
-      TaskHelpers.HandleTaskPropertyUpdate(
-        this.context.renderedBoard,
-        this.props.task.id,
-        "attachments",
-        this.state.attachments
-      )
-        .then(async () => {
-          const id = await GetUniqueId();
-          UploadFile(file, id);
-        })
-        .catch((err) => console.log(err));
-    });
+  addAttachment = async (file) => {
+    const id = await GetUniqueId();
+    UploadFile(file, id.data)
+      .then(() => {
+        this.setState(
+          {
+            attachments: [
+              ...this.state.attachments,
+              {
+                id: id.data,
+                name: file.name,
+                uploadDate: file.lastModifiedDate,
+              },
+            ],
+          },
+          () => {
+            TaskHelpers.HandleTaskPropertyUpdate(
+              this.context.renderedBoard,
+              this.props.task.id,
+              "attachments",
+              this.state.attachments
+            );
+          }
+        );
+      })
+      .catch((err) => console.log(err));
+  };
+  deleteAttachment = (attachmentId) => {
+    let attachments = this.state.attachments;
+    for (let i = 0; i < attachments.length; i++) {
+      const attachment = attachments[i];
+      if (attachment.id === attachmentId) {
+        // remove id matched comment
+        attachments.splice(i, 1);
+        this.setState({ comments: attachments }, () => {
+          TaskHelpers.HandleTaskPropertyUpdate(
+            this.context.renderedBoard,
+            this.props.task.id,
+            "attachments",
+            this.state.attachments
+          ).catch((err) => console.log(err));
+        });
+      }
+    }
   };
 
   componentDidMount() {
@@ -186,6 +216,7 @@ class Task extends React.Component {
               editComment={this.editComment}
               attachments={this.state.attachments}
               addAttachment={this.addAttachment}
+              deleteAttachment={this.deleteAttachment}
             />
           </div>
         )}

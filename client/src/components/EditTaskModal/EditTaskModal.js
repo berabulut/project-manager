@@ -30,6 +30,7 @@ const EditTaskModal = ({
   editComment,
   attachments,
   addAttachment,
+  deleteAttachment
 }) => {
   const classes = modalStyles();
 
@@ -70,6 +71,7 @@ const EditTaskModal = ({
     const file = e.target.files[0];
     addAttachment(file);
   };
+
 
   return (
     <Modal className={classes.modal} open={open} onClose={() => handleClose()}>
@@ -218,16 +220,19 @@ const EditTaskModal = ({
                 />
               </Grid> */}
               <Grid item xs={12} style={{ marginBottom: "32px" }}>
-                {attachments.map((attachment, key) => {
-                  return (
-                    <Attachment
-                      key={key}
-                      file={{ text: "TXT" }}
-                      date="July 5, 2020"
-                      title={attachment.name}
-                    />
-                  );
-                })}
+                {attachments &&
+                  attachments.map((attachment, key) => {
+                    return (
+                      <Attachment
+                        key={key}
+                        file={{ text: "TXT" }}
+                        date="July 5, 2020"
+                        title={attachment.name}
+                        id={attachment.id}
+                        deleteAttachment={deleteAttachment}
+                      />
+                    );
+                  })}
               </Grid>
             </Grid>
             {/*  write a comment*/}
