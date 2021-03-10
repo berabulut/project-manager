@@ -57,6 +57,13 @@ export const modalStyles = makeStyles((theme) => ({
     letterSpacing: "-0.035em",
     marginBottom: theme.spacing(1),
   },
+  editButton: {
+    borderRadius: "1px",
+    width: "50%",
+    padding: "0px",
+    paddingBottom: theme.spacing(0.5),
+    paddingTop: theme.spacing(0.5),
+  },
   listTitle: {
     fontWeight: 600,
     fontSize: "0.725rem",
@@ -82,7 +89,7 @@ export const modalStyles = makeStyles((theme) => ({
     lineHeight: "15px",
     letterSpacing: "-0.035em",
     fontSize: "0.725rem",
-	fontWeight: "600"
+    fontWeight: "600",
   },
   uploadButtonIcon: {
     fontSize: "1rem",
@@ -91,6 +98,6 @@ export const modalStyles = makeStyles((theme) => ({
     fontSize: "0.825rem",
     color: "#f44336",
     marginTop: theme.spacing(0.5),
-    marginBottom: theme.spacing(0.5)
-  }
+    marginBottom: theme.spacing(0.5),
+  },
 }));

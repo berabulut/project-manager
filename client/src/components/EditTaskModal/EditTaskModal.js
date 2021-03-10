@@ -6,7 +6,7 @@ import {
   IconButton,
   LinearProgress,
 } from "@material-ui/core";
-import { Clear, Add } from "@material-ui/icons";
+import { Clear, Add, Edit } from "@material-ui/icons";
 import {
   SectionTitle,
   LightButton,
@@ -41,8 +41,10 @@ const EditTaskModal = ({
   open,
   handleClose,
   coverImageRegular,
+  taskTitle,
   listTitle,
   editDescription,
+  editTitle,
   description,
   comments,
   submitComment,
@@ -55,11 +57,20 @@ const EditTaskModal = ({
   const classes = modalStyles();
 
   const [displayEditArea, setDisplayEditArea] = useState(false);
+  const [displayEditTitle, setDisplayEditTitle] = useState(false);
   const [displayProgress, setDisplayProgress] = useState(false);
   const [uploadError, setUploadError] = useState();
 
   const [coverAnchorEl, setCoverAnchorEl] = useState(null);
   const [labelAnchorEl, setLabelAnchorEl] = useState(null);
+
+  const handleEditTitleButtonClick = () => {
+    setDisplayEditTitle(!displayEditTitle);
+  };
+
+  const closeEditTitle = () => {
+    setDisplayEditTitle(false);
+  };
 
   const handleEditButtonClick = () => {
     setDisplayEditArea(!displayEditArea);
@@ -119,8 +130,8 @@ const EditTaskModal = ({
   useEffect(() => {
     setTimeout(() => {
       setUploadError();
-    }, 5000)
-  }, [uploadError])
+    }, 5000);
+  }, [uploadError]);
 
   return (
     <Modal className={classes.modal} open={open} onClose={() => handleClose()}>
@@ -152,10 +163,32 @@ const EditTaskModal = ({
           </Grid>
           {/*this is the left side of modal in big screens */}
           <Grid className={classes.gridItem} item container xs={8}>
-            <Grid item xs={12}>
-              <Typography className={classes.taskTitle}>
-                ✋🏿 Move anything that is actually started here
-              </Typography>
+            <Grid item container xs={12}>
+              <Grid item xs={10} style={{marginBottom: displayEditTitle ? "12px" : "0px"}}>
+                {displayEditTitle ? (
+                  <EditInput
+                    handleClose={closeEditTitle}
+                    editInput={editTitle}
+                    value={taskTitle}
+                    label="Title"
+                  />
+                ) : (
+                  <Typography className={classes.taskTitle}>
+                    {taskTitle}
+                  </Typography>
+                )}
+              </Grid>
+              <Grid
+                item
+                container
+                justify="flex-end"
+                alignItems="flex-start"
+                xs={2}
+              >
+                <IconButton onClick={handleEditTitleButtonClick} className={classes.editButton}>
+                  <Edit style={{ fontSize: "1rem" }} />
+                </IconButton>
+              </Grid>
             </Grid>
             {/*inlist - inprogress */}
             <Grid item container xs={12}>

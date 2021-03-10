@@ -31,7 +31,7 @@ export const taskStyles = (theme) => ({
   },
   avatar: {
     borderRadius: "8px"
-  }
+  },
 });
 
 export const columnStyles = (theme) => ({

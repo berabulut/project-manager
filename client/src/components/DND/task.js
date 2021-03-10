@@ -1,11 +1,11 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { withStyles } from "@material-ui/core/styles";
-import { Paper, Typography, Box, Avatar } from "@material-ui/core";
+import { Paper, Grid, Box, Typography, Avatar } from "@material-ui/core";
 import { EditTaskModal } from "components";
 import { UIContext } from "provider/UIProvider";
 import { GetUniqueId } from "functions/BoardFunctions";
-import { UploadFile, CreateDownloadUrl } from "firebase/Upload";
+import { UploadFile } from "firebase/Upload";
 import { TaskHelpers } from "helpers";
 import { taskStyles } from "./styles";
 
@@ -17,6 +17,7 @@ class Task extends React.Component {
     super(props);
     this.state = {
       modalVisible: false,
+      title: "",
       description: "",
       comments: [],
       attachments: [],
@@ -32,6 +33,16 @@ class Task extends React.Component {
   closeEditModal = () => {
     this.setState({ modalVisible: false });
   };
+
+  handleTitleChange = (title) => {
+    this.setState({ title: title });
+    TaskHelpers.HandleTaskPropertyUpdate(
+      this.context.renderedBoard,
+      this.props.task.id,
+      "title",
+      title
+    ).catch((err) => console.log(err));
+  }
 
   handleDescriptionChange = (description) => {
     this.setState({ description: description });
@@ -156,6 +167,7 @@ class Task extends React.Component {
 
   componentDidMount() {
     this.setState({
+      title: this.props.task.title || " ",
       description: this.props.task.description || " ",
       comments: this.props.task.comments || [],
       attachments: this.props.task.attachments || [],
@@ -163,9 +175,9 @@ class Task extends React.Component {
   }
 
   render() {
-    const { classes, users, image } = this.props;
+    const { classes, users, image, task, index } = this.props;
     return (
-      <Draggable draggableId={this.props.task.id} index={this.props.index}>
+      <Draggable draggableId={task.id} index={index}>
         {(provided, snapshot) => (
           <div
             className={
@@ -175,17 +187,34 @@ class Task extends React.Component {
             {...provided.dragHandleProps}
             ref={provided.innerRef}
           >
-            <Paper className={classes.paper} onClick={this.handleTaskClick}>
+            <Paper
+              className={classes.paper}
+              onClick={this.handleTaskClick}
+              onMouseEnter={() =>
+                this.setState({
+                  taskHover: true,
+                })
+              }
+              onMouseLeave={() =>
+                this.setState({
+                  taskHover: false,
+                })
+              }
+            >
               {image && (
                 <img className={classes.cover} src={image + "&q=80&w=400"} />
               )}
-              <Typography
-                className={classes.title}
-                variant="body1"
-                gutterBottom
-              >
-                {this.props.task.title}
-              </Typography>
+              <Grid container>
+                <Grid item xs={10}>
+                  <Typography
+                    className={classes.title}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {task.title}
+                  </Typography>
+                </Grid>
+              </Grid>
               <Box display="flex">
                 {users &&
                   users.map((val, key) => {
@@ -221,8 +250,10 @@ class Task extends React.Component {
             <EditTaskModal
               open={this.state.modalVisible}
               handleClose={this.closeEditModal}
+              editTitle={this.handleTitleChange}
               editDescription={this.handleDescriptionChange}
               listTitle={this.props.listTitle}
+              taskTitle={this.state.title}
               description={this.state.description}
               comments={this.state.comments}
               submitComment={this.submitComment}
