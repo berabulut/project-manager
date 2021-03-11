@@ -14,14 +14,12 @@ import {
   Attachment,
   CoverMenu,
   LabelsMenu,
+  Label,
   Comment,
   EditInput,
   CommentInput,
 } from "components";
 import { modalStyles } from "./styles";
-
-const placeholder =
-  "https://images.unsplash.com/photo-1613085628218-d08b3a264f86?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop";
 
 const imageFormats = [
   "APNG",
@@ -40,19 +38,23 @@ const imageFormats = [
 const EditTaskModal = ({
   open,
   handleClose,
-  coverImageRegular,
+  coverImage,
   taskTitle,
   listTitle,
   editDescription,
   editTitle,
   description,
   comments,
+  labels,
   submitComment,
   deleteComment,
   editComment,
   attachments,
   addAttachment,
   deleteAttachment,
+  addImageToTask,
+  addLabel,
+  deleteLabel,
 }) => {
   const classes = modalStyles();
 
@@ -94,10 +96,6 @@ const EditTaskModal = ({
 
   const handleLabelMenuClose = () => {
     setLabelAnchorEl(null);
-  };
-
-  const addImageToTask = () => {
-    return;
   };
 
   const handleFileUpload = async (e) => {
@@ -152,19 +150,22 @@ const EditTaskModal = ({
             >
               <Clear />
             </IconButton>
-            <img
-              className={classes.image}
-              src={
-                coverImageRegular !== undefined
-                  ? coverImageRegular
-                  : `${placeholder}&w=1280&q=80`
-              }
-            />
+            {coverImage && (
+              <img
+                className={classes.image}
+                src={coverImage + "&w=1280&q=80"}
+                alt="cover-img"
+              />
+            )}
           </Grid>
           {/*this is the left side of modal in big screens */}
           <Grid className={classes.gridItem} item container xs={8}>
             <Grid item container xs={12}>
-              <Grid item xs={10} style={{marginBottom: displayEditTitle ? "12px" : "0px"}}>
+              <Grid
+                item
+                xs={10}
+                style={{ marginBottom: displayEditTitle ? "12px" : "0px" }}
+              >
                 {displayEditTitle ? (
                   <EditInput
                     handleClose={closeEditTitle}
@@ -185,7 +186,10 @@ const EditTaskModal = ({
                 alignItems="flex-start"
                 xs={2}
               >
-                <IconButton onClick={handleEditTitleButtonClick} className={classes.editButton}>
+                <IconButton
+                  onClick={handleEditTitleButtonClick}
+                  className={classes.editButton}
+                >
                   <Edit style={{ fontSize: "1rem" }} />
                 </IconButton>
               </Grid>
@@ -209,6 +213,36 @@ const EditTaskModal = ({
                 </Typography>
               </Grid>
             </Grid>
+            {/* labels */}
+            {labels && (
+              <Grid
+                item
+                container
+                spacing={3}
+                xs={12}
+                style={{ marginBottom: "16px" }}
+              >
+                {labels.map((label, key) => {
+                  return (
+                    <Grid
+                      style={{ minWidth: "75px", maxWidth: "100px" }}
+                      key={key}
+                      item
+                      xs
+                    >
+                      <Label
+                        text={label.input}
+                        color={label.color.hex}
+                        style={{ width: "100%" }}
+                      >
+                        {label.input}
+                      </Label>
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            )}
+
             {/*description - edit */}
             <Grid item container xs={12} style={{ marginBottom: "16px" }}>
               <Grid
@@ -366,6 +400,7 @@ const EditTaskModal = ({
                 })}
             </Grid>
           </Grid>
+          {/*this is the right side of modal in big screens */}
           <Grid
             style={{ height: "200px" }}
             className={classes.gridItem}
@@ -373,6 +408,7 @@ const EditTaskModal = ({
             container
             xs={4}
           >
+            {/*section title - Actions */}
             <Grid
               item
               container
@@ -381,6 +417,7 @@ const EditTaskModal = ({
             >
               <SectionTitle title="Actions" icon="people" />
             </Grid>
+            {/*Members */}
             <Grid
               className={classes.buttonContainer}
               item
@@ -390,6 +427,7 @@ const EditTaskModal = ({
             >
               <GrayButton icon="people" text="Members" />
             </Grid>
+            {/*Labels */}
             <Grid
               className={classes.buttonContainer}
               item
@@ -405,8 +443,10 @@ const EditTaskModal = ({
               <LabelsMenu
                 anchorEl={labelAnchorEl}
                 handleClose={handleLabelMenuClose}
+                addLabel={addLabel}
               />
             </Grid>
+            {/*Cover */}
             <Grid
               className={classes.buttonContainer}
               item

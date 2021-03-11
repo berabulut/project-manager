@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Grid, IconButton } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import { Grid, IconButton, Typography } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { SearchImages, GetRandomImages, GetImages } from "api/unsplash";
 import { keywordSearchStyles } from "./styles";
@@ -11,6 +11,7 @@ const KeywordSearch = ({
   setSearchInput,
 }) => {
   const classes = keywordSearchStyles();
+  const [error, setError] = useState();
 
   useEffect(() => {
     // GetRandomImages(12)
@@ -22,17 +23,28 @@ const KeywordSearch = ({
     //   });
   }, []);
 
+  useEffect(() => {
+    setError();
+  }, [searchInput]) 
+
+  useEffect(() => {
+    setTimeout(() => {
+      setError();
+    }, 5000)
+  }, [error])
+
   const handleSearch = () => {
-    if (searchInput.length > 0) {
+    setError();
+    if (searchInput.trim().length > 0) {
       SearchImages(searchInput)
         .then((result) => {
           setSearchedImages(result.results);
         })
         .catch((err) => {
-          console.log(err);
+          setError(err)
         });
     } else {
-      console.log("input filed can't be empty");
+      setError("Input field cannot be empty!")
     }
   };
 
@@ -58,6 +70,7 @@ const KeywordSearch = ({
           </IconButton>
         </Grid>
       </Grid>
+      <Typography className={classes.error}>{error}</Typography>
     </div>
   );
 };

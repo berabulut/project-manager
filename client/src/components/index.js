@@ -13,6 +13,7 @@ export { default as LightButton } from "./LightButton/LightButton";
 export { default as Attachment } from "./Attachment/Attachment";
 export { default as GrayButton } from "./GrayButton/GrayButton";
 export { default as LabelsMenu } from "./LabelsMenu/LabelsMenu";
+export { default as Label } from "./Label/index";
 export { default as Comment } from "./Comment/Comment";
 export { default as EditInput } from "./EditInput/EditInput";
 export { default as CommentInput } from "./CommentInput/index";

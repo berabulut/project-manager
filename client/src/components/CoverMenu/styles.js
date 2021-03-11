@@ -70,7 +70,15 @@ export const keywordSearchStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.primary.dark,
     },
-  }
+  },
+  error: {
+    fontSize: "0.825rem",
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    paddingLeft: theme.spacing(0.5),
+    color: "#f44336",
+    fontWeight: "500"
+  },
 }))
 
 export const PopMenuItem = withStyles((theme) => ({

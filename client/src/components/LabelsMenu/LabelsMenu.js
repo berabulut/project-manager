@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Typography, Grid, Button } from "@material-ui/core";
-import { UpdateTaskProperty } from "functions/BoardFunctions";
+import { GetUniqueId } from "functions/BoardFunctions";
 import { PopMenu, menuStyles } from "./styles";
 import { colors } from "./colors";
-import { Update } from "@material-ui/icons";
 
-const LabelsMenu = ({ anchorEl, handleClose }) => {
+const LabelsMenu = ({ anchorEl, handleClose, addLabel }) => {
   const classes = menuStyles();
 
   const [input, setInput] = useState("");
@@ -19,11 +18,20 @@ const LabelsMenu = ({ anchorEl, handleClose }) => {
     } else if (selectedColor === 1917) {
       setError("Select a color!");
     } else {
-      console.log({
-        input: input,
-        color: colors[selectedColor],
-      });
-      setError();
+      GetUniqueId()
+        .then((id) => {
+          addLabel({
+            id: id,
+            input: input,
+            color: colors[selectedColor],
+          });
+          setError();
+          setInput("");
+          handleClose();
+        })
+        .catch((err) => {
+          setError(err);
+        });
     }
   };
 
@@ -43,7 +51,7 @@ const LabelsMenu = ({ anchorEl, handleClose }) => {
           </Grid>
           <Grid item xs={12}>
             <Typography className={classes.headerDescription} component="p">
-              Select a name and and a color
+              Enter a name and select a color
             </Typography>
           </Grid>
         </Grid>
@@ -73,7 +81,7 @@ const LabelsMenu = ({ anchorEl, handleClose }) => {
                   onClick={() => setSelectedColor(key)}
                   className={classes.color}
                   style={{
-                    backgroundColor: val.color,
+                    backgroundColor: val.hex,
                     transform: selectedColor === key && "scale(1.05)",
                   }}
                 ></div>

@@ -22,7 +22,7 @@ const EditDescription = ({ handleButtonClick }) => {
     setLoading(true);
     setCommentError();
     if (comment.trim() <= 0) {
-      setCommentError("You can't submit empty comment");
+      setCommentError("You can't submit empty comment!");
       setLoading(false);
     } else {
       const id = await GetUniqueId();

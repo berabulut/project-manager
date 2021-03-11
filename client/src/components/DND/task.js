@@ -17,10 +17,12 @@ class Task extends React.Component {
     super(props);
     this.state = {
       modalVisible: false,
+      coverImage: "",
       title: "",
       description: "",
       comments: [],
       attachments: [],
+      labels: [],
     };
   }
 
@@ -165,12 +167,73 @@ class Task extends React.Component {
     }
   };
 
+  handleSearchedImageClick = (regular, raw) => {
+    this.setState(
+      {
+        coverImage: regular,
+      },
+      () => {
+        TaskHelpers.HandleTaskPropertyUpdate(
+          this.context.renderedBoard,
+          this.props.task.id,
+          "coverImage",
+          this.state.coverImage
+        );
+      }
+    );
+  };
+
+  addLabel = (label) => {
+    this.setState(
+      {
+        labels: [...this.state.labels, label],
+      },
+      () => {
+        TaskHelpers.HandleTaskPropertyUpdate(
+          this.context.renderedBoard,
+          this.props.task.id,
+          "labels",
+          this.state.labels
+        );
+      }
+    );
+  };
+
+  deleteLabel = (labelId) => {
+    let labels = this.state.labels;
+    for (let i = 0; i < labels.length; i++) {
+      const label = labels[i];
+      if (label.id === labelId) {
+        // remove id matched label
+        labels.splice(i, 1);
+        this.setState({ labels: labels }, () => {
+          TaskHelpers.HandleTaskPropertyUpdate(
+            this.context.renderedBoard,
+            this.props.task.id,
+            "labels",
+            this.state.labels
+          ).catch((err) => console.log(err));
+        });
+      }
+    }
+  }
+
   componentDidMount() {
+    const {
+      coverImage,
+      title,
+      description,
+      comments,
+      attachments,
+      labels
+    } = this.props.task;
     this.setState({
-      title: this.props.task.title || " ",
-      description: this.props.task.description || " ",
-      comments: this.props.task.comments || [],
-      attachments: this.props.task.attachments || [],
+      coverImage: coverImage || "",
+      title: title || " ",
+      description: description || " ",
+      comments: comments || [],
+      attachments: attachments || [],
+      labels : labels || []
     });
   }
 
@@ -252,16 +315,21 @@ class Task extends React.Component {
               handleClose={this.closeEditModal}
               editTitle={this.handleTitleChange}
               editDescription={this.handleDescriptionChange}
+              coverImage={this.state.coverImage}
+              labels={this.state.labels}
               listTitle={this.props.listTitle}
               taskTitle={this.state.title}
               description={this.state.description}
               comments={this.state.comments}
+              addImageToTask={this.handleSearchedImageClick}
               submitComment={this.submitComment}
               deleteComment={this.deleteComment}
               editComment={this.editComment}
               attachments={this.state.attachments}
               addAttachment={this.addAttachment}
               deleteAttachment={this.deleteAttachment}
+              addLabel={this.addLabel}
+              deleteLabel={this.deleteLabel}
             />
           </div>
         )}
