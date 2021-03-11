@@ -40,4 +40,10 @@ export const editStyles = makeStyles((theme) => ({
   cancelButton: {
     padding: "8px",
   },
+  error: {
+    fontSize: "0.825rem",
+    color: "#f44336",
+    marginTop: theme.spacing(1.5),
+    marginBottom: theme.spacing(1),
+  }
 }));

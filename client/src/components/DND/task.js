@@ -42,7 +42,7 @@ class Task extends React.Component {
       "title",
       title
     ).catch((err) => console.log(err));
-  }
+  };
 
   handleDescriptionChange = (description) => {
     this.setState({ description: description });

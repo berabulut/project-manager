@@ -1,15 +1,28 @@
 import React, { useState } from "react";
-import { Grid, Button, IconButton } from "@material-ui/core";
+import { Grid, Button, IconButton, Typography } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import { editStyles, EditInput } from "./styles";
 
 const EditComment = ({ handleClose, editInput, value, label }) => {
   const classes = editStyles();
   const [input, setInput] = useState(value);
+  const [error, setError] = useState();
 
   const handleChange = (e) => {
     setInput(e.target.value);
+    setError();
   };
+
+  const handleSaveButtonClick = () => {
+    setError();
+    if (input.trim().length <= 0) {
+      setError("Input field cannot be empty!");
+    } else {
+      editInput(input);
+      handleClose();
+    }
+  };
+
   useState(() => {
     setInput(value);
   }, [value]);
@@ -40,10 +53,7 @@ const EditComment = ({ handleClose, editInput, value, label }) => {
             className={classes.addList}
             variant="contained"
             color="primary"
-            onClick={() => {
-              editInput(input);
-              handleClose();
-            }}
+            onClick={handleSaveButtonClick}
           >
             Save
           </Button>
@@ -62,6 +72,7 @@ const EditComment = ({ handleClose, editInput, value, label }) => {
           </IconButton>
         </Grid>
       </Grid>
+      {error && <Typography className={classes.error}>{error}</Typography>}
     </Grid>
   );
 };
