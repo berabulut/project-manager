@@ -11,9 +11,9 @@ export const inputStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   commentButton: {
-    width: "100%",
+    width: "90%",
     marginRight: "10px",
-    marginTop: "5px",
+    marginTop: "8px",
     borderRadius: "8px",
     fontWeight: 500,
     fontSize: "0.775rem",

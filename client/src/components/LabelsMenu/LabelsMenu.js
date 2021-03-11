@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Grid, Button } from "@material-ui/core";
 import { GetUniqueId } from "functions/BoardFunctions";
 import { PopMenu, menuStyles } from "./styles";
@@ -9,7 +9,6 @@ const LabelsMenu = ({ anchorEl, handleClose, addLabel }) => {
 
   const [input, setInput] = useState("");
   const [selectedColor, setSelectedColor] = useState(1917);
-
   const [error, setError] = useState();
 
   const handleButtonClick = () => {
@@ -21,7 +20,7 @@ const LabelsMenu = ({ anchorEl, handleClose, addLabel }) => {
       GetUniqueId()
         .then((id) => {
           addLabel({
-            id: id,
+            id: id.data,
             input: input,
             color: colors[selectedColor],
           });
@@ -34,6 +33,7 @@ const LabelsMenu = ({ anchorEl, handleClose, addLabel }) => {
         });
     }
   };
+
 
   return (
     <div>
@@ -67,7 +67,7 @@ const LabelsMenu = ({ anchorEl, handleClose, addLabel }) => {
           </Grid>
         </Grid>
         <Grid className={classes.content} container>
-          {colors.map((val, key) => {
+          {colors.map((color, key) => {
             return (
               <Grid
                 item
@@ -81,10 +81,11 @@ const LabelsMenu = ({ anchorEl, handleClose, addLabel }) => {
                   onClick={() => setSelectedColor(key)}
                   className={classes.color}
                   style={{
-                    backgroundColor: val.hex,
+                    backgroundColor: color.hex,
                     transform: selectedColor === key && "scale(1.05)",
                   }}
-                ></div>
+                >
+                </div>
               </Grid>
             );
           })}

@@ -225,13 +225,15 @@ const EditTaskModal = ({
                 {labels.map((label, key) => {
                   return (
                     <Grid
-                      style={{ minWidth: "75px", maxWidth: "100px" }}
+                      style={{ minWidth: "75px", maxWidth: "115px" }}
                       key={key}
                       item
                       xs
                     >
                       <Label
                         text={label.input}
+                        id={label.id}
+                        deleteLabel={deleteLabel}
                         color={label.color.hex}
                         style={{ width: "100%" }}
                       >

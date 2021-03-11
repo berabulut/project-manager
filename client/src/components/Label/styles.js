@@ -10,9 +10,16 @@ export const labelStyles = makeStyles((theme) => ({
     fontSize: "0.825rem",
     lineHeight: "14px",
     letterSpacing: "-0.035em",
+    paddingBottom: "4px",
+    paddingTop: "4px",
     textAlign: "center",
     color: "white",
     overflow: "hidden",
     textOverflow: "ellipsis",
+  },
+  deleteButton: {
+    padding: "0px",
+    marginLeft: "-8px",
+    marginTop: "-8px",
   },
 }));
