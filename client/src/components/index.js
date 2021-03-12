@@ -17,3 +17,4 @@ export { default as Label } from "./Label/index";
 export { default as Comment } from "./Comment/Comment";
 export { default as EditInput } from "./EditInput/EditInput";
 export { default as CommentInput } from "./CommentInput/index";
+export { default as InviteUserMenu } from "./InviteUserMenu/index";

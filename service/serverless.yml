@@ -49,6 +49,13 @@ functions:
           path: boardRelatedUsers
           method: post
           cors: true
+  inviteUserToBoard:
+    handler: handlers/boards.invite
+    events:
+      - http:
+          path: invite
+          method: put
+          cors: true 
   createNewList:
     handler: handlers/list.create
     events:

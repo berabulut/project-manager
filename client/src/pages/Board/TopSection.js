@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Grid, Typography, IconButton, Avatar } from "@material-ui/core";
 import { Public, Lock, MoreHoriz, Add } from "@material-ui/icons";
-import { VisibilityMenu } from "components";
+import { VisibilityMenu, InviteUserMenu } from "components";
 import { topSectionStyles } from "./styles";
 
 const TopSection = ({ board }) => {
@@ -11,6 +11,8 @@ const TopSection = ({ board }) => {
   const [openVisibility, setOpenVisibilty] = useState(false);
 
   const [boardVisibility, setBoardVisibility] = useState("Private");
+
+  const[inviteAnchorEl, setInviteAnchorEl] = useState(null);
 
   const handleVisibilityClick = (event) => {
     setVisibilityAnchorEl(event.currentTarget);
@@ -22,11 +24,19 @@ const TopSection = ({ board }) => {
     setOpenVisibilty(false);
   };
 
+  const handleInviteButtonClick = (event) => {
+    setInviteAnchorEl(event.currentTarget);
+  };
+
+  const handleInviteMenuClose = () => {
+    setInviteAnchorEl(null);
+  };
+
   return (
     <div className={classes.root}>
       <Grid container>
         <Grid item container xs={5}>
-          <Grid item style={{minWidth: "120px"}}>
+          <Grid item style={{ minWidth: "120px" }}>
             <IconButton
               onClick={handleVisibilityClick}
               className={classes.button}
@@ -63,9 +73,13 @@ const TopSection = ({ board }) => {
                 );
               })}
             <Grid item className={classes.iconGrid}>
-              <IconButton className={classes.addButton} aria-label="add-member">
+              <IconButton onClick={handleInviteButtonClick} className={classes.addButton} aria-label="add-member">
                 <Add />
               </IconButton>
+              <InviteUserMenu
+                anchorEl={inviteAnchorEl}
+                handleClose={handleInviteMenuClose}
+              />
             </Grid>
           </Grid>
         </Grid>

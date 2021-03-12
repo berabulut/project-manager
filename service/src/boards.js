@@ -38,7 +38,7 @@ const linkUsersAndBoard = (users, boardId) =>
     if (users !== undefined && users.length > 0) {
       try {
         users.map((val) => {
-          const ref = db.ref(`/users/${val.uid}/boards/`).push();
+          const ref = db.ref(`/users/${val.uid}/boards/${boardId}`);
           const data = {
             boardId: boardId,
           };
@@ -47,7 +47,7 @@ const linkUsersAndBoard = (users, boardId) =>
               reject(error);
             } else {
               resolve({
-                [ref.key]: {
+                [boardId]: {
                   boardId: boardId,
                 },
               });
@@ -117,6 +117,68 @@ const returnBoardRelatedUsers = (users) =>
     } catch (err) {
       reject(err);
     }
+  });
+
+const returnUserId = (email) =>
+  new Promise((resolve, reject) => {
+    const ref = db.ref(`/users`);
+    ref.once("value", (snapshot) => {
+      let users = snapshot.val();
+      const userIds = Object.keys(users)
+      if (users) {
+        for (let i = 0; i < userIds.length; i++) {
+          const user = users[userIds[i]];
+          if (user.email === email) {
+            resolve(user.uid);
+          } else if (i === users.length - 1) {
+            reject();
+          }
+        }
+      }
+    });
+  });
+
+const inviteUser = (boardId, email) =>
+  new Promise((resolve, reject) => {
+    const ref = db.ref(`/users`);
+    ref.once("value", async (snapshot) => {
+      const users = snapshot.val();
+      const uid = await returnUserId(email);
+      if (uid) {
+        const user = users[uid];
+        if (user.boards && user.boards[boardId]) {
+          reject("User has already been added to this board!");
+        }
+        else {
+          const userRef = db.ref(`/users/${uid}/boards/${boardId}`);
+          const data = {
+            boardId: boardId
+          }
+          userRef.set(data, (error) => {
+            if(error) {
+              reject(error)
+            }
+            else {
+              const boardRef = db.ref(`/boards/${boardId}/users`)
+              boardRef.once("value", (snapshot) => {
+                const users = snapshot.val();
+                users.push({uid: uid})
+                boardRef.set(users, (error) => {
+                  if(error) {
+                    reject(error)
+                  }
+                  else {
+                    resolve("User has been successfully added to the board!")
+                  }
+                })
+              })
+            }
+          })
+        }
+      } else {
+        reject("User not found!");
+      }
+    });
   });
 
 const createNewList = (boardId, list, listOrder) =>
@@ -252,4 +314,5 @@ module.exports = {
   returnUserRelatedBoards,
   returnBoardRelatedUsers,
   createUniqueId,
+  inviteUser
 };
