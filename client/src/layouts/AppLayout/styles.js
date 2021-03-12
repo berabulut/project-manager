@@ -142,6 +142,8 @@ export const menuStyles = makeStyles((theme) => ({
     color: "#333333",
     borderRadius: "0px",
     minWidth: "250px",
+    display:"flex",
+    justifyContent:"flex-end",
     "&:hover": {
       background: "#ffffff",
     },

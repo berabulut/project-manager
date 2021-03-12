@@ -129,7 +129,7 @@ const HandleBoardCreation = (
 
 const HandleInvitingUser = (boardId, input) =>
   new Promise((resolve, reject) => {
-    InviteUser({ boardId: boardId, email: input })
+    InviteUser({ boardId: boardId, address: input })
       .then((response) => {
         resolve(response);
       })

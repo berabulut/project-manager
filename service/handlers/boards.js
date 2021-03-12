@@ -2,9 +2,9 @@ const { inviteUser } = require("../src/boards");
 
 module.exports.invite = (event) => {
 	const promise = new Promise((resolve) => {
-	  const { boardId, email } = JSON.parse(event.body);
-	  if (boardId && email) {
-		inviteUser(boardId, email)
+	  const { boardId, address } = JSON.parse(event.body);
+	  if (boardId && address) {
+		inviteUser(boardId, address)
 		  .then((data) => {
 			const response = {
 			  statusCode: 200,

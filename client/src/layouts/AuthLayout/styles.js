@@ -1,6 +1,9 @@
 import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
 
 export const AuthTheme = createMuiTheme({
+  typography: {
+    fontFamily: "Poppins !important",
+  },
   palette: {
     primary: {
       main: "#2F80ED",

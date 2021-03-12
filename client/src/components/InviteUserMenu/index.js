@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Typography, Grid, Button } from "@material-ui/core";
+import { UserContext } from "provider/UserProvider";
 import { BoardHelpers } from "helpers";
 import { PopMenu, menuStyles } from "./styles";
 
 const LabelsMenu = ({ boardId, anchorEl, handleClose }) => {
   const classes = menuStyles();
+
+  const { renderedBoard, setRenderedBoard } = useContext(UserContext);
 
   const [input, setInput] = useState("");
   const [error, setError] = useState();
@@ -13,21 +16,25 @@ const LabelsMenu = ({ boardId, anchorEl, handleClose }) => {
     setError("");
   }, [input]);
 
-
-
   const handleInviteButtonClick = () => {
     if (!input.trim().length > 0) {
       setError("Input cannot be empty!");
     } else {
       BoardHelpers.HandleInvitingUser(boardId, input)
         .then((response) => {
-          if(response.statusCode === 500) {
-            setError(response.error)
-          }
-          else {
+          if (response.statusCode === 500) {
+            setError(response.error);
+          } else if (response.statusCode === 200) {
+            renderedBoard.userData.push(response.data);
+            renderedBoard.users.push({uid: response.data.uid})
+            setRenderedBoard(renderedBoard)
             handleClose();
-            setError("")
-            setInput("")
+            setError("");
+            setInput("");
+          } else {
+            handleClose();
+            setError("");
+            setInput("");
           }
         })
         .catch((err) => setError(err));
@@ -41,9 +48,9 @@ const LabelsMenu = ({ boardId, anchorEl, handleClose }) => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={() => {
-          handleClose()
-          setError("")
-          setInput("")
+          handleClose();
+          setError("");
+          setInput("");
         }}
       >
         <Grid className={classes.header} container>

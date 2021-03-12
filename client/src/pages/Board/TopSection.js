@@ -35,7 +35,7 @@ const TopSection = ({ board }) => {
   return (
     <div className={classes.root}>
       <Grid container>
-        <Grid item container xs={5}>
+        <Grid item container xs>
           <Grid item style={{ minWidth: "120px" }}>
             <IconButton
               onClick={handleVisibilityClick}
@@ -59,7 +59,7 @@ const TopSection = ({ board }) => {
               boardVisibility={boardVisibility}
             />
           </Grid>
-          <Grid item container xs={7}>
+          <Grid item container xs>
             {board !== undefined &&
               board.userData.map((val, key) => {
                 return (
@@ -88,7 +88,7 @@ const TopSection = ({ board }) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item container xs={7}>
+        <Grid item container style={{width: "150px"}}>
           <Grid justify="flex-end" container item xs={12}>
             <IconButton className={classes.menuButton} aria-label="cover">
               <MoreHoriz className={classes.menuIcon} />
