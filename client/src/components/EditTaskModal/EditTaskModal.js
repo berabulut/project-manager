@@ -18,6 +18,7 @@ import {
   Comment,
   EditInput,
   CommentInput,
+  AssignMemberMenu,
 } from "components";
 import { modalStyles } from "./styles";
 
@@ -61,10 +62,12 @@ const EditTaskModal = ({
   const [displayEditArea, setDisplayEditArea] = useState(false);
   const [displayEditTitle, setDisplayEditTitle] = useState(false);
   const [displayProgress, setDisplayProgress] = useState(false);
+
   const [uploadError, setUploadError] = useState();
 
   const [coverAnchorEl, setCoverAnchorEl] = useState(null);
   const [labelAnchorEl, setLabelAnchorEl] = useState(null);
+  const [memberAnchorEl, setMemberAnchorEl] = useState(null);
 
   const handleEditTitleButtonClick = () => {
     setDisplayEditTitle(!displayEditTitle);
@@ -96,6 +99,14 @@ const EditTaskModal = ({
 
   const handleLabelMenuClose = () => {
     setLabelAnchorEl(null);
+  };
+
+  const handleMemberButtonClick = (event) => {
+    setMemberAnchorEl(event.currentTarget);
+  };
+
+  const handleMemberMenuClose = () => {
+    setMemberAnchorEl(null);
   };
 
   const handleFileUpload = async (e) => {
@@ -427,7 +438,12 @@ const EditTaskModal = ({
               justify="flex-end"
               xs={12}
             >
-              <GrayButton icon="people" text="Members" />
+              <GrayButton
+                icon="people"
+                text="Members"
+                handleClick={handleMemberButtonClick}
+              />
+              <AssignMemberMenu anchorEl={memberAnchorEl} handleClose={handleMemberMenuClose} />
             </Grid>
             {/*Labels */}
             <Grid

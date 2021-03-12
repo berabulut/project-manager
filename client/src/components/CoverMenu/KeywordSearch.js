@@ -21,6 +21,13 @@ const KeywordSearch = ({
     //   .catch((err) => {
     //     console.log(err);
     //   });
+        // GetImages()
+    //   .then((response) => {
+    //     setRandomImages(response.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }, []);
 
   useEffect(() => {

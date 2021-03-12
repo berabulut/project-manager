@@ -4,7 +4,7 @@ import { UserContext } from "provider/UserProvider";
 import { BoardHelpers } from "helpers";
 import { PopMenu, menuStyles } from "./styles";
 
-const LabelsMenu = ({ boardId, anchorEl, handleClose }) => {
+const InviteUserMenu = ({ boardId, anchorEl, handleClose }) => {
   const classes = menuStyles();
 
   const { renderedBoard, setRenderedBoard } = useContext(UserContext);
@@ -98,4 +98,4 @@ const LabelsMenu = ({ boardId, anchorEl, handleClose }) => {
   );
 };
 
-export default LabelsMenu;
+export default InviteUserMenu;

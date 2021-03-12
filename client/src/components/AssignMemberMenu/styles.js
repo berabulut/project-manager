@@ -44,26 +44,36 @@ export const menuStyles = makeStyles((theme) => ({
     border: "none",
     borderRadius: "8px",
   },
-  addButton: {
-    width: "30%",
-    marginRight: "10px",
-    marginTop: "5px",
+  membersContainer: {
+    background: "#FFFFFF",
+    border: "1px solid #E0E0E0",
     borderRadius: "8px",
-    fontWeight: 500,
-    fontSize: "0.775rem",
-    lineHeight: "14px",
-    letterSpacing: "-0.035em",
-    height: "32px",
-    marginBottom: theme.spacing(2)
+    boxShadow: "0px 2px 8px rgb(0 0 0 / 10%)",
+    margin: "auto",
+    marginBottom: theme.spacing(1.5),
+    padding: theme.spacing(1),
   },
-  error: {
-    color: "#EB5757",
-    marginBottom: theme.spacing(1),
-    fontWeight: "600",
-    fontSize: "0.825rem",
-    paddingLeft: theme.spacing(3),
-    paddingRight: theme.spacing(3)
-  }
+  member: {
+    padding: theme.spacing(1),
+    borderRadius: "8px",
+    transition: "background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+    "&:hover": {
+      backgroundColor: "#F2F2F2",
+      cursor: "pointer",
+    },
+  },
+  avatar: {
+    borderRadius: "8px",
+    height: "2rem",
+    width: "2rem",
+  },
+  name: {
+    fontWeight: 600,
+    fontSize: "0.875rem",
+    lineHeight: "18px",
+    letterSpacing: "-0.035em",
+    paddingLeft: theme.spacing(2)
+  },
 }));
 
 export const PopMenu = withStyles({
