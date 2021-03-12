@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Typography, IconButton, Avatar } from "@material-ui/core";
 import { Public, Lock, MoreHoriz, Add } from "@material-ui/icons";
 import { VisibilityMenu, InviteUserMenu } from "components";
@@ -12,7 +12,7 @@ const TopSection = ({ board }) => {
 
   const [boardVisibility, setBoardVisibility] = useState("Private");
 
-  const[inviteAnchorEl, setInviteAnchorEl] = useState(null);
+  const [inviteAnchorEl, setInviteAnchorEl] = useState(null);
 
   const handleVisibilityClick = (event) => {
     setVisibilityAnchorEl(event.currentTarget);
@@ -73,10 +73,15 @@ const TopSection = ({ board }) => {
                 );
               })}
             <Grid item className={classes.iconGrid}>
-              <IconButton onClick={handleInviteButtonClick} className={classes.addButton} aria-label="add-member">
+              <IconButton
+                onClick={handleInviteButtonClick}
+                className={classes.addButton}
+                aria-label="add-member"
+              >
                 <Add />
               </IconButton>
               <InviteUserMenu
+                boardId={board && board.id}
                 anchorEl={inviteAnchorEl}
                 handleClose={handleInviteMenuClose}
               />

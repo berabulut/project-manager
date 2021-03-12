@@ -5,6 +5,7 @@ import {
   ReorderLists,
   ReorderTasks,
   SwitchTasks,
+  InviteUser,
 } from "functions/BoardFunctions";
 import { UIHelpers, UserHelpers } from "helpers/";
 
@@ -126,6 +127,17 @@ const HandleBoardCreation = (
     }
   });
 
+const HandleInvitingUser = (boardId, input) =>
+  new Promise((resolve, reject) => {
+    InviteUser({ boardId: boardId, email: input })
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
 const HandleListCreation = (board, lists, list, listOrder) =>
   new Promise((resolve, reject) => {
     if ((board && lists, list, listOrder)) {
@@ -209,6 +221,7 @@ const BoardHelpers = {
   HandleListReordering: HandleListReordering,
   HandleTaskReordering: HandleTaskReordering,
   HandleTaskSwitching: HandleTaskSwitching,
+  HandleInvitingUser: HandleInvitingUser,
   FindExactBoard: FindExactBoard,
 };
 

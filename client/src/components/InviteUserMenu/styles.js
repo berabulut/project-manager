@@ -71,7 +71,9 @@ export const menuStyles = makeStyles((theme) => ({
     color: "#EB5757",
     marginBottom: theme.spacing(1),
     fontWeight: "600",
-    fontSize: "0.825rem"
+    fontSize: "0.825rem",
+    paddingLeft: theme.spacing(3),
+    paddingRight: theme.spacing(3)
   }
 }));
 

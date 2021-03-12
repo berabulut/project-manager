@@ -1,12 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Typography, Grid, Button } from "@material-ui/core";
+import { BoardHelpers } from "helpers";
 import { PopMenu, menuStyles } from "./styles";
 
-const LabelsMenu = ({ anchorEl, handleClose, addLabel }) => {
+const LabelsMenu = ({ boardId, anchorEl, handleClose }) => {
   const classes = menuStyles();
 
   const [input, setInput] = useState("");
   const [error, setError] = useState();
+
+  useEffect(() => {
+    setError("");
+  }, [input]);
+
+
+
+  const handleInviteButtonClick = () => {
+    if (!input.trim().length > 0) {
+      setError("Input cannot be empty!");
+    } else {
+      BoardHelpers.HandleInvitingUser(boardId, input)
+        .then((response) => {
+          if(response.statusCode === 500) {
+            setError(response.error)
+          }
+          else {
+            handleClose();
+            setError("")
+            setInput("")
+          }
+        })
+        .catch((err) => setError(err));
+    }
+  };
 
   return (
     <div>
@@ -14,7 +40,11 @@ const LabelsMenu = ({ anchorEl, handleClose, addLabel }) => {
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={handleClose}
+        onClose={() => {
+          handleClose()
+          setError("")
+          setInput("")
+        }}
       >
         <Grid className={classes.header} container>
           <Grid item xs={12}>
@@ -33,8 +63,8 @@ const LabelsMenu = ({ anchorEl, handleClose, addLabel }) => {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Email address"
-              type="email"
+              placeholder="User address"
+              type="text"
               className={classes.input}
             />
           </Grid>
@@ -47,6 +77,7 @@ const LabelsMenu = ({ anchorEl, handleClose, addLabel }) => {
           )}
           <Grid item container justify="center" xs={12}>
             <Button
+              onClick={handleInviteButtonClick}
               className={classes.addButton}
               variant="contained"
               color="primary"
