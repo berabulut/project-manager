@@ -23,6 +23,7 @@ class Task extends React.Component {
       comments: [],
       attachments: [],
       labels: [],
+      assigments: [],
     };
   }
 
@@ -216,6 +217,37 @@ class Task extends React.Component {
         });
       }
     }
+  };
+
+  assignMemberToTask = (uid) => {
+    this.setState(
+      {
+        assigments: [...this.state.assigments, uid],
+      },
+      () => {
+        TaskHelpers.HandleTaskPropertyUpdate(
+          this.context.renderedBoard,
+          this.props.task.id,
+          "assigments",
+          this.state.assigments
+        );
+      }
+    );
+  };
+
+  removeAssignedMember = (uid) => {
+    let assigments = this.state.assigments;
+    for (let i = 0; i < assigments.length; i++) {
+      assigments = assigments.filter((id) => id !== uid)
+      this.setState({ assigments: assigments }, () => {
+        TaskHelpers.HandleTaskPropertyUpdate(
+          this.context.renderedBoard,
+          this.props.task.id,
+          "assigments",
+          this.state.assigments
+        ).catch((err) => console.log(err));
+      });
+    }
   }
 
   componentDidMount() {
@@ -225,7 +257,8 @@ class Task extends React.Component {
       description,
       comments,
       attachments,
-      labels
+      labels,
+      assigments
     } = this.props.task;
     this.setState({
       coverImage: coverImage || "",
@@ -233,7 +266,8 @@ class Task extends React.Component {
       description: description || " ",
       comments: comments || [],
       attachments: attachments || [],
-      labels : labels || []
+      labels: labels || [],
+      assigments: assigments || []
     });
   }
 
@@ -321,6 +355,7 @@ class Task extends React.Component {
               taskTitle={this.state.title}
               description={this.state.description}
               comments={this.state.comments}
+              assigments={this.state.assigments}
               addImageToTask={this.handleSearchedImageClick}
               submitComment={this.submitComment}
               deleteComment={this.deleteComment}
@@ -330,6 +365,8 @@ class Task extends React.Component {
               deleteAttachment={this.deleteAttachment}
               addLabel={this.addLabel}
               deleteLabel={this.deleteLabel}
+              assignMemberToTask={this.assignMemberToTask}
+              removeAssignedMember={this.removeAssignedMember}
             />
           </div>
         )}

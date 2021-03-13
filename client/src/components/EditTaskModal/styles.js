@@ -79,6 +79,8 @@ export const modalStyles = makeStyles((theme) => ({
   },
   buttonContainer: {
     maxHeight: "60px",
+    display: "inline-flex",
+    marginBottom: theme.spacing(1.5),
   },
   uploadButton: {
     border: "1px solid #BDBDBD",
@@ -99,5 +101,46 @@ export const modalStyles = makeStyles((theme) => ({
     color: "#f44336",
     marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(0.5),
+  },
+  member: {
+    borderRadius: "8px",
+    maxHeight: "48px",
+    transition: "background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+    padding: "8px 6px",
+    "&:hover": {
+      backgroundColor: "#F2F2F2",
+      cursor: "pointer",
+    },
+  },
+  avatar: {
+    borderRadius: "8px",
+    height: "2rem",
+    width: "2rem",
+  },
+  name: {
+    fontWeight: 600,
+    fontSize: "0.875rem",
+    lineHeight: "18px",
+    letterSpacing: "-0.035em",
+    paddingLeft: theme.spacing(2),
+  },
+  assignMemberButton: {
+    background: "#2f80ed38",
+    borderRadius: "8px",
+    width: "90%",
+    display: "flex",
+    justifyContent: "space-evenly",
+    transition: "background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+    height: "40px",
+    "&:hover": {
+      background: "#2f80ed61"
+    }
+  },
+  assignMemberButtonText: {
+    fontWeight: 500,
+    fontSize: "0.825rem",
+    lineHeight: "16px",
+    letterSpacing: "-0.035em",
+    color: "#2F80ED",
   },
 }));

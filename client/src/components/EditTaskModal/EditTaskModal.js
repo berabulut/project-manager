@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Grid,
   Typography,
   Modal,
   IconButton,
   LinearProgress,
+  Avatar,
 } from "@material-ui/core";
 import { Clear, Add, Edit } from "@material-ui/icons";
 import {
@@ -20,6 +21,7 @@ import {
   CommentInput,
   AssignMemberMenu,
 } from "components";
+import { UserContext } from "provider/UserProvider";
 import { modalStyles } from "./styles";
 
 const imageFormats = [
@@ -47,6 +49,7 @@ const EditTaskModal = ({
   description,
   comments,
   labels,
+  assigments,
   submitComment,
   deleteComment,
   editComment,
@@ -56,8 +59,11 @@ const EditTaskModal = ({
   addImageToTask,
   addLabel,
   deleteLabel,
+  assignMemberToTask,
+  removeAssignedMember,
 }) => {
   const classes = modalStyles();
+  const { renderedBoard } = useContext(UserContext);
 
   const [displayEditArea, setDisplayEditArea] = useState(false);
   const [displayEditTitle, setDisplayEditTitle] = useState(false);
@@ -68,6 +74,8 @@ const EditTaskModal = ({
   const [coverAnchorEl, setCoverAnchorEl] = useState(null);
   const [labelAnchorEl, setLabelAnchorEl] = useState(null);
   const [memberAnchorEl, setMemberAnchorEl] = useState(null);
+
+  const [assignedUsers, setAssignedUsers] = useState([]);
 
   const handleEditTitleButtonClick = () => {
     setDisplayEditTitle(!displayEditTitle);
@@ -141,6 +149,15 @@ const EditTaskModal = ({
       setUploadError();
     }, 5000);
   }, [uploadError]);
+
+  useEffect(() => {
+    if (renderedBoard) {
+      const users = renderedBoard.userData.filter((user) =>
+        assigments.includes(user.uid)
+      );
+      setAssignedUsers(users);
+    }
+  }, [assigments]);
 
   return (
     <Modal className={classes.modal} open={open} onClose={() => handleClose()}>
@@ -415,36 +432,48 @@ const EditTaskModal = ({
           </Grid>
           {/*this is the right side of modal in big screens */}
           <Grid
-            style={{ height: "200px" }}
             className={classes.gridItem}
             item
             container
             xs={4}
+            style={{ display: "table" }}
           >
             {/*section title - Actions */}
             <Grid
               item
               container
               justify="flex-start"
-              style={{ paddingLeft: "24px" }}
+              style={{
+                paddingLeft: "24px",
+                marginBottom: "12px",
+                height: "30px",
+              }}
             >
               <SectionTitle title="Actions" icon="people" />
             </Grid>
-            {/*Members */}
-            <Grid
-              className={classes.buttonContainer}
-              item
-              container
-              justify="flex-end"
-              xs={12}
-            >
-              <GrayButton
-                icon="people"
-                text="Members"
-                handleClick={handleMemberButtonClick}
-              />
-              <AssignMemberMenu anchorEl={memberAnchorEl} handleClose={handleMemberMenuClose} />
-            </Grid>
+            {/*Assign Members */}
+            {!assigments.length > 0 && (
+              <Grid
+                className={classes.buttonContainer}
+                item
+                container
+                justify="flex-end"
+                xs={12}
+              >
+                <GrayButton
+                  icon="people"
+                  text="Members"
+                  handleClick={handleMemberButtonClick}
+                />
+                <AssignMemberMenu
+                  anchorEl={memberAnchorEl}
+                  handleClose={handleMemberMenuClose}
+                  assigments={assigments}
+                  assignMemberToTask={assignMemberToTask}
+                  removeAssignedMember={removeAssignedMember}
+                />
+              </Grid>
+            )}
             {/*Labels */}
             <Grid
               className={classes.buttonContainer}
@@ -483,6 +512,82 @@ const EditTaskModal = ({
                 handleImageClick={addImageToTask}
               />
             </Grid>
+            {/* Members */}
+            {assignedUsers && assignedUsers.length > 0 && (
+              <Grid
+                style={{ maxHeight: "400px" }}
+                item
+                container
+                xs={12}
+                direction="column"
+              >
+                <Grid
+                  item
+                  container
+                  justify="flex-start"
+                  style={{ paddingLeft: "24px", marginBottom: "12px" }}
+                >
+                  <SectionTitle title="Members" icon="people" />
+                </Grid>
+                {assignedUsers.map((user, index) => {
+                  return (
+                    <Grid
+                      index={index}
+                      className={classes.buttonContainer}
+                      container
+                      onClick={() => removeAssignedMember(user.uid)}
+                      style={{ paddingLeft: "20px", marginBottom: "8px" }}
+                      justify="center"
+                    >
+                      <Grid item container xs className={classes.member}>
+                        <Grid item xs style={{ maxWidth: "32px" }}>
+                          <Avatar
+                            className={classes.avatar}
+                            src={user.picture}
+                            alt={user.name}
+                          />
+                        </Grid>
+                        <Grid
+                          item
+                          container
+                          alignItems="center"
+                          xs
+                          style={{ maxWidth: "180px" }}
+                        >
+                          <Typography className={classes.name}>
+                            {user.name}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  );
+                })}
+                <Grid
+                  className={classes.buttonContainer}
+                  item
+                  container
+                  justify="flex-end"
+                  style={{ marginTop: "12px" }}
+                  xs={12}
+                >
+                  <IconButton
+                    className={classes.assignMemberButton}
+                    onClick={handleMemberButtonClick}
+                  >
+                    <Typography className={classes.assignMemberButtonText}>
+                      Assign a member
+                    </Typography>
+                    <Add style={{ color: "#2F80ED" }} />
+                  </IconButton>
+                  <AssignMemberMenu
+                    anchorEl={memberAnchorEl}
+                    handleClose={handleMemberMenuClose}
+                    assigments={assigments}
+                    assignMemberToTask={assignMemberToTask}
+                  />
+                </Grid>
+              </Grid>
+            )}
           </Grid>
         </Grid>
       </div>
