@@ -380,7 +380,7 @@ const EditTaskModal = ({
             </Grid>
             {/*  attachment itself*/}
             <Grid item container xs={12}>
-              <Grid item xs={12} style={{ marginBottom: "32px" }}>
+              <Grid item xs={12} style={{ marginBottom: "16px" }}>
                 {attachments &&
                   attachments.map((attachment, key) => {
                     if (imageFormats.includes(attachment.fileType)) {

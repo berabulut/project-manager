@@ -38,7 +38,7 @@ const Boards = ({ image, title, users, visibility }) => {
             }
           })}
           {users.length > 3 && (
-            <Box p={1} flexGrow={1}>
+            <Box >
               <Typography
                 className={classes.title}
                 variant="body1"

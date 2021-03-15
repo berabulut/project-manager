@@ -18,6 +18,7 @@ export const boardStyles = makeStyles((theme) => ({
   cover: {
     width: "100%",
     borderRadius: "12px",
+    height: "170px"
   },
   title: {
     fontWeight: "500",

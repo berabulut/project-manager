@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const labelStyles = makeStyles((theme) => ({
   container: {
     borderRadius: "8px",
-    padding: "8px",
+    padding: "6px 8px",
   },
   text: {
     fontWeight: "500",

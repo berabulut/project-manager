@@ -60,7 +60,7 @@ const HandleUserRelatedBoards = (
             });
         })
         .catch((err) => {
-          console.log(err);
+          UIHelpers.HandleBackdropClose(setOpenBackdrop);
           reject(err);
         });
     } else {

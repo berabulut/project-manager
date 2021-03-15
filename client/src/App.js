@@ -1,15 +1,16 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import firebase from "firebase";
 import { FirebaseConfig } from "./firebase/FirebaseConfig";
 import AuthProvider from "provider/AuthProvider";
 import UIProvider from "provider/UIProvider";
 import UserProvider from "provider/UserProvider";
-import { UserHelpers, BoardHelpers, UIHelpers } from "helpers/";
+import { Loading } from "components";
+import { UserHelpers } from "helpers/";
 
 import Routes from "./routes/Routes";
 
 const App = () => {
-  const [openBackdrop, setOpenBackdrop] = useState(true);
+  const [openBackdrop, setOpenBackdrop] = useState(false);
   const [userData, setUserData] = useState({});
   const [boards, setBoards] = useState([]);
   const [renderedBoard, setRenderedBoard] = useState(); 
@@ -39,6 +40,7 @@ const App = () => {
       <AuthProvider setUserData={setUserData} setBoards={setBoards} setOpenBackdrop={setOpenBackdrop}>
         <UserProvider userData={userData} setUserData={setUserData} boards={boards} setBoards={setBoards} setOpenBackdrop={setOpenBackdrop} renderedBoard={renderedBoard} setRenderedBoard={setRenderedBoard}>
           <div className="App">
+            <Loading />
             <Routes />
           </div>
         </UserProvider>

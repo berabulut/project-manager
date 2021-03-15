@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Grid, Typography, Container, Box, Button } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import { AppLayout } from "layouts";
-import { Board, AddBoardModal, Loading } from "components";
+import { Board, AddBoardModal } from "components";
 import { UserContext } from "provider/UserProvider";
 import { boardsStyles } from "./styles";
 
@@ -68,7 +68,6 @@ const Boards = () => {
           <AddBoardModal open={modalOpen} setOpen={setModalOpen} />
         </Container>
       </div>
-      <Loading />
     </AppLayout>
   );
 };
