@@ -4,7 +4,7 @@ export const listStyles = (theme) => ({
 	  border: "1px solid lightgrey",
 	  backgroundColor: "#f7f7f7",
 	  borderRadius: "8px",
-	  width: "250px",
+	  width: "280px",
 	  display: "flex",
 	  flexDirection: "column",
 	},

@@ -7,7 +7,9 @@ import { UIContext } from "provider/UIProvider";
 import { GetUniqueId } from "functions/BoardFunctions";
 import { UploadFile } from "firebase/Upload";
 import { TaskHelpers } from "helpers";
-import { taskStyles } from "./styles";
+import { taskStyles, MemberAvatar } from "./styles";
+
+const detectUnsplash = "https://images.unsplash.com";
 
 class Task extends React.Component {
   constructor(props) {
@@ -165,7 +167,7 @@ class Task extends React.Component {
     }
   };
 
-  handleSearchedImageClick = (regular, raw) => {
+  handleSearchedImageClick = (regular) => {
     this.setState(
       {
         coverImage: regular,
@@ -235,7 +237,7 @@ class Task extends React.Component {
   removeAssignedMember = (uid) => {
     let assigments = this.state.assigments;
     for (let i = 0; i < assigments.length; i++) {
-      assigments = assigments.filter((id) => id !== uid)
+      assigments = assigments.filter((id) => id !== uid);
       this.setState({ assigments: assigments }, () => {
         TaskHelpers.HandleTaskPropertyUpdate(
           this.context.renderedBoard,
@@ -245,7 +247,7 @@ class Task extends React.Component {
         ).catch((err) => console.log(err));
       });
     }
-  }
+  };
 
   componentDidMount() {
     const {
@@ -255,7 +257,7 @@ class Task extends React.Component {
       comments,
       attachments,
       labels,
-      assigments
+      assigments,
     } = this.props.task;
     this.setState({
       coverImage: coverImage || "",
@@ -264,12 +266,24 @@ class Task extends React.Component {
       comments: comments || [],
       attachments: attachments || [],
       labels: labels || [],
-      assigments: assigments || []
+      assigments: assigments || [],
     });
   }
 
   render() {
     const { classes, users, image, task, index } = this.props;
+    const {
+      coverImage,
+      title,
+      description,
+      comments,
+      attachments,
+      labels,
+      assigments,
+    } = this.state;
+    const { renderedBoard } = this.context;
+    let avatarCounter = 0;
+
     return (
       <Draggable draggableId={task.id} index={index}>
         {(provided, snapshot) => (
@@ -295,8 +309,20 @@ class Task extends React.Component {
                 })
               }
             >
-              {image && (
-                <img className={classes.cover} src={image + "&q=80&w=400"} />
+              {coverImage && coverImage.includes(detectUnsplash) ? (
+                <img
+                  alt="task-cover"
+                  className={classes.cover}
+                  src={coverImage + "&q=80&w=400"}
+                />
+              ) : (
+                coverImage && (
+                  <img
+                    alt="task-cover"
+                    className={classes.cover}
+                    src={coverImage}
+                  />
+                )
               )}
               <Grid container>
                 <Grid item xs={10}>
@@ -308,38 +334,69 @@ class Task extends React.Component {
                     {task.title}
                   </Typography>
                 </Grid>
-              </Grid>
-              <Box display="flex">
-                {users &&
-                  users.map((val, key) => {
-                    if (key < 3) {
+                <Grid
+                  item
+                  container
+                  xs={12}
+                  justify="flex-start"
+                  style={{ marginBottom: "16px" }}
+                >
+                  {labels &&
+                    labels.map((label, index) => {
                       return (
-                        <Box
-                          key={key}
-                          alignSelf="center"
-                          className={classes.boardBox}
+                        <Grid
+                          className={classes.labelContainer}
+                          style={{ backgroundColor: label.color.hex }}
+                          item
+                          container
+                          alignItems="center"
+                          justify="space-around"
+                          index={index}
                         >
-                          <Avatar
-                            src={val.picture}
-                            className={classes.avatar}
-                            alt="Remy Sharp"
+                          <Grid item xs={10}>
+                            <Typography className={classes.labelText}>
+                              {label.input}
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      );
+                    })}
+                </Grid>
+              </Grid>
+              <Grid item container xs={12}>
+                {assigments &&
+                  renderedBoard &&
+                  renderedBoard.userData.map((user, index) => {
+                    if (
+                      assigments.includes(user.uid) &&
+                      !(assigments.length > 2 && avatarCounter > 0)
+                    ) {
+                      avatarCounter += 1;
+                      return (
+                        <Grid item style={{width: "35px", height: "35px", marginRight: "8px"}}>
+                          <MemberAvatar
+                            key={index}
+                            picture={user.picture}
+                            alt={user.name}
                           />
-                        </Box>
+                        </Grid>
                       );
                     }
+                    if (index === renderedBoard.userData.length - 1)
+                      avatarCounter = 0;
                   })}
-                {users && users.length > 3 && (
-                  <Box p={1} flexGrow={1}>
+                {assigments && assigments.length > 2 && (
+                  <Grid item className={classes.othersContainer}>
                     <Typography
-                      className={classes.title}
-                      variant="body1"
+                      className={classes.othersInfo}
+                      variant="body2"
                       gutterBottom
                     >
-                      +{users.length - 3} Others
+                      +{assigments.length - 1} Others
                     </Typography>
-                  </Box>
+                  </Grid>
                 )}
-              </Box>
+              </Grid>
             </Paper>
             <EditTaskModal
               open={this.state.modalVisible}

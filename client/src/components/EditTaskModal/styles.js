@@ -47,7 +47,9 @@ export const modalStyles = makeStyles((theme) => ({
     width: "100%",
     height: "165px",
     borderRadius: "8px",
-    objectFit: "cover",
+    objectFit: "contain",
+    padding: theme.spacing(1.5),
+    background: "#F2F2F2"
   },
   taskTitle: {
     color: "black",
@@ -69,7 +71,7 @@ export const modalStyles = makeStyles((theme) => ({
     fontSize: "0.725rem",
     lineHeight: "15px",
     letterSpacing: "-0.035em",
-    marginBottom: theme.spacing(4),
+    marginBottom: theme.spacing(2.5),
   },
   description: {
     fontSize: "1rem",

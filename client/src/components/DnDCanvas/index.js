@@ -128,7 +128,7 @@ class DndCanvas extends React.Component {
     };
 
     let foreignTaskIds;
-    if (foreignTaskIds) {
+    if (foreign.taskIds) {
       foreignTaskIds = Array.from(foreign.taskIds);
     } else {
       foreignTaskIds = [];

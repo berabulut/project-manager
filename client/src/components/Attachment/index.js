@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { CreateDownloadUrl } from "firebase/Upload";
+import React, { useState } from "react";
 import {
   Grid,
   Typography,
@@ -18,7 +17,9 @@ const Attachment = ({
   fileUrl,
   fileType,
   image,
+  coverImage,
   deleteAttachment,
+  addImageToTask
 }) => {
   const classes = attachmentStyles();
   const [displayDeleteDialog, setDisplayDeleteDialog] = useState(false);
@@ -95,6 +96,15 @@ const Attachment = ({
               </DialogActions>
             </Dialog>
           </Grid>
+          {image && fileUrl && fileUrl !== coverImage && (
+            <Grid item container alignItems="center" xs={5}>
+              <div onClick={() => addImageToTask(fileUrl)}>
+                <Typography className={classes.setButton}>
+                  Set Cover Image
+                </Typography>
+              </div>
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </Grid>

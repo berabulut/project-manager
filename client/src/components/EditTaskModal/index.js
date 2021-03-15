@@ -392,7 +392,9 @@ const EditTaskModal = ({
                           date={attachment.uploadDate}
                           image={true}
                           fileUrl={attachment.fileUrl}
+                          coverImage={coverImage}
                           deleteAttachment={deleteAttachment}
+                          addImageToTask={addImageToTask}
                         />
                       );
                     } else {
