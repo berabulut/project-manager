@@ -3,33 +3,14 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { IconButton, Grid, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Add } from "@material-ui/icons";
-import { AddListModal } from "components";
+import { AddListModal, ListColumn } from "components";
 import { UserContext } from "provider/UserProvider";
 import { BoardHelpers } from "helpers";
-import Column from "./column";
-import { columnStyles } from "./styles";
+import { canvasStyles } from "./styles";
 
-class InnerList extends React.Component {
-  render() {
-    const { list, taskMap, index, createNewTask } = this.props;
-    let tasks;
-    if (list.taskIds) {
-      tasks = list.taskIds.map((taskId) => taskMap[taskId]);
-    }
-    return (
-      <div>
-        <Column
-          list={list}
-          tasks={tasks}
-          index={index}
-          createNewTask={createNewTask}
-        />
-      </div>
-    );
-  }
-}
 
-class TestDrag extends React.Component {
+
+class DndCanvas extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -316,7 +297,7 @@ class TestDrag extends React.Component {
                   const list = this.state.lists[listId];
                   if (list !== undefined) {
                     return (
-                      <InnerList
+                      <ListColumn
                         key={list.id}
                         list={list}
                         taskMap={this.state.tasks}
@@ -339,7 +320,7 @@ class TestDrag extends React.Component {
                     </Typography>
                   </Grid>
                   <Grid item container xs={2}>
-                    <Add className={classes.menuIcon} />
+                    <Add />
                   </Grid>
                 </IconButton>
                 <AddListModal
@@ -356,4 +337,4 @@ class TestDrag extends React.Component {
   }
 }
 
-export default withStyles(columnStyles)(TestDrag);
+export default withStyles(canvasStyles)(DndCanvas);

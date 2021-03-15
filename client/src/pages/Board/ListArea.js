@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import TestDnd from "components/DND/index";
+import { DndCanvas } from "components";
 import { listAreaStyles } from "./styles";
 
 const ListArea = ({ board }) => {
@@ -17,7 +17,7 @@ const ListArea = ({ board }) => {
         className={classes.container}
         container
       >
-        <TestDnd board={board} />
+        <DndCanvas board={board} />
       </Grid>
     </div>
   );

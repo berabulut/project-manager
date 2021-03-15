@@ -1,13 +1,12 @@
 import React from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { IconButton, Grid, Typography } from "@material-ui/core";
-import { AddTaskModal } from "components";
+import { AddTaskModal, TaskColumn } from "components";
 import { Add } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
-import { columnStyles } from "./styles";
-import InnerList from "./inner-list";
+import { listStyles } from "./styles";
 
-class Column extends React.Component {
+class List extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,7 +52,7 @@ class Column extends React.Component {
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >
-                  <InnerList list={list} tasks={this.props.tasks} />
+                  <TaskColumn list={list} tasks={this.props.tasks} />
                   {provided.placeholder}
                 </div>
               )}
@@ -86,4 +85,4 @@ class Column extends React.Component {
   }
 }
 
-export default withStyles(columnStyles)(Column);
+export default withStyles(listStyles)(List);

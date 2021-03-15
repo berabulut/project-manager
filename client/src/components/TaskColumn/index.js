@@ -1,7 +1,7 @@
 import React from "react";
-import Task from "./task";
+import { Task } from "components";
 
-class InnerList extends React.Component {
+class TaskColumn extends React.Component {
   shouldComponentUpdate(nextProps) {
     if (nextProps.tasks === this.props.tasks) {
       return false;
@@ -21,4 +21,4 @@ class InnerList extends React.Component {
   }
 }
 
-export default InnerList;
+export default TaskColumn;

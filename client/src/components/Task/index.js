@@ -9,9 +9,6 @@ import { UploadFile } from "firebase/Upload";
 import { TaskHelpers } from "helpers";
 import { taskStyles } from "./styles";
 
-// const image =
-//   "https://images.unsplash.com/photo-1612689690865-2035b60c449b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop";
-
 class Task extends React.Component {
   constructor(props) {
     super(props);
