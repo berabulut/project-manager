@@ -108,7 +108,7 @@ export const modalStyles = makeStyles((theme) => ({
     transition: "background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
     padding: "8px 6px",
     "&:hover": {
-      backgroundColor: "#F2F2F2",
+      backgroundColor: "#ffbaba",
       cursor: "pointer",
     },
   },

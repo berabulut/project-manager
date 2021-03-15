@@ -55,10 +55,11 @@ export const menuStyles = makeStyles((theme) => ({
   },
   member: {
     padding: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     borderRadius: "8px",
     transition: "background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
     "&:hover": {
-      backgroundColor: "#F2F2F2",
+      backgroundColor: "#d7ffd9",
       cursor: "pointer",
     },
   },

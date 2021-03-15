@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Typography, Grid, Avatar } from "@material-ui/core";
 import { UserContext } from "provider/UserProvider";
 import { PopMenu, menuStyles } from "./styles";
@@ -14,10 +14,35 @@ const AssignMemberMenu = ({
   const { renderedBoard } = useContext(UserContext);
 
   const [input, setInput] = useState("");
+  const [memberList, setMemberList] = useState([]);
 
   const handleMemberClick = (uid) => {
     assignMemberToTask(uid);
-    handleClose()
+    handleClose();
+  };
+
+  useEffect(() => {
+    if (input.length > 0) {
+      const list = memberList.filter((member) => {
+        const name = member.name.toUpperCase();
+        const text = input.toUpperCase();
+        return name.includes(text);
+      });
+      setMemberList(list);
+    }
+  }, [input]);
+
+  useEffect(() => {
+    if (assigments && renderedBoard.userData) {
+      const list = renderedBoard.userData.filter(
+        (user) => !assigments.includes(user.uid)
+      );
+      setMemberList(list);
+    }
+  }, [assigments, renderedBoard.userData]);
+
+  const handleOnKeyDown = (e) => {
+    e.stopPropagation();
   };
 
   return (
@@ -46,14 +71,15 @@ const AssignMemberMenu = ({
               placeholder="Name"
               type="text"
               className={classes.input}
+              onKeyDown={handleOnKeyDown}
             />
           </Grid>
         </Grid>
         {renderedBoard.userData &&
           renderedBoard.userData.length !== assigments.length && (
             <Grid item container className={classes.membersContainer} xs={11}>
-              {renderedBoard.userData.map((user, index) => {
-                if (!assigments.includes(user.uid)) {
+              {memberList &&
+                memberList.map((user, index) => {
                   return (
                     <Grid
                       index={index}
@@ -83,8 +109,7 @@ const AssignMemberMenu = ({
                       </Grid>
                     </Grid>
                   );
-                }
-              })}
+                })}
             </Grid>
           )}
       </PopMenu>
