@@ -19,6 +19,7 @@ export const PopMenu = withStyles({
     borderTopLeftRadius:"0px",
     borderTopRightRadius:"0px",
     width: "280px",
+    backgroundColor: "#f5f5f5"
   },
 })((props) => (
   <Menu
@@ -40,6 +41,9 @@ export const PopMenu = withStyles({
 export const NameInput = withStyles({
   root: {
     width: "100%",
+    backgroundColor: "white",
+    borderRadius: "8px",
+    padding: "8px",
     "& label.Mui-focused": {
       color: "#2F80ED",
     },

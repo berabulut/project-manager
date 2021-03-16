@@ -2,7 +2,7 @@ export const listStyles = (theme) => ({
 	container: {
 	  margin: "8px",
 	  border: "1px solid lightgrey",
-	  backgroundColor: "#f7f7f7",
+	  backgroundColor: "#f5f5f5",
 	  borderRadius: "8px",
 	  width: "280px",
 	  display: "flex",

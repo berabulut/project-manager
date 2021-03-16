@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const boardPageStyles = makeStyles((theme) => ({
   root: {
     height: "100%",
-    marginTop: "-40px"
+    marginTop: "-40px",
   },
   container: {
     marginTop: theme.spacing(5),
@@ -68,13 +68,26 @@ export const topSectionStyles = makeStyles((theme) => ({
 }));
 
 export const listAreaStyles = makeStyles((theme) => ({
-  root: {
-  },
+  root: {},
   container: {
-    minHeight: "80vh",
+    overflow: "auto",
+    height: "80vh",
     marginTop: theme.spacing(3),
     backgroundSize: "cover",
     backgroundPositionY: "center",
-    borderRadius: "8px"
-  }
-}))
+    borderRadius: "8px",
+    "&::-webkit-scrollbar": {
+      width: "8px",
+      height: "8px",
+    },
+    "&::-webkit-scrollbar-track": {
+      background: "#f1f1f1" 
+    },
+    "&::-webkit-scrollbar-thumb": {
+      background: "#888"
+    },
+    "&::-webkit-scrollbar-thumb:hover": {
+      background: "#555"
+    },
+  },
+}));
