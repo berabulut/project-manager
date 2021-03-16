@@ -18,7 +18,7 @@ export const PopMenu = withStyles({
     borderTop: "none",
     borderTopLeftRadius:"0px",
     borderTopRightRadius:"0px",
-    width: "250px",
+    width: "280px",
   },
 })((props) => (
   <Menu

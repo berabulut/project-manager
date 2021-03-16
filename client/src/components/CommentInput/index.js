@@ -90,6 +90,7 @@ const EditDescription = ({ handleButtonClick }) => {
               variant="contained"
               color="primary"
               onClick={handleCommentButton}
+              disabled={loading}
             >
               Comment
             </Button>

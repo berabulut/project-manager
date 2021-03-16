@@ -1,4 +1,3 @@
-import { withStyles } from "@material-ui/core/styles";
 import { Avatar } from "@material-ui/core";
 
 export const taskStyles = (theme) => ({
@@ -58,12 +57,31 @@ export const taskStyles = (theme) => ({
     borderRadius: "8px",
   },
   othersContainer: {
-	display: "flex",
-	alignItems: "center"
+    display: "flex",
+    alignItems: "flex-end",
+    marginRight: theme.spacing(1),
   },
   othersInfo: {
-	  fontWeight: "500"
-  }
+    fontWeight: "500",
+  },
+  addButton: {
+    height: "100%",
+    width: "100%",
+    borderRadius: "8px",
+    background: "#2F80ED",
+    "&:hover": {
+      background: "#2059A5",
+    },
+  },
+  propertyCounter: {
+    color: "#BDBDBD",
+    fontSize: "0.825rem"
+  },
+  propertyIcon: {
+    color: "#BDBDBD",
+    fontSize: "1rem",
+    marginRight: theme.spacing(0.2)
+  },
 });
 
 export const MemberAvatar = (props) => (

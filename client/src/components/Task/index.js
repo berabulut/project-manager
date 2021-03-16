@@ -1,15 +1,14 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { withStyles } from "@material-ui/core/styles";
-import { Paper, Grid, Box, Typography, Avatar } from "@material-ui/core";
+import { Add, AttachFile, Comment } from "@material-ui/icons";
+import { Paper, Grid, Typography, IconButton } from "@material-ui/core";
 import { EditTaskModal } from "components";
 import { UIContext } from "provider/UIProvider";
 import { GetUniqueId } from "functions/BoardFunctions";
 import { UploadFile } from "firebase/Upload";
 import { TaskHelpers } from "helpers";
 import { taskStyles, MemberAvatar } from "./styles";
-
-const detectUnsplash = "https://images.unsplash.com";
 
 class Task extends React.Component {
   constructor(props) {
@@ -271,11 +270,10 @@ class Task extends React.Component {
   }
 
   render() {
-    const { classes, users, image, task, index } = this.props;
+    const { classes, task, index } = this.props;
     const {
       coverImage,
       title,
-      description,
       comments,
       attachments,
       labels,
@@ -309,20 +307,12 @@ class Task extends React.Component {
                 })
               }
             >
-              {coverImage && coverImage.includes(detectUnsplash) ? (
+              {coverImage && (
                 <img
                   alt="task-cover"
                   className={classes.cover}
                   src={coverImage + "&q=80&w=400"}
                 />
-              ) : (
-                coverImage && (
-                  <img
-                    alt="task-cover"
-                    className={classes.cover}
-                    src={coverImage}
-                  />
-                )
               )}
               <Grid container>
                 <Grid item xs={10}>
@@ -331,7 +321,7 @@ class Task extends React.Component {
                     variant="body1"
                     gutterBottom
                   >
-                    {task.title}
+                    {title}
                   </Typography>
                 </Grid>
                 <Grid
@@ -373,7 +363,14 @@ class Task extends React.Component {
                     ) {
                       avatarCounter += 1;
                       return (
-                        <Grid item style={{width: "35px", height: "35px", marginRight: "8px"}}>
+                        <Grid
+                          item
+                          style={{
+                            width: "35px",
+                            height: "35px",
+                            marginRight: "8px",
+                          }}
+                        >
                           <MemberAvatar
                             key={index}
                             picture={user.picture}
@@ -385,7 +382,7 @@ class Task extends React.Component {
                     if (index === renderedBoard.userData.length - 1)
                       avatarCounter = 0;
                   })}
-                {assigments && assigments.length > 2 && (
+                {assigments && assigments.length > 2 ? (
                   <Grid item className={classes.othersContainer}>
                     <Typography
                       className={classes.othersInfo}
@@ -395,7 +392,33 @@ class Task extends React.Component {
                       +{assigments.length - 1} Others
                     </Typography>
                   </Grid>
+                ) : (
+                  <Grid
+                    item
+                    style={{
+                      width: "35px",
+                      height: "35px",
+                    }}
+                  >
+                    <IconButton className={classes.addButton}>
+                      <Add style={{ color: "white" }} />
+                    </IconButton>
+                  </Grid>
                 )}
+                <Grid item container xs justify="flex-end" className={classes.propertyCounter}>
+                  {comments && comments.length > 0 && (
+                    <Grid item container justify="center" alignItems="center" xs={4} style={{maxWidth: "35px"}}>
+                      <Comment className={classes.propertyIcon} />
+                      {comments.length}
+                    </Grid>
+                  )}
+                  {attachments && attachments.length > 0 && (
+                    <Grid item container justify="center" alignItems="center" xs={4} style={{maxWidth: "35px"}}>
+                      <AttachFile className={classes.propertyIcon} />
+                      {attachments.length}
+                    </Grid>
+                  )}
+                </Grid>
               </Grid>
             </Paper>
             <EditTaskModal

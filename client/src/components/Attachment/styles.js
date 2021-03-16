@@ -4,7 +4,7 @@ export const attachmentStyles = makeStyles((theme) => ({
   image: {
     width: "100%",
     height: "66px",
-    padding: "16px",
+    padding: "12px",
     objectFit: "scale-down",
     borderRadius: "8px",
     backgroundColor: "#F2F2F2",
