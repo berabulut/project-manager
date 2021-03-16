@@ -222,6 +222,7 @@ const AddBoardModal = ({ open, setOpen }) => {
                   success ? classes.createButtonSuccess : classes.createButton
                 }
                 startIcon={<Add />}
+                disabled={loading}
               >
                 {loading && (
                   <CircularProgress

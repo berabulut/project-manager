@@ -11,6 +11,7 @@ const InviteUserMenu = ({ boardId, anchorEl, handleClose }) => {
 
   const [input, setInput] = useState("");
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setError("");
@@ -20,14 +21,16 @@ const InviteUserMenu = ({ boardId, anchorEl, handleClose }) => {
     if (!input.trim().length > 0) {
       setError("Input cannot be empty!");
     } else {
+      setLoading(true)
       BoardHelpers.HandleInvitingUser(boardId, input)
         .then((response) => {
+          setLoading(false)
           if (response.statusCode === 500) {
             setError(response.error);
           } else if (response.statusCode === 200) {
             renderedBoard.userData.push(response.data);
-            renderedBoard.users.push({uid: response.data.uid})
-            setRenderedBoard(renderedBoard)
+            renderedBoard.users.push({ uid: response.data.uid });
+            setRenderedBoard(renderedBoard);
             handleClose();
             setError("");
             setInput("");
@@ -37,7 +40,11 @@ const InviteUserMenu = ({ boardId, anchorEl, handleClose }) => {
             setInput("");
           }
         })
-        .catch((err) => setError(err));
+        .catch((err) => {
+          setError(err);
+          setLoading(false)
+          console.log(err);
+        });
     }
   };
 
@@ -79,7 +86,9 @@ const InviteUserMenu = ({ boardId, anchorEl, handleClose }) => {
         <Grid item container>
           {error && (
             <Grid item container xs={12} justify="center">
-              <Typography className={classes.error}>{error}</Typography>
+              <Typography className={classes.error}>
+                Not a valid user address!
+              </Typography>
             </Grid>
           )}
           <Grid item container justify="center" xs={12}>
@@ -88,6 +97,7 @@ const InviteUserMenu = ({ boardId, anchorEl, handleClose }) => {
               className={classes.addButton}
               variant="contained"
               color="primary"
+              disabled={loading}
             >
               Invite
             </Button>
