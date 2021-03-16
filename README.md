@@ -6,6 +6,10 @@
 
 <br>
 
+![shuffle](https://github.com/berabulut/gifs/blob/main/shuffle.gif)
+
+<br>
+
 ## Current state of project
 
  - Authorization (with Firebase auth, I think secure enough?)
