@@ -8,6 +8,7 @@ import {
   ListItemText,
   Avatar,
   Divider,
+  CircularProgress 
 } from "@material-ui/core";
 import {
   AccountCircle,
@@ -53,7 +54,7 @@ const Menu = ({ history }) => {
           src={userData !== undefined && userData.picture}
         />
         <Typography variant="subtitle2" className={classes.username}>
-          {userData !== undefined ? userData.name : "Xanthe Neal"}
+          {userData !== undefined ? userData.name : <CircularProgress style={{width: "30px", height: "30px"}} color="primary" />}
         </Typography>
         {open ? (
           <ArrowDropUp className={classes.arrowIcon} />

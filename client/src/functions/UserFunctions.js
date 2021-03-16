@@ -53,7 +53,7 @@ export const handleSignIn = (response, setUserData, setOpenBackdrop) => {
     return userData;
   } else if (isNewUser === false) {
     if (setUserData) {
-      FetchUserData(response.user.uid, setUserData, setOpenBackdrop);
+      FetchUserData(response.user.uid, setUserData, setOpenBackdrop)
     }
   } else {
     console.log("handlesignin failed somehow");

@@ -155,6 +155,8 @@ export const menuStyles = makeStyles((theme) => ({
   username: {
     marginLeft: theme.spacing(1.5),
     fontWeight: "600",
+    display: "flex",
+    alignItems: "center"
   },
   arrowIcon: {
     marginLeft: theme.spacing(2),

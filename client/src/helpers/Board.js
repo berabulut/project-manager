@@ -35,6 +35,9 @@ const HandleUserRelatedBoards = (
   setOpenBackdrop
 ) =>
   new Promise((resolve, reject) => {
+    if(!userData) {
+      UIHelpers.HandleBackdropOpen(setOpenBackdrop);
+    }
     if (
       userData !== undefined &&
       userData.boards !== undefined &&
@@ -64,6 +67,9 @@ const HandleUserRelatedBoards = (
           reject(err);
         });
     } else {
+      if(userData !== undefined) {
+        UIHelpers.HandleBackdropClose(setOpenBackdrop);
+      }
       reject("userData or boards are undefined");
     }
   });

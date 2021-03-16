@@ -11,20 +11,20 @@ import Routes from "./routes/Routes";
 
 const App = () => {
   const [openBackdrop, setOpenBackdrop] = useState(false);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState();
   const [boards, setBoards] = useState([]);
-  const [renderedBoard, setRenderedBoard] = useState(); 
-
+  const [renderedBoard, setRenderedBoard] = useState();
 
   useEffect(() => {
-    if (!userData.name) {
+    if (!userData) {
       firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
           UserHelpers.HandleUserData(
             user.uid,
             setUserData,
             setBoards,
-            setOpenBackdrop
+            setOpenBackdrop,
+            userData
           );
         } else {
           return;
@@ -34,11 +34,27 @@ const App = () => {
   }, []);
 
 
-
   return (
-    <UIProvider openBackdrop={openBackdrop} setOpenBackdrop={setOpenBackdrop} renderedBoard={renderedBoard} setRenderedBoard={setRenderedBoard}>
-      <AuthProvider setUserData={setUserData} setBoards={setBoards} setOpenBackdrop={setOpenBackdrop}>
-        <UserProvider userData={userData} setUserData={setUserData} boards={boards} setBoards={setBoards} setOpenBackdrop={setOpenBackdrop} renderedBoard={renderedBoard} setRenderedBoard={setRenderedBoard}>
+    <UIProvider
+      openBackdrop={openBackdrop}
+      setOpenBackdrop={setOpenBackdrop}
+      renderedBoard={renderedBoard}
+      setRenderedBoard={setRenderedBoard}
+    >
+      <AuthProvider
+        setUserData={setUserData}
+        setBoards={setBoards}
+        setOpenBackdrop={setOpenBackdrop}
+      >
+        <UserProvider
+          userData={userData}
+          setUserData={setUserData}
+          boards={boards}
+          setBoards={setBoards}
+          setOpenBackdrop={setOpenBackdrop}
+          renderedBoard={renderedBoard}
+          setRenderedBoard={setRenderedBoard}
+        >
           <div className="App">
             <Loading />
             <Routes />
