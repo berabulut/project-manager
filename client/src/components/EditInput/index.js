@@ -32,7 +32,7 @@ const EditComment = ({ handleClose, editInput, value, label }) => {
       <Grid item xs={12}>
         <EditInput
           onChange={handleChange}
-          value={input.trim()}
+          value={input}
           label={label}
           variant="outlined"
           margin="dense"

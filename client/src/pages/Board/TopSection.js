@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Typography, IconButton, Avatar } from "@material-ui/core";
 import { Public, Lock, MoreHoriz, Add } from "@material-ui/icons";
-import { VisibilityMenu, InviteUserMenu } from "components";
+import { VisibilityMenu, InviteUserMenu, BoardDrawer } from "components";
 import { topSectionStyles } from "./styles";
 
 const TopSection = ({ board }) => {
@@ -13,6 +13,8 @@ const TopSection = ({ board }) => {
   const [boardVisibility, setBoardVisibility] = useState("Private");
 
   const [inviteAnchorEl, setInviteAnchorEl] = useState(null);
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleVisibilityClick = (event) => {
     setVisibilityAnchorEl(event.currentTarget);
@@ -31,6 +33,10 @@ const TopSection = ({ board }) => {
   const handleInviteMenuClose = () => {
     setInviteAnchorEl(null);
   };
+
+  const handleShowMenuButtonClick = () => {
+    setDrawerOpen(!drawerOpen);
+  }
 
   return (
     <div className={classes.root}>
@@ -90,7 +96,7 @@ const TopSection = ({ board }) => {
         </Grid>
         <Grid item container style={{width: "150px"}}>
           <Grid justify="flex-end" container item xs={12}>
-            <IconButton className={classes.menuButton} aria-label="cover">
+            <IconButton className={classes.menuButton} aria-label="cover" onClick={handleShowMenuButtonClick}>
               <MoreHoriz className={classes.menuIcon} />
               <Typography className={classes.buttonText} component="p">
                 Show Menu
@@ -99,6 +105,7 @@ const TopSection = ({ board }) => {
           </Grid>
         </Grid>
       </Grid>
+      <BoardDrawer state={drawerOpen} setDrawerOpen={setDrawerOpen} />
     </div>
   );
 };

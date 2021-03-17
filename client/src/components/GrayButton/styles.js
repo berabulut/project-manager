@@ -9,9 +9,9 @@ export const buttonStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "#e6e5e5",
     },
-	width: "90%",
-	justifyContent: "start",
-	paddingLeft: "24px"
+    width: "90%",
+    justifyContent: "start",
+    paddingLeft: "24px",
   },
   text: {
     fontSize: "0.875rem",

@@ -10,7 +10,7 @@ export const buttonStyles = makeStyles((theme) => ({
     lineHeight: "15px",
     letterSpacing: "-0.035em",
     fontSize: "0.725rem",
-	fontWeight: "600"
+    fontWeight: "600",
   },
   icon: {
     fontSize: "1rem",

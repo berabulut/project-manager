@@ -24,3 +24,4 @@ export { default as TaskColumn } from "./TaskColumn";
 export { default as List } from "./List";
 export { default as ListColumn } from "./ListColumn";
 export { default as DndCanvas } from "./DnDCanvas";
+export { default as BoardDrawer } from "./BoardDrawer";

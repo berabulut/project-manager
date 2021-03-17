@@ -74,7 +74,7 @@ export const modalStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2.5),
   },
   description: {
-    fontSize: "1rem",
+    fontSize: "0.925rem",
     lineHeight: "21px",
     letterSpacing: "-0.035em",
     whiteSpace: "pre-line",
