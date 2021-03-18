@@ -64,6 +64,7 @@ const KeywordSearch = ({
             onChange={(e) => setSearchInput(e.target.value)}
             placeholder="Keywords..."
             type="text"
+            onKeyDown={(e) => e.stopPropagation()}
             className={classes.input}
           />
         </Grid>

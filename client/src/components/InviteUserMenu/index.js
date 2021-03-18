@@ -80,6 +80,7 @@ const InviteUserMenu = ({ boardId, anchorEl, handleClose }) => {
               placeholder="User address"
               type="text"
               className={classes.input}
+              onKeyDown={(e) => e.stopPropagation()}
             />
           </Grid>
         </Grid>

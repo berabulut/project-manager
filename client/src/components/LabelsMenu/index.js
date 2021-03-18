@@ -63,6 +63,7 @@ const LabelsMenu = ({ anchorEl, handleClose, addLabel }) => {
               placeholder="Keywords..."
               type="text"
               className={classes.input}
+              onKeyDown={(e) => e.stopPropagation()}
             />
           </Grid>
         </Grid>

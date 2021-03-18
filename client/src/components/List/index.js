@@ -10,7 +10,7 @@ class List extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      anchorEl: null
+      anchorEl: null,
     };
   }
 
@@ -32,51 +32,57 @@ class List extends React.Component {
     const { classes, createNewTask, list, index } = this.props;
     return (
       <Draggable draggableId={list.id} index={index}>
-        {(provided) => (
-          <div
-            className={classes.container}
-            {...provided.draggableProps}
-            ref={provided.innerRef}
-          >
-            <div className={classes.title} {...provided.dragHandleProps}>
-              {this.props.list.title}
-            </div>
-            <Droppable droppableId={list.id} type="task">
-              {(provided, snapshot) => (
-                <div
-                  className={
-                    snapshot.isDraggingOver
-                      ? classes.dragging
-                      : classes.taskList
-                  }
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                >
-                  <TaskColumn list={list} tasks={this.props.tasks} />
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-            <div className={classes.title}>
-              <Grid container justify="space-between" alignItems="center">
-                <IconButton
-                  className={classes.addAnotherCard}
-                  aria-label="cover"
-                  onClick={(e) => {
-                    this.handleAddAnotherCardButtonClick(e)
-                  }}
-                >
-                  <Grid item xs={10}>
-                    <Typography className={classes.buttonText} component="p">
-                      Add another card
-                    </Typography>
-                  </Grid>
-                  <Grid item container xs={2}>
-                    <Add className={classes.menuIcon} />
-                  </Grid>
-                </IconButton>
-                <AddTaskModal anchorEl={this.state.anchorEl} handleClose={this.handleNameInputClose} createNewTask={createNewTask} list={list} />
-              </Grid>
+        {(provided, snapshot) => (
+          <div {...provided.draggableProps} ref={provided.innerRef}>
+            <div
+              className={classes.container}
+              style={{ transform: snapshot.isDragging && "rotate(3.5deg)" }}
+            >
+              <div className={classes.title} {...provided.dragHandleProps}>
+                {this.props.list.title}
+              </div>
+              <Droppable droppableId={list.id} type="task">
+                {(provided, snapshot) => (
+                  <div
+                    className={
+                      snapshot.isDraggingOver
+                        ? classes.dragging
+                        : classes.taskList
+                    }
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                  >
+                    <TaskColumn list={list} tasks={this.props.tasks} />
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+              <div className={classes.title}>
+                <Grid container justify="space-between" alignItems="center">
+                  <IconButton
+                    className={classes.addAnotherCard}
+                    aria-label="cover"
+                    onClick={(e) => {
+                      this.handleAddAnotherCardButtonClick(e);
+                    }}
+                  >
+                    <Grid item xs={10}>
+                      <Typography className={classes.buttonText} component="p">
+                        Add another card
+                      </Typography>
+                    </Grid>
+                    <Grid item container xs={2}>
+                      <Add className={classes.menuIcon} />
+                    </Grid>
+                  </IconButton>
+                  <AddTaskModal
+                    anchorEl={this.state.anchorEl}
+                    handleClose={this.handleNameInputClose}
+                    createNewTask={createNewTask}
+                    list={list}
+                  />
+                </Grid>
+              </div>
             </div>
           </div>
         )}
