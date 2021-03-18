@@ -15,28 +15,29 @@ const Footer = () => {
   const { showFooter } = React.useContext(UIContext);
 
   return (
-    <div style={{display: showFooter === true ? "flex" : "none"}} className={classes.root}>
+    <div
+      style={{ display: showFooter === true ? "flex" : "none" }}
+      className={classes.root}
+    >
       <CssBaseline />
-      <footer className={classes.footer}>
-        <Divider className={classes.divider} />
-        <Grid className={classes.gridContainer} container alignItems="center">
-          <Grid item xs={11}>
-            <Typography className={classes.footerText} variant="body2">
-              Developed by Hüseyin Bera Bulut.
-            </Typography>
-          </Grid>
-          <Grid item xs={1} className={classes.linkGrid}>
-            <Link
-              href="https://github.com/berabulut/project-manager"
-              variant="body2"
-              target="_blank"
-              rel="noopener"
-            >
-              <GitHubIcon />
-            </Link>
-          </Grid>
+      <Divider className={classes.divider} />
+      <Grid className={classes.gridContainer} container alignItems="center">
+        <Grid item xs={11}>
+          <Typography className={classes.footerText} variant="body2">
+            Developed by Hüseyin Bera Bulut.
+          </Typography>
         </Grid>
-      </footer>
+        <Grid item xs={1} className={classes.linkGrid}>
+          <Link
+            href="https://github.com/berabulut/project-manager"
+            variant="body2"
+            target="_blank"
+            rel="noopener"
+          >
+            <GitHubIcon />
+          </Link>
+        </Grid>
+      </Grid>
     </div>
   );
 };

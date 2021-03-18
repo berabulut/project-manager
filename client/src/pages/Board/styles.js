@@ -2,7 +2,6 @@ import { makeStyles } from "@material-ui/core/styles";
 export const boardPageStyles = makeStyles((theme) => ({
   root: {
     height: "100%",
-    marginTop: "-40px",
   },
   container: {
     marginTop: theme.spacing(5),
@@ -71,6 +70,7 @@ export const listAreaStyles = makeStyles((theme) => ({
   root: {},
   container: {
     overflow: "auto",
+    width: "100%",
     height: "80vh",
     marginTop: theme.spacing(3),
     backgroundSize: "cover",

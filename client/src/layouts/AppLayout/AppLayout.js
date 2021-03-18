@@ -27,7 +27,9 @@ const AppLayout = ({ children }) => {
           }}
           className={classes.root}
         >
-          <Header />
+          <header>
+            <Header />
+          </header>
           <div
             style={{
               backgroundColor:
@@ -37,7 +39,9 @@ const AppLayout = ({ children }) => {
           >
             {children}
           </div>
-          <Footer />
+          <footer className={classes.footer}>
+            <Footer />
+          </footer>
         </div>
       </ThemeProvider>
     </>

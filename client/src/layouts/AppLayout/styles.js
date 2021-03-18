@@ -37,12 +37,15 @@ export const LayoutStyles = makeStyles((theme) => ({
 export const appStyles = makeStyles((theme) => ({
   root: {
     minHeight: "100vh",
-    display: "grid",
     boxShadow: "0px 2px 2px rgb(0 0 0 / 5%)",
   },
   children: {
     minHeight: "80vh",
     fontFamily: "Poppins",
+  },
+  footer: {
+    padding: theme.spacing(0, 2),
+    marginTop: "auto",
   },
 }));
 
@@ -51,10 +54,7 @@ export const footerStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
-  footer: {
-    padding: theme.spacing(3, 2),
-    marginTop: "auto",
-  },
+
   divider: {
     backgroundColor: "#333333",
   },
@@ -142,8 +142,8 @@ export const menuStyles = makeStyles((theme) => ({
     color: "#333333",
     borderRadius: "0px",
     minWidth: "250px",
-    display:"flex",
-    justifyContent:"flex-end",
+    display: "flex",
+    justifyContent: "flex-end",
     "&:hover": {
       background: "#ffffff",
     },
@@ -156,7 +156,7 @@ export const menuStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1.5),
     fontWeight: "600",
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
   arrowIcon: {
     marginLeft: theme.spacing(2),
