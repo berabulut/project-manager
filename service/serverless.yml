@@ -15,45 +15,45 @@ package:
 
 functions:
   createNewUser:
-    handler: handlers/createNewUser.create
+    handler: handlers/user.create
     events:
       - http:
           path: user
           method: post
           cors: true
   returnUserData:
-    handler: handlers/returnUserData.login
+    handler: handlers/user.login
     events:
       - http:
           path: user
           method: get
           cors: true
   createNewBoard:
-    handler: handlers/createNewBoard.create
+    handler: handlers/board.create
     events:
       - http:
           path: board
           method: post
           cors: true
   returnUserRelatedBoards:
-    handler: handlers/returnUserRelatedBoards.boards
+    handler: handlers/board.boards
     events:
       - http:
-          path: userRelatedBoards
+          path: user/boards
           method: post
           cors: true
   returnBoardRelatedUsers:
-    handler: handlers/returnBoardRelatedUsers.users
+    handler: handlers/board.users
     events:
       - http:
-          path: boardRelatedUsers
+          path: board/users
           method: post
           cors: true
   inviteUserToBoard:
     handler: handlers/boards.invite
     events:
       - http:
-          path: invite
+          path: board/invite
           method: put
           cors: true 
   createNewList:
@@ -67,8 +67,8 @@ functions:
     handler: handlers/list.reorder
     events:
       - http:
-          path: list-reorder
-          method: post
+          path: list
+          method: put
           cors: true
   createNewTask:
     handler: handlers/task.create
@@ -82,20 +82,20 @@ functions:
     events:
       - http:
           path: task-reorder
-          method: post
+          method: put
           cors: true
   switchTasks:
     handler: handlers/task.switch
     events:
       - http:
           path: task-switch
-          method: post
+          method: put
           cors: true
   updateTask:
     handler: handlers/task.update
     events:
       - http:
-          path: update-task
+          path: task-update
           method: put
           cors: true
   createId:

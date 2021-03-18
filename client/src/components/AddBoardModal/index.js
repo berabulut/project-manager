@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { Clear, Image, Lock, Add, Public } from "@material-ui/icons";
 import { UserContext } from "provider/UserProvider";
-import { CreateNewBoard } from "functions/BoardFunctions";
+import { CreateNewBoard } from "api/Board";
 import { BoardHelpers } from "helpers/";
 import { VisibilityMenu, CoverMenu } from "components";
 import { modalStyles } from "./styles";

@@ -5,7 +5,7 @@ import { Add, AttachFile, Comment } from "@material-ui/icons";
 import { Paper, Grid, Typography, IconButton } from "@material-ui/core";
 import { EditTaskModal } from "components";
 import { UIContext } from "provider/UIProvider";
-import { GetUniqueId } from "functions/BoardFunctions";
+import { GetUniqueId } from "api/Common";
 import { UploadFile } from "firebase/Upload";
 import { TaskHelpers } from "helpers";
 import { taskStyles, MemberAvatar } from "./styles";
@@ -295,6 +295,7 @@ class Task extends React.Component {
           >
             <Paper
               className={classes.paper}
+              style={{transform: snapshot.isDragging && "rotate(3.5deg)"}}
               onClick={this.handleTaskClick}
               onMouseEnter={() =>
                 this.setState({

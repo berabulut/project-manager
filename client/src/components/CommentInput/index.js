@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Grid, Button, Avatar, Typography, CircularProgress } from "@material-ui/core";
-import { GetUniqueId } from "functions/BoardFunctions";
+import { GetUniqueId } from "api/Common";
 import { UserContext } from "provider/UserProvider";
 import { inputStyles, CommentInput } from "./styles";
 

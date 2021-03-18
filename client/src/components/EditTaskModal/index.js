@@ -232,7 +232,7 @@ const EditTaskModal = ({
                   in list
                 </Typography>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs>
                 <Typography
                   style={{ marginLeft: "8px" }}
                   className={classes.listTitle}

@@ -1,4 +1,4 @@
-import { FetchUserData } from "functions/UserFunctions";
+import { FetchUserData } from "api/User";
 import { BoardHelpers } from "helpers/";
 
 const HandleUserData = (uid, setUserData, setBoards, setOpenBackdrop, userData) =>

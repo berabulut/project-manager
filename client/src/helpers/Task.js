@@ -1,4 +1,4 @@
-import { UpdateTaskProperty } from "functions/BoardFunctions";
+import { UpdateTaskProperty } from "api/Task";
 
 const HandleTaskPropertyUpdate = (board, taskId, property, data) =>
   new Promise((resolve, reject) => {

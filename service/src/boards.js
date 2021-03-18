@@ -2,10 +2,12 @@ const admin = require("firebase-admin");
 const firebaseConfig = require("../firebaseConfig.json");
 require("dotenv").config();
 
-admin.initializeApp({
-  credential: admin.credential.cert(firebaseConfig),
-  databaseURL: process.env.DATABASE_URL,
-});
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(firebaseConfig),
+    databaseURL: process.env.DATABASE_URL,
+  });
+}
 
 const db = admin.database();
 
@@ -14,12 +16,18 @@ const createNewBoard = (title, coverPhoto, visibility, users) =>
     const ref = db.ref(`/boards/`).push();
     const boardId = ref.key;
 
+    const now = new Date();
+    const day = now.getDate();
+    const month = now.toLocaleString("en-EN", { month: "long" });
+    const year = now.getFullYear();
+
     const data = {
       id: boardId,
       title: title,
       coverPhoto: coverPhoto,
       visibility: visibility,
       users: users,
+      date: `${month} ${day}, ${year}`,
     };
 
     ref.set(data, (error) => {
@@ -183,138 +191,9 @@ const inviteUser = (boardId, address) =>
     });
   });
 
-const createNewList = (boardId, list, listOrder) =>
-  new Promise((resolve, reject) => {
-    try {
-      const ref = db.ref(`/boards/${boardId}/lists/${list.id}`);
-      ref.set(list, async (error) => {
-        if (error) {
-          reject(error);
-        } else {
-          let response = await handleListOrder(boardId, listOrder);
-          resolve(response);
-        }
-      });
-    } catch (err) {
-      reject(err);
-    }
-  });
-
-const createNewTask = (boardId, task, listId, taskIds) =>
-  new Promise((resolve, reject) => {
-    try {
-      const ref = db.ref(`/boards/${boardId}/tasks/${task.id}`);
-      ref.set(task, async (error) => {
-        if (error) {
-          reject(error);
-        } else {
-          const response = await linkTaskAndList(boardId, listId, taskIds);
-          resolve(response);
-        }
-      });
-    } catch (err) {
-      reject(err);
-    }
-  });
-
-const linkTaskAndList = (boardId, listId, taskIds) =>
-  new Promise((resolve, reject) => {
-    try {
-      const ref = db.ref(`/boards/${boardId}/lists/${listId}/taskIds`);
-      ref.set(taskIds, (error) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(true);
-        }
-      });
-    } catch (err) {
-      reject(err);
-    }
-  });
-
-const handleListOrder = (boardId, listOrder) =>
-  new Promise((resolve, reject) => {
-    const ref = db.ref(`/boards/${boardId}/listOrder`);
-
-    ref.set(listOrder, (error) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(true);
-      }
-    });
-  });
-
-const reorderLists = (boardId, listOrder) =>
-  new Promise((resolve, reject) => {
-    const ref = db.ref(`/boards/${boardId}/listOrder`);
-    ref.set(listOrder, (error) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(true);
-      }
-    });
-  });
-
-const reorderTasksInSameList = (boardId, listId, taskIds) =>
-  new Promise((resolve, reject) => {
-    const ref = db.ref(`/boards/${boardId}/lists/${listId}/taskIds`);
-    ref.set(taskIds, (error) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(true);
-      }
-    });
-  });
-
-const switchTasksBetweenLists = (boardId, lists) =>
-  new Promise((resolve, reject) => {
-    const ref = db.ref(`/boards/${boardId}/lists`);
-    ref.set(lists, (error) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(true);
-      }
-    });
-  });
-
-const updateTaskProperty = (boardId, taskId, property, data) =>
-  new Promise((resolve, reject) => {
-    const ref = db.ref(`/boards/${boardId}/tasks/${taskId}/${property}`);
-    ref.set(data, (error) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(true);
-      }
-    });
-  });
-
-const createUniqueId = () =>
-  new Promise((resolve, reject) => {
-    try {
-      const ref = db.ref(`/uniqueId`).push();
-      const uniqueId = ref.key;
-      resolve(uniqueId);
-    } catch (err) {
-      reject(err);
-    }
-  });
-
 module.exports = {
   createNewBoard,
-  createNewList,
-  reorderLists,
-  createNewTask,
-  updateTaskProperty,
-  reorderTasksInSameList,
-  switchTasksBetweenLists,
   returnUserRelatedBoards,
   returnBoardRelatedUsers,
-  createUniqueId,
   inviteUser,
 };

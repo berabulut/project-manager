@@ -105,7 +105,7 @@ const TopSection = ({ board }) => {
           </Grid>
         </Grid>
       </Grid>
-      <BoardDrawer state={drawerOpen} setDrawerOpen={setDrawerOpen} />
+      <BoardDrawer state={drawerOpen} setDrawerOpen={setDrawerOpen} board={board} />
     </div>
   );
 };

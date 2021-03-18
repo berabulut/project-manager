@@ -11,17 +11,15 @@ if (!admin.apps.length) {
 
 const db = admin.database();
 
-const returnImages = () => // this will be removed later
+const createUniqueId = () =>
   new Promise((resolve, reject) => {
-    const ref = db.ref(`/images`);
-    ref.once("value", (snapshot) => {
-      const value = snapshot.val();
-      if (value !== undefined && value !== null) {
-        resolve(value);
-      } else {
-        reject("No images!");
-      }
-    });
+    try {
+      const ref = db.ref(`/uniqueId`).push();
+      const uniqueId = ref.key;
+      resolve(uniqueId);
+    } catch (err) {
+      reject(err);
+    }
   });
 
-module.exports = { returnImages };
+module.exports = { createUniqueId };

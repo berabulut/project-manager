@@ -2,10 +2,12 @@ const admin = require("firebase-admin");
 const firebaseConfig = require("../firebaseConfig.json");
 require("dotenv").config();
 
-admin.initializeApp({
-  credential: admin.credential.cert(firebaseConfig),
-  databaseURL: process.env.DATABASE_URL,
-});
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(firebaseConfig),
+    databaseURL: process.env.DATABASE_URL,
+  });
+}
 
 const db = admin.database();
 
@@ -68,4 +70,4 @@ const returnUserData = (uid) =>
     }
   });
 
-module.exports = { createNewUser, checkIfUserExists, returnUserData };
+module.exports = { createNewUser, returnUserData };

@@ -1,4 +1,4 @@
-const { createUniqueId } = require("../src/boards");
+const { createUniqueId } = require("../src/common");
 
 module.exports.create = () => {
   const promise = new Promise((resolve) => {

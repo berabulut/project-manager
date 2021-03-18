@@ -1,15 +1,9 @@
-import {
-  GetUserRelatedBoards,
-  CreateNewTask,
-  CreateNewList,
-  ReorderLists,
-  ReorderTasks,
-  SwitchTasks,
-  InviteUser,
-} from "functions/BoardFunctions";
+import { GetUserRelatedBoards, InviteUser } from "api/Board";
+import { CreateNewTask, ReorderTasks, SwitchTasks } from "api/Task";
+import { CreateNewList, ReorderLists } from "api/List";
 import { UIHelpers, UserHelpers } from "helpers/";
 
-const parseBoardId = (
+const ParseBoardId = (
   boards // structuring boardIds for api call --> ["id1", "id2"]
 ) =>
   new Promise((resolve, reject) => {
@@ -35,7 +29,7 @@ const HandleUserRelatedBoards = (
   setOpenBackdrop
 ) =>
   new Promise((resolve, reject) => {
-    if(!userData) {
+    if (!userData) {
       UIHelpers.HandleBackdropOpen(setOpenBackdrop);
     }
     if (
@@ -44,7 +38,7 @@ const HandleUserRelatedBoards = (
       Object.keys(userData.boards).length > 0
     ) {
       UIHelpers.HandleBackdropOpen(setOpenBackdrop);
-      parseBoardId(Object.values(userData.boards))
+      ParseBoardId(Object.values(userData.boards))
         .then((response) => {
           const body = {
             boardList: response,
@@ -67,7 +61,7 @@ const HandleUserRelatedBoards = (
           reject(err);
         });
     } else {
-      if(userData !== undefined) {
+      if (userData !== undefined) {
         UIHelpers.HandleBackdropClose(setOpenBackdrop);
       }
       reject("userData or boards are undefined");
@@ -84,6 +78,7 @@ const FindExactBoard = (
   UIHelpers.HandleBackdropOpen(setOpenBackdrop);
 
   for (let board of boards) {
+    board.admin = board.userData[0];
     if (board.id === id) {
       UIHelpers.HandleBoardPageRender(
         board,

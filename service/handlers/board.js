@@ -1,15 +1,76 @@
 const {
-  createNewTask,
-  reorderTasksInSameList,
-  switchTasksBetweenLists,
-  updateTaskProperty,
-} = require("../src/task");
+  createNewBoard,
+  inviteUser,
+  returnBoardRelatedUsers,
+  returnUserRelatedBoards,
+} = require("../src/boards");
 
-module.exports.create = (event) => {
+module.exports.create = async (event) => {
+  const promise = new Promise((resolve, reject) => {
+    const board = JSON.parse(event.body);
+    if (board.users !== undefined) {
+      createNewBoard(
+        board.title,
+        board.coverPhoto,
+        board.visibility,
+        board.users
+      )
+        .then((data) => {
+          const response = {
+            statusCode: 200,
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Credentials": true,
+            },
+            body: JSON.stringify({
+              statusCode: 200,
+              message: "Board created successfuly!",
+              data: data,
+            }),
+          };
+          resolve(response);
+        })
+        .catch((err) => {
+          const response = {
+            statusCode: 500,
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Credentials": true,
+            },
+            body: JSON.stringify({
+              statusCode: 500,
+              message: "Couldn't create a board!",
+              error: err,
+            }),
+          };
+          resolve(response);
+        });
+    } else {
+      const response = {
+        statusCode: 400,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
+        },
+        body: JSON.stringify({
+          statusCode: 400,
+          message: "Title is undefined",
+        }),
+      };
+      resolve(response);
+    }
+  });
+  return promise;
+};
+
+module.exports.invite = (event) => {
   const promise = new Promise((resolve) => {
-    const body = JSON.parse(event.body);
-    if (body.boardId && body.task && body.listId && body.taskIds) {
-      createNewTask(body.boardId, body.task, body.listId, body.taskIds)
+    const { boardId, address } = JSON.parse(event.body);
+    if (boardId && address) {
+      inviteUser(boardId, address)
         .then((data) => {
           const response = {
             statusCode: 200,
@@ -59,12 +120,13 @@ module.exports.create = (event) => {
   return promise;
 };
 
-module.exports.reorder = (event) => {
-  const promise = new Promise((resolve) => {
-    const body = JSON.parse(event.body);
-    if (body.boardId && body.listId && body.taskIds) {
-      reorderTasksInSameList(body.boardId, body.listId, body.taskIds)
-        .then((data) => {
+module.exports.users = async (event) => {
+  const promise = new Promise(async (resolve, reject) => {
+    const userList = JSON.parse(event.body).userList;
+    if (userList !== undefined && userList.length > 0) {
+      const userData = await returnBoardRelatedUsers(userList);
+      try {
+        if (userData) {
           const response = {
             statusCode: 200,
             headers: {
@@ -74,26 +136,26 @@ module.exports.reorder = (event) => {
             },
             body: JSON.stringify({
               statusCode: 200,
-              data: data,
+              userData: userData,
             }),
           };
           resolve(response);
-        })
-        .catch((err) => {
-          const response = {
+        }
+      } catch (err) {
+        const response = {
+          statusCode: 500,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+          },
+          body: JSON.stringify({
             statusCode: 500,
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Credentials": true,
-            },
-            body: JSON.stringify({
-              statusCode: 500,
-              error: err,
-            }),
-          };
-          resolve(response);
-        });
+            error: err,
+          }),
+        };
+        resolve(response);
+      }
     } else {
       const response = {
         statusCode: 400,
@@ -104,7 +166,7 @@ module.exports.reorder = (event) => {
         },
         body: JSON.stringify({
           statusCode: 400,
-          message: "Missing body element",
+          message: "User IDS are not undefined!",
         }),
       };
       resolve(response);
@@ -113,12 +175,13 @@ module.exports.reorder = (event) => {
   return promise;
 };
 
-module.exports.switch = (event) => {
-  const promise = new Promise((resolve) => {
-    const body = JSON.parse(event.body);
-    if (body.boardId && body.lists) {
-      switchTasksBetweenLists(body.boardId, body.lists)
-        .then((data) => {
+module.exports.boards = async (event) => {
+  const promise = new Promise(async (resolve, reject) => {
+    const boardList = JSON.parse(event.body).boardList;
+    if (boardList !== undefined && boardList.length > 0) {
+      const boardData = await returnUserRelatedBoards(boardList);
+      try {
+        if (boardData) {
           const response = {
             statusCode: 200,
             headers: {
@@ -128,26 +191,26 @@ module.exports.switch = (event) => {
             },
             body: JSON.stringify({
               statusCode: 200,
-              data: data,
+              boardData: boardData,
             }),
           };
           resolve(response);
-        })
-        .catch((err) => {
-          const response = {
+        }
+      } catch (err) {
+        const response = {
+          statusCode: 500,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+          },
+          body: JSON.stringify({
             statusCode: 500,
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Credentials": true,
-            },
-            body: JSON.stringify({
-              statusCode: 500,
-              error: err,
-            }),
-          };
-          resolve(response);
-        });
+            error: err,
+          }),
+        };
+        resolve(response);
+      }
     } else {
       const response = {
         statusCode: 400,
@@ -158,61 +221,7 @@ module.exports.switch = (event) => {
         },
         body: JSON.stringify({
           statusCode: 400,
-          message: "Missing body element",
-        }),
-      };
-      resolve(response);
-    }
-  });
-  return promise;
-};
-
-module.exports.update = (event) => {
-  const promise = new Promise((resolve) => {
-    const { boardId, taskId, property, data } = JSON.parse(event.body);
-    if (boardId && taskId && property && data) {
-      updateTaskProperty(boardId, taskId, property, data)
-        .then((data) => {
-          const response = {
-            statusCode: 200,
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Credentials": true,
-            },
-            body: JSON.stringify({
-              statusCode: 200,
-              data: data,
-            }),
-          };
-          resolve(response);
-        })
-        .catch((err) => {
-          const response = {
-            statusCode: 500,
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Credentials": true,
-            },
-            body: JSON.stringify({
-              statusCode: 500,
-              error: err,
-            }),
-          };
-          resolve(response);
-        });
-    } else {
-      const response = {
-        statusCode: 400,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": true,
-        },
-        body: JSON.stringify({
-          statusCode: 400,
-          message: "Missing body element",
+          message: "Board IDS are not undefined!",
         }),
       };
       resolve(response);
