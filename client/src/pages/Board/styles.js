@@ -3,13 +3,12 @@ export const boardPageStyles = makeStyles((theme) => ({
   root: {
     height: "100%",
   },
-  container: {
-    marginTop: theme.spacing(5),
-  },
 }));
 
 export const topSectionStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    marginTop: "40px"
+  },
   button: {
     width: "100%",
     maxWidth: "120px",

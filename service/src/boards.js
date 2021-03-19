@@ -191,9 +191,22 @@ const inviteUser = (boardId, address) =>
     });
   });
 
+const updateBoardProperty = (boardId, property, data) =>
+  new Promise((resolve, reject) => {
+    const ref = db.ref(`/boards/${boardId}/${property}`);
+    ref.set(data, (error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(true);
+      }
+    });
+  });
+
 module.exports = {
   createNewBoard,
   returnUserRelatedBoards,
   returnBoardRelatedUsers,
   inviteUser,
+  updateBoardProperty,
 };

@@ -50,7 +50,7 @@ functions:
           method: post
           cors: true
   inviteUserToBoard:
-    handler: handlers/boards.invite
+    handler: handlers/board.invite
     events:
       - http:
           path: board/invite

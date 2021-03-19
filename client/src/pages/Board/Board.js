@@ -4,6 +4,7 @@ import { Container } from "@material-ui/core";
 import { UIContext } from "provider/UIProvider";
 import { UserContext } from "provider/UserProvider";
 import { AppLayout } from "layouts";
+import { BoardDrawer } from "components";
 import { boardPageStyles } from "./styles";
 import { BoardHelpers, UIHelpers } from "helpers/";
 import TopSection from "./TopSection";
@@ -54,8 +55,9 @@ const Board = () => {
     <AppLayout>
       <div className={classes.root}>
         <Container className={classes.container} component="main" maxWidth="xl">
+          <BoardDrawer board={renderedBoard} />
           <TopSection board={renderedBoard} />
-          <ListArea board={renderedBoard}/>
+          <ListArea board={renderedBoard} />
         </Container>
       </div>
     </AppLayout>

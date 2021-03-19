@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import { UIContext } from "provider/UIProvider";
 import { Grid, Typography, IconButton, Avatar } from "@material-ui/core";
 import { Public, Lock, MoreHoriz, Add } from "@material-ui/icons";
-import { VisibilityMenu, InviteUserMenu, BoardDrawer } from "components";
+import { VisibilityMenu, InviteUserMenu } from "components";
 import { topSectionStyles } from "./styles";
 
 const TopSection = ({ board }) => {
   const classes = topSectionStyles();
+
+  const { changeDrawerVisibility } = useContext(UIContext);
 
   const [visibilityAnchorEl, setVisibilityAnchorEl] = useState(null);
   const [openVisibility, setOpenVisibilty] = useState(false);
@@ -13,8 +16,6 @@ const TopSection = ({ board }) => {
   const [boardVisibility, setBoardVisibility] = useState("Private");
 
   const [inviteAnchorEl, setInviteAnchorEl] = useState(null);
-
-  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleVisibilityClick = (event) => {
     setVisibilityAnchorEl(event.currentTarget);
@@ -33,10 +34,6 @@ const TopSection = ({ board }) => {
   const handleInviteMenuClose = () => {
     setInviteAnchorEl(null);
   };
-
-  const handleShowMenuButtonClick = () => {
-    setDrawerOpen(!drawerOpen);
-  }
 
   return (
     <div className={classes.root}>
@@ -94,9 +91,13 @@ const TopSection = ({ board }) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item container style={{width: "150px"}}>
+        <Grid item container style={{ width: "150px" }}>
           <Grid justify="flex-end" container item xs={12}>
-            <IconButton className={classes.menuButton} aria-label="cover" onClick={handleShowMenuButtonClick}>
+            <IconButton
+              className={classes.menuButton}
+              aria-label="cover"
+              onClick={changeDrawerVisibility}
+            >
               <MoreHoriz className={classes.menuIcon} />
               <Typography className={classes.buttonText} component="p">
                 Show Menu
@@ -105,7 +106,6 @@ const TopSection = ({ board }) => {
           </Grid>
         </Grid>
       </Grid>
-      <BoardDrawer state={drawerOpen} setDrawerOpen={setDrawerOpen} board={board} />
     </div>
   );
 };

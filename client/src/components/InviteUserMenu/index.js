@@ -21,16 +21,17 @@ const InviteUserMenu = ({ boardId, anchorEl, handleClose }) => {
     if (!input.trim().length > 0) {
       setError("Input cannot be empty!");
     } else {
-      setLoading(true)
+      setLoading(true);
       BoardHelpers.HandleInvitingUser(boardId, input)
         .then((response) => {
-          setLoading(false)
+          setLoading(false);
           if (response.statusCode === 500) {
             setError(response.error);
           } else if (response.statusCode === 200) {
-            renderedBoard.userData.push(response.data);
-            renderedBoard.users.push({ uid: response.data.uid });
-            setRenderedBoard(renderedBoard);
+            let board = { ...renderedBoard };
+            board.userData.push(response.data);
+            board.users.push({ uid: response.data.uid });
+            setRenderedBoard(board);
             handleClose();
             setError("");
             setInput("");
@@ -42,7 +43,7 @@ const InviteUserMenu = ({ boardId, anchorEl, handleClose }) => {
         })
         .catch((err) => {
           setError(err);
-          setLoading(false)
+          setLoading(false);
           console.log(err);
         });
     }

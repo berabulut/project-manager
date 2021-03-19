@@ -11,6 +11,15 @@ const UIProvider = ({
 }) => {
   const [showAllBoards, setShowAllBoards] = useState(false);
   const [showFooter, setShowFooter] = useState(true);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const changeDrawerVisibility = (state = undefined) => {
+    if (state) {
+      setDrawerOpen(state);
+    } else {
+      setDrawerOpen(!drawerOpen);
+    }
+  };
 
   return (
     <UIContext.Provider
@@ -23,6 +32,8 @@ const UIProvider = ({
         setShowAllBoards,
         setRenderedBoard,
         renderedBoard,
+        drawerOpen,
+        changeDrawerVisibility,
       }}
     >
       {children}

@@ -86,7 +86,6 @@ const FindExactBoard = (
         setShowAllBoards
       );
       UIHelpers.HandleBackdropClose(setOpenBackdrop);
-      console.log(board);
       break;
     }
   }

@@ -21,7 +21,7 @@ export const GetUserRelatedBoards = (body) =>
   new Promise(async (resolve, reject) => {
     try {
       let response = await fetch(
-        process.env.REACT_APP_SERVICE_URL + `/userRelatedBoards`,
+        process.env.REACT_APP_SERVICE_URL + `/user/boards`,
         {
           method: "POST",
           headers: new Headers({
