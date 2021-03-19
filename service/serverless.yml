@@ -35,6 +35,13 @@ functions:
           path: board
           method: post
           cors: true
+  updateBoard:
+    handler: handlers/board.update
+    events:
+      - http:
+          path: board
+          method: put
+          cors: true
   returnUserRelatedBoards:
     handler: handlers/board.boards
     events:
