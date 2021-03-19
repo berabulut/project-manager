@@ -17,16 +17,13 @@ export const CreateNewBoard = (boardData) =>
 export const UpdateBoardProperty = (body) =>
   new Promise(async (resolve, reject) => {
     try {
-      let response = await fetch(
-        process.env.REACT_APP_SERVICE_URL + `/board`,
-        {
-          method: "PUT",
-          headers: new Headers({
-            "Content-type": "application/json; charset=UTF-8",
-          }),
-          body: JSON.stringify(body),
-        }
-      );
+      let response = await fetch(process.env.REACT_APP_SERVICE_URL + `/board`, {
+        method: "PUT",
+        headers: new Headers({
+          "Content-type": "application/json; charset=UTF-8",
+        }),
+        body: JSON.stringify(body),
+      });
       resolve(await response.json());
     } catch (err) {
       reject(err);
@@ -84,7 +81,26 @@ export const InviteUser = (body) =>
           body: JSON.stringify(body),
         }
       );
-      resolve(await response.json());
+      resolve(response.json());
+    } catch (err) {
+      reject(err);
+    }
+  });
+
+export const RemoveUser = (body) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      let response = await fetch(
+        process.env.REACT_APP_SERVICE_URL + `/user/boards`,
+        {
+          method: "PUT",
+          headers: new Headers({
+            "Content-type": "application/json; charset=UTF-8",
+          }),
+          body: JSON.stringify(body),
+        }
+      );
+      resolve(response.json());
     } catch (err) {
       reject(err);
     }

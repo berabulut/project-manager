@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { UIContext } from "provider/UIProvider";
 import { BoardHelpers } from "helpers";
 import {
@@ -43,17 +43,31 @@ const BoardDrawer = ({ board }) => {
 
   const editDescription = (description) => {
     setRenderedBoard({ ...board, description: description });
-    BoardHelpers.HandleBoardPropertyUpdate(board.id, "description", description)
+    BoardHelpers.HandleBoardPropertyUpdate(
+      board.id,
+      "description",
+      description
+    );
   };
 
   const editTitle = (title) => {
     setRenderedBoard({ ...board, title: title });
-    BoardHelpers.HandleBoardPropertyUpdate(board.id, "title", title)
+    BoardHelpers.HandleBoardPropertyUpdate(board.id, "title", title);
   };
 
   const removeUser = (user) => {
-    console.log(user)
-  }
+    const uid = user.uid;
+    const users = board.users.filter((user) => user.uid !== uid);
+    const userData = board.userData.filter((user) => user.uid !== uid);
+    
+    setRenderedBoard({
+      ...board,
+      users: users,
+      userData: userData
+    });
+    BoardHelpers.HandleBoardPropertyUpdate(board.id, "users", users);
+    BoardHelpers.HandleRemovingUser(board.id, uid);
+  };
 
   return (
     <Drawer
@@ -333,7 +347,10 @@ const BoardDrawer = ({ board }) => {
                     </Grid>
                     <Grid item container xs justify="center">
                       <Grid item contaşner xs={9}>
-                        <div onClick={() => removeUser(user)} className={classes.redButton}>
+                        <div
+                          onClick={() => removeUser(user)}
+                          className={classes.redButton}
+                        >
                           <Typography
                             variant="subtitle1"
                             component="p"

@@ -2,6 +2,7 @@ import {
   GetUserRelatedBoards,
   InviteUser,
   UpdateBoardProperty,
+  RemoveUser,
 } from "api/Board";
 import { CreateNewTask, ReorderTasks, SwitchTasks } from "api/Task";
 import { CreateNewList, ReorderLists } from "api/List";
@@ -232,6 +233,17 @@ const HandleBoardPropertyUpdate = (boardId, property, data) =>
     }
   });
 
+const HandleRemovingUser = (boardId, userId) =>
+  new Promise((resolve, reject) => {
+    RemoveUser({ boardId: boardId, userId: userId })
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
 const BoardHelpers = {
   HandleUserRelatedBoards: HandleUserRelatedBoards,
   HandleBoardCreation: HandleBoardCreation,
@@ -242,6 +254,7 @@ const BoardHelpers = {
   HandleTaskReordering: HandleTaskReordering,
   HandleTaskSwitching: HandleTaskSwitching,
   HandleInvitingUser: HandleInvitingUser,
+  HandleRemovingUser: HandleRemovingUser,
   FindExactBoard: FindExactBoard,
 };
 
