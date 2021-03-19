@@ -1,4 +1,8 @@
-import { GetUserRelatedBoards, InviteUser } from "api/Board";
+import {
+  GetUserRelatedBoards,
+  InviteUser,
+  UpdateBoardProperty,
+} from "api/Board";
 import { CreateNewTask, ReorderTasks, SwitchTasks } from "api/Task";
 import { CreateNewList, ReorderLists } from "api/List";
 import { UIHelpers, UserHelpers } from "helpers/";
@@ -213,9 +217,25 @@ const HandleTaskSwitching = (board, lists) =>
     }
   });
 
+const HandleBoardPropertyUpdate = (boardId, property, data) =>
+  new Promise((resolve, reject) => {
+    if (boardId && property && data) {
+      UpdateBoardProperty({
+        boardId: boardId,
+        property: property,
+        data: data || " ",
+      })
+        .then(() => resolve(true))
+        .catch((err) => reject(err));
+    } else {
+      reject("Missing parameters");
+    }
+  });
+
 const BoardHelpers = {
   HandleUserRelatedBoards: HandleUserRelatedBoards,
   HandleBoardCreation: HandleBoardCreation,
+  HandleBoardPropertyUpdate: HandleBoardPropertyUpdate,
   HandleListCreation: HandleListCreation,
   HandleTaskCreation: HandleTaskCreation,
   HandleListReordering: HandleListReordering,
