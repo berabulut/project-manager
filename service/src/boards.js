@@ -203,10 +203,22 @@ const updateBoardProperty = (boardId, property, data) =>
     });
   });
 
+const removeBoardFromUser = (boardId, userId) =>
+  new Promise((resolve, reject) => {
+    const ref = db.ref(`/users/${userId}/boards/${boardId}`);
+    ref.remove((error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(true);
+      }
+    });
+  });
 module.exports = {
   createNewBoard,
   returnUserRelatedBoards,
   returnBoardRelatedUsers,
   inviteUser,
   updateBoardProperty,
+  removeBoardFromUser,
 };
