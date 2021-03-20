@@ -8,15 +8,12 @@ const {
 } = require("../src/boards");
 
 module.exports.create = async (event) => {
-  const promise = new Promise((resolve, reject) => {
-    const board = JSON.parse(event.body);
-    if (board.users !== undefined) {
-      createNewBoard(
-        board.title,
-        board.coverPhoto,
-        board.visibility,
-        board.users
-      )
+  const promise = new Promise((resolve) => {
+    const { admin, title, coverPhoto, visibility, users } = JSON.parse(
+      event.body
+    );
+    if (users !== undefined) {
+      createNewBoard(admin, title, coverPhoto, visibility, users)
         .then((data) => {
           const response = {
             statusCode: 200,

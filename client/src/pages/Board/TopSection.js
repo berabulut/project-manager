@@ -5,7 +5,7 @@ import { Public, Lock, MoreHoriz, Add } from "@material-ui/icons";
 import { VisibilityMenu, InviteUserMenu } from "components";
 import { topSectionStyles } from "./styles";
 
-const TopSection = ({ board }) => {
+const TopSection = ({ board, admin }) => {
   const classes = topSectionStyles();
 
   const { changeDrawerVisibility } = useContext(UIContext);
@@ -39,7 +39,10 @@ const TopSection = ({ board }) => {
     <div className={classes.root}>
       <Grid container>
         <Grid item container xs>
-          <Grid item style={{ minWidth: "120px" }}>
+          <Grid
+            item
+            style={{ minWidth: "120px" }}
+          >
             <IconButton
               onClick={handleVisibilityClick}
               className={classes.button}
@@ -75,7 +78,11 @@ const TopSection = ({ board }) => {
                   </Grid>
                 );
               })}
-            <Grid item className={classes.iconGrid}>
+            <Grid
+              item
+              className={classes.iconGrid}
+              style={{ display: admin ? "block" : "none" }}
+            >
               <IconButton
                 onClick={handleInviteButtonClick}
                 className={classes.addButton}

@@ -11,7 +11,7 @@ if (!admin.apps.length) {
 
 const db = admin.database();
 
-const createNewBoard = (title, coverPhoto, visibility, users) =>
+const createNewBoard = (admin, title, coverPhoto, visibility, users) =>
   new Promise((resolve, reject) => {
     const ref = db.ref(`/boards/`).push();
     const boardId = ref.key;
@@ -22,6 +22,7 @@ const createNewBoard = (title, coverPhoto, visibility, users) =>
     const year = now.getFullYear();
 
     const data = {
+      admin: admin,
       id: boardId,
       title: title,
       coverPhoto: coverPhoto,

@@ -47,6 +47,7 @@ const AddBoardModal = ({ open, setOpen }) => {
       setLoading(true);
 
       const boardData = {
+        admin: userData,
         title: boardTitle,
         coverPhoto: coverImageRaw,
         visibility: boardVisibility,

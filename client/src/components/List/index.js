@@ -1,8 +1,8 @@
 import React from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { IconButton, Grid, Typography } from "@material-ui/core";
-import { AddTaskModal, TaskColumn } from "components";
-import { Add } from "@material-ui/icons";
+import { AddTaskModal, TaskColumn, ListMenu } from "components";
+import { Add, MoreHoriz } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 import { listStyles } from "./styles";
 
@@ -10,21 +10,32 @@ class List extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      anchorEl: null,
+      addCardAnchorEl: null,
+      listMenuAnchorEl: null,
     };
   }
 
   handleNameInputClose = () => {
     this.setState({
-      ...this.state,
-      anchorEl: null,
+      addCardAnchorEl: null,
+    });
+  };
+
+  handleListMenuClose = () => {
+    this.setState({
+      listMenuAnchorEl: null,
     });
   };
 
   handleAddAnotherCardButtonClick = (event) => {
     this.setState({
-      ...this.state,
-      anchorEl: event.currentTarget,
+      addCardAnchorEl: event.currentTarget,
+    });
+  };
+
+  handleListMenuButtonClick = (event) => {
+    this.setState({
+      listMenuAnchorEl: event.currentTarget,
     });
   };
 
@@ -38,9 +49,17 @@ class List extends React.Component {
               className={classes.container}
               style={{ transform: snapshot.isDragging && "rotate(3.5deg)" }}
             >
-              <div className={classes.title} {...provided.dragHandleProps}>
-                {this.props.list.title}
-              </div>
+              <Grid container {...provided.dragHandleProps}>
+                <Grid item container xs={9} className={classes.title}>
+                  {this.props.list.title}
+                </Grid>
+                <Grid item container xs={3} justify="flex-end">
+                  <IconButton onClick={this.handleListMenuButtonClick} style={{ padding: "8px" }}>
+                    <MoreHoriz />
+                  </IconButton>
+                </Grid>
+                <ListMenu anchorEl={this.state.listMenuAnchorEl} handleClose={this.handleListMenuClose} />
+              </Grid>
               <Droppable droppableId={list.id} type="task">
                 {(provided, snapshot) => (
                   <div
@@ -76,7 +95,7 @@ class List extends React.Component {
                     </Grid>
                   </IconButton>
                   <AddTaskModal
-                    anchorEl={this.state.anchorEl}
+                    anchorEl={this.state.addCardAnchorEl}
                     handleClose={this.handleNameInputClose}
                     createNewTask={createNewTask}
                     list={list}

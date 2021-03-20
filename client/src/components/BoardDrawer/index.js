@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { UIContext } from "provider/UIProvider";
+import { UserContext, UserProvider } from "provider/UserProvider";
 import { BoardHelpers } from "helpers";
 import {
   Drawer,
@@ -21,6 +22,7 @@ const BoardDrawer = ({ board, admin }) => {
   const { drawerOpen, changeDrawerVisibility, setRenderedBoard } = useContext(
     UIContext
   );
+  const { boards, setBoards } = useContext(UserContext);
 
   const [displayDescriptionEditArea, setDisplayDescriptionEditArea] = useState(
     false
@@ -57,12 +59,29 @@ const BoardDrawer = ({ board, admin }) => {
       board.id,
       "description",
       description
-    );
+    ).then(() => {
+      for (let i = 0; i < boards.length; i++) {
+        if (boards[i].id === board.id) {
+          boards[i].description = description;
+          setBoards(boards);
+        }
+      }
+    });
   };
 
   const editTitle = (title) => {
-    setRenderedBoard({ ...board, title: title });
-    BoardHelpers.HandleBoardPropertyUpdate(board.id, "title", title);
+    const newState = { ...board, title: title };
+    setRenderedBoard(newState);
+    BoardHelpers.HandleBoardPropertyUpdate(board.id, "title", title).then(
+      () => {
+        for (let i = 0; i < boards.length; i++) {
+          if (boards[i].id === board.id) {
+            boards[i].title = title;
+            setBoards(boards);
+          }
+        }
+      }
+    );
   };
 
   const removeUser = (user) => {
@@ -75,7 +94,17 @@ const BoardDrawer = ({ board, admin }) => {
       users: users,
       userData: userData,
     });
-    BoardHelpers.HandleBoardPropertyUpdate(board.id, "users", users);
+    BoardHelpers.HandleBoardPropertyUpdate(board.id, "users", users).then(
+      () => {
+        for (let i = 0; i < boards.length; i++) {
+          if (boards[i].id === board.id) {
+            boards[i].users = users;
+            boards[i].userData = userData;
+            setBoards(boards);
+          }
+        }
+      }
+    );
     BoardHelpers.HandleRemovingUser(board.id, uid);
   };
 
@@ -175,7 +204,13 @@ const BoardDrawer = ({ board, admin }) => {
                 />
               </Grid>
             </Grid>
-            <Grid item xs container justify="start" style={{display: admin ?  "flex" : "none"}}>
+            <Grid
+              item
+              xs
+              container
+              justify="start"
+              style={{ display: admin ? "flex" : "none" }}
+            >
               <LightButton
                 handleClick={() =>
                   setDisplayTitleEditArea(!displayTitleEditArea)
@@ -232,7 +267,7 @@ const BoardDrawer = ({ board, admin }) => {
                 alignItems="end"
               />
             </Grid>
-            <Grid item xs={2} style={{display: admin ?  "block" : "none"}}>
+            <Grid item xs={2} style={{ display: admin ? "block" : "none" }}>
               <LightButton
                 handleClick={() =>
                   setDisplayDescriptionEditArea(!displayDescriptionEditArea)
@@ -288,7 +323,7 @@ const BoardDrawer = ({ board, admin }) => {
           {/* MAPPING TEAM MEMBERS */}
           {board.userData &&
             board.userData.map((user, index) => {
-              if (index === 0) {
+              if (board.admin.uid === user.uid) {
                 return (
                   <Grid
                     item
@@ -360,7 +395,7 @@ const BoardDrawer = ({ board, admin }) => {
                         <div
                           onClick={() => setDisplayRemoveDialog(true)}
                           className={classes.redButton}
-                          style={{display: admin ? "flex" : "none"}}
+                          style={{ display: admin ? "flex" : "none" }}
                         >
                           <Typography
                             variant="subtitle1"

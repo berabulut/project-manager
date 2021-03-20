@@ -54,8 +54,8 @@ const Board = () => {
   }, [boards]);
 
   useEffect(() => {
-    if (renderedBoard && renderedBoard.userData && userData) {
-      if (userData.uid === renderedBoard.userData[0].uid) {
+    if (renderedBoard && renderedBoard.admin) {
+      if (userData.uid === renderedBoard.admin.uid) {
         setAdmin(true);
       }
     }
@@ -66,7 +66,7 @@ const Board = () => {
       <div className={classes.root}>
         <Container className={classes.container} component="main" maxWidth="xl">
           <BoardDrawer admin={adminPerm} board={renderedBoard} />
-          <TopSection board={renderedBoard} />
+          <TopSection admin={adminPerm} board={renderedBoard} />
           <ListArea board={renderedBoard} />
         </Container>
       </div>
