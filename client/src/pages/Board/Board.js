@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container } from "@material-ui/core";
 import { UIContext } from "provider/UIProvider";
@@ -19,8 +19,10 @@ const Board = () => {
     setShowAllBoards,
     setOpenBackdrop,
   } = useContext(UIContext);
-  const { boards } = useContext(UserContext);
+  const { boards, userData } = useContext(UserContext);
   const { id } = useParams();
+
+  const [adminPerm, setAdmin] = useState(false);
 
   useEffect(() => {
     BoardHelpers.FindExactBoard(
@@ -51,11 +53,19 @@ const Board = () => {
     );
   }, [boards]);
 
+  useEffect(() => {
+    if (renderedBoard && renderedBoard.userData && userData) {
+      if (userData.uid === renderedBoard.userData[0].uid) {
+        setAdmin(true);
+      }
+    }
+  }, [renderedBoard, userData]);
+
   return (
     <AppLayout>
       <div className={classes.root}>
         <Container className={classes.container} component="main" maxWidth="xl">
-          <BoardDrawer board={renderedBoard} />
+          <BoardDrawer admin={adminPerm} board={renderedBoard} />
           <TopSection board={renderedBoard} />
           <ListArea board={renderedBoard} />
         </Container>

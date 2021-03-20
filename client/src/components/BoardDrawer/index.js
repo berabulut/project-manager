@@ -5,22 +5,28 @@ import {
   Drawer,
   Grid,
   Typography,
+  Button,
   IconButton,
   Avatar,
+  Dialog,
+  DialogTitle,
+  DialogActions,
 } from "@material-ui/core";
 import { SectionTitle, EditInput, LightButton } from "components";
 import { Close } from "@material-ui/icons";
 import { drawerStyles } from "./styles";
 
-const BoardDrawer = ({ board }) => {
+const BoardDrawer = ({ board, admin }) => {
   const classes = drawerStyles();
+  const { drawerOpen, changeDrawerVisibility, setRenderedBoard } = useContext(
+    UIContext
+  );
+
   const [displayDescriptionEditArea, setDisplayDescriptionEditArea] = useState(
     false
   );
   const [displayTitleEditArea, setDisplayTitleEditArea] = useState(false);
-  const { drawerOpen, changeDrawerVisibility, setRenderedBoard } = useContext(
-    UIContext
-  );
+  const [displayRemoveDialog, setDisplayRemoveDialog] = useState(false);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -41,6 +47,10 @@ const BoardDrawer = ({ board }) => {
     setDisplayTitleEditArea(false);
   };
 
+  const closeRemoveDialog = () => {
+    setDisplayRemoveDialog(false);
+  };
+
   const editDescription = (description) => {
     setRenderedBoard({ ...board, description: description });
     BoardHelpers.HandleBoardPropertyUpdate(
@@ -59,11 +69,11 @@ const BoardDrawer = ({ board }) => {
     const uid = user.uid;
     const users = board.users.filter((user) => user.uid !== uid);
     const userData = board.userData.filter((user) => user.uid !== uid);
-    
+
     setRenderedBoard({
       ...board,
       users: users,
-      userData: userData
+      userData: userData,
     });
     BoardHelpers.HandleBoardPropertyUpdate(board.id, "users", users);
     BoardHelpers.HandleRemovingUser(board.id, uid);
@@ -165,7 +175,7 @@ const BoardDrawer = ({ board }) => {
                 />
               </Grid>
             </Grid>
-            <Grid item xs container justify="start">
+            <Grid item xs container justify="start" style={{display: admin ?  "flex" : "none"}}>
               <LightButton
                 handleClick={() =>
                   setDisplayTitleEditArea(!displayTitleEditArea)
@@ -222,7 +232,7 @@ const BoardDrawer = ({ board }) => {
                 alignItems="end"
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={2} style={{display: admin ?  "block" : "none"}}>
               <LightButton
                 handleClick={() =>
                   setDisplayDescriptionEditArea(!displayDescriptionEditArea)
@@ -348,8 +358,9 @@ const BoardDrawer = ({ board }) => {
                     <Grid item container xs justify="center">
                       <Grid item contaşner xs={9}>
                         <div
-                          onClick={() => removeUser(user)}
+                          onClick={() => setDisplayRemoveDialog(true)}
                           className={classes.redButton}
+                          style={{display: admin ? "flex" : "none"}}
                         >
                           <Typography
                             variant="subtitle1"
@@ -361,6 +372,28 @@ const BoardDrawer = ({ board }) => {
                           </Typography>
                         </div>
                       </Grid>
+                      <Dialog
+                        open={displayRemoveDialog}
+                        onClose={closeRemoveDialog}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                      >
+                        <DialogTitle>{"Remove this user?"}</DialogTitle>
+                        <DialogActions>
+                          <Button onClick={closeRemoveDialog} color="primary">
+                            Go Back
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              removeUser(user);
+                              closeRemoveDialog();
+                            }}
+                            style={{ color: "#f44336" }}
+                          >
+                            Delete
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
                     </Grid>
                   </Grid>
                 );
