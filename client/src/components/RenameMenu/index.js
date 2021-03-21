@@ -1,23 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "provider/UserProvider";
+import { ListHelpers } from "helpers";
 import { IconButton, Grid, Button } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import { modalStyles, PopMenu, NameInput } from "./styles";
 
-const AddElementModal = ({ anchorEl, handleClose, createNewList }) => {
+const RenameMenu = ({ anchorEl, handleClose, listTitle, listId }) => {
   const classes = modalStyles();
   const [error, setError] = useState();
   const [nameInput, setNameInput] = useState("");
+  const [disableButton, setDisableButton] = useState(false);
+  const { renderedBoard, setRenderedBoard } = useContext(UserContext);
 
   const handleSubmit = () => {
+    setDisableButton(true);
     if (nameInput !== undefined && nameInput.trim().length <= 0) {
       setError("Field cannot be empty!");
+      setDisableButton(false);
     } else if (nameInput !== undefined && nameInput.trim().length > 0) {
-      setError();
-      createNewList(nameInput);
-      handleClose();
-      setNameInput("");
+      renderedBoard.lists[listId]["title"] = nameInput;
+      ListHelpers.HandleRenamingList(renderedBoard, listId, nameInput)
+        .then(() => {
+          setRenderedBoard(renderedBoard);
+          handleClose();
+          setError();
+          setDisableButton(false);
+        })
+        .catch((err) => {
+          setError(err);
+          setDisableButton(false);
+        });
     } else {
       setError("Field cannot be empty!");
+      setDisableButton(false);
     }
   };
 
@@ -25,6 +40,10 @@ const AddElementModal = ({ anchorEl, handleClose, createNewList }) => {
     const { value } = e.target;
     setNameInput(value);
   };
+
+  useEffect(() => {
+    setNameInput(listTitle || "");
+  }, [listTitle]);
 
   return (
     <PopMenu
@@ -62,8 +81,9 @@ const AddElementModal = ({ anchorEl, handleClose, createNewList }) => {
               variant="contained"
               color="primary"
               onClick={handleSubmit}
+              disabled={disableButton}
             >
-              Add List
+              Rename
             </Button>
           </Grid>
           <Grid item xs={2}>
@@ -85,4 +105,4 @@ const AddElementModal = ({ anchorEl, handleClose, createNewList }) => {
   );
 };
 
-export default AddElementModal;
+export default RenameMenu;

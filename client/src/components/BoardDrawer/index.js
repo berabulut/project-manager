@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { UIContext } from "provider/UIProvider";
-import { UserContext, UserProvider } from "provider/UserProvider";
+import { UserContext } from "provider/UserProvider";
 import { BoardHelpers } from "helpers";
 import {
   Drawer,
@@ -38,7 +38,7 @@ const BoardDrawer = ({ board, admin }) => {
       return;
     }
 
-    changeDrawerVisibility(false);
+    changeDrawerVisibility("set", false);
   };
 
   const closeDescriptionEditArea = () => {
@@ -139,7 +139,7 @@ const BoardDrawer = ({ board, admin }) => {
             <Grid item xs={2} container justify="flex-end">
               <IconButton
                 className={classes.closeButton}
-                onClick={() => changeDrawerVisibility(false)}
+                onClick={() => changeDrawerVisibility("set", false)}
               >
                 <Close />
               </IconButton>

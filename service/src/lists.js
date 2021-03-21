@@ -53,4 +53,43 @@ const reorderLists = (boardId, listOrder) =>
     });
   });
 
-module.exports = { createNewList, reorderLists };
+const renameList = (boardId, listId, title) =>
+  new Promise((resolve, reject) => {
+    const ref = db.ref(`/boards/${boardId}/lists/${listId}/title`);
+    ref.set(title, (error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(true);
+      }
+    });
+  });
+
+const removeList = (boardId, listId) =>
+  new Promise((resolve, reject) => {
+    let ref = db.ref(`/boards/${boardId}/lists/${listId}`);
+    ref.remove((error) => {
+      if (error) {
+        reject(error);
+      } else {
+        ref = db.ref(`/boards/${boardId}/listOrder`);
+        ref.once("value", (snapshot) => {
+          // removing from list order as well
+          let value = snapshot.val();
+          if (value !== undefined && value !== null) {
+            value = value.filter((id) => id !== listId);
+            ref.set(value, (error) => {
+              if (error) {
+                reject(error);
+              } else {
+                resolve(true);
+              }
+            });
+          } else {
+            reject("List order is undefined!");
+          }
+        });
+      }
+    });
+  });
+module.exports = { createNewList, reorderLists, renameList, removeList };

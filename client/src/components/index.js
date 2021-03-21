@@ -6,8 +6,8 @@ export { default as ListColumn } from "./ListColumn";
 export { default as DndCanvas } from "./DnDCanvas";
 
 export { default as AddBoardModal } from "./AddBoardModal";
-export { default as AddListModal } from "./AddListModal";
-export { default as AddTaskModal } from "./AddTaskModal";
+export { default as AddListModal } from "./AddListModal"; // should be named menu
+export { default as AddTaskModal } from "./AddTaskModal"; // should be named menu
 export { default as EditTaskModal } from "./EditTaskModal";
 
 export { default as AssignMemberMenu } from "./AssignMemberMenu";
@@ -16,6 +16,7 @@ export { default as LabelsMenu } from "./LabelsMenu";
 export { default as VisibilityMenu } from "./VisibilityMenu";
 export { default as CoverMenu } from "./CoverMenu";
 export { default as ListMenu } from "./ListMenu";
+export { default as RenameMenu } from "./RenameMenu";
 export { default as BoardDrawer } from "./BoardDrawer";
 
 export { default as Attachment } from "./Attachment";

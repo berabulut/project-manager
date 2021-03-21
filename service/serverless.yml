@@ -77,6 +77,20 @@ functions:
           path: list
           method: post
           cors: true
+  removeList:
+    handler: handlers/list.remove
+    events:
+      - http:
+          path: list/remove
+          method: put
+          cors: true
+  renameList:
+    handler: handlers/list.rename
+    events:
+      - http:
+          path: list/rename
+          method: put
+          cors: true
   reorderLists:
     handler: handlers/list.reorder
     events:

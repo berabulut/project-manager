@@ -1,4 +1,5 @@
 import React from "react";
+import shortid from "shortid";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { IconButton, Grid, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
@@ -7,8 +8,6 @@ import { AddListModal, ListColumn } from "components";
 import { UserContext } from "provider/UserProvider";
 import { BoardHelpers } from "helpers";
 import { canvasStyles } from "./styles";
-
-
 
 class DndCanvas extends React.Component {
   constructor(props) {
@@ -73,7 +72,7 @@ class DndCanvas extends React.Component {
       return;
     }
 
-    // triggers when reordering lists 
+    // triggers when reordering lists
     if (type === "list") {
       const newListOrder = Array.from(this.state.listOrder);
       newListOrder.splice(source.index, 1);
@@ -92,7 +91,6 @@ class DndCanvas extends React.Component {
 
     const home = this.state.lists[source.droppableId];
     const foreign = this.state.lists[destination.droppableId];
-
 
     // triggers when reordering tasks in the same list
     if (home === foreign) {
@@ -153,17 +151,14 @@ class DndCanvas extends React.Component {
       .catch((err) => console.log(err));
   };
 
-  createNewList = (title) => {
+  createNewList = async (title) => {
     let updatedState = { ...this.state };
-    let listCount;
-    let listId;
+    const listId = shortid.generate();
     let list;
     const board = this.context.renderedBoard;
 
     if (updatedState.lists !== undefined) {
       // board doesn't have any list
-      listCount = Object.keys(updatedState.lists).length;
-      listId = `list-${listCount + 1}`;
       list = {
         id: listId,
         title: title,
@@ -183,8 +178,6 @@ class DndCanvas extends React.Component {
         })
         .catch((err) => console.log(err));
     } else {
-      listCount = 0;
-      listId = `list-${listCount + 1}`;
       list = {
         id: listId,
         title: title,
@@ -295,7 +288,7 @@ class DndCanvas extends React.Component {
                 this.state.lists &&
                 this.state.listOrder.map((listId, index) => {
                   const list = this.state.lists[listId];
-                  if (list !== undefined) {
+                  if (list && list.id) {
                     return (
                       <ListColumn
                         key={list.id}
