@@ -39,22 +39,23 @@ const TopSection = ({ board, admin }) => {
     <div className={classes.root}>
       <Grid container>
         <Grid item container xs>
-          <Grid
-            item
-            style={{ minWidth: "120px" }}
-          >
+          <Grid item style={{ minWidth: "120px" }}>
             <IconButton
               onClick={handleVisibilityClick}
-              className={classes.button}
+              classes={{
+                root: classes.button,
+                disabled: classes.disabledButton,
+              }}
               aria-label="cover"
+              disabled={admin ? "false" : "true"}
             >
-              {boardVisibility === "Private" ? (
+              {board.visibility === "Private" ? (
                 <Lock className={classes.icons} />
               ) : (
                 <Public className={classes.icons} />
               )}
               <Typography className={classes.buttonText} component="p">
-                {boardVisibility}
+                {board.visibility}
               </Typography>
             </IconButton>
             <VisibilityMenu

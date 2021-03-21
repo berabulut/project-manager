@@ -20,6 +20,9 @@ export const topSectionStyles = makeStyles((theme) => ({
       backgroundColor: "#e6e5e5",
     },
   },
+  disabledButton: {
+    backgroundColor: "#F2F2F2 !important",
+  },
   menuButton: {
     width: "100%",
     maxWidth: "150px",
