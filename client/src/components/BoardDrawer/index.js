@@ -322,6 +322,7 @@ const BoardDrawer = ({ board, admin }) => {
           </Grid>
           {/* MAPPING TEAM MEMBERS */}
           {board.userData &&
+            board.users &&
             board.userData.map((user, index) => {
               if (board.admin.uid === user.uid) {
                 return (

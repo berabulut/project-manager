@@ -14,9 +14,7 @@ const UIProvider = ({
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const changeDrawerVisibility = (set, state) => {
-    console.log(set, state);
     if (set && state) {
-      console.log("girdi");
       setDrawerOpen(state);
     } else {
       setDrawerOpen(!drawerOpen);

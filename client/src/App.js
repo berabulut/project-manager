@@ -34,8 +34,9 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log(renderedBoard);
-  }, [renderedBoard]);
+    console.log('app.js', boards);
+  }, [boards]);
+
 
   return (
     <UIProvider

@@ -47,7 +47,7 @@ const TopSection = ({ board, admin }) => {
                 disabled: classes.disabledButton,
               }}
               aria-label="cover"
-              disabled={admin ? "false" : "true"}
+              disabled={!admin}
             >
               {board && board.visibility === "Private" ? (
                 <Lock className={classes.icons} />

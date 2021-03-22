@@ -113,15 +113,14 @@ export const headerStyles = makeStyles((theme) => ({
   },
   boardsContainer: {
     justifyContent: "flex-start",
-    [theme.breakpoints.down("sm")]: {
-      justifyContent: "space-evenly",
-    },
-  },
-  boardsContainer: {
     display: "flex",
     alignItems: "center",
     flexGrow: "1",
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
   },
+
   title: {
     textAlign: "center",
     fontSize: "1.125rem",
@@ -130,6 +129,10 @@ export const headerStyles = makeStyles((theme) => ({
     letterSpacing: "-0.035em",
     paddingRight: theme.spacing(3),
     borderRight: "1px solid #E0E0E0",
+    maxWidth: "170px",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
   },
   allBoardsButton: {
     marginLeft: theme.spacing(3),

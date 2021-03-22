@@ -83,7 +83,6 @@ const FindExactBoard = (
   UIHelpers.HandleBackdropOpen(setOpenBackdrop);
 
   for (let board of boards) {
-    board.admin = board.userData[0];
     if (board.id === id) {
       UIHelpers.HandleBoardPageRender(
         board,
