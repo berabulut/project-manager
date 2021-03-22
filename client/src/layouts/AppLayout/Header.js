@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <div className={classes.root}>
       <AppBar className={classes.appbar} position="static">
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
             className={classes.menuButton}

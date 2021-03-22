@@ -17,6 +17,13 @@ export const modalStyles = makeStyles((theme) => ({
     outlineColor: "white",
     outlineWidth: "0px",
   },
+  footerSection: {
+    display:"flex",
+    justifyContent: "flex-end",
+    [theme.breakpoints.down('xs')]: {
+      justifyContent: "space-evenly"
+    },
+  },
   closeButton: {
     backgroundColor: "#2F80ED",
     color: "white",

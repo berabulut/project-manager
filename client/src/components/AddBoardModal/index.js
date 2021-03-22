@@ -208,7 +208,7 @@ const AddBoardModal = ({ open, setOpen }) => {
               />
             </Grid>
           </Grid>
-          <Grid item container xs={12} justify="flex-end">
+          <Grid item container xs={12} className={classes.footerSection} justify="flex-end">
             <Grid item xs={3}>
               <Button onClick={handleClose} className={classes.cancelButton}>
                 Cancel

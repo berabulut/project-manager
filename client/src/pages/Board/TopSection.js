@@ -49,13 +49,13 @@ const TopSection = ({ board, admin }) => {
               aria-label="cover"
               disabled={admin ? "false" : "true"}
             >
-              {board.visibility === "Private" ? (
+              {board && board.visibility === "Private" ? (
                 <Lock className={classes.icons} />
               ) : (
                 <Public className={classes.icons} />
               )}
               <Typography className={classes.buttonText} component="p">
-                {board.visibility}
+                {board && board.visibility}
               </Typography>
             </IconButton>
             <VisibilityMenu

@@ -8,9 +8,8 @@ import { UserContext } from "provider/UserProvider";
 import { boardsStyles } from "./styles";
 
 const Boards = () => {
-  
   const classes = boardsStyles();
-  
+
   let history = useHistory();
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -28,7 +27,7 @@ const Boards = () => {
     <AppLayout>
       <div className={classes.root}>
         <Container className={classes.container} component="main" maxWidth="lg">
-          <Box display="flex">
+          <Box display="flex" className={classes.boxContainer}>
             <Box p={1} flexGrow={1}>
               <Typography className={classes.title} variant="h6" gutterBottom>
                 All Boards
@@ -52,7 +51,7 @@ const Boards = () => {
               boards.length > 0 &&
               boards.map((value, key) => {
                 return (
-                  <Grid container key={key} item lg={3} md={3} sm={4} xs={8}>
+                  <Grid container key={key} item lg={3} md={3} sm={4} xs={10}>
                     <div onClick={() => handleBoardClick(value.id)}>
                       <Board
                         image={value.coverPhoto}

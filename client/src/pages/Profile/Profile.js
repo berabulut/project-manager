@@ -72,7 +72,7 @@ const Profile = () => {
                   variant="h5"
                   gutterBottom
                 >
-                  EMAIL
+                  ADDRESS
                 </Typography>
               </Grid>
               <Grid item xs={8}>
@@ -86,9 +86,9 @@ const Profile = () => {
               </Grid>
             </Grid>
           </Box>
-          <Button className={classes.button} variant="outlined">
+          {/* <Button className={classes.button} variant="outlined">
             Edit
-          </Button>
+          </Button> */}
         </Container>
       </div>
     </AppLayout>

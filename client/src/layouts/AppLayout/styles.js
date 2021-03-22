@@ -42,6 +42,9 @@ export const appStyles = makeStyles((theme) => ({
   children: {
     minHeight: "80vh",
     fontFamily: "Poppins",
+    [theme.breakpoints.down("sm")]: {
+      minHeight: "85vh",
+    },
   },
   footer: {
     padding: theme.spacing(0, 2),
@@ -66,6 +69,9 @@ export const footerStyles = makeStyles((theme) => ({
   },
   gridContainer: {
     marginTop: "20px",
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: "20px",
+    },
   },
   linkGrid: {
     textAlign: "center",
@@ -81,11 +87,19 @@ export const headerStyles = makeStyles((theme) => ({
     boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.05)",
     color: "#333333",
   },
+  toolbar: {
+    [theme.breakpoints.down("xs")]: {
+      padding: "0px",
+    },
+  },
   menuButton: {
     marginRight: theme.spacing(2),
     borderRadius: "0px",
     "&:hover": {
       background: "#ffffff",
+    },
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
     },
   },
   menuIcon: {
@@ -138,6 +152,11 @@ export const headerStyles = makeStyles((theme) => ({
 }));
 
 export const menuStyles = makeStyles((theme) => ({
+  menuContainer: {
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+    },
+  },
   popButton: {
     color: "#333333",
     borderRadius: "0px",
@@ -146,6 +165,9 @@ export const menuStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
     "&:hover": {
       background: "#ffffff",
+    },
+    [theme.breakpoints.down("xs")]: {
+      justifyContent: "flex-start",
     },
   },
   avatar: {

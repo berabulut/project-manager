@@ -38,9 +38,9 @@ const Boards = ({ image, title, users, visibility }) => {
             }
           })}
           {users.length > 3 && (
-            <Box >
+            <Box className={classes.othersContainer}>
               <Typography
-                className={classes.title}
+                className={classes.others}
                 variant="body1"
                 gutterBottom
               >

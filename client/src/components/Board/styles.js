@@ -18,7 +18,8 @@ export const boardStyles = makeStyles((theme) => ({
   cover: {
     width: "100%",
     borderRadius: "12px",
-    height: "170px"
+    height: "170px",
+    objectFit: "cover"
   },
   title: {
     fontWeight: "500",
@@ -31,5 +32,14 @@ export const boardStyles = makeStyles((theme) => ({
   },
   avatar: {
     borderRadius: "8px"
+  },
+  othersContainer: {
+    display: "flex",
+    alignItems: "center"
+  },
+  others: {
+    fontWeight: "500",
+    letterSpacing: "-0.035em",
+    fontSize: "0.825rem"
   }
 }));

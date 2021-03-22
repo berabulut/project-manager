@@ -38,7 +38,7 @@ const Menu = ({ history }) => {
   };
 
   return (
-    <div>
+    <div className={classes.menuContainer}>
       <IconButton
         aria-label="account of current user"
         aria-controls="menu-appbar"
