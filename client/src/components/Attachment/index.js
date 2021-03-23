@@ -19,7 +19,7 @@ const Attachment = ({
   image,
   coverImage,
   deleteAttachment,
-  addImageToTask
+  addImageToTask,
 }) => {
   const classes = attachmentStyles();
   const [displayDeleteDialog, setDisplayDeleteDialog] = useState(false);
@@ -38,7 +38,7 @@ const Attachment = ({
   };
 
   return (
-    <Grid container>
+    <Grid container className={classes.container}>
       <Grid item style={{ width: "100px" }}>
         {image ? (
           <img className={classes.image} src={`${fileUrl}`} alt={title} />
@@ -50,7 +50,7 @@ const Attachment = ({
           )
         )}
       </Grid>
-      <Grid item xs={9} style={{ paddingLeft: "16px" }}>
+      <Grid item xs={9} className={classes.bottomSection}>
         <Grid item xs={12}>
           <Typography className={classes.date}>Added on {date}</Typography>
         </Grid>
@@ -69,7 +69,7 @@ const Attachment = ({
               <LightButton text="Download" />
             </a>
           </Grid>
-          <Grid item xs={3} style={{ marginLeft: "14px" }}>
+          <Grid item xs={3} className={classes.deleteButtonContainer}>
             <div
               style={{ display: "inline-flex" }}
               onClick={handleDeleteButtonClick}

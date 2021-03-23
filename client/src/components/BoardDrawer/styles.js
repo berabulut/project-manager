@@ -3,6 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 export const drawerStyles = makeStyles((theme) => ({
   drawer: {
     width: "370px",
+    [theme.breakpoints.down('xs')]: {
+      width: "100%",
+    },
     height: "100%",
     borderTop: "1px solid rgba(0, 0, 0, 0.12)",
     boxShadow: "0px 4px 12px rgb(0 0 0 / 5%)",

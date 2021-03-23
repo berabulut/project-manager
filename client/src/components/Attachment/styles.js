@@ -1,6 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const attachmentStyles = makeStyles((theme) => ({
+  container: {
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(2)
+    },
+  },
   image: {
     width: "100%",
     height: "66px",
@@ -49,4 +54,16 @@ export const attachmentStyles = makeStyles((theme) => ({
       cursor: "pointer",
     },
   },
+  deleteButtonContainer: {
+    marginLeft: "14px",
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: "28px",
+    },
+  },
+  bottomSection: {
+    paddingLeft: "16px",
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: "0px"
+    },
+  }
 }));

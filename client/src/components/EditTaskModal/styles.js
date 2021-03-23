@@ -49,7 +49,7 @@ export const modalStyles = makeStyles((theme) => ({
     borderRadius: "8px",
     objectFit: "contain",
     padding: theme.spacing(1.5),
-    background: "#F2F2F2"
+    background: "#F2F2F2",
   },
   taskTitle: {
     color: "black",
@@ -83,6 +83,21 @@ export const modalStyles = makeStyles((theme) => ({
     maxHeight: "60px",
     display: "inline-flex",
     marginBottom: theme.spacing(1.5),
+    justifyContent: "flex-end",
+    [theme.breakpoints.down("xs")]: {
+      justifyContent: "center",
+    },
+  },
+  assignedUsersContainer: {
+    maxHeight: "60px",
+    display: "inline-flex",
+    marginBottom: theme.spacing(1.5),
+    paddingLeft: "20px", 
+    justifyContent: "flex-end",
+    [theme.breakpoints.down("xs")]: {
+      justifyContent: "flex-start",
+      paddingLeft: "0px", 
+    },
   },
   uploadButton: {
     border: "1px solid #BDBDBD",
@@ -135,8 +150,8 @@ export const modalStyles = makeStyles((theme) => ({
     transition: "background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
     height: "40px",
     "&:hover": {
-      background: "#2f80ed61"
-    }
+      background: "#2f80ed61",
+    },
   },
   assignMemberButtonText: {
     fontWeight: 500,
@@ -144,5 +159,13 @@ export const modalStyles = makeStyles((theme) => ({
     lineHeight: "16px",
     letterSpacing: "-0.035em",
     color: "#2F80ED",
+  },
+  sectionTitleContainer: {
+    paddingLeft: "24px",
+    marginBottom: "12px",
+    height: "30px",
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: "0px",
+    },
   },
 }));

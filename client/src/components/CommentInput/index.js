@@ -1,5 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Grid, Button, Avatar, Typography, CircularProgress } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  Avatar,
+  Typography,
+  CircularProgress,
+} from "@material-ui/core";
 import { GetUniqueId } from "api/Common";
 import { UserContext } from "provider/UserProvider";
 import { inputStyles, CommentInput } from "./styles";
@@ -65,7 +71,7 @@ const EditDescription = ({ handleButtonClick }) => {
   return (
     <>
       <Grid container className={classes.container} justify="space-around">
-        <Grid item xs={1}>
+        <Grid item sm={1} xs={2}>
           <Avatar
             src={userData !== undefined && userData.picture}
             variant="rounded"
@@ -84,7 +90,7 @@ const EditDescription = ({ handleButtonClick }) => {
           />
         </Grid>
         <Grid item container xs={12} justify="flex-end">
-          <Grid item xs={3}>
+          <Grid item sm={3} xs={4}>
             <Button
               className={classes.commentButton}
               variant="contained"

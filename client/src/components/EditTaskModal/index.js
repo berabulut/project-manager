@@ -187,7 +187,7 @@ const EditTaskModal = ({
             )}
           </Grid>
           {/*this is the left side of modal in big screens */}
-          <Grid className={classes.gridItem} item container xs={8}>
+          <Grid className={classes.gridItem} item container sm={8} xs={12}>
             <Grid item container xs={12}>
               <Grid
                 item
@@ -437,7 +437,8 @@ const EditTaskModal = ({
             className={classes.gridItem}
             item
             container
-            xs={4}
+            sm={4}
+            xs={12}
             style={{ display: "table" }}
           >
             {/*section title - Actions */}
@@ -445,11 +446,7 @@ const EditTaskModal = ({
               item
               container
               justify="flex-start"
-              style={{
-                paddingLeft: "24px",
-                marginBottom: "12px",
-                height: "30px",
-              }}
+              className={classes.sectionTitleContainer}
             >
               <SectionTitle title="Actions" icon="people" />
             </Grid>
@@ -460,7 +457,8 @@ const EditTaskModal = ({
                 item
                 container
                 justify="flex-end"
-                xs={12}
+                xs={6}
+                sm={12}
               >
                 <GrayButton
                   icon="people"
@@ -481,8 +479,8 @@ const EditTaskModal = ({
               className={classes.buttonContainer}
               item
               container
-              justify="flex-end"
-              xs={12}
+              sm={12}
+              xs={6}
             >
               <GrayButton
                 icon="label"
@@ -501,7 +499,8 @@ const EditTaskModal = ({
               item
               container
               justify="flex-end"
-              xs={12}
+              xs={6}
+              sm={12}
             >
               <GrayButton
                 icon="cover"
@@ -527,7 +526,7 @@ const EditTaskModal = ({
                   item
                   container
                   justify="flex-start"
-                  style={{ paddingLeft: "24px", marginBottom: "12px" }}
+                  className={classes.sectionTitleContainer}
                 >
                   <SectionTitle title="Members" icon="people" />
                 </Grid>
@@ -535,13 +534,11 @@ const EditTaskModal = ({
                   return (
                     <Grid
                       index={index}
-                      className={classes.buttonContainer}
+                      className={classes.assignedUsersContainer}
                       container
                       onClick={() => removeAssignedMember(user.uid)}
-                      style={{ paddingLeft: "20px", marginBottom: "8px" }}
-                      justify="center"
                     >
-                      <Grid item container xs className={classes.member}>
+                      <Grid item container sm xs={8} className={classes.member}>
                         <Grid item xs style={{ maxWidth: "32px" }}>
                           <Avatar
                             className={classes.avatar}
