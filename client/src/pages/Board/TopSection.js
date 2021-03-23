@@ -37,9 +37,9 @@ const TopSection = ({ board, admin }) => {
 
   return (
     <div className={classes.root}>
-      <Grid container>
+      <Grid container className={classes.container}>
         <Grid item container xs>
-          <Grid item style={{ minWidth: "120px" }}>
+          <Grid item style={{ minWidth: "120px" }} className={classes.visibilityMenuContainer}>
             <IconButton
               onClick={handleVisibilityClick}
               classes={{
@@ -99,8 +99,8 @@ const TopSection = ({ board, admin }) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item container style={{ width: "150px" }}>
-          <Grid justify="flex-end" container item xs={12}>
+        <Grid item container sm={3} xs={12}>
+          <Grid justify="flex-end" container item xs={12} className={classes.showMenuContainer}>
             <IconButton
               className={classes.menuButton}
               aria-label="cover"

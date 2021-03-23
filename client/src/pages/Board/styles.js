@@ -7,7 +7,15 @@ export const boardPageStyles = makeStyles((theme) => ({
 
 export const topSectionStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "40px"
+    marginTop: "40px",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "25px",
+    },
+  },
+  container: {
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column-reverse",
+    },
   },
   button: {
     width: "100%",
@@ -33,6 +41,9 @@ export const topSectionStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "#e6e5e5",
     },
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: theme.spacing(2),
+    },
   },
   menuIcon: {
     marginRight: theme.spacing(1),
@@ -52,6 +63,21 @@ export const topSectionStyles = makeStyles((theme) => ({
   },
   iconGrid: {
     marginLeft: theme.spacing(2),
+    [theme.breakpoints.down("xs")]: {
+      marginRight: theme.spacing(2),
+      marginLeft: "0px",
+      marginBottom: theme.spacing(0.5)
+    },
+  },
+  visibilityMenuContainer: {
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
+  },
+  showMenuContainer: {
+    [theme.breakpoints.down("xs")]: {
+      justifyContent: "flex-start",
+    },
   },
   avatar: {
     borderRadius: "8px",
@@ -83,13 +109,13 @@ export const listAreaStyles = makeStyles((theme) => ({
       height: "8px",
     },
     "&::-webkit-scrollbar-track": {
-      background: "#f1f1f1" 
+      background: "#f1f1f1",
     },
     "&::-webkit-scrollbar-thumb": {
-      background: "#888"
+      background: "#888",
     },
     "&::-webkit-scrollbar-thumb:hover": {
-      background: "#555"
+      background: "#555",
     },
   },
 }));
