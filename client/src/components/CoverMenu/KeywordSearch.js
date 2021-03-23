@@ -21,24 +21,24 @@ const KeywordSearch = ({
     //   .catch((err) => {
     //     console.log(err);
     //   });
-        // GetImages()
-    //   .then((response) => {
-    //     setRandomImages(response.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    GetImages()
+      .then((response) => {
+        setRandomImages(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   useEffect(() => {
     setError();
-  }, [searchInput]) 
+  }, [searchInput]);
 
   useEffect(() => {
     setTimeout(() => {
       setError();
-    }, 5000)
-  }, [error])
+    }, 5000);
+  }, [error]);
 
   const handleSearch = () => {
     setError();
@@ -48,10 +48,10 @@ const KeywordSearch = ({
           setSearchedImages(result.results);
         })
         .catch((err) => {
-          setError(err)
+          setError(err);
         });
     } else {
-      setError("Input field cannot be empty!")
+      setError("Input field cannot be empty!");
     }
   };
 

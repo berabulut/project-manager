@@ -140,7 +140,6 @@ functions:
           path: list-images
           method: get
           cors: true
-
   
 
 plugins:

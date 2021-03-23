@@ -28,6 +28,7 @@ export const GetRandomImages = (count) =>
       .then((result) => {
         if (result.type === "success") {
           resolve(result.response);
+          console.log(result.response)
         } else {
           reject(result.type);
         }
@@ -48,7 +49,7 @@ export const GetImages = () => new Promise(async(resolve, reject) => {
         }),
       }
     );
-    resolve(await response.json());
+    resolve(response.json());
   } catch (err) {
     reject(err);
   }
