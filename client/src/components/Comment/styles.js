@@ -40,4 +40,7 @@ export const commentStyles = makeStyles((theme) => ({
     letterSpacing: "-0.035em",
     whiteSpace: "pre-line",
   },
+  avatar: {
+    borderRadius: "8px"
+  }
 }));

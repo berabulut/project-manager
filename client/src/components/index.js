@@ -23,6 +23,7 @@ export { default as Attachment } from "./Attachment";
 export { default as Comment } from "./Comment";
 export { default as Label } from "./Label";
 export { default as SectionTitle } from "./SectionTitle";
+export { default as UserAvatar } from "./UserAvatar";
 
 export { default as Loading } from "./Loading";
 export { default as Alert } from "./Alert";

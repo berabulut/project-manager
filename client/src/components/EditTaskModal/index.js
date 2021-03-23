@@ -20,6 +20,7 @@ import {
   EditInput,
   CommentInput,
   AssignMemberMenu,
+  UserAvatar,
 } from "components";
 import { UserContext } from "provider/UserProvider";
 import { modalStyles } from "./styles";
@@ -540,11 +541,7 @@ const EditTaskModal = ({
                     >
                       <Grid item container sm xs={8} className={classes.member}>
                         <Grid item xs style={{ maxWidth: "32px" }}>
-                          <Avatar
-                            className={classes.avatar}
-                            src={user.picture}
-                            alt={user.name}
-                          />
+                          <UserAvatar user={user} styles={classes.avatar} />
                         </Grid>
                         <Grid
                           item

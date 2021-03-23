@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { FirebaseAuth } from "provider/AuthProvider";
 import { UserContext } from "provider/UserProvider";
+import { UserAvatar } from "components";
 import {
   IconButton,
   Typography,
@@ -15,7 +16,7 @@ import {
   ArrowDropDown,
   ArrowDropUp,
   ExitToApp,
-  Assignment
+  Assignment,
 } from "@material-ui/icons";
 import { PopMenu, PopMenuItem, menuStyles } from "./styles";
 
@@ -48,12 +49,7 @@ const Menu = ({ history }) => {
         color="inherit"
         className={classes.popButton}
       >
-        <Avatar
-          variant="rounded"
-          className={classes.avatar}
-          alt="Remy Sharp"
-          src={userData !== undefined && userData.picture}
-        />
+        <UserAvatar user={userData} styles={classes.avatar} />
         <Typography variant="subtitle2" className={classes.username}>
           {userData !== undefined ? (
             userData.name

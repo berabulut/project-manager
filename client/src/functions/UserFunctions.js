@@ -16,6 +16,16 @@ export const handleSignIn = (response, setUserData, setOpenBackdrop) => {
   }
 };
 
+export const manualSignIn = (response) =>
+  new Promise((resolve, reject) => {
+    const userData = handleSignInData(response);
+    CreateNewUserRecord(userData)
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((err) => reject(err));
+  });
+
 const handleSignInData = (response) => {
   if (response.credential !== undefined && response.credential !== null) {
     const signInMethod = response.credential.signInMethod;
@@ -27,7 +37,7 @@ const handleSignInData = (response) => {
       return handleGithubData(response);
     }
   } else if (response.credential === null) {
-    handleCredentialsData(response);
+    return handleCredentialsData(response);
   } else {
     // logout
     return;
@@ -74,7 +84,7 @@ const handleCredentialsData = (response) => {
   const body = {
     uid: response.user.uid,
     email: response.user.email,
-    name: "",
+    name: response.user.email,
     picture: "",
   };
 

@@ -9,7 +9,7 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { UserContext } from "provider/UserProvider";
-import { EditInput } from "components";
+import { EditInput, UserAvatar } from "components";
 import { commentStyles } from "./styles";
 
 const Comment = ({ comment, deleteComment, editComment }) => {
@@ -56,11 +56,7 @@ const Comment = ({ comment, deleteComment, editComment }) => {
     <Grid container className={classes.container}>
       <Grid item container xs={12} justify="space-between">
         <Grid item xs={1}>
-          <Avatar
-            src={comment.picture}
-            variant="rounded"
-            className={classes.avatar}
-          />
+          <UserAvatar user={comment} styles={classes.avatar} />
         </Grid>
         <Grid item container xs={7} style={{ paddingLeft: "7px" }}>
           <Grid item xs={12}>
@@ -106,14 +102,16 @@ const Comment = ({ comment, deleteComment, editComment }) => {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
               >
-                <DialogTitle>
-                  {"Delete this comment?"}
-                </DialogTitle>
+                <DialogTitle>{"Delete this comment?"}</DialogTitle>
                 <DialogActions>
                   <Button onClick={closeDeleteDialog} color="primary">
                     Go Back
                   </Button>
-                  <Button onClick={handleDeleteComment} style={{color: "#f44336"}} autoFocus>
+                  <Button
+                    onClick={handleDeleteComment}
+                    style={{ color: "#f44336" }}
+                    autoFocus
+                  >
                     Delete
                   </Button>
                 </DialogActions>

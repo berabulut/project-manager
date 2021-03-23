@@ -3,7 +3,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { withStyles } from "@material-ui/core/styles";
 import { Add, AttachFile, Comment } from "@material-ui/icons";
 import { Paper, Grid, Typography, IconButton } from "@material-ui/core";
-import { EditTaskModal } from "components";
+import { EditTaskModal, UserAvatar } from "components";
 import { UIContext } from "provider/UIProvider";
 import { GetUniqueId } from "api/Common";
 import { UploadFile } from "firebase/Upload";
@@ -372,11 +372,7 @@ class Task extends React.Component {
                             marginRight: "8px",
                           }}
                         >
-                          <MemberAvatar
-                            key={index}
-                            picture={user.picture}
-                            alt={user.name}
-                          />
+                          <UserAvatar user={user} styles={classes.memberAvatar} />
                         </Grid>
                       );
                     }

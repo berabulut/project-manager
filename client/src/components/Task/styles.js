@@ -1,5 +1,3 @@
-import { Avatar } from "@material-ui/core";
-
 export const taskStyles = (theme) => ({
   container: {
     marginBottom: "8px",
@@ -75,19 +73,16 @@ export const taskStyles = (theme) => ({
   },
   propertyCounter: {
     color: "#BDBDBD",
-    fontSize: "0.825rem"
+    fontSize: "0.825rem",
   },
   propertyIcon: {
     color: "#BDBDBD",
     fontSize: "1rem",
-    marginRight: theme.spacing(0.2)
+    marginRight: theme.spacing(0.2),
+  },
+  memberAvatar: {
+    borderRadius: "8px",
+    width: "35px",
+    height: "35px",
   },
 });
-
-export const MemberAvatar = (props) => (
-  <Avatar
-    style={{ borderRadius: "8px", width: "35px", height: "35px" }}
-    src={props.picture}
-    alt={props.name}
-  />
-);

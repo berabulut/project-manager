@@ -1,5 +1,6 @@
 import React from "react";
-import { Paper, Typography, Box, Avatar } from "@material-ui/core";
+import { Paper, Typography, Box } from "@material-ui/core";
+import { UserAvatar } from "components";
 import { boardStyles } from "./styles";
 
 // const address =
@@ -24,15 +25,11 @@ const Boards = ({ image, title, users, visibility }) => {
           {title}
         </Typography>
         <Box display="flex">
-          {users.map((val, key) => {
+          {users.map((user, key) => {
             if (key < 3) {
               return (
                 <Box key={key} alignSelf="center" className={classes.boardBox}>
-                  <Avatar
-                    src={val.picture}
-                    className={classes.avatar}
-                    alt="Remy Sharp"
-                  />
+                  <UserAvatar user={user} styles={classes.avatar} />
                 </Box>
               );
             }

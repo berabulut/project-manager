@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import { GetUniqueId } from "api/Common";
 import { UserContext } from "provider/UserProvider";
+import { UserAvatar } from "components";
 import { inputStyles, CommentInput } from "./styles";
 
 const EditDescription = ({ handleButtonClick }) => {
@@ -72,11 +73,7 @@ const EditDescription = ({ handleButtonClick }) => {
     <>
       <Grid container className={classes.container} justify="space-around">
         <Grid item sm={1} xs={2}>
-          <Avatar
-            src={userData !== undefined && userData.picture}
-            variant="rounded"
-            className={classes.avatar}
-          />
+          <UserAvatar user={userData} styles={classes.avatar} />
         </Grid>
         <Grid item xs={10}>
           <CommentInput

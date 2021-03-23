@@ -33,11 +33,6 @@ const App = () => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log('app.js', boards);
-  }, [boards]);
-
-
   return (
     <UIProvider
       openBackdrop={openBackdrop}

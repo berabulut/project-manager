@@ -176,6 +176,7 @@ export const menuStyles = makeStyles((theme) => ({
   avatar: {
     width: theme.spacing(4.5),
     height: theme.spacing(4.5),
+    borderRadius: "8px"
   },
   username: {
     marginLeft: theme.spacing(1.5),

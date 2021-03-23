@@ -25,21 +25,19 @@ export const FetchUserData = (uid, setUserData, setOpenBackdrop) =>
     }
   });
 
-export const CreateNewUserRecord = async (userData) => {
-  try {
-    let response = await fetch(
-      process.env.REACT_APP_SERVICE_URL + `/user`,
-      {
+export const CreateNewUserRecord = (userData) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      let response = await fetch(process.env.REACT_APP_SERVICE_URL + `/user`, {
         method: "POST",
         headers: new Headers({
           Authorization: "b066d3fe-fcda-4263-b8dc-a012ce5f2641",
           "Content-type": "application/json; charset=UTF-8",
         }),
         body: JSON.stringify(userData),
-      }
-    );
-    return await response.json();
-  } catch (err) {
-    console.log(err);
-  }
-};
+      });
+      resolve(await response.json());
+    } catch (err) {
+      reject(err);
+    }
+  });

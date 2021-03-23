@@ -149,6 +149,24 @@ const AuthForm = ({
               </Link>
             </Typography>
           </Grid>
+          <Grid item xs={12}>
+            <Typography
+              className={classes.infoText}
+              variant="body2"
+              style={{ marginTop: "24px", textAlign: "end" }}
+            >
+              email : test@gmail.com
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography
+              className={classes.infoText}
+              variant="body2"
+              style={{ marginTop: "8px", textAlign: "end" }}
+            >
+              password : Trellotest.
+            </Typography>
+          </Grid>
         </Grid>
       </form>
     </div>

@@ -3,7 +3,7 @@ import { TextField } from "@material-ui/core";
 
 export const formStyles = makeStyles((theme) => ({
   paper: {
-    margin: theme.spacing(8, 5, 8, 5),
+    margin: theme.spacing(8, 5, 6, 5),
     [theme.breakpoints.down('sm')]: {
       margin: theme.spacing(8, 2, 8, 2),
     },

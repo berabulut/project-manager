@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { UIContext } from "provider/UIProvider";
 import { UserContext } from "provider/UserProvider";
 import { BoardHelpers } from "helpers";
@@ -13,7 +13,7 @@ import {
   DialogTitle,
   DialogActions,
 } from "@material-ui/core";
-import { SectionTitle, EditInput, LightButton } from "components";
+import { SectionTitle, EditInput, LightButton, UserAvatar } from "components";
 import { Close } from "@material-ui/icons";
 import { drawerStyles } from "./styles";
 
@@ -157,11 +157,7 @@ const BoardDrawer = ({ board, admin }) => {
             {board.admin && (
               <Grid item container xs={12} style={{ marginTop: "14px" }}>
                 <Grid item style={{ width: "45px" }}>
-                  <Avatar
-                    src={board.admin.picture}
-                    alt={board.admin.name}
-                    className={classes.avatar}
-                  />
+                  <UserAvatar user={board.admin} styles={classes.avatar} />
                 </Grid>
                 <Grid item container xs>
                   <Grid item xs={12}>
@@ -334,11 +330,7 @@ const BoardDrawer = ({ board, admin }) => {
                     alignItems="center"
                   >
                     <Grid item style={{ width: "50px" }}>
-                      <Avatar
-                        src={user.picture}
-                        alt="Remy Sharp"
-                        className={classes.avatar}
-                      />
+                      <UserAvatar user={user} styles={classes.avatar} />
                     </Grid>
                     <Grid item container xs={7}>
                       <Grid item xs={12}>
@@ -374,11 +366,7 @@ const BoardDrawer = ({ board, admin }) => {
                     alignItems="center"
                   >
                     <Grid item style={{ width: "50px" }}>
-                      <Avatar
-                        src={user.picture}
-                        alt="Remy Sharp"
-                        className={classes.avatar}
-                      />
+                      <UserAvatar user={user} styles={classes.avatar} />
                     </Grid>
                     <Grid item container xs={7}>
                       <Grid item xs={12}>

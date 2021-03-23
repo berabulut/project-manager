@@ -6,7 +6,6 @@ import { AuthForm, Alert } from "components";
 import { loginStyles } from "./styles";
 import { Container, CssBaseline, Snackbar } from "@material-ui/core";
 
-
 const SignUp = () => {
   const classes = loginStyles(AuthTheme);
   const history = useHistory();
@@ -45,7 +44,9 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleSignUp();
+    handleSignUp()
+      .then(() => history.push("/login"))
+      .catch((err) => console.log(err));
   };
 
   const handleChange = (e) => {

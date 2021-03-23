@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { UIContext } from "provider/UIProvider";
-import { Grid, Typography, IconButton, Avatar } from "@material-ui/core";
+import { Grid, Typography, IconButton } from "@material-ui/core";
 import { Public, Lock, MoreHoriz, Add } from "@material-ui/icons";
-import { VisibilityMenu, InviteUserMenu } from "components";
+import { VisibilityMenu, InviteUserMenu, UserAvatar } from "components";
 import { topSectionStyles } from "./styles";
 
 const TopSection = ({ board, admin }) => {
@@ -39,7 +39,11 @@ const TopSection = ({ board, admin }) => {
     <div className={classes.root}>
       <Grid container className={classes.container}>
         <Grid item container xs>
-          <Grid item style={{ minWidth: "120px" }} className={classes.visibilityMenuContainer}>
+          <Grid
+            item
+            style={{ minWidth: "120px" }}
+            className={classes.visibilityMenuContainer}
+          >
             <IconButton
               onClick={handleVisibilityClick}
               classes={{
@@ -68,14 +72,10 @@ const TopSection = ({ board, admin }) => {
           </Grid>
           <Grid item container xs>
             {board !== undefined &&
-              board.userData.map((val, key) => {
+              board.userData.map((user, key) => {
                 return (
                   <Grid className={classes.iconGrid} item key={key}>
-                    <Avatar
-                      src={val.picture}
-                      className={classes.avatar}
-                      alt={val.name}
-                    />
+                    <UserAvatar user={user} styles={classes.avatar} />
                   </Grid>
                 );
               })}
@@ -100,7 +100,13 @@ const TopSection = ({ board, admin }) => {
           </Grid>
         </Grid>
         <Grid item container sm={3} xs={12}>
-          <Grid justify="flex-end" container item xs={12} className={classes.showMenuContainer}>
+          <Grid
+            justify="flex-end"
+            container
+            item
+            xs={12}
+            className={classes.showMenuContainer}
+          >
             <IconButton
               className={classes.menuButton}
               aria-label="cover"

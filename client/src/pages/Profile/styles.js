@@ -27,6 +27,7 @@ export const profileStyles = makeStyles((theme) => ({
   avatar: {
     width: "3em",
     height: "3em",
+    borderRadius: "8px"
   },
   button: {
     marginTop: theme.spacing(4),

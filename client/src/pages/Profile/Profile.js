@@ -9,9 +9,8 @@ import {
   Box,
   Divider,
   Avatar,
-  Button,
 } from "@material-ui/core";
-
+import { UserAvatar } from "components";
 
 const Profile = () => {
   const classes = profileStyles();
@@ -35,12 +34,7 @@ const Profile = () => {
                 </Typography>
               </Grid>
               <Grid item xs={8}>
-                <Avatar
-                  className={classes.avatar}
-                  variant="rounded"
-                  alt="Cindy Baker"
-                  src={userData !== undefined && userData.picture}
-                />
+                <UserAvatar user={userData} styles={classes.avatar} />
               </Grid>
             </Grid>
             <Divider className={classes.divider} />

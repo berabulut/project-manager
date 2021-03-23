@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Typography, Grid, Avatar } from "@material-ui/core";
+import { UserAvatar } from "components";
 import { UserContext } from "provider/UserProvider";
 import { PopMenu, menuStyles } from "./styles";
 
@@ -90,11 +91,7 @@ const AssignMemberMenu = ({
                       onClick={() => handleMemberClick(user.uid)}
                     >
                       <Grid item xs style={{ maxWidth: "32px" }}>
-                        <Avatar
-                          className={classes.avatar}
-                          src={user.picture}
-                          alt={user.name}
-                        />
+                        <UserAvatar user={user} styles={classes.avatar} />
                       </Grid>
                       <Grid
                         item
