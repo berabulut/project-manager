@@ -37,7 +37,7 @@ export const inputStyles = makeStyles((theme) => ({
   avatar: {
     borderRadius: "8px"
   }
-}));
+}), { index: 1 });
 
 export const CommentInput = withStyles({
   root: {

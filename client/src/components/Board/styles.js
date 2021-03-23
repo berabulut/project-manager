@@ -1,4 +1,4 @@
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 export const boardStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -42,4 +42,4 @@ export const boardStyles = makeStyles((theme) => ({
     letterSpacing: "-0.035em",
     fontSize: "0.825rem"
   }
-}));
+}), { index: 1 });

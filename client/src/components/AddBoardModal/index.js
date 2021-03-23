@@ -37,15 +37,16 @@ const AddBoardModal = ({ open, setOpen }) => {
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleCreate = () => {
     if (coverImageRaw === undefined) {
-      console.log("Select a cover image");
+      setError("Select a cover image!");
     } else if (boardTitle.trim().length <= 0) {
-      console.log("Board field cannot be empty");
+      setError("Title field cannot be empty!");
     } else {
       setLoading(true);
-
+      setError("");
       const boardData = {
         admin: userData,
         title: boardTitle,
@@ -67,15 +68,18 @@ const AddBoardModal = ({ open, setOpen }) => {
                 setSuccess(true);
                 setLoading(false);
                 handleClose();
+                setError("");
               })
               .catch((err) => {
                 setLoading(false);
+                setError(err);
                 console.log(err);
               });
           }
         })
         .catch((err) => {
           setLoading(false);
+          setError(err);
           console.log(err);
         });
     }
@@ -83,6 +87,11 @@ const AddBoardModal = ({ open, setOpen }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setError("");
+    setCoverImageRaw();
+    setCoverImageRegular();
+    setBoardTitle("");
+    setBoardVisibility("Private")
   };
 
   const handleVisibilityClick = (event) => {
@@ -208,7 +217,18 @@ const AddBoardModal = ({ open, setOpen }) => {
               />
             </Grid>
           </Grid>
-          <Grid item container xs={12} className={classes.footerSection} justify="flex-end">
+          <Grid
+            item
+            container
+            xs={12}
+            className={classes.footerSection}
+            justify="flex-end"
+          >
+            {error && (
+              <Grid item xs={12}>
+                <Typography className={classes.error}>{error}</Typography>
+              </Grid>
+            )}
             <Grid item xs={3}>
               <Button onClick={handleClose} className={classes.cancelButton}>
                 Cancel

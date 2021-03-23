@@ -168,4 +168,4 @@ export const modalStyles = makeStyles((theme) => ({
       paddingLeft: "0px",
     },
   },
-}));
+}), { index: 1 });

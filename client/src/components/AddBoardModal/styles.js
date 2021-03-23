@@ -18,10 +18,10 @@ export const modalStyles = makeStyles((theme) => ({
     outlineWidth: "0px",
   },
   footerSection: {
-    display:"flex",
+    display: "flex",
     justifyContent: "flex-end",
-    [theme.breakpoints.down('xs')]: {
-      justifyContent: "space-evenly"
+    [theme.breakpoints.down("xs")]: {
+      justifyContent: "space-evenly",
     },
   },
   closeButton: {
@@ -100,7 +100,7 @@ export const modalStyles = makeStyles((theme) => ({
   },
   createButtonSuccess: {
     backgroundColor: green[500],
-    '&:hover': {
+    "&:hover": {
       backgroundColor: green[700],
     },
   },
@@ -111,5 +111,12 @@ export const modalStyles = makeStyles((theme) => ({
     left: "50%",
     marginTop: -12,
     marginLeft: -12,
+  },
+  error: {
+    fontSize: "0.825rem",
+    color: "#f44336",
+    marginTop: theme.spacing(1.5),
+    marginBottom: theme.spacing(3),
+    textAlign: "center"
   },
 }));

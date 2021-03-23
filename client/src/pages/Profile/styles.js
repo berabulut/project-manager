@@ -41,4 +41,4 @@ export const profileStyles = makeStyles((theme) => ({
     fontSize: "1.1em",
     fontWeight: "500",
   },
-}));
+}), { index: 1 });

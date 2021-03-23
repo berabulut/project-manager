@@ -88,4 +88,4 @@ export const drawerStyles = makeStyles((theme) => ({
     fontWeight: "600",
     color: "#EB5757",
   },
-}));
+}), { index: 1 });

@@ -8,7 +8,7 @@ import { UIContext } from "provider/UIProvider";
 import { GetUniqueId } from "api/Common";
 import { UploadFile } from "firebase/Upload";
 import { TaskHelpers } from "helpers";
-import { taskStyles, MemberAvatar } from "./styles";
+import { taskStyles } from "./styles";
 
 class Task extends React.Component {
   constructor(props) {
@@ -295,7 +295,7 @@ class Task extends React.Component {
           >
             <Paper
               className={classes.paper}
-              style={{transform: snapshot.isDragging && "rotate(3.5deg)"}}
+              style={{ transform: snapshot.isDragging && "rotate(3.5deg)" }}
               onClick={this.handleTaskClick}
               onMouseEnter={() =>
                 this.setState({
@@ -372,7 +372,11 @@ class Task extends React.Component {
                             marginRight: "8px",
                           }}
                         >
-                          <UserAvatar user={user} styles={classes.memberAvatar} />
+                          <UserAvatar
+                            user={user}
+                            styles={classes.memberAvatar}
+                            isTask={true}
+                          />
                         </Grid>
                       );
                     }
@@ -402,15 +406,35 @@ class Task extends React.Component {
                     </IconButton>
                   </Grid>
                 )}
-                <Grid item container xs justify="flex-end" className={classes.propertyCounter}>
+                <Grid
+                  item
+                  container
+                  xs
+                  justify="flex-end"
+                  className={classes.propertyCounter}
+                >
                   {comments && comments.length > 0 && (
-                    <Grid item container justify="center" alignItems="center" xs={4} style={{maxWidth: "35px"}}>
+                    <Grid
+                      item
+                      container
+                      justify="center"
+                      alignItems="center"
+                      xs={4}
+                      style={{ maxWidth: "35px" }}
+                    >
                       <Comment className={classes.propertyIcon} />
                       {comments.length}
                     </Grid>
                   )}
                   {attachments && attachments.length > 0 && (
-                    <Grid item container justify="center" alignItems="center" xs={4} style={{maxWidth: "35px"}}>
+                    <Grid
+                      item
+                      container
+                      justify="center"
+                      alignItems="center"
+                      xs={4}
+                      style={{ maxWidth: "35px" }}
+                    >
                       <AttachFile className={classes.propertyIcon} />
                       {attachments.length}
                     </Grid>

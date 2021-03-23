@@ -43,4 +43,4 @@ export const commentStyles = makeStyles((theme) => ({
   avatar: {
     borderRadius: "8px"
   }
-}));
+}), { index: 1 });

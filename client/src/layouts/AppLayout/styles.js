@@ -191,7 +191,7 @@ export const menuStyles = makeStyles((theme) => ({
     width: "85%",
     margin: "auto",
   },
-}));
+}), { index: 1 });
 
 export const PopMenu = withStyles((theme) => ({
   paper: {

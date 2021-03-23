@@ -77,7 +77,7 @@ const EditDescription = ({ handleButtonClick }) => {
         </Grid>
         <Grid item xs={10}>
           <CommentInput
-            value={comment.trim()}
+            value={comment}
             onChange={handleChange}
             label="Write a comment..."
             variant="outlined"
