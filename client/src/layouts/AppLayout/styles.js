@@ -192,13 +192,16 @@ export const menuStyles = makeStyles((theme) => ({
   },
 }));
 
-export const PopMenu = withStyles({
+export const PopMenu = withStyles((theme) => ({
   paper: {
     border: "1px solid #E0E0E0",
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
     borderRadius: "12px",
+    [theme.breakpoints.down('xs')]: {
+      width: "250px"
+    },
   },
-})((props) => (
+}))((props) => (
   <Menu
     elevation={0}
     getContentAnchorEl={null}
@@ -217,7 +220,6 @@ export const PopMenu = withStyles({
 
 export const PopMenuItem = withStyles((theme) => ({
   root: {
-    backgroundColor: "F2F2F2",
     borderRadius: "8px",
     marginLeft: theme.spacing(1.5),
     marginRight: theme.spacing(1.5),

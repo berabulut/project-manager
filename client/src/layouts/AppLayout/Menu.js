@@ -8,13 +8,14 @@ import {
   ListItemText,
   Avatar,
   Divider,
-  CircularProgress 
+  CircularProgress,
 } from "@material-ui/core";
 import {
   AccountCircle,
   ArrowDropDown,
   ArrowDropUp,
   ExitToApp,
+  Assignment
 } from "@material-ui/icons";
 import { PopMenu, PopMenuItem, menuStyles } from "./styles";
 
@@ -54,7 +55,14 @@ const Menu = ({ history }) => {
           src={userData !== undefined && userData.picture}
         />
         <Typography variant="subtitle2" className={classes.username}>
-          {userData !== undefined ? userData.name : <CircularProgress style={{width: "30px", height: "30px"}} color="primary" />}
+          {userData !== undefined ? (
+            userData.name
+          ) : (
+            <CircularProgress
+              style={{ width: "30px", height: "30px" }}
+              color="primary"
+            />
+          )}
         </Typography>
         {open ? (
           <ArrowDropUp className={classes.arrowIcon} />
@@ -69,6 +77,13 @@ const Menu = ({ history }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+        <PopMenuItem onClick={() => history.push("/")}>
+          <ListItemIcon>
+            <Assignment fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="Boards" />
+        </PopMenuItem>
+        <Divider className={classes.menuDivider} />
         <PopMenuItem onClick={() => history.push("/profile")}>
           <ListItemIcon>
             <AccountCircle fontSize="small" />
