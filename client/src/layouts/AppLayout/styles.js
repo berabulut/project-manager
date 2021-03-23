@@ -129,7 +129,7 @@ export const headerStyles = makeStyles((theme) => ({
     letterSpacing: "-0.035em",
     paddingRight: theme.spacing(3),
     borderRight: "1px solid #E0E0E0",
-    maxWidth: "170px",
+    maxWidth: "350px",
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
