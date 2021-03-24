@@ -1,3 +1,2 @@
 1. delete board
-2. delete list
-3. rename lsit
+2. filtering bugfix
