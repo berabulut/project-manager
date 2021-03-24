@@ -1,117 +1,78 @@
-# Project Manager
+<!-- Please update value in the {}  -->
 
-### Trying to build a trello clone
+<h1 align="center">Project Manager (Trello Clone)</h1>
 
-### It's a [devchallanges.io](https://devchallenges.io/challenges/wP0LbGgEeKhpFHUpPpDh) challenge
+<div align="center">
+   Solution for a challenge from  <a href="http://devchallenges.io/" target="_blank">Devchallenges.io</a>.
+</div>
 
-<br>
+<div align="center">
+  <h3>
+    <a href="https://trello-project-manager.netlify.app/">
+      Demo
+    </a>
+    <span> | </span>
+    <a href="https://www.youtube.com/watch?v=qYPW0w2QXmc">
+      Demo Video
+    </a>
+    <a href="https://devchallenges.io/solutions/SVcO9rsAuK5k6qcXjmsw">
+      Solution
+    </a>
+    <span> | </span>
+    <a href="https://devchallenges.io/challenges/wP0LbGgEeKhpFHUpPpDh">
+      Challenge
+    </a>
+  </h3>
+</div>
+
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Built With](#built-with)
+- [Features](#features)
+	- [List of stories](#List-of-stories)
+- [How to use](#how-to-use)
+
+
+## Overview
 
 ![shuffle](https://github.com/berabulut/gifs/blob/main/shuffle.gif)
 
-<br>
+It's a simple clone of Trello from Atlassian. You can check out [demo video](https://www.youtube.com/watch?v=qYPW0w2QXmc), [gif examples](./images/examples.MD) or visit [demo site](https://trello-project-manager.netlify.app/).  
 
-## Current state of project
+### Built With
 
- - Authorization (with Firebase auth, I think secure enough?)
-	- Sign up with email and password
-	- Sign in with Google
-	- Sign in with Twitter
-	- Sign in with Github
+- React 
+- Node.js 
+- Serverless Framework 
+- AWS Lambda
+- Firebase Authentication, Realtime Database, Storage
 
-<br>
+## Features
 
-![login](./images/login.png)
+<!-- List the features of your application or follow the template. Don't share the figma file here :) -->
 
-<br>
+This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges) challenge. The [challenge](https://devchallenges.io/challenges/wP0LbGgEeKhpFHUpPpDh) was to build an application to complete the given user stories.
 
-- Profile page
+### List of stories :
 
-<br>
+- Authenticate user
+- Create a new board (select title, cover image, visibility)
+	- You can edit board info (description, title, remove team members)
+- Invite team members to bard
+- Create a list 
+	- You can drag, drop, rename and delete lists.
+- Create a task
+	- You can switch tasks between lists
+	- You can reorder tasks in the list
+	- You can set description, cover image, labels to task
+	- You can upload attachments
+	- You can assign team members to task
+	- You can comment on task
 
-![profile](./images/profile.png)
+## How To Use
 
-<br>
-
-- Create new board
-	- You can pick a cover image (Unsplash API)
-	- Set privacy 
-
-
-<br>
-
-![create-board](https://github.com/berabulut/gifs/blob/main/create-board.gif)
-
-<br>
-
-- Display boards
-
-<br>
-
-![boards](./images/boards.png)
-
-<br>
-
-- Invite user to board 
-
-<br>
-
-![invite](https://github.com/berabulut/gifs/blob/main/invite.gif)
-
-<br>
-
-- Create list 
-
-<br>
-
-![create-list](https://github.com/berabulut/gifs/blob/main/create-list.gif)
-
-<br>
-
-- Create task 
-
-<br>
-
-![create-task](https://github.com/berabulut/gifs/blob/main/create-task.gif)
-
-<br>
-
-- Edit task 
-
-<br>
-
-![edit-task](https://github.com/berabulut/gifs/blob/main/edit-task.gif)
-
-<br>
-
-- Upload attachment (Task's cover image can be picked from them) 
-
-<br>
-
-![upload-attachment](https://github.com/berabulut/gifs/blob/main/upload-attachment.gif)
-
-<br>
-
-- You can set cover image from unsplash
-
-<br>
-
-![cover-unsplash](https://github.com/berabulut/gifs/blob/main/cover-unsplash.gif)
-
-<br>
-
-- Set labels
-
-<br>
-
-![set-labels](https://github.com/berabulut/gifs/blob/main/label.gif)
-
-<br>
-
-- Assign members to task
-
-<br>
-
-![assign](https://github.com/berabulut/gifs/blob/main/assign.gif)
-
-<br>
+[Client-Side Application](./client/readme.MD) &nbsp;
+[Server-Side Application](./server/readme.MD)
 

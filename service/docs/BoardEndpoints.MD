@@ -1,22 +1,48 @@
 # Board Endpoints
 
-- ## Create New Board 
+- ## Create a new board
 
-	- Post
-	- Params :
-		- title
-		- coverPhoto
-		- visibility
-		- users (expected array : [{"uid": "123"}, {"uid": "321"}])
+  `POST`
+  `/board` <br />
+  `Params` :
 
-- ## Return User Related Boards
+  ```
+  	- admin (user data of admin)
+  	- title
+  	- coverPhoto
+  	- visibility
+  	- users (expected array : [{"uid": "123"}, {"uid": "321"}])
+  ```
 
-	- Post (i couldn't be bothered by passing an array with get request)
-	- Params :
-		- boardList (expected array : [ "boardId1", "boardId2"]) 
+- ## Update board
 
-- ## Return Board Related Users
+  `PUT`
+  `/board` <br />
+  `Params` :
 
-	- Post (i couldn't be bothered by passing an array with get request)
-	- Params :
-		- userList (expected array : [ "userId1", "userId2"]) 
+  ```
+  	- boardId (user data of admin)
+  	- property (title, description, users)
+  	- data (property's data)
+  ```
+
+- ## Invite a user to board
+
+  `PUT`
+  `/board/invite` <br />
+  `Params` :
+
+  ```
+  	- boardId
+  	- address (like user email)
+  ```
+
+- ## Return board related users' data
+
+  `POST`
+  `/board/users` <br />
+  `Params` :
+
+  ```
+     - userList (expected array : [{"uid": "123"}, {"uid": "321"}])
+  ```
