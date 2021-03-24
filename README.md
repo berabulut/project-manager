@@ -15,6 +15,7 @@
     <a href="https://www.youtube.com/watch?v=qYPW0w2QXmc">
       Demo Video
     </a>
+    <span> | </span>
     <a href="https://devchallenges.io/solutions/SVcO9rsAuK5k6qcXjmsw">
       Solution
     </a>
