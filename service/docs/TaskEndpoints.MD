@@ -23,7 +23,7 @@
   	- taskIds
   ```
 
-- ## Switch a task between lists (in the same list)
+- ## Switch a task between lists 
 
   `PUT`
   `/task-switch` <br />
@@ -41,8 +41,8 @@
   `Params` :
 
   ```
-  	- boardId
-  	- taskId
+      - boardId
+      - taskId
 	  - property (title, description, attachments, assigments, comments, labels)
 	  - data (property's data)
   ```

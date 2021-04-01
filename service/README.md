@@ -50,8 +50,8 @@ SLS_DEBUG=*
 ### Endpoints
 
 |[USER](./docs/UserEndpoints)   | [BOARD](./docs/BoardEndpoints) | [LIST](./docs/ListEndpoints) | [TASK](./docs/TaskEndpoints)
-| -------------                 | :-------------                 | :----------                  |  :----------                
+|:-------------                 | :-------------                 | :----------                  |  :----------                
 | `POST /user`                  | `PUT, POST /board`             | `PUT, POST /list`            |  `POST /task`               
 | `GET /user`                   | `PUT /board/invite`            | `PUT /list/rename`           |  `PUT /task-reorder`
-| `PUT, POST /user/boards`      | `POST /board/users`            | `PUT /list/remove`           |  `PUT /task-reorder`
-|                               |                                |                              |   `PUT /task-update`
+| `PUT, POST /user/boards`      | `POST /board/users`            | `PUT /list/remove`           |  `PUT /task-switch`
+|                               |                                |                              |  `PUT /task-update`
