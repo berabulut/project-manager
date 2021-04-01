@@ -11,6 +11,7 @@ export const boardsStyles = makeStyles((theme) => ({
   },
   container: {
     marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(4),
     [theme.breakpoints.down("sm")]: {
       marginTop: theme.spacing(4),
     },

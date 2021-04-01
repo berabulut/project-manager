@@ -8,7 +8,7 @@
 
 <br>
 
-![login](./images/login.png)
+![login](./login.png)
 
 <br>
 
@@ -16,7 +16,7 @@
 
 <br>
 
-![profile](./images/profile.png)
+![profile](./profile.png)
 
 <br>
 
@@ -35,7 +35,7 @@
 
 <br>
 
-![boards](./images/boards.png)
+![boards](./boards.png)
 
 <br>
 

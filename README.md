@@ -9,7 +9,7 @@
 <div align="center">
   <h3>
     <a href="https://trello-project-manager.netlify.app/">
-      Demo
+      Live
     </a>
     <span> | </span>
     <a href="https://www.youtube.com/watch?v=qYPW0w2QXmc">

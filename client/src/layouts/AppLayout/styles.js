@@ -69,9 +69,7 @@ export const footerStyles = makeStyles((theme) => ({
   },
   gridContainer: {
     marginTop: "20px",
-    [theme.breakpoints.down("sm")]: {
-      marginBottom: "20px",
-    },
+    marginBottom: "20px",
   },
   linkGrid: {
     textAlign: "center",
