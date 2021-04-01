@@ -38,7 +38,7 @@
 
 ## Overview
 
-![shuffle](https://github.com/berabulut/gifs/blob/main/shuffle.gif)
+![shuffle??](https://github.com/berabulut/gifs/blob/main/shuffle.gif)
 
 It's a simple clone of Trello from Atlassian. You can check out [demo video](https://www.youtube.com/watch?v=qYPW0w2QXmc), [gif examples](./images/examples.MD) or visit [demo site](https://trello-project-manager.netlify.app/).  
 
