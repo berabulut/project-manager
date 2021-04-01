@@ -6,19 +6,23 @@
    Solution for a challenge from  <a href="http://devchallenges.io/" target="_blank">Devchallenges.io</a>.
 </div>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <div align="center">
   <h3>
     <a href="https://trello-project-manager.netlify.app/">
       Live
     </a>
-    <span> | </span>
+    <span> &nbsp;|&nbsp; </span>
     <a href="https://www.youtube.com/watch?v=qYPW0w2QXmc">
-      Demo Video
+      Demo &nbsp;
+      <i class="fa fa-youtube-play" style="font-size:16px;color:red"></i>  
     </a>
+    <span> &nbsp;|&nbsp; </span>
     <a href="https://devchallenges.io/solutions/SVcO9rsAuK5k6qcXjmsw">
       Solution
     </a>
-    <span> | </span>
+    <span> &nbsp;|&nbsp; </span>
     <a href="https://devchallenges.io/challenges/wP0LbGgEeKhpFHUpPpDh">
       Challenge
     </a>
@@ -28,7 +32,7 @@
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [Overview](#overview) 
 - [Built With](#built-with)
 - [Features](#features)
 	- [List of stories](#List-of-stories)
