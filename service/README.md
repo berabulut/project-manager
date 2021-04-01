@@ -49,7 +49,7 @@ SLS_DEBUG=*
 
 ### Endpoints
 
-|[USER](./docs/UserEndpoints)   | [BOARD](./docs/BoardEndpoints) | [LIST](./docs/ListEndpoints) | [TASK](./docs/TaskEndpoints)
+|[USER](./docs/UserEndpoints.md)   | [BOARD](./docs/BoardEndpoints.md) | [LIST](./docs/ListEndpoints.md) | [TASK](./docs/TaskEndpoints.md)
 |:-------------                 | :-------------                 | :----------                  |  :----------                
 | `POST /user`                  | `PUT, POST /board`             | `PUT, POST /list`            |  `POST /task`               
 | `GET /user`                   | `PUT /board/invite`            | `PUT /list/rename`           |  `PUT /task-reorder`
