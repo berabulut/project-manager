@@ -77,6 +77,6 @@ This application/site was created as a submission to a [DevChallenges](https://d
 
 ## How To Use
 
-[Client-Side Application](./client/readme.MD) &nbsp;
-[Server-Side Application](./server/readme.MD)
+[Client-Side Application](/client/README.md) &nbsp;
+[Server-Side Application](./service/README.md)
 
