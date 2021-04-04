@@ -1,6 +1,6 @@
 const { checkIfUserExists, returnUserData } = require("../src/auth");
 
-const uid = "NXKy105C0KhmmDlKOtiaTZCooXB3"; // test@gmail.com
+const uid = "aNL7ZWQk9qRTXSjjwKnTknOgWyl1"; // test2@gmail.com
 
 describe("checking if user exists", () => {
   it("should return true", async () => {
@@ -19,10 +19,8 @@ describe("return user data", () => {
   });
 
   it("should return error", async () => {
-    try {
-      await returnUserData(uid + "923");
-    } catch (err) {
-      expect(err).toMatch("User data doesn't exist!");
-    }
+    await expect(returnUserData(uid + "923")).rejects.toMatch(
+      "User data doesn't exist!"
+    );
   });
 });
