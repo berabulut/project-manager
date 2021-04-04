@@ -70,4 +70,4 @@ const returnUserData = (uid) =>
     }
   });
 
-module.exports = { createNewUser, returnUserData };
+module.exports = { createNewUser, returnUserData, checkIfUserExists };
