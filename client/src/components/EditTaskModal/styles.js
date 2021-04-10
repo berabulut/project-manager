@@ -139,6 +139,9 @@ export const modalStyles = makeStyles((theme) => ({
     fontSize: "0.875rem",
     lineHeight: "18px",
     letterSpacing: "-0.035em",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    maxWidth: "140px",
     paddingLeft: theme.spacing(2),
   },
   assignMemberButton: {
