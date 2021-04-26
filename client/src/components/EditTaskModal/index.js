@@ -189,7 +189,7 @@ const EditTaskModal = ({
           </Grid>
           {/*this is the left side of modal in big screens */}
           <Grid className={classes.gridItem} item container sm={8} xs={12}>
-            <Grid item container xs={12}>
+            <Grid item container xs={12} className={classes.taskTitleWrapper}>
               <Grid
                 item
                 xs={10}
@@ -254,7 +254,7 @@ const EditTaskModal = ({
                 {labels.map((label, key) => {
                   return (
                     <Grid
-                      style={{ minWidth: "75px", maxWidth: "115px" }}
+                      style={{ minWidth: "95px", maxWidth: "115px" }}
                       key={key}
                       item
                       xs

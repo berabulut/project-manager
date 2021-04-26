@@ -147,7 +147,7 @@ export const modalStyles = makeStyles((theme) => ({
   assignMemberButton: {
     background: "#2f80ed38",
     borderRadius: "8px",
-    width: "90%",
+    width: "100%",
     display: "flex",
     justifyContent: "space-evenly",
     transition: "background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
@@ -171,4 +171,9 @@ export const modalStyles = makeStyles((theme) => ({
       paddingLeft: "0px",
     },
   },
+  taskTitleWrapper: {
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "24px",
+    },
+  }
 }), { index: 1 });
