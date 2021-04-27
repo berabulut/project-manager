@@ -61,7 +61,7 @@ This application/site was created as a submission to a [DevChallenges](https://d
 - Authenticate user
 - Create a new board (select title, cover image, visibility)
 	- You can edit board info (description, title, remove team members)
-- Invite team members to bard
+- Invite team members to board
 - Create a list 
 	- You can drag, drop, rename and delete lists.
 - Create a task
