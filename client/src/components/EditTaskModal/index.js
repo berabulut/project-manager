@@ -559,7 +559,7 @@ const EditTaskModal = ({
                   );
                 })}
                 <Grid
-                  className={classes.buttonContainer}
+                  className={classes.assignButtonContainer}
                   item
                   container
                   justify="flex-end"

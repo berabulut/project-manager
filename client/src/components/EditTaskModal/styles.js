@@ -88,6 +88,17 @@ export const modalStyles = makeStyles((theme) => ({
       justifyContent: "center",
     },
   },
+  assignButtonContainer: {
+    maxHeight: "60px",
+    display: "inline-flex",
+    marginBottom: theme.spacing(1.5),
+    paddingLeft: "20px",
+    justifyContent: "flex-end",
+    [theme.breakpoints.down("xs")]: {
+      justifyContent: "center",
+      paddingLeft: "0px"
+    },
+  },
   assignedUsersContainer: {
     maxHeight: "60px",
     display: "inline-flex",
