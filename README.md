@@ -33,14 +33,14 @@
 - [Built With](#built-with)
 - [Features](#features)
 	- [List of stories](#List-of-stories)
-- [How to use](#how-to-use)
+- [Setup](#setup)
 
 
 ## Overview
 
 ![shuffle??](https://github.com/berabulut/gifs/blob/main/shuffle.gif)
 
-It's a simple clone of Trello from Atlassian. You can check out [demo video](https://www.youtube.com/watch?v=qYPW0w2QXmc), [gif examples](./images/examples.MD) or visit [demo site](https://trello-project-manager.netlify.app/).  
+It's a simple clone of Trello. You can check out [demo video](https://www.youtube.com/watch?v=qYPW0w2QXmc), [gif examples](./images/examples.MD) or visit [demo site](https://trello-project-manager.netlify.app/).  
 
 ### Built With
 
@@ -72,7 +72,7 @@ This application/site was created as a submission to a [DevChallenges](https://d
 	- You can assign team members to task
 	- You can comment on task
 
-## How To Use
+## Setup
 
 [Client-Side Application](/client/README.md) &nbsp;
 [Server-Side Application](./service/README.md)
