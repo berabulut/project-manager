@@ -169,7 +169,7 @@ const EditTaskModal = ({
             className={classes.gridItem}
             item
             container
-            justify="flex-end"
+            justifyContent="flex-end"
             xs={12}
           >
             <IconButton
@@ -211,7 +211,7 @@ const EditTaskModal = ({
               <Grid
                 item
                 container
-                justify="flex-end"
+                justifyContent="flex-end"
                 alignItems="flex-start"
                 xs={2}
               >
@@ -446,7 +446,7 @@ const EditTaskModal = ({
             <Grid
               item
               container
-              justify="flex-start"
+              justifyContent="flex-start"
               className={classes.sectionTitleContainer}
             >
               <SectionTitle title="Actions" icon="people" />
@@ -457,7 +457,7 @@ const EditTaskModal = ({
                 className={classes.buttonContainer}
                 item
                 container
-                justify="flex-end"
+                justifyContent="flex-end"
                 xs={6}
                 sm={12}
               >
@@ -499,7 +499,7 @@ const EditTaskModal = ({
               className={classes.buttonContainer}
               item
               container
-              justify="flex-end"
+              justifyContent="flex-end"
               xs={6}
               sm={12}
             >
@@ -526,7 +526,7 @@ const EditTaskModal = ({
                 <Grid
                   item
                   container
-                  justify="flex-start"
+                  justifyContent="flex-start"
                   className={classes.sectionTitleContainer}
                 >
                   <SectionTitle title="Members" icon="people" />
@@ -562,7 +562,7 @@ const EditTaskModal = ({
                   className={classes.assignButtonContainer}
                   item
                   container
-                  justify="flex-end"
+                  justifyContent="flex-end"
                   style={{ marginTop: "12px" }}
                   xs={12}
                 >

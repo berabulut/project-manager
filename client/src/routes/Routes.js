@@ -27,7 +27,12 @@ const Layout = (props) => {
             );
           } else if (val.path === "/") {
             return (
-              <Route exact path="/" render={() => <Redirect to="/boards" />} />
+              <Route
+                exact
+                key={key}
+                path="/"
+                render={() => <Redirect to="/boards" />}
+              />
             );
           } else {
             return (

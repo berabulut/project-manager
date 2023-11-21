@@ -87,13 +87,13 @@ const InviteUserMenu = ({ boardId, anchorEl, handleClose }) => {
         </Grid>
         <Grid item container>
           {error && (
-            <Grid item container xs={12} justify="center">
+            <Grid item container xs={12} justifyContent="center">
               <Typography className={classes.error}>
                 Not a valid user address!
               </Typography>
             </Grid>
           )}
-          <Grid item container justify="center" xs={12}>
+          <Grid item container justifyContent="center" xs={12}>
             <Button
               onClick={handleInviteButtonClick}
               className={classes.addButton}

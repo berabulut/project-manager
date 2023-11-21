@@ -88,7 +88,7 @@ class List extends React.Component {
                 <Grid item container xs={9} className={classes.title}>
                   {this.props.list.title}
                 </Grid>
-                <Grid item container xs={3} justify="flex-end">
+                <Grid item container xs={3} justifyContent="flex-end">
                   <IconButton
                     onClick={this.handleListMenuButtonClick}
                     style={{ padding: "8px" }}
@@ -127,7 +127,11 @@ class List extends React.Component {
                 )}
               </Droppable>
               <div className={classes.title}>
-                <Grid container justify="space-between" alignItems="center">
+                <Grid
+                  container
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
                   <IconButton
                     className={classes.addAnotherCard}
                     aria-label="cover"

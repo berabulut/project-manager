@@ -7,13 +7,22 @@ const Label = ({ text, color, id, deleteLabel }) => {
   const classes = labelStyles();
 
   return (
-    <Grid className={classes.container} style={{ backgroundColor: color }} container alignItems="center" justify="space-around">
+    <Grid
+      className={classes.container}
+      style={{ backgroundColor: color }}
+      container
+      alignItems="center"
+      justifyContent="space-around"
+    >
       <Grid item xs={10}>
         <Typography className={classes.text}>{text}</Typography>
       </Grid>
       <Grid item xs={1}>
-        <IconButton onClick={() => deleteLabel(id)} className={classes.deleteButton}>
-          <HighlightOff style={{fontSize: "1.25rem", color: "white"}} />
+        <IconButton
+          onClick={() => deleteLabel(id)}
+          className={classes.deleteButton}
+        >
+          <HighlightOff style={{ fontSize: "1.25rem", color: "white" }} />
         </IconButton>
       </Grid>
     </Grid>

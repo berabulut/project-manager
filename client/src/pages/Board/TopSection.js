@@ -101,7 +101,7 @@ const TopSection = ({ board, admin }) => {
         </Grid>
         <Grid item container sm={3} xs={12}>
           <Grid
-            justify="flex-end"
+            justifyContent="flex-end"
             container
             item
             xs={12}

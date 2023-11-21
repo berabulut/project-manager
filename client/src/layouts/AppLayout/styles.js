@@ -1,11 +1,7 @@
-import {
-  makeStyles,
-  withStyles,
-  createMuiTheme,
-} from "@material-ui/core/styles";
+import { makeStyles, withStyles, createTheme } from "@material-ui/core/styles";
 import { Menu, MenuItem } from "@material-ui/core";
 
-export const AppTheme = createMuiTheme({
+export const AppTheme = createTheme({
   typography: {
     fontFamily: "Poppins !important",
   },
@@ -152,52 +148,55 @@ export const headerStyles = makeStyles((theme) => ({
   },
 }));
 
-export const menuStyles = makeStyles((theme) => ({
-  menuContainer: {
-    [theme.breakpoints.down("xs")]: {
-      width: "100%",
+export const menuStyles = makeStyles(
+  (theme) => ({
+    menuContainer: {
+      [theme.breakpoints.down("xs")]: {
+        width: "100%",
+      },
     },
-  },
-  popButton: {
-    color: "#333333",
-    borderRadius: "0px",
-    minWidth: "250px",
-    display: "flex",
-    justifyContent: "flex-end",
-    "&:hover": {
-      background: "#ffffff",
+    popButton: {
+      color: "#333333",
+      borderRadius: "0px",
+      minWidth: "250px",
+      display: "flex",
+      justifyContent: "flex-end",
+      "&:hover": {
+        background: "#ffffff",
+      },
+      [theme.breakpoints.down("xs")]: {
+        justifyContent: "flex-start",
+      },
     },
-    [theme.breakpoints.down("xs")]: {
-      justifyContent: "flex-start",
+    avatar: {
+      width: theme.spacing(4.5),
+      height: theme.spacing(4.5),
+      borderRadius: "8px",
     },
-  },
-  avatar: {
-    width: theme.spacing(4.5),
-    height: theme.spacing(4.5),
-    borderRadius: "8px"
-  },
-  username: {
-    marginLeft: theme.spacing(1.5),
-    fontWeight: "600",
-    display: "flex",
-    alignItems: "center",
-  },
-  arrowIcon: {
-    marginLeft: theme.spacing(2),
-  },
-  menuDivider: {
-    width: "85%",
-    margin: "auto",
-  },
-}), { index: 1 });
+    username: {
+      marginLeft: theme.spacing(1.5),
+      fontWeight: "600",
+      display: "flex",
+      alignItems: "center",
+    },
+    arrowIcon: {
+      marginLeft: theme.spacing(2),
+    },
+    menuDivider: {
+      width: "85%",
+      margin: "auto",
+    },
+  }),
+  { index: 1 }
+);
 
 export const PopMenu = withStyles((theme) => ({
   paper: {
     border: "1px solid #E0E0E0",
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
     borderRadius: "12px",
-    [theme.breakpoints.down('xs')]: {
-      width: "250px"
+    [theme.breakpoints.down("xs")]: {
+      width: "250px",
     },
   },
 }))((props) => (

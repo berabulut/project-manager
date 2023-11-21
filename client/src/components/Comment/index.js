@@ -54,7 +54,7 @@ const Comment = ({ comment, deleteComment, editComment }) => {
 
   return (
     <Grid container className={classes.container}>
-      <Grid item container xs={12} justify="space-between">
+      <Grid item container xs={12} justifyContent="space-between">
         <Grid item xs={1}>
           <UserAvatar user={comment} styles={classes.avatar} />
         </Grid>
@@ -66,7 +66,7 @@ const Comment = ({ comment, deleteComment, editComment }) => {
             <Typography className={classes.date}>{comment.time}</Typography>
           </Grid>
         </Grid>
-        <Grid item container xs={3} justify="flex-end">
+        <Grid item container xs={3} justifyContent="flex-end">
           {owner && (
             <>
               <Grid item xs={3}>

@@ -68,7 +68,13 @@ const KeywordSearch = ({
             className={classes.input}
           />
         </Grid>
-        <Grid container alignItems="center" justify="flex-end" item xs={2}>
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="flex-end"
+          item
+          xs={2}
+        >
           <IconButton
             onClick={handleSearch}
             className={classes.iconButton}

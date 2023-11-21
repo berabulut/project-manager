@@ -30,7 +30,7 @@ const ListMenu = ({
       open={Boolean(anchorEl)}
       onClose={handleClose}
     >
-      <Grid container style={{ outline: "0" }} justify="center">
+      <Grid container style={{ outline: "0" }} justifyContent="center">
         <Grid
           item
           xs={12}
@@ -62,7 +62,9 @@ const ListMenu = ({
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle>{"Delete this list with all the tasks in it?"}</DialogTitle>
+          <DialogTitle>
+            {"Delete this list with all the tasks in it?"}
+          </DialogTitle>
           <DialogActions>
             <Button onClick={closeDeleteDialog} color="primary">
               Go Back
@@ -70,7 +72,7 @@ const ListMenu = ({
             <Button
               onClick={() => {
                 handleClose();
-                closeDeleteDialog()
+                closeDeleteDialog();
                 deleteButtonClick();
               }}
               style={{ color: "#f44336" }}
