@@ -1,17 +1,17 @@
-org: berabulut
+org: wayzero
 app: project-management-tool
 service: project-management-tool-service
-frameworkVersion: "2"
+frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   environment:
     SLS_DEBUG: ${env:SLS_DEBUG}
     DATABASE_URL: ${env:DATABASE_URL}
 
 package:
- individually: false
+  individually: false
 
 functions:
   createNewUser:
@@ -69,7 +69,7 @@ functions:
       - http:
           path: board/invite
           method: put
-          cors: true 
+          cors: true
   createNewList:
     handler: handlers/list.create
     events:
@@ -128,11 +128,11 @@ functions:
           cors: true
   createId:
     handler: handlers/uniqueId.create
-    events: 
+    events:
       - http:
           path: id
           method: get
-          cors: true          
+          cors: true
   returnImages:
     handler: handlers/images.list
     events:
@@ -140,7 +140,12 @@ functions:
           path: list-images
           method: get
           cors: true
-  
+
+custom:
+  serverless-offline:
+    httpPort: 3003
+
+useDotenv: true
 
 plugins:
   - serverless-offline

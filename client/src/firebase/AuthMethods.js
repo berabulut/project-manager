@@ -44,7 +44,8 @@ const Login = (
     .signInWithEmailAndPassword(email, password)
     //everything is almost exactly the same as the function above
     .then(async (res) => {
-      const token = await Object.entries(res.user)[5][1].b;
+      // not sure if this the right token
+      const token = res.user.refreshToken;
       //set token to localStorage
       handleSignIn(res, setUserData, setOpenBackdrop);
       await localStorage.setItem("pmt_token", token);
