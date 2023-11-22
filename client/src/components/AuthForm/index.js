@@ -91,7 +91,7 @@ const AuthForm = ({
         >
           {constants.buttonText}
         </Button>
-        <Grid className={classes.gridContainer} container justify="center">
+        <Grid className={classes.gridContainer} container justifyContent="center">
           <Grid item>
             <Typography className={classes.infoText} variant="body2">
               or continue with these
@@ -102,7 +102,7 @@ const AuthForm = ({
           className={classes.gridContainer}
           container
           spacing={3}
-          justify="center"
+          justifyContent="center"
           alignItems="center"
         >
           <Grid item xs={3}>
@@ -136,7 +136,7 @@ const AuthForm = ({
             </IconButton>
           </Grid>
         </Grid>
-        <Grid className={classes.gridContainer} container justify="flex-end">
+        <Grid className={classes.gridContainer} container justifyContent="flex-end">
           <Grid item>
             <Typography className={classes.infoText} variant="body2">
               {constants.info}

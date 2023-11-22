@@ -34,7 +34,6 @@ const LabelsMenu = ({ anchorEl, handleClose, addLabel }) => {
     }
   };
 
-
   return (
     <div>
       <PopMenu
@@ -73,7 +72,7 @@ const LabelsMenu = ({ anchorEl, handleClose, addLabel }) => {
               <Grid
                 item
                 container
-                justify="center"
+                justifyContent="center"
                 xs={3}
                 style={{ marginBottom: "8px" }}
                 key={key}
@@ -85,19 +84,18 @@ const LabelsMenu = ({ anchorEl, handleClose, addLabel }) => {
                     backgroundColor: color.hex,
                     transform: selectedColor === key && "scale(1.05)",
                   }}
-                >
-                </div>
+                ></div>
               </Grid>
             );
           })}
         </Grid>
         <Grid container>
           {error && (
-            <Grid item container xs={12} justify="center">
+            <Grid item container xs={12} justifyContent="center">
               <Typography className={classes.error}>{error}</Typography>
             </Grid>
           )}
-          <Grid item container justify="center" xs={12}>
+          <Grid item container justifyContent="center" xs={12}>
             <Button
               onClick={handleButtonClick}
               className={classes.addButton}

@@ -1,6 +1,6 @@
-import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
+import { makeStyles, createTheme } from "@material-ui/core/styles";
 
-export const AuthTheme = createMuiTheme({
+export const AuthTheme = createTheme({
   typography: {
     fontFamily: "Poppins !important",
   },
@@ -30,21 +30,21 @@ export const footerStyles = makeStyles((theme) => ({
   footer: {
     padding: theme.spacing(3, 2),
     marginTop: "auto",
-    backgroundColor: "#252329"
+    backgroundColor: "#252329",
   },
   divider: {
-    backgroundColor: "#828282"
+    backgroundColor: "#828282",
   },
   footerText: {
     color: "#828282",
     textAlign: "start",
     fontWeight: "500",
-    paddingLeft: "10px"
+    paddingLeft: "10px",
   },
   gridContainer: {
     marginTop: "15px",
   },
   linkGrid: {
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 }));

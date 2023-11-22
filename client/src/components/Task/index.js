@@ -271,14 +271,8 @@ class Task extends React.Component {
 
   render() {
     const { classes, task, index } = this.props;
-    const {
-      coverImage,
-      title,
-      comments,
-      attachments,
-      labels,
-      assigments,
-    } = this.state;
+    const { coverImage, title, comments, attachments, labels, assigments } =
+      this.state;
     const { renderedBoard } = this.context;
     let avatarCounter = 0;
 
@@ -329,7 +323,7 @@ class Task extends React.Component {
                   item
                   container
                   xs={12}
-                  justify="flex-start"
+                  justifyContent="flex-start"
                   style={{ marginBottom: "16px" }}
                 >
                   {labels &&
@@ -341,7 +335,7 @@ class Task extends React.Component {
                           item
                           container
                           alignItems="center"
-                          justify="space-around"
+                          justifyContent="space-around"
                           index={index}
                         >
                           <Grid item xs={10}>
@@ -410,14 +404,14 @@ class Task extends React.Component {
                   item
                   container
                   xs
-                  justify="flex-end"
+                  justifyContent="flex-end"
                   className={classes.propertyCounter}
                 >
                   {comments && comments.length > 0 && (
                     <Grid
                       item
                       container
-                      justify="center"
+                      justifyContent="center"
                       alignItems="center"
                       xs={4}
                       style={{ maxWidth: "35px" }}
@@ -430,7 +424,7 @@ class Task extends React.Component {
                     <Grid
                       item
                       container
-                      justify="center"
+                      justifyContent="center"
                       alignItems="center"
                       xs={4}
                       style={{ maxWidth: "35px" }}

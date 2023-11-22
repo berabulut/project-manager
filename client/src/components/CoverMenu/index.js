@@ -51,7 +51,7 @@ const CoverMenu = ({ anchorEl, handleClose, handleImageClick }) => {
                   key={key}
                   className={classes.imageContainer}
                   container
-                  justify="center"
+                  justifyContent="center"
                   item
                   xs={3}
                 >
@@ -75,7 +75,7 @@ const CoverMenu = ({ anchorEl, handleClose, handleImageClick }) => {
                   key={key}
                   className={classes.imageContainer}
                   container
-                  justify="center"
+                  justifyContent="center"
                   item
                   xs={3}
                 >

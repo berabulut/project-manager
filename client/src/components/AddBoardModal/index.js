@@ -131,7 +131,7 @@ const AddBoardModal = ({ open, setOpen }) => {
             className={classes.gridItem}
             item
             container
-            justify="flex-end"
+            justifyContent="flex-end"
             xs={12}
           >
             <IconButton
@@ -153,7 +153,7 @@ const AddBoardModal = ({ open, setOpen }) => {
           <Grid
             className={classes.gridItem}
             container
-            justify="center"
+            justifyContent="center"
             item
             xs={12}
           >
@@ -170,7 +170,7 @@ const AddBoardModal = ({ open, setOpen }) => {
             item
             container
             xs={12}
-            justify="space-between"
+            justifyContent="space-between"
           >
             <Grid item xs={6}>
               <IconButton
@@ -222,7 +222,7 @@ const AddBoardModal = ({ open, setOpen }) => {
             container
             xs={12}
             className={classes.footerSection}
-            justify="flex-end"
+            justifyContent="flex-end"
           >
             {error && (
               <Grid item xs={12}>
