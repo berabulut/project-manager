@@ -6,24 +6,17 @@
 
 # Setup
 
-- Create firebaseConfig.json in root directory (service root).
+- Run npm install to install dependencies
+- Create an [.env](./.env) file and copy the variables from the [.env.EXAMPLE](./.env.EXAMPLE) file
+  - fill out the DATABASE_URL from [Firebase](https://console.firebase.google.com/project/_/settings/general/)
+- Create firebaseConfig.json in root directory (service root)
 - Generate a new key for Firebase admin-sdk from [here](https://console.firebase.google.com/project/_/settings/serviceaccounts/adminsdk).
 - Copy what's inside to firebaseConfig.json.
-- It should look like this :
-
-```{
- "type": "service_account",
- "project_id": "",
- "private_key_id": "",
- "private_key": "",
- "client_email": "",
- "client_id": "",
- "auth_uri": "",
- "token_uri": "",
- "auth_provider_x509_cert_url": "",
- "client_x509_cert_url": ""
-}
-```
+  - It should look like the [firebaseConfig.json.EXAMPLE](./firebaseConfig.json.EXAMPLE)
+- Run npm run login to login to your serverless account
+- Run npm run deploy to deploy your code to AWS
+  - Your serverless account must be connected to AWS for deployment
+  - For development run npm run offline to run service offline
 
 ```bash
 # Install dependencies

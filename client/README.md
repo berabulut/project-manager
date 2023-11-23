@@ -1,10 +1,17 @@
+# Setup
+
+- Run npm install to install dependencies
+- Create an [.env](./.env) file and copy the variables from the [.env.EXAMPLE](./.env.EXAMPLE) file
+- Fill out the .env file with [variables](#environment-variables)
+  - For local service use http://localhost:3003/dev as REACT_APP_SERVICE_URL variable
+  - For deployment use service URL instead
 
 # Environment Variables
 
-[Firebase Variables](https://console.firebase.google.com/project/_/settings/general/)  &nbsp;
-[Unsplash](https://unsplash.com/oauth/applications)
+[Get Firebase Variables](https://console.firebase.google.com/project/_/settings/general/) &nbsp;
+[Unsplash Webpage](https://unsplash.com/oauth/applications)
 
-``` 
+```
 REACT_APP_API_KEY=
 REACT_APP_AUTH_DOMAIN=
 REACT_APP_DB_URL=
@@ -17,7 +24,14 @@ REACT_APP_SERVICE_URL=
 REACT_APP_UNSPLASH_ACCESS_KEY=
 ```
 
+```bash
+# Install dependencies
+$ npm install
 
+# Start app in development mode
+$ npm run start
+
+```
 
 # Getting Started with Create React App
 
