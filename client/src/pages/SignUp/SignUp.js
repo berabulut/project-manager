@@ -46,7 +46,7 @@ const SignUp = () => {
     e.preventDefault();
     handleSignUp()
       .then(() => history.push("/login"))
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const handleChange = (e) => {
