@@ -5,7 +5,7 @@ frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs16.x
   environment:
     SLS_DEBUG: ${env:SLS_DEBUG}
     DATABASE_URL: ${env:DATABASE_URL}

@@ -1,0 +1,11 @@
+{
+  "overrides": [
+    {
+      "extends": ["react-app"],
+      "files": ["**/*.js"],
+      "rules": {
+        "react-hooks/exhaustive-deps": "off"
+      }
+    }
+  ]
+}
