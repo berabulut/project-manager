@@ -36,7 +36,9 @@ export const CreateNewUserRecord = (userData) =>
         }),
         body: JSON.stringify(userData),
       });
-      resolve(await response.json());
+      const data = await response.json();
+      if (!response.ok) throw data;
+      resolve(data);
     } catch (err) {
       reject(err);
     }

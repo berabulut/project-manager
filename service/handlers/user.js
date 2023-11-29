@@ -15,7 +15,7 @@ module.exports.create = async (event) => {
             },
             body: JSON.stringify({
               statusCode: 200,
-              message: "User created successfuly!",
+              message: "User created successfully!",
               data: data,
             }),
           };

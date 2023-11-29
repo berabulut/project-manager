@@ -1,4 +1,4 @@
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 export const profileStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Typography, Grid, Avatar } from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core";
 import { UserAvatar } from "components";
 import { UserContext } from "provider/UserProvider";
 import { PopMenu, menuStyles } from "./styles";

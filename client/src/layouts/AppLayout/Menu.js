@@ -7,7 +7,6 @@ import {
   Typography,
   ListItemIcon,
   ListItemText,
-  Avatar,
   Divider,
   CircularProgress,
 } from "@material-ui/core";

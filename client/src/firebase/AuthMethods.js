@@ -1,5 +1,4 @@
 import firebase from "firebase";
-import { FirebaseConfig } from "./FirebaseConfig";
 import { handleSignIn, manualSignIn } from "../functions/UserFunctions";
 
 const SignUp = (

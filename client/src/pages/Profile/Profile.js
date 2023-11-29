@@ -8,7 +8,6 @@ import {
   Container,
   Box,
   Divider,
-  Avatar,
 } from "@material-ui/core";
 import { UserAvatar } from "components";
 

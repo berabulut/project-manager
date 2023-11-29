@@ -1,5 +1,4 @@
 import firebase from "firebase";
-import { FirebaseConfig } from "./FirebaseConfig";
 
 const storage = firebase.storage();
 const storageRef = storage.ref();
