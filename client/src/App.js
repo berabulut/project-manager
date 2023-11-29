@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import firebase from "firebase";
+import { FirebaseConfig } from "./firebase/FirebaseConfig";
 import AuthProvider from "provider/AuthProvider";
 import UIProvider from "provider/UIProvider";
 import UserProvider from "provider/UserProvider";
 import { Loading } from "components";
 import { UserHelpers } from "helpers/";
-
 import Routes from "./routes/Routes";
 
 const App = () => {
