@@ -1,7 +1,7 @@
 {
   "name": "project-management-tool-service",
   "version": "1.0.0",
-  "description": "Service of my trello clone.",
+  "description": "Workspace system",
   "main": "index.js",
   "scripts": {
     "login": "serverless login",

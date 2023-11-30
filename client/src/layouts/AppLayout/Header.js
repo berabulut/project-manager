@@ -23,7 +23,7 @@ const Header = () => {
           >
             <Dashboard className={classes.menuIcon} />
             <Typography variant="h6" className={classes.menuTitle}>
-              Trello
+              WayZero Workspace
             </Typography>
           </IconButton>
           {showAllBoards === true ? (
