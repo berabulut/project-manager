@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
-import { Dashboard, Apps } from "@material-ui/icons";
+import { Apps } from "@material-ui/icons";
 import Menu from "./Menu";
 import { headerStyles } from "./styles";
 import { UIContext } from "provider/UIProvider";
+import wayZeroIcon from "./wayZero-logo.png";
 
 const Header = () => {
   let history = useHistory();
@@ -21,7 +22,7 @@ const Header = () => {
             aria-label="menu"
             onClick={() => history.push("/boards")}
           >
-            <Dashboard className={classes.menuIcon} />
+            <img src={wayZeroIcon} className={classes.menuIcon} />
             <Typography variant="h6" className={classes.menuTitle}>
               WayZero Workspace
             </Typography>

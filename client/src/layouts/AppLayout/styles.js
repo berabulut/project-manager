@@ -97,6 +97,7 @@ export const headerStyles = makeStyles((theme) => ({
     },
   },
   menuIcon: {
+    maxWidth: "40px",
     color: "#2F80ED",
     fontSize: "2rem",
   },
