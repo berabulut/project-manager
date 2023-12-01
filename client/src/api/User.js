@@ -11,8 +11,10 @@ export const FetchUserData = (uid, setUserData, setOpenBackdrop) =>
           }),
         }
       );
+
       const data = await response.json();
-      if (setUserData) {
+      if (!response.ok) return reject(data.error);
+      else if (setUserData) {
         setUserData(data.userData);
         UIHelpers.HandleBackdropClose(setOpenBackdrop);
         resolve(data.userData);
