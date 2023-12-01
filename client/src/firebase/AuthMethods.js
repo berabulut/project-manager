@@ -47,11 +47,12 @@ const Login = (
       const token = res.user.refreshToken;
       //set token to localStorage
       handleSignIn(res, setUserData, setOpenBackdrop);
-      await localStorage.setItem("pmt_token", token);
+      localStorage.setItem("pmt_token", token);
       await setToken(token);
     })
-    .catch((err) => {
-      setErrors((prev) => [...prev, err.message]);
+    .catch(async (err) => {
+      const { error } = await JSON.parse(err.message);
+      setErrors((prev) => [...prev, error?.message]);
     });
 };
 
