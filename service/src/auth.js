@@ -74,29 +74,27 @@ const checkIfUserExists = (uid) =>
 
 const checkIfWhitelisted = (uid) =>
   new Promise(async (resolve, reject) => {
-    const adminAuth = admin.apps[0].auth();
-    const user = await adminAuth.getUser(uid);
-    const ref = db.ref("/access/whitelist");
+    try {
+      const adminAuth = admin.apps[0].auth();
+      const user = await adminAuth.getUser(uid);
+      const ref = db.ref("/access/whitelist");
 
-    ref
-      .once("value", (snapshot) => {
+      ref.once("value", (snapshot) => {
         if (!snapshot.val().includes(user.email)) {
           try {
             adminAuth
               .deleteUser(uid)
-              .then((userRecord) =>
-                console.log("Successfully deleted user", userRecord)
-              );
+              .then((userRecord) => console.log("Successfully deleted user"));
           } catch (err) {
             (err) => console.log("Error deleting user:", err);
           }
 
           resolve(false);
         } else resolve(true);
-      })
-      .catch((err) => {
-        reject(err);
       });
+    } catch (err) {
+      reject(err);
+    }
   });
 
 module.exports = { createNewUser, returnUserData, checkIfUserExists };
