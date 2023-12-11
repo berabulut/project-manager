@@ -1,10 +1,10 @@
 # EXAMPLES
 
- - Authorization 
-	- Sign up with email and password
-	- Sign in with Google
-	- Sign in with Twitter
-	- Sign in with Github
+- Authorization
+  - Sign up with email and password
+  - Sign in with Google
+  - Sign in with Twitter
+  - Sign in with Github
 
 <br>
 
@@ -21,9 +21,8 @@
 <br>
 
 - Create new board
-	- You can pick a cover image (Unsplash API)
-	- Set privacy 
-
+  - You can pick a cover image (Unsplash API)
+  - Set privacy
 
 <br>
 
@@ -39,7 +38,7 @@
 
 <br>
 
-- Invite user to board 
+- Invite user to board
 
 <br>
 
@@ -47,7 +46,7 @@
 
 <br>
 
-- Create list 
+- Create list
 
 <br>
 
@@ -55,7 +54,7 @@
 
 <br>
 
-- Create task 
+- Create task
 
 <br>
 
@@ -63,7 +62,7 @@
 
 <br>
 
-- Edit task 
+- Edit task
 
 <br>
 
@@ -71,7 +70,7 @@
 
 <br>
 
-- Upload attachment (Task's cover image can be picked from them) 
+- Upload attachment (Task's cover image can be picked from them)
 
 <br>
 
@@ -102,4 +101,3 @@
 ![assign](https://github.com/berabulut/gifs/blob/main/assign.gif)
 
 <br>
-

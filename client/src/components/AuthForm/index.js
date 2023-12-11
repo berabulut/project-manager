@@ -91,7 +91,11 @@ const AuthForm = ({
         >
           {constants.buttonText}
         </Button>
-        <Grid className={classes.gridContainer} container justifyContent="center">
+        <Grid
+          className={classes.gridContainer}
+          container
+          justifyContent="center"
+        >
           <Grid item>
             <Typography className={classes.infoText} variant="body2">
               or continue with these
@@ -136,7 +140,11 @@ const AuthForm = ({
             </IconButton>
           </Grid>
         </Grid>
-        <Grid className={classes.gridContainer} container justifyContent="flex-end">
+        <Grid
+          className={classes.gridContainer}
+          container
+          justifyContent="flex-end"
+        >
           <Grid item>
             <Typography className={classes.infoText} variant="body2">
               {constants.info}
@@ -154,14 +162,18 @@ const AuthForm = ({
               className={classes.infoText}
               variant="body2"
               style={{ marginTop: "24px", textAlign: "end" }}
-            >            </Typography>
+            >
+              {" "}
+            </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography
               className={classes.infoText}
               variant="body2"
               style={{ marginTop: "8px", textAlign: "end" }}
-            >            </Typography>
+            >
+              {" "}
+            </Typography>
           </Grid>
         </Grid>
       </form>

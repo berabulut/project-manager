@@ -23,7 +23,7 @@ const App = () => {
             setUserData,
             setBoards,
             setOpenBackdrop,
-            userData
+            userData,
           );
         } else {
           return;

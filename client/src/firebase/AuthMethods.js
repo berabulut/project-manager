@@ -7,7 +7,7 @@ const SignUp = (
   setErrors,
   setToken,
   setUserData,
-  setOpenBackdrop
+  setOpenBackdrop,
 ) =>
   new Promise(async (resolve, reject) => {
     firebase
@@ -35,7 +35,7 @@ const Login = (
   setErrors,
   setToken,
   setUserData,
-  setOpenBackdrop
+  setOpenBackdrop,
 ) => {
   //change from create users to...
   firebase
@@ -96,7 +96,7 @@ const LoginWithTwitter = (
   setErrors,
   setToken,
   setUserData,
-  setOpenBackdrop
+  setOpenBackdrop,
 ) => {
   let provider = new firebase.auth.TwitterAuthProvider();
 

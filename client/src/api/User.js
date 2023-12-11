@@ -9,7 +9,7 @@ export const FetchUserData = (uid, setUserData, setOpenBackdrop) =>
           headers: new Headers({
             "Content-Type": "application/json",
           }),
-        }
+        },
       );
 
       const data = await response.json();

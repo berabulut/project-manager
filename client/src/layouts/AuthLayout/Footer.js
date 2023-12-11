@@ -7,7 +7,7 @@ import {
   Divider,
   Link,
 } from "@material-ui/core";
-import GitHubIcon from '@material-ui/icons/GitHub';
+import GitHubIcon from "@material-ui/icons/GitHub";
 
 const Footer = () => {
   const classes = footerStyles(AuthTheme);

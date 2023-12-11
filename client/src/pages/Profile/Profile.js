@@ -2,13 +2,7 @@ import React, { useContext } from "react";
 import { UserContext } from "provider/UserProvider";
 import { AppLayout } from "layouts";
 import { profileStyles } from "./styles";
-import {
-  Grid,
-  Typography,
-  Container,
-  Box,
-  Divider,
-} from "@material-ui/core";
+import { Grid, Typography, Container, Box, Divider } from "@material-ui/core";
 import { UserAvatar } from "components";
 
 const Profile = () => {

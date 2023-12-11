@@ -27,7 +27,7 @@ const AuthProvider = ({
       inputs.password,
       setErrors,
       setToken,
-      setOpenBackdrop
+      setOpenBackdrop,
     );
   };
 
@@ -38,7 +38,7 @@ const AuthProvider = ({
       setErrors,
       setToken,
       setUserData,
-      setOpenBackdrop
+      setOpenBackdrop,
     );
   };
 

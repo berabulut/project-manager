@@ -7,7 +7,7 @@ const HandleUserData = (
   setUserData,
   setBoards,
   setOpenBackdrop,
-  userData
+  userData,
 ) =>
   new Promise(async (resolve, reject) => {
     try {
@@ -16,7 +16,7 @@ const HandleUserData = (
       const response = await BoardHelpers.HandleUserRelatedBoards(
         data,
         setBoards,
-        setOpenBackdrop
+        setOpenBackdrop,
       );
       setOpenBackdrop(false);
       resolve(response);

@@ -77,7 +77,7 @@ export const menuStyles = makeStyles(
       paddingLeft: theme.spacing(2),
     },
   }),
-  { index: 1 }
+  { index: 1 },
 );
 
 export const PopMenu = withStyles({

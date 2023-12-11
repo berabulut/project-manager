@@ -54,7 +54,7 @@ export const menuStyles = makeStyles((theme) => ({
     lineHeight: "14px",
     letterSpacing: "-0.035em",
     height: "32px",
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   error: {
     color: "#EB5757",
@@ -62,8 +62,8 @@ export const menuStyles = makeStyles((theme) => ({
     fontWeight: "600",
     fontSize: "0.825rem",
     paddingLeft: theme.spacing(3),
-    paddingRight: theme.spacing(3)
-  }
+    paddingRight: theme.spacing(3),
+  },
 }));
 
 export const PopMenu = withStyles({

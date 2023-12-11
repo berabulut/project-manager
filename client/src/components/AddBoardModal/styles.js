@@ -117,6 +117,6 @@ export const modalStyles = makeStyles((theme) => ({
     color: "#f44336",
     marginTop: theme.spacing(1.5),
     marginBottom: theme.spacing(3),
-    textAlign: "center"
+    textAlign: "center",
   },
 }));

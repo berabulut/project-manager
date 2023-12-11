@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "client-dev": "cd client/ && npm run start",
-    "service-dev": "cd service/ && npm run offline"
+    "service-dev": "cd service/ && npm run offline",
+    "prettier": "npx prettier . --write"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/rphad23/project-manager/issues"
   },
-  "homepage": "https://github.com/rphad23/project-manager#readme"
+  "homepage": "https://github.com/rphad23/project-manager#readme",
+  "devDependencies": {
+    "prettier": "^3.1.1"
+  }
 }

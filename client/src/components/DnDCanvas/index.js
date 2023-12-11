@@ -171,7 +171,7 @@ class DndCanvas extends React.Component {
         board,
         updatedState.lists,
         list,
-        updatedState.listOrder
+        updatedState.listOrder,
       )
         .then((renderedBoard) => {
           this.context.setRenderedBoard(renderedBoard);
@@ -192,7 +192,7 @@ class DndCanvas extends React.Component {
         board,
         updatedState.lists,
         list,
-        updatedState.listOrder
+        updatedState.listOrder,
       )
         .then((renderedBoard) => {
           this.context.setRenderedBoard(renderedBoard);
@@ -225,7 +225,7 @@ class DndCanvas extends React.Component {
         listId,
         updatedState.tasks,
         task,
-        updatedState.lists[listId].taskIds
+        updatedState.lists[listId].taskIds,
       )
         .then((renderedBoard) => {
           this.context.setRenderedBoard(renderedBoard);
@@ -250,7 +250,7 @@ class DndCanvas extends React.Component {
         listId,
         updatedState.tasks,
         task,
-        updatedState.lists[listId].taskIds
+        updatedState.lists[listId].taskIds,
       )
         .then((renderedBoard) => {
           this.context.setRenderedBoard(renderedBoard);

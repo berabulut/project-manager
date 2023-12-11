@@ -30,14 +30,14 @@ const Board = () => {
       boards,
       setRenderedBoard,
       setShowAllBoards,
-      setOpenBackdrop
+      setOpenBackdrop,
     );
     setShowFooter(false);
     return () => {
       UIHelpers.HideShowAllBoards(
         renderedBoard,
         setRenderedBoard,
-        setShowAllBoards
+        setShowAllBoards,
       );
       setShowFooter(true);
     };
@@ -49,7 +49,7 @@ const Board = () => {
       boards,
       setRenderedBoard,
       setShowAllBoards,
-      setOpenBackdrop
+      setOpenBackdrop,
     );
   }, [boards]);
 
@@ -82,7 +82,7 @@ const Board = () => {
             newState.userData[index] = temp;
             // setRenderedBoard({...renderedBoard, userData: newState.userData})
             setRenderedBoard(newState);
-          }
+          },
         );
       }
     }

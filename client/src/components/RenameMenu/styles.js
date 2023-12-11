@@ -42,12 +42,12 @@ export const NameInput = withStyles({
       color: "#2F80ED",
     },
     "& .MuiFormLabel-root": {
-      fontSize: "0.875rem"
+      fontSize: "0.875rem",
     },
     "& .MuiOutlinedInput-root": {
       fontSize: "0.875rem",
       "& fieldset": {
-        border: "2px solid #2F80ED"
+        border: "2px solid #2F80ED",
       },
       "&:hover fieldset": {
         borderColor: "#2F80ED",
@@ -58,10 +58,10 @@ export const NameInput = withStyles({
     },
     "& .MuiFormHelperText-contained": {
       color: "red",
-      marginLeft: "3px"
-    }
+      marginLeft: "3px",
+    },
   },
   input: {
-    fontSize: "0.875rem"
-  }
+    fontSize: "0.875rem",
+  },
 })(TextField);

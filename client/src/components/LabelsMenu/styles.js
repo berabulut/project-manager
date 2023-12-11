@@ -65,14 +65,14 @@ export const menuStyles = makeStyles((theme) => ({
     lineHeight: "14px",
     letterSpacing: "-0.035em",
     height: "32px",
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   error: {
     color: "#EB5757",
     marginBottom: theme.spacing(1),
     fontWeight: "600",
-    fontSize: "0.825rem"
-  }
+    fontSize: "0.825rem",
+  },
 }));
 
 export const PopMenu = withStyles({

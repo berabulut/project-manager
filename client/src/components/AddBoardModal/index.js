@@ -20,9 +20,8 @@ const placeholder =
 const AddBoardModal = ({ open, setOpen }) => {
   const classes = modalStyles();
 
-  const { userData, setUserData, setBoards, setOpenBackdrop } = useContext(
-    UserContext
-  );
+  const { userData, setUserData, setBoards, setOpenBackdrop } =
+    useContext(UserContext);
 
   const [visibilityAnchorEl, setVisibilityAnchorEl] = useState(null);
   const [openVisibility, setOpenVisibilty] = useState(false);
@@ -62,7 +61,7 @@ const AddBoardModal = ({ open, setOpen }) => {
               userData,
               setUserData,
               setBoards,
-              setOpenBackdrop
+              setOpenBackdrop,
             )
               .then(() => {
                 setSuccess(true);
@@ -91,7 +90,7 @@ const AddBoardModal = ({ open, setOpen }) => {
     setCoverImageRaw();
     setCoverImageRegular();
     setBoardTitle("");
-    setBoardVisibility("Private")
+    setBoardVisibility("Private");
   };
 
   const handleVisibilityClick = (event) => {
