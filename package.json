@@ -1,0 +1,21 @@
+{
+  "name": "project-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client-dev": "cd client/ && npm run start",
+    "service-dev": "cd service/ && npm run offline"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rphad23/project-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rphad23/project-manager/issues"
+  },
+  "homepage": "https://github.com/rphad23/project-manager#readme"
+}
