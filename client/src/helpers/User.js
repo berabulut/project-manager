@@ -23,6 +23,7 @@ const HandleUserData = (
     } catch (err) {
       firebase.auth().signOut();
       localStorage.removeItem("pmt_token");
+      setOpenBackdrop(false);
       reject(err);
     }
   });
