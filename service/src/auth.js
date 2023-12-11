@@ -10,6 +10,7 @@ if (!admin.apps.length) {
 }
 
 const db = admin.database();
+const adminAuth = admin.apps[0].auth();
 
 const createNewUser = (uid, email, name, picture) =>
   new Promise(async (resolve, reject) => {
@@ -74,27 +75,19 @@ const checkIfUserExists = (uid) =>
 
 const checkIfWhitelisted = (uid) =>
   new Promise(async (resolve, reject) => {
-    try {
-      const adminAuth = admin.apps[0].auth();
+    const ref = db.ref("/access/whitelist");
+
+    ref.once("value", async (snapshot) => {
       const user = await adminAuth.getUser(uid);
-      const ref = db.ref("/access/whitelist");
+      if (user && !snapshot.val().includes(user.email)) {
+        adminAuth
+          .deleteUser(uid)
+          .then((userRecord) => console.log("Successfully deleted user"))
+          .catch((err) => console.log(err));
 
-      ref.once("value", (snapshot) => {
-        if (!snapshot.val().includes(user.email)) {
-          try {
-            adminAuth
-              .deleteUser(uid)
-              .then((userRecord) => console.log("Successfully deleted user"));
-          } catch (err) {
-            (err) => console.log("Error deleting user:", err);
-          }
-
-          resolve(false);
-        } else resolve(true);
-      });
-    } catch (err) {
-      reject(err);
-    }
+        resolve(false);
+      } else resolve(true);
+    });
   });
 
 module.exports = { createNewUser, returnUserData, checkIfUserExists };
