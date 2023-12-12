@@ -91,51 +91,7 @@ const AuthForm = ({
         >
           {constants.buttonText}
         </Button>
-        <Grid className={classes.gridContainer} container justifyContent="center">
-          <Grid item>
-            <Typography className={classes.infoText} variant="body2">
-              or continue with these
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid
-          className={classes.gridContainer}
-          container
-          spacing={3}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Grid item xs={3}>
-            <IconButton
-              aria-label="upload picture"
-              component="span"
-              className={classes.iconButton}
-              onClick={() => handleGoogleLogin()}
-            >
-              <Google />
-            </IconButton>
-          </Grid>
-          <Grid item xs={3}>
-            <IconButton
-              aria-label="upload picture"
-              component="span"
-              className={classes.iconButton}
-              onClick={() => handleTwitterLogin()}
-            >
-              <Twitter />
-            </IconButton>
-          </Grid>
-          <Grid item xs={3}>
-            <IconButton
-              aria-label="upload picture"
-              component="span"
-              className={classes.iconButton}
-              onClick={() => handleGithubLogin()}
-            >
-              <GitHub />
-            </IconButton>
-          </Grid>
-        </Grid>
+        
         <Grid className={classes.gridContainer} container justifyContent="flex-end">
           <Grid item>
             <Typography className={classes.infoText} variant="body2">
