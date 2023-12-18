@@ -28,8 +28,10 @@ jobs:
           REACT_APP_MEASUREMENT_ID: ${{ secrets.REACT_APP_MEASUREMENT_ID }}
           REACT_APP_SERVICE_URL: ${{ secrets.REACT_APP_SERVICE_URL }}
           REACT_APP_UNSPLASH_ACCESS_KEY: ${{ secrets.REACT_APP_UNSPLASH_ACCESS_KEY }}
+          CI: ${{ vars.CI }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
+          entryPoint: /client
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_WAYZERO }}"
           channelId: live

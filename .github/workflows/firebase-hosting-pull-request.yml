@@ -24,6 +24,7 @@ jobs:
           CI: ${{ vars.CI }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
+          entryPoint: /client
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_WAYZERO }}"
           projectId: wayzero
