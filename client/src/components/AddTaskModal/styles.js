@@ -16,10 +16,10 @@ export const PopMenu = withStyles({
     border: "1px solid #E0E0E0",
     borderRadius: "8px",
     borderTop: "none",
-    borderTopLeftRadius:"0px",
-    borderTopRightRadius:"0px",
+    borderTopLeftRadius: "0px",
+    borderTopRightRadius: "0px",
     width: "280px",
-    backgroundColor: "#f5f5f5"
+    backgroundColor: "#f5f5f5",
   },
 })((props) => (
   <Menu
@@ -48,7 +48,7 @@ export const NameInput = withStyles({
       color: "#2F80ED",
     },
     "& .MuiFormLabel-root": {
-      fontSize: "0.875rem"
+      fontSize: "0.875rem",
     },
     "& .MuiOutlinedInput-root": {
       fontSize: "0.875rem",
@@ -66,10 +66,10 @@ export const NameInput = withStyles({
     },
     "& .MuiFormHelperText-contained": {
       color: "red",
-      marginLeft: "3px"
-    }
+      marginLeft: "3px",
+    },
   },
   input: {
-    fontSize: "0.875rem"
-  }
+    fontSize: "0.875rem",
+  },
 })(TextField);

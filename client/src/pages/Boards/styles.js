@@ -17,13 +17,13 @@ export const boardsStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down("xs")]: {
       marginTop: theme.spacing(4),
-    }
+    },
   },
   boardsContainer: {
     [theme.breakpoints.down("xs")]: {
       justifyContent: "center",
       marginBottom: theme.spacing(3),
-    }
+    },
   },
   button: {
     backgroundColor: "#2F80ED",

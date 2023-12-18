@@ -17,7 +17,6 @@ const HandleTaskPropertyUpdate = (board, taskId, property, data) =>
     }
   });
 
-
 const TaskHelpers = {
   HandleTaskPropertyUpdate: HandleTaskPropertyUpdate,
 };

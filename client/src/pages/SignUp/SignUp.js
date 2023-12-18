@@ -9,15 +9,7 @@ import { Container, CssBaseline, Snackbar } from "@material-ui/core";
 const SignUp = () => {
   const classes = loginStyles(AuthTheme);
   const history = useHistory();
-  const {
-    handleSignUp,
-    handleGoogleLogin,
-    handleTwitterLogin,
-    handleGithubLogin,
-    setInputs,
-    errors,
-    token,
-  } = useContext(FirebaseAuth);
+  const { handleSignUp, setInputs, errors, token } = useContext(FirebaseAuth);
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alert, setAlert] = useState("");
@@ -70,9 +62,6 @@ const SignUp = () => {
           <AuthForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
-            handleGithubLogin={handleGithubLogin}
-            handleGoogleLogin={handleGoogleLogin}
-            handleTwitterLogin={handleTwitterLogin}
             constants={constants}
           />
         </Container>

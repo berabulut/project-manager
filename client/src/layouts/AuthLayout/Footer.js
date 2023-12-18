@@ -7,7 +7,6 @@ import {
   Divider,
   Link,
 } from "@material-ui/core";
-import GitHubIcon from '@material-ui/icons/GitHub';
 
 const Footer = () => {
   const classes = footerStyles(AuthTheme);
@@ -18,10 +17,8 @@ const Footer = () => {
       <footer className={classes.footer}>
         <Divider className={classes.divider} />
         <Grid className={classes.gridContainer} container alignItems="center">
-          <Grid item xs={11}>           
-          </Grid>
-          <Grid item xs={1} className={classes.linkGrid}>
-          </Grid>
+          <Grid item xs={11}></Grid>
+          <Grid item xs={1} className={classes.linkGrid}></Grid>
         </Grid>
       </footer>
     </div>

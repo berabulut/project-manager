@@ -8,7 +8,6 @@ import {
   Link,
 } from "@material-ui/core";
 import { UIContext } from "provider/UIProvider";
-import GitHubIcon from "@material-ui/icons/GitHub";
 
 const Footer = () => {
   const classes = footerStyles();
@@ -23,11 +22,12 @@ const Footer = () => {
       <Divider className={classes.divider} />
       <Grid className={classes.gridContainer} container alignItems="center">
         <Grid item xs={11}>
-          <Typography className={classes.footerText} variant="body2">
-          </Typography>
+          <Typography
+            className={classes.footerText}
+            variant="body2"
+          ></Typography>
         </Grid>
-        <Grid item xs={1} className={classes.linkGrid}>
-        </Grid>
+        <Grid item xs={1} className={classes.linkGrid}></Grid>
       </Grid>
     </div>
   );

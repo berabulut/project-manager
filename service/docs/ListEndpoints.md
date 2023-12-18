@@ -18,7 +18,7 @@
 
   ```
   	- boardId
-  	- listOrder (array of list ids : ["342", "321", "123"]) 
+  	- listOrder (array of list ids : ["342", "321", "123"])
   ```
 
 - ## Rename the list
@@ -29,11 +29,11 @@
 
   ```
       - boardId
-      - listId 
-	  - title
+      - listId
+    - title
   ```
 
-- ## Delete the list 
+- ## Delete the list
 
   `PUT`
   `/list/remove` <br />
@@ -41,5 +41,5 @@
 
   ```
   	- boardId
-  	- listId 
+  	- listId
   ```

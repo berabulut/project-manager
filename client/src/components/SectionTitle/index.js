@@ -7,7 +7,12 @@ const SectionTitle = ({ icon, title, alignItems }) => {
   const classes = sectionStyles();
 
   return (
-    <Grid item container alignItems={alignItems ? alignItems : "center"} xs={12}>
+    <Grid
+      item
+      container
+      alignItems={alignItems ? alignItems : "center"}
+      xs={12}
+    >
       <Grid item>
         {icon === "description" ? (
           <Description className={classes.sectionIcon} />

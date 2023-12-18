@@ -45,5 +45,5 @@ export const editStyles = makeStyles((theme) => ({
     color: "#f44336",
     marginTop: theme.spacing(1.5),
     marginBottom: theme.spacing(1),
-  }
+  },
 }));

@@ -27,7 +27,7 @@ const AuthProvider = ({
       inputs.password,
       setErrors,
       setToken,
-      setOpenBackdrop
+      setOpenBackdrop,
     );
   };
 
@@ -38,20 +38,8 @@ const AuthProvider = ({
       setErrors,
       setToken,
       setUserData,
-      setOpenBackdrop
+      setOpenBackdrop,
     );
-  };
-
-  const handleGoogleLogin = () => {
-    AuthMethods.googleLogin(setErrors, setToken, setUserData, setOpenBackdrop);
-  };
-
-  const handleGithubLogin = () => {
-    AuthMethods.githubLogin(setErrors, setToken, setUserData, setOpenBackdrop);
-  };
-
-  const handleTwitterLogin = () => {
-    AuthMethods.twitterLogin(setErrors, setToken, setUserData, setOpenBackdrop);
   };
 
   const handleLogout = () => {
@@ -67,9 +55,6 @@ const AuthProvider = ({
         handleSignUp,
         handleLogin,
         handleLogout,
-        handleGoogleLogin,
-        handleGithubLogin,
-        handleTwitterLogin,
         inputs,
         setInputs,
         errors,

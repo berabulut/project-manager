@@ -154,7 +154,7 @@ const EditTaskModal = ({
   useEffect(() => {
     if (renderedBoard) {
       const users = renderedBoard.userData.filter((user) =>
-        assigments.includes(user.uid)
+        assigments.includes(user.uid),
       );
       setAssignedUsers(users);
     }

@@ -22,12 +22,12 @@ export const coverStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(1.5),
     paddingRight: theme.spacing(1.5),
     paddingTop: theme.spacing(1.8),
-    paddingBottom: theme.spacing(1.8)
+    paddingBottom: theme.spacing(1.8),
   },
   imageContainer: {
-    marginBottom: theme.spacing(1.25)
+    marginBottom: theme.spacing(1.25),
   },
-  image:{
+  image: {
     width: "50px",
     height: "50px",
     objectFit: "cover",
@@ -35,16 +35,16 @@ export const coverStyles = makeStyles((theme) => ({
     transition: "all .2s ease-in-out",
     "&:hover": {
       cursor: "pointer",
-      transform: "scale(1.05)"
-    }
-  }
+      transform: "scale(1.05)",
+    },
+  },
 }));
 
 export const keywordSearchStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: "white",
     borderRadius: "8px",
-    boxShadow: "0px 4px 12px rgb(0 0 0 / 15%)"
+    boxShadow: "0px 4px 12px rgb(0 0 0 / 15%)",
   },
   input: {
     width: "100%",
@@ -59,7 +59,7 @@ export const keywordSearchStyles = makeStyles((theme) => ({
     fontFamily: "Poppins",
     fontSize: "0.875rem",
     border: "none",
-    borderRadius: "8px"
+    borderRadius: "8px",
   },
   iconButton: {
     backgroundColor: theme.palette.primary.main,
@@ -77,9 +77,9 @@ export const keywordSearchStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
     paddingLeft: theme.spacing(0.5),
     color: "#f44336",
-    fontWeight: "500"
+    fontWeight: "500",
   },
-}))
+}));
 
 export const PopMenuItem = withStyles((theme) => ({
   root: {

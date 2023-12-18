@@ -28,7 +28,7 @@ export const GetRandomImages = (count) =>
       .then((result) => {
         if (result.type === "success") {
           resolve(result.response);
-          console.log(result.response)
+          console.log(result.response);
         } else {
           reject(result.type);
         }
@@ -38,19 +38,20 @@ export const GetRandomImages = (count) =>
       });
   });
 
-export const GetImages = () => new Promise(async(resolve, reject) => {
-  try {
-    let response = await fetch(
-      process.env.REACT_APP_SERVICE_URL + `/list-images`,
-      {
-        method: "GET",
-        headers: new Headers({
-          "Content-type": "application/json; charset=UTF-8",
-        }),
-      }
-    );
-    resolve(response.json());
-  } catch (err) {
-    reject(err);
-  }
-})
+export const GetImages = () =>
+  new Promise(async (resolve, reject) => {
+    try {
+      let response = await fetch(
+        process.env.REACT_APP_SERVICE_URL + `/list-images`,
+        {
+          method: "GET",
+          headers: new Headers({
+            "Content-type": "application/json; charset=UTF-8",
+          }),
+        },
+      );
+      resolve(response.json());
+    } catch (err) {
+      reject(err);
+    }
+  });

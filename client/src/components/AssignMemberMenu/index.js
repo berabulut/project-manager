@@ -36,7 +36,7 @@ const AssignMemberMenu = ({
   useEffect(() => {
     if (assigments && renderedBoard.userData) {
       const list = renderedBoard.userData.filter(
-        (user) => !assigments.includes(user.uid)
+        (user) => !assigments.includes(user.uid),
       );
       setMemberList(list);
     }

@@ -94,7 +94,7 @@ export const topSectionStyles = makeStyles(
       },
     },
   }),
-  { index: 1 }
+  { index: 1 },
 );
 
 export const listAreaStyles = makeStyles((theme) => ({
