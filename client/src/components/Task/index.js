@@ -21,7 +21,7 @@ class Task extends React.Component {
       comments: [],
       attachments: [],
       labels: [],
-      assigments: [],
+      assignments: [],
     };
   }
 
@@ -220,29 +220,29 @@ class Task extends React.Component {
   assignMemberToTask = (uid) => {
     this.setState(
       {
-        assigments: [...this.state.assigments, uid],
+        assignments: [...this.state.assignments, uid],
       },
       () => {
         TaskHelpers.HandleTaskPropertyUpdate(
           this.context.renderedBoard,
           this.props.task.id,
-          "assigments",
-          this.state.assigments,
+          "assignments",
+          this.state.assignments,
         );
       },
     );
   };
 
   removeAssignedMember = (uid) => {
-    let assigments = this.state.assigments;
-    for (let i = 0; i < assigments.length; i++) {
-      assigments = assigments.filter((id) => id !== uid);
-      this.setState({ assigments: assigments }, () => {
+    let assignments = this.state.assignments;
+    for (let i = 0; i < assignments.length; i++) {
+      assignments = assignments.filter((id) => id !== uid);
+      this.setState({ assignments: assignments }, () => {
         TaskHelpers.HandleTaskPropertyUpdate(
           this.context.renderedBoard,
           this.props.task.id,
-          "assigments",
-          this.state.assigments,
+          "assignments",
+          this.state.assignments,
         ).catch((err) => console.log(err));
       });
     }
@@ -256,7 +256,7 @@ class Task extends React.Component {
       comments,
       attachments,
       labels,
-      assigments,
+      assignments,
     } = this.props.task;
     this.setState({
       coverImage: coverImage || "",
@@ -265,14 +265,20 @@ class Task extends React.Component {
       comments: comments || [],
       attachments: attachments || [],
       labels: labels || [],
-      assigments: assigments || [],
+      assignments: assignments || [],
     });
   }
 
   render() {
     const { classes, task, index } = this.props;
-    const { coverImage, title, comments, attachments, labels, assigments } =
-      this.state;
+    const {
+      coverImage,
+      title,
+      comments,
+      attachments,
+      labels,
+      assignments: assignments,
+    } = this.state;
     const { renderedBoard } = this.context;
     let avatarCounter = 0;
 
@@ -349,12 +355,12 @@ class Task extends React.Component {
                 </Grid>
               </Grid>
               <Grid item container xs={12}>
-                {assigments &&
+                {assignments &&
                   renderedBoard &&
                   renderedBoard.userData.map((user, index) => {
                     if (
-                      assigments.includes(user.uid) &&
-                      !(assigments.length > 2 && avatarCounter > 0)
+                      assignments.includes(user.uid) &&
+                      !(assignments.length > 2 && avatarCounter > 0)
                     ) {
                       avatarCounter += 1;
                       return (
@@ -377,14 +383,14 @@ class Task extends React.Component {
                     if (index === renderedBoard.userData.length - 1)
                       avatarCounter = 0;
                   })}
-                {assigments && assigments.length > 2 ? (
+                {assignments && assignments.length > 2 ? (
                   <Grid item className={classes.othersContainer}>
                     <Typography
                       className={classes.othersInfo}
                       variant="body2"
                       gutterBottom
                     >
-                      +{assigments.length - 1} Others
+                      +{assignments.length - 1} Others
                     </Typography>
                   </Grid>
                 ) : (
@@ -447,7 +453,7 @@ class Task extends React.Component {
               taskTitle={this.state.title}
               description={this.state.description}
               comments={this.state.comments}
-              assigments={this.state.assigments}
+              assignments={this.state.assignments}
               addImageToTask={this.handleSearchedImageClick}
               submitComment={this.submitComment}
               deleteComment={this.deleteComment}
