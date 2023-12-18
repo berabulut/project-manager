@@ -27,57 +27,12 @@ export const manualSignIn = (response) =>
   });
 
 const handleSignInData = (response) => {
-  if (response.credential !== undefined && response.credential !== null) {
-    const signInMethod = response.credential.signInMethod;
-    if (signInMethod === "google.com") {
-      return handleGoogleData(response);
-    } else if (signInMethod === "twitter.com") {
-      return handleTwitterData(response);
-    } else if (signInMethod === "github.com") {
-      return handleGithubData(response);
-    }
-  } else if (response.credential === null) {
+  if (response.credential === null) {
     return handleCredentialsData(response);
   } else {
     // logout
     return;
   }
-};
-
-const handleGoogleData = (response) => {
-  const profile = response.additionalUserInfo.profile;
-  const body = {
-    uid: response.user.uid,
-    email: profile.email,
-    name: profile.name,
-    picture: profile.picture,
-  };
-
-  return body;
-};
-
-const handleTwitterData = (response) => {
-  const profile = response.additionalUserInfo.profile;
-  const body = {
-    uid: response.user.uid,
-    email: `twitter.com/${response.additionalUserInfo.username}`,
-    name: profile.name,
-    picture: profile.profile_image_url,
-  };
-
-  return body;
-};
-
-const handleGithubData = (response) => {
-  const profile = response.additionalUserInfo.profile;
-  const body = {
-    uid: response.user.uid,
-    email: response.user.email,
-    name: profile.name,
-    picture: profile.avatar_url,
-  };
-
-  return body;
 };
 
 const handleCredentialsData = (response) => {

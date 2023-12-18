@@ -41,7 +41,7 @@ export const RenameList = (body) =>
             "Content-type": "application/json; charset=UTF-8",
           }),
           body: JSON.stringify(body),
-        }
+        },
       );
       resolve(await response.json());
     } catch (err) {
@@ -60,7 +60,7 @@ export const DeleteList = (body) =>
             "Content-type": "application/json; charset=UTF-8",
           }),
           body: JSON.stringify(body),
-        }
+        },
       );
       resolve(await response.json());
     } catch (err) {

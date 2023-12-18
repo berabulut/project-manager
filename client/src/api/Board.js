@@ -41,7 +41,7 @@ export const GetUserRelatedBoards = (body) =>
             "Content-type": "application/json; charset=UTF-8",
           }),
           body: JSON.stringify(body),
-        }
+        },
       );
       resolve(await response.json());
     } catch (err) {
@@ -60,7 +60,7 @@ export const GetBoardRelatedUsers = (body) =>
             "Content-type": "application/json; charset=UTF-8",
           }),
           body: JSON.stringify(body),
-        }
+        },
       );
       resolve(await response.json());
     } catch (err) {
@@ -79,7 +79,7 @@ export const InviteUser = (body) =>
             "Content-type": "application/json; charset=UTF-8",
           }),
           body: JSON.stringify(body),
-        }
+        },
       );
       resolve(response.json());
     } catch (err) {
@@ -98,7 +98,7 @@ export const RemoveUser = (body) =>
             "Content-type": "application/json; charset=UTF-8",
           }),
           body: JSON.stringify(body),
-        }
+        },
       );
       resolve(response.json());
     } catch (err) {

@@ -10,7 +10,7 @@ const {
 module.exports.create = async (event) => {
   const promise = new Promise((resolve) => {
     const { admin, title, coverPhoto, visibility, users } = JSON.parse(
-      event.body
+      event.body,
     );
     if (users !== undefined) {
       createNewBoard(admin, title, coverPhoto, visibility, users)

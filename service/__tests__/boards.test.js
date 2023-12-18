@@ -29,7 +29,7 @@ describe("create new board", () => {
       body.title,
       body.coverPhoto,
       body.visibility,
-      body.users
+      body.users,
     );
     expect(Object.keys(data)[0].substring(0, 2)).toBe("-M");
   });

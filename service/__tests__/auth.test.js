@@ -20,7 +20,7 @@ describe("return user data", () => {
 
   it("should return error", async () => {
     await expect(returnUserData(uid + "923")).rejects.toMatch(
-      "User data doesn't exist!"
+      "User data doesn't exist!",
     );
   });
 });

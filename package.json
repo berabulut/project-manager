@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/rphad23/project-manager/issues"
   },
-  "homepage": "https://github.com/rphad23/project-manager#readme"
+  "homepage": "https://github.com/rphad23/project-manager#readme",
+  "devDependencies": {
+    "prettier": "^3.1.1"
+  }
 }

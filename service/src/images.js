@@ -11,7 +11,8 @@ if (!admin.apps.length) {
 
 const db = admin.database();
 
-const returnImages = () => // this will be removed later
+const returnImages = () =>
+  // this will be removed later
   new Promise((resolve, reject) => {
     const ref = db.ref(`/unsplash-images`);
     ref.once("value", (snapshot) => {
@@ -24,7 +25,8 @@ const returnImages = () => // this will be removed later
     });
   });
 
-  const postImages = (json) => new Promise((resolve, reject) => {
+const postImages = (json) =>
+  new Promise((resolve, reject) => {
     const ref = db.ref(`/unsplash-images`);
     ref.set(json, (error) => {
       if (error) {
@@ -33,6 +35,6 @@ const returnImages = () => // this will be removed later
         resolve(true);
       }
     });
-  })
+  });
 
 module.exports = { returnImages, postImages };

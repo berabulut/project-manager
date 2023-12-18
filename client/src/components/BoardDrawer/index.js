@@ -56,7 +56,7 @@ const BoardDrawer = ({ board, admin }) => {
     BoardHelpers.HandleBoardPropertyUpdate(
       board.id,
       "description",
-      description
+      description,
     ).then(() => {
       for (let i = 0; i < boards.length; i++) {
         if (boards[i].id === board.id) {
@@ -78,7 +78,7 @@ const BoardDrawer = ({ board, admin }) => {
             setBoards(boards);
           }
         }
-      }
+      },
     );
   };
 
@@ -101,7 +101,7 @@ const BoardDrawer = ({ board, admin }) => {
             setBoards(boards);
           }
         }
-      }
+      },
     );
     BoardHelpers.HandleRemovingUser(board.id, uid);
   };

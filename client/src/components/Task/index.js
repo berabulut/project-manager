@@ -41,7 +41,7 @@ class Task extends React.Component {
       this.context.renderedBoard,
       this.props.task.id,
       "title",
-      title
+      title,
     ).catch((err) => console.log(err));
   };
 
@@ -51,7 +51,7 @@ class Task extends React.Component {
       this.context.renderedBoard,
       this.props.task.id,
       "description",
-      description
+      description,
     ).catch((err) => console.log(err));
   };
 
@@ -66,14 +66,14 @@ class Task extends React.Component {
             this.context.renderedBoard,
             this.props.task.id,
             "comments",
-            this.state.comments
+            this.state.comments,
           );
           if (response) {
             resolve("Property updated successfully!");
           } else {
             reject("Property update failed");
           }
-        }
+        },
       );
     });
   deleteComment = (commentId) => {
@@ -88,7 +88,7 @@ class Task extends React.Component {
             this.context.renderedBoard,
             this.props.task.id,
             "comments",
-            this.state.comments
+            this.state.comments,
           ).catch((err) => console.log(err));
         });
       }
@@ -105,7 +105,7 @@ class Task extends React.Component {
             this.context.renderedBoard,
             this.props.task.id,
             "comments",
-            this.state.comments
+            this.state.comments,
           ).catch((err) => console.log(err));
         });
       }
@@ -135,14 +135,14 @@ class Task extends React.Component {
               this.context.renderedBoard,
               this.props.task.id,
               "attachments",
-              this.state.attachments
+              this.state.attachments,
             );
             if (response) {
               resolve("Property updated successfully!");
             } else {
               reject("Property update failed");
             }
-          }
+          },
         );
       }
     });
@@ -159,7 +159,7 @@ class Task extends React.Component {
             this.context.renderedBoard,
             this.props.task.id,
             "attachments",
-            this.state.attachments
+            this.state.attachments,
           ).catch((err) => console.log(err));
         });
       }
@@ -176,9 +176,9 @@ class Task extends React.Component {
           this.context.renderedBoard,
           this.props.task.id,
           "coverImage",
-          this.state.coverImage
+          this.state.coverImage,
         );
-      }
+      },
     );
   };
 
@@ -192,9 +192,9 @@ class Task extends React.Component {
           this.context.renderedBoard,
           this.props.task.id,
           "labels",
-          this.state.labels
+          this.state.labels,
         );
-      }
+      },
     );
   };
 
@@ -210,7 +210,7 @@ class Task extends React.Component {
             this.context.renderedBoard,
             this.props.task.id,
             "labels",
-            this.state.labels
+            this.state.labels,
           ).catch((err) => console.log(err));
         });
       }
@@ -227,9 +227,9 @@ class Task extends React.Component {
           this.context.renderedBoard,
           this.props.task.id,
           "assigments",
-          this.state.assigments
+          this.state.assigments,
         );
-      }
+      },
     );
   };
 
@@ -242,7 +242,7 @@ class Task extends React.Component {
           this.context.renderedBoard,
           this.props.task.id,
           "assigments",
-          this.state.assigments
+          this.state.assigments,
         ).catch((err) => console.log(err));
       });
     }

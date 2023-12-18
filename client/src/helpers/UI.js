@@ -25,7 +25,7 @@ const HandleLeavingBoardPage = (boards, renderedBoard) =>
           board = renderedBoard;
         }
       }
-      resolve(boards)
+      resolve(boards);
     } else {
       reject("Missing parameters");
     }

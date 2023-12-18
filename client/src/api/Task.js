@@ -25,7 +25,7 @@ export const ReorderTasks = (body) =>
             "Content-type": "application/json; charset=UTF-8",
           }),
           body: JSON.stringify(body),
-        }
+        },
       );
       resolve(await response.json());
     } catch (err) {
@@ -44,7 +44,7 @@ export const SwitchTasks = (body) =>
             "Content-type": "application/json; charset=UTF-8",
           }),
           body: JSON.stringify(body),
-        }
+        },
       );
       resolve(await response.json());
     } catch (err) {
@@ -63,7 +63,7 @@ export const UpdateTaskProperty = (body) =>
             "Content-type": "application/json; charset=UTF-8",
           }),
           body: JSON.stringify(body),
-        }
+        },
       );
       resolve(await response.json());
     } catch (err) {

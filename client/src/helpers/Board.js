@@ -9,7 +9,7 @@ import { CreateNewList, ReorderLists } from "api/List";
 import { UIHelpers, UserHelpers } from "helpers/";
 
 const ParseBoardId = (
-  boards // structuring boardIds for api call --> ["id1", "id2"]
+  boards, // structuring boardIds for api call --> ["id1", "id2"]
 ) =>
   new Promise((resolve, reject) => {
     let body = [];
@@ -31,7 +31,7 @@ const HandleUserRelatedBoards = (
   // fetching user related boards and seting them to context
   userData,
   setBoards,
-  setOpenBackdrop
+  setOpenBackdrop,
 ) =>
   new Promise((resolve, reject) => {
     if (!userData) {
@@ -78,7 +78,7 @@ const FindExactBoard = (
   boards,
   setRenderedBoard,
   setShowAllBoards,
-  setOpenBackdrop
+  setOpenBackdrop,
 ) => {
   UIHelpers.HandleBackdropOpen(setOpenBackdrop);
 
@@ -87,7 +87,7 @@ const FindExactBoard = (
       UIHelpers.HandleBoardPageRender(
         board,
         setRenderedBoard,
-        setShowAllBoards
+        setShowAllBoards,
       );
       UIHelpers.HandleBackdropClose(setOpenBackdrop);
       break;
@@ -100,7 +100,7 @@ const HandleBoardCreation = (
   userData,
   setUserData,
   setBoards,
-  setOpenBackdrop
+  setOpenBackdrop,
 ) =>
   new Promise(async (resolve, reject) => {
     try {
@@ -112,7 +112,7 @@ const HandleBoardCreation = (
           userData.uid,
           setUserData,
           setBoards,
-          setOpenBackdrop
+          setOpenBackdrop,
         );
         resolve(data);
       } else {
@@ -122,7 +122,7 @@ const HandleBoardCreation = (
           userData.uid,
           setUserData,
           setBoards,
-          setOpenBackdrop
+          setOpenBackdrop,
         );
         resolve(data);
       }

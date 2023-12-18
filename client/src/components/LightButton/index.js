@@ -6,17 +6,24 @@ import { buttonStyles } from "./styles";
 const LightButton = ({ icon, text, handleClick }) => {
   const classes = buttonStyles();
 
-
   return (
-    <IconButton onClick={handleClick} className={classes.button} aria-label="edit">
-      {icon && (
-        icon === "edit" ? (
+    <IconButton
+      onClick={handleClick}
+      className={classes.button}
+      aria-label="edit"
+    >
+      {icon &&
+        (icon === "edit" ? (
           <Edit className={classes.icon} />
         ) : (
           <Add className={classes.icon} />
-        )
-      )}
-      <Typography style={{marginLeft: icon ? "8px" : "0px"}} className={classes.text}>{text}</Typography>
+        ))}
+      <Typography
+        style={{ marginLeft: icon ? "8px" : "0px" }}
+        className={classes.text}
+      >
+        {text}
+      </Typography>
     </IconButton>
   );
 };
