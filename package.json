@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "install": "cd client && npm i && cd ../service && npm i",
+    "build": "cd client && npm run build",
     "client-dev": "cd client/ && npm run start",
     "service-dev": "cd service/ && npm run offline",
-    "prettier": "npx prettier . --write"
+    "prettier": "npx prettier --write ."
   },
   "repository": {
     "type": "git",

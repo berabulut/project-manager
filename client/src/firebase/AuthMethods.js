@@ -51,8 +51,7 @@ const Login = (
       await setToken(token);
     })
     .catch(async (err) => {
-      const { error } = await JSON.parse(err.message);
-      setErrors((prev) => [...prev, error?.message]);
+      setErrors((prev) => [...prev, err?.message]);
     });
 };
 
