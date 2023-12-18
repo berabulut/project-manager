@@ -2,11 +2,7 @@
   "hosting": {
     "public": "build",
     "site": "workspacewayzero",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
