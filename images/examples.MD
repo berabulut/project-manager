@@ -2,9 +2,6 @@
 
 - Authorization
   - Sign up with email and password
-  - Sign in with Google
-  - Sign in with Twitter
-  - Sign in with Github
 
 <br>
 

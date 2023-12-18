@@ -8,19 +8,11 @@ import {
   IconButton,
   InputAdornment,
 } from "@material-ui/core";
-import { LockOutlined, Mail, Lock, Twitter, GitHub } from "@material-ui/icons";
-import { Google } from "../Icons";
+import { LockOutlined, Mail, Lock } from "@material-ui/icons";
 import { AuthTheme } from "layouts";
 import { formStyles, LoginTextField } from "./styles";
 
-const AuthForm = ({
-  handleSubmit,
-  handleChange,
-  handleGoogleLogin,
-  handleGithubLogin,
-  handleTwitterLogin,
-  constants,
-}) => {
+const AuthForm = ({ handleSubmit, handleChange, constants }) => {
   const classes = formStyles(AuthTheme);
   return (
     <div className={classes.paper}>
@@ -91,8 +83,12 @@ const AuthForm = ({
         >
           {constants.buttonText}
         </Button>
-        
-        <Grid className={classes.gridContainer} container justifyContent="flex-end">
+
+        <Grid
+          className={classes.gridContainer}
+          container
+          justifyContent="flex-end"
+        >
           <Grid item>
             <Typography className={classes.infoText} variant="body2">
               {constants.info}

@@ -42,18 +42,6 @@ const AuthProvider = ({
     );
   };
 
-  const handleGoogleLogin = () => {
-    AuthMethods.googleLogin(setErrors, setToken, setUserData, setOpenBackdrop);
-  };
-
-  const handleGithubLogin = () => {
-    AuthMethods.githubLogin(setErrors, setToken, setUserData, setOpenBackdrop);
-  };
-
-  const handleTwitterLogin = () => {
-    AuthMethods.twitterLogin(setErrors, setToken, setUserData, setOpenBackdrop);
-  };
-
   const handleLogout = () => {
     AuthMethods.logout(setErrors, setToken);
     setBoards([]);
@@ -67,9 +55,6 @@ const AuthProvider = ({
         handleSignUp,
         handleLogin,
         handleLogout,
-        handleGoogleLogin,
-        handleGithubLogin,
-        handleTwitterLogin,
         inputs,
         setInputs,
         errors,

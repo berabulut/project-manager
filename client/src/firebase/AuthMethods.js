@@ -55,65 +55,6 @@ const Login = (
     });
 };
 
-const LoginWithGoogle = (setErrors, setToken, setUserData, setOpenBackdrop) => {
-  let provider = new firebase.auth.GoogleAuthProvider();
-
-  firebase
-    .auth()
-    .signInWithPopup(provider)
-    .then(async (res) => {
-      const token = await Object.entries(res.user)[5][1].b;
-      //set token to localStorage
-      handleSignIn(res, setUserData, setOpenBackdrop);
-      await localStorage.setItem("pmt_token", token);
-      await setToken(token);
-    })
-    .catch((err) => {
-      setErrors((prev) => [...prev, err.message]);
-    });
-};
-
-const LoginWithGithub = (setErrors, setToken, setUserData, setOpenBackdrop) => {
-  let provider = new firebase.auth.GithubAuthProvider();
-
-  firebase
-    .auth()
-    .signInWithPopup(provider)
-    .then(async (res) => {
-      const token = await Object.entries(res.user)[5][1].b;
-      //set token to localStorage
-      handleSignIn(res, setUserData, setOpenBackdrop);
-      await localStorage.setItem("pmt_token", token);
-      await setToken(token);
-    })
-    .catch((err) => {
-      setErrors((prev) => [...prev, err.message]);
-    });
-};
-
-const LoginWithTwitter = (
-  setErrors,
-  setToken,
-  setUserData,
-  setOpenBackdrop,
-) => {
-  let provider = new firebase.auth.TwitterAuthProvider();
-
-  firebase
-    .auth()
-    .signInWithPopup(provider)
-    .then(async (res) => {
-      const token = await Object.entries(res.user)[5][1].b;
-      //set token to localStorage
-      handleSignIn(res, setUserData, setOpenBackdrop);
-      await localStorage.setItem("pmt_token", token);
-      await setToken(token);
-    })
-    .catch((err) => {
-      setErrors((prev) => [...prev, err.message]);
-    });
-};
-
 const Logout = (setErrors, setToken) => {
   // signOut is a no argument function
   firebase
@@ -139,8 +80,5 @@ const Logout = (setErrors, setToken) => {
 export const AuthMethods = {
   signup: SignUp,
   login: Login,
-  googleLogin: LoginWithGoogle,
-  githubLogin: LoginWithGithub,
-  twitterLogin: LoginWithTwitter,
   logout: Logout,
 };
