@@ -37,8 +37,8 @@ const EditComment = ({ handleClose, editInput, value, label }) => {
           variant="outlined"
           margin="dense"
           multiline
-          rowsMax={10}
-          rows={2}
+          maxRows={10}
+          minRows={2}
         />
       </Grid>
       <Grid

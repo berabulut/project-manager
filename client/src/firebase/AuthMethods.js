@@ -64,7 +64,6 @@ const Logout = (setErrors, setToken) => {
       //remove the token
       localStorage.removeItem("pmt_token");
       //set the token back to original state
-      console.error(res);
       setToken(null);
     })
     .catch((err) => {
