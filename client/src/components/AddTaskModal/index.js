@@ -48,8 +48,8 @@ const AddElementModal = ({ anchorEl, handleClose, createNewTask, list }) => {
             helperText={error && error}
             value={nameInput}
             multiline
-            rowsMax={4}
-            rows={2}
+            maxRows={4}
+            minRows={2}
           />
         </Grid>
         <Grid

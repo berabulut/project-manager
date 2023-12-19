@@ -194,7 +194,7 @@ const BoardDrawer = ({ board, admin }) => {
                 <SectionTitle
                   title="Title"
                   icon="description"
-                  alignItems="end"
+                  alignItems="flex-end"
                 />
               </Grid>
             </Grid>
@@ -202,7 +202,7 @@ const BoardDrawer = ({ board, admin }) => {
               item
               xs
               container
-              justifyContent="start"
+              justifyContent="flex-start"
               style={{ display: admin ? "flex" : "none" }}
             >
               <LightButton
@@ -258,7 +258,7 @@ const BoardDrawer = ({ board, admin }) => {
               <SectionTitle
                 title="Description"
                 icon="description"
-                alignItems="end"
+                alignItems="flex-end"
               />
             </Grid>
             <Grid item xs={2} style={{ display: admin ? "block" : "none" }}>
@@ -311,7 +311,7 @@ const BoardDrawer = ({ board, admin }) => {
             alignItems="center"
           >
             <Grid item xs>
-              <SectionTitle title="Team" icon="people" alignItems="end" />
+              <SectionTitle title="Team" icon="people" alignItems="flex-end" />
             </Grid>
           </Grid>
           {/* MAPPING TEAM MEMBERS */}
@@ -326,6 +326,7 @@ const BoardDrawer = ({ board, admin }) => {
                     xs={11}
                     className={classes.gridItem}
                     alignItems="center"
+                    key={user.uid}
                   >
                     <Grid item style={{ width: "50px" }}>
                       <UserAvatar user={user} styles={classes.avatar} />
@@ -362,6 +363,7 @@ const BoardDrawer = ({ board, admin }) => {
                     xs={11}
                     className={classes.gridItem}
                     alignItems="center"
+                    key={user.uid}
                   >
                     <Grid item style={{ width: "50px" }}>
                       <UserAvatar user={user} styles={classes.avatar} />
