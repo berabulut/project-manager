@@ -75,10 +75,9 @@ const returnUserRelatedBoards = (boards) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = new Promise((resolve, reject) => {
-        let data = [];
-        let counter = 0;
+        const data = [];
 
-        boards.map((val, key) => {
+        boards.forEach((val, index) => {
           // val here should be unique id of a board
           const ref = db.ref(`/boards/${val}`);
           ref.once("value", (snapshot) => {
@@ -90,14 +89,11 @@ const returnUserRelatedBoards = (boards) =>
                   data.push(value);
                 })
                 .then(() => {
-                  if (counter === boards.length - 1) resolve(data);
                   // resolve promise if iterating last item of array
-                  else counter = counter + 1;
+                  if (index === boards.length - 1) resolve(data);
                 });
             } else {
-              counter === boards.length - 1
-                ? resolve(data)
-                : (counter = counter + 1);
+              if (index === boards.length - 1) resolve(data);
             }
           });
         });
