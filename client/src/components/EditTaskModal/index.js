@@ -50,7 +50,7 @@ const EditTaskModal = ({
   description,
   comments,
   labels,
-  assigments,
+  assignments,
   submitComment,
   deleteComment,
   editComment,
@@ -154,11 +154,11 @@ const EditTaskModal = ({
   useEffect(() => {
     if (renderedBoard) {
       const users = renderedBoard.userData.filter((user) =>
-        assigments.includes(user.uid),
+        assignments.includes(user.uid),
       );
       setAssignedUsers(users);
     }
-  }, [assigments]);
+  }, [assignments]);
 
   return (
     <Modal className={classes.modal} open={open} onClose={() => handleClose()}>
@@ -452,7 +452,7 @@ const EditTaskModal = ({
               <SectionTitle title="Actions" icon="people" />
             </Grid>
             {/*Assign Members */}
-            {!assigments.length > 0 && (
+            {!assignments.length > 0 && (
               <Grid
                 className={classes.buttonContainer}
                 item
@@ -469,7 +469,7 @@ const EditTaskModal = ({
                 <AssignMemberMenu
                   anchorEl={memberAnchorEl}
                   handleClose={handleMemberMenuClose}
-                  assigments={assigments}
+                  assignments={assignments}
                   assignMemberToTask={assignMemberToTask}
                   removeAssignedMember={removeAssignedMember}
                 />
@@ -578,7 +578,7 @@ const EditTaskModal = ({
                   <AssignMemberMenu
                     anchorEl={memberAnchorEl}
                     handleClose={handleMemberMenuClose}
-                    assigments={assigments}
+                    assignments={assignments}
                     assignMemberToTask={assignMemberToTask}
                   />
                 </Grid>
