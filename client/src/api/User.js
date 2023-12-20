@@ -22,7 +22,7 @@ export const FetchUserData = (uid, setUserData, setOpenBackdrop) =>
 
       return data;
     } catch (err) {
-      console.log(err);
+      console.error(err);
       reject(err);
     }
   });
