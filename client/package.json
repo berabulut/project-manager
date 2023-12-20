@@ -25,6 +25,7 @@
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts --openssl-legacy-provider build",
+    "firebase-preview": "npm run build && firebase hosting:channel:deploy dev --expires 8h",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

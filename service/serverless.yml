@@ -1,14 +1,25 @@
 org: wayzero
-app: project-management-tool
-service: project-management-tool-service
+app: workspace
+service: workspace-service
 frameworkVersion: "3"
+
+custom:
+  myStage: ${opt:stage, self:provider.stage}
+  myEnvironment:
+    MESSAGE:
+      prod: "This is production environment"
+      dev: "This is development environment"
+  serverless-offline:
+    httpPort: 3003
 
 provider:
   name: aws
   runtime: nodejs16.x
+  stage: dev
   environment:
     SLS_DEBUG: ${env:SLS_DEBUG}
     DATABASE_URL: ${env:DATABASE_URL}
+    MESSAGE: ${self:custom.myEnvironment.MESSAGE.${self:custom.myStage}}
 
 package:
   individually: false
@@ -140,10 +151,6 @@ functions:
           path: list-images
           method: get
           cors: true
-
-custom:
-  serverless-offline:
-    httpPort: 3003
 
 useDotenv: true
 
