@@ -94,6 +94,10 @@ const returnUserRelatedBoards = (boards) =>
                   // resolve promise if iterating last item of array
                   else counter = counter + 1;
                 });
+            } else {
+              counter === boards.length - 1
+                ? resolve(data)
+                : (counter = counter + 1);
             }
           });
         });
