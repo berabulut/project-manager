@@ -1,6 +1,6 @@
 org: wayzero
-app: project-management-tool
-service: project-management-tool-service
+app: workspace
+service: workspace-service
 frameworkVersion: "3"
 
 provider:
