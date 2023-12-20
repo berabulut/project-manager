@@ -7,7 +7,7 @@ import { PopMenu, menuStyles } from "./styles";
 const AssignMemberMenu = ({
   anchorEl,
   handleClose,
-  assigments,
+  assignments,
   assignMemberToTask,
 }) => {
   const classes = menuStyles();
@@ -34,13 +34,13 @@ const AssignMemberMenu = ({
   }, [input]);
 
   useEffect(() => {
-    if (assigments && renderedBoard.userData) {
+    if (assignments && renderedBoard.userData) {
       const list = renderedBoard.userData.filter(
-        (user) => !assigments.includes(user.uid),
+        (user) => !assignments.includes(user.uid),
       );
       setMemberList(list);
     }
-  }, [assigments, renderedBoard.userData]);
+  }, [assignments, renderedBoard.userData]);
 
   const handleOnKeyDown = (e) => {
     e.stopPropagation();
@@ -77,7 +77,7 @@ const AssignMemberMenu = ({
           </Grid>
         </Grid>
         {renderedBoard.userData &&
-          renderedBoard.userData.length !== assigments.length && (
+          renderedBoard.userData.length !== assignments.length && (
             <Grid item container className={classes.membersContainer} xs={11}>
               {memberList &&
                 memberList.map((user, index) => {

@@ -47,6 +47,7 @@ const Layout = (props) => {
             );
           }
         })}
+        <Route path="/*" render={() => <Redirect to="/" />} />
       </Switch>
     </Router>
   );

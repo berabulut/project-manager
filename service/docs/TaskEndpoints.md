@@ -43,6 +43,6 @@
   ```
       - boardId
       - taskId
-    - property (title, description, attachments, assigments, comments, labels)
+    - property (title, description, attachments, assignments, comments, labels)
     - data (property's data)
   ```
