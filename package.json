@@ -9,6 +9,8 @@
     "client-dev": "cd client/ && npm run start",
     "service-dev": "cd service/ && npm run offline",
     "firebase-preview": "cd client/ && npm run firebase-preview",
+    "service-deploy-prod": "cd service/ && npm run deploy-prod",
+    "service-deploy-dev": "cd service/ && npm run deploy-dev",
     "prettier": "npx prettier --write ."
   },
   "repository": {
