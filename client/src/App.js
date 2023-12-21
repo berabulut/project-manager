@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import firebase from "firebase";
+import firebase from "firebase/app";
 // eslint-disable-next-line
 import { FirebaseConfig } from "./firebase/FirebaseConfig";
 import AuthProvider from "provider/AuthProvider";
