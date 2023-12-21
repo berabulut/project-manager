@@ -1,11 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import {
-  Grid,
-  Button,
-  Avatar,
-  Typography,
-  CircularProgress,
-} from "@material-ui/core";
+import { Grid, Button, Typography, CircularProgress } from "@material-ui/core";
 import { GetUniqueId } from "api/Common";
 import { UserContext } from "provider/UserProvider";
 import { UserAvatar } from "components";

@@ -5,7 +5,6 @@ import {
   Modal,
   IconButton,
   LinearProgress,
-  Avatar,
 } from "@material-ui/core";
 import { Clear, Add, Edit } from "@material-ui/icons";
 import {

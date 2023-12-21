@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import {
   Grid,
   Typography,
-  Avatar,
   Button,
   Dialog,
   DialogTitle,

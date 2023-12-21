@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Grid, IconButton, Typography } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
-import { SearchImages, GetRandomImages, GetImages } from "api/unsplash";
+import { SearchImages, GetImages } from "api/unsplash";
 import { keywordSearchStyles } from "./styles";
 
 const KeywordSearch = ({
@@ -14,6 +14,7 @@ const KeywordSearch = ({
   const [error, setError] = useState();
 
   useEffect(() => {
+    // import {GetRandomImages} from "api/unsplash";
     // GetRandomImages(12)
     //   .then((result) => {
     //     setRandomImages(result);

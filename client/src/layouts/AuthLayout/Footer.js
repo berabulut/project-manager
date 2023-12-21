@@ -1,12 +1,6 @@
 import React from "react";
 import { footerStyles, AuthTheme } from "./styles";
-import {
-  Grid,
-  CssBaseline,
-  Typography,
-  Divider,
-  Link,
-} from "@material-ui/core";
+import { Grid, CssBaseline, Divider } from "@material-ui/core";
 
 const Footer = () => {
   const classes = footerStyles(AuthTheme);

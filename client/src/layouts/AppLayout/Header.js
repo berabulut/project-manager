@@ -22,7 +22,11 @@ const Header = () => {
             aria-label="menu"
             onClick={() => history.push("/boards")}
           >
-            <img src={wayZeroIcon} className={classes.menuIcon} />
+            <img
+              src={wayZeroIcon}
+              className={classes.menuIcon}
+              alt="Wayzero Icon"
+            />
             <Typography variant="h6" className={classes.menuTitle}>
               WayZero Workspace
             </Typography>
