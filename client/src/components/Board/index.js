@@ -37,10 +37,10 @@ const Boards = ({ image, title, users, visibility }) => {
                 </Box>
               );
             } else {
-              console.error(
-                "client/src/components/Board/index.js",
-                "key > 3; returned null",
-              );
+              // console.error(
+              //   "client/src/components/Board/index.js",
+              //   "key > 3; returned null",
+              // );
               return null;
             }
           })}

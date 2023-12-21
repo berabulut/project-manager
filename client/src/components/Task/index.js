@@ -375,10 +375,10 @@ class Task extends React.Component {
                       );
                     } else if (index === renderedBoard.userData.length - 1)
                       avatarCounter = 0;
-                    console.error(
-                      "client/src/components/Task/index.js",
-                      "Condition not meet; returned null",
-                    );
+                    // console.error(
+                    //   "client/src/components/Task/index.js",
+                    //   "Condition not meet; returned null",
+                    // );
                     return null;
                   })}
                 {assignments && assignments.length > 2 ? (

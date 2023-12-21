@@ -299,10 +299,10 @@ class DndCanvas extends React.Component {
                       />
                     );
                   } else {
-                    console.error(
-                      "client/src/components/DnDCanvas/index.js",
-                      "Map returned null",
-                    );
+                    // console.error(
+                    //   "client/src/components/DnDCanvas/index.js",
+                    //   "Map returned null",
+                    // );
                     return null;
                   }
                 })}
