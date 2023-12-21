@@ -145,9 +145,11 @@ const EditTaskModal = ({
   };
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeoutID = setTimeout(() => {
       setUploadError();
     }, 5000);
+
+    return () => clearTimeout(timeoutID);
   }, [uploadError]);
 
   useEffect(() => {
