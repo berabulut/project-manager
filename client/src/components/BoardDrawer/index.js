@@ -8,7 +8,6 @@ import {
   Typography,
   Button,
   IconButton,
-  Avatar,
   Dialog,
   DialogTitle,
   DialogActions,

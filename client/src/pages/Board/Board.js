@@ -64,7 +64,7 @@ const Board = () => {
   const findAdminIndex = (userData, adminUid) =>
     new Promise((resolve) => {
       if (userData) {
-        userData.map((user, index) => {
+        userData.forEach((user, index) => {
           if (user.uid === adminUid) resolve(index);
         });
       }

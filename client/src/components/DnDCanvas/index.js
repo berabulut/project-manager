@@ -298,6 +298,12 @@ class DndCanvas extends React.Component {
                         createNewTask={this.createNewTask}
                       />
                     );
+                  } else {
+                    // console.error(
+                    //   "client/src/components/DnDCanvas/index.js",
+                    //   "Map returned null",
+                    // );
+                    return null;
                   }
                 })}
               {provided.placeholder}

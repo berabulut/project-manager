@@ -28,9 +28,6 @@ export const EditInput = withStyles({
       marginLeft: "3px",
     },
   },
-  input: {
-    fontSize: "0.875rem",
-  },
 })(TextField);
 export const editStyles = makeStyles((theme) => ({
   addList: {

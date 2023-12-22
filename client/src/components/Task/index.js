@@ -271,14 +271,8 @@ class Task extends React.Component {
 
   render() {
     const { classes, task, index } = this.props;
-    const {
-      coverImage,
-      title,
-      comments,
-      attachments,
-      labels,
-      assignments: assignments,
-    } = this.state;
+    const { coverImage, title, comments, attachments, labels, assignments } =
+      this.state;
     const { renderedBoard } = this.context;
     let avatarCounter = 0;
 
@@ -379,9 +373,13 @@ class Task extends React.Component {
                           />
                         </Grid>
                       );
-                    }
-                    if (index === renderedBoard.userData.length - 1)
+                    } else if (index === renderedBoard.userData.length - 1)
                       avatarCounter = 0;
+                    // console.error(
+                    //   "client/src/components/Task/index.js",
+                    //   "Condition not meet; returned null",
+                    // );
+                    return null;
                   })}
                 {assignments && assignments.length > 2 ? (
                   <Grid item className={classes.othersContainer}>

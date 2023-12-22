@@ -5,7 +5,6 @@ import {
   Button,
   Typography,
   Grid,
-  IconButton,
   InputAdornment,
 } from "@material-ui/core";
 import { LockOutlined, Mail, Lock } from "@material-ui/icons";

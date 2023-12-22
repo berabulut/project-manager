@@ -71,7 +71,4 @@ export const CommentInput = withStyles({
       marginLeft: "3px",
     },
   },
-  input: {
-    fontSize: "0.875rem",
-  },
 })(TextField);

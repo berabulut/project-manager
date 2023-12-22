@@ -5,7 +5,6 @@ import {
   Modal,
   IconButton,
   LinearProgress,
-  Avatar,
 } from "@material-ui/core";
 import { Clear, Add, Edit } from "@material-ui/icons";
 import {
@@ -146,9 +145,11 @@ const EditTaskModal = ({
   };
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeoutID = setTimeout(() => {
       setUploadError();
     }, 5000);
+
+    return () => clearTimeout(timeoutID);
   }, [uploadError]);
 
   useEffect(() => {

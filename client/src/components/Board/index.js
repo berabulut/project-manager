@@ -20,7 +20,11 @@ const Boards = ({ image, title, users, visibility }) => {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <img className={classes.cover} src={image + "&q=80&w=400"} />
+        <img
+          className={classes.cover}
+          src={image + "&q=80&w=400"}
+          alt="unsplash"
+        />
         <Typography className={classes.title} variant="body1" gutterBottom>
           {title}
         </Typography>
@@ -32,6 +36,12 @@ const Boards = ({ image, title, users, visibility }) => {
                   <UserAvatar user={user} styles={classes.avatar} />
                 </Box>
               );
+            } else {
+              // console.error(
+              //   "client/src/components/Board/index.js",
+              //   "key > 3; returned null",
+              // );
+              return null;
             }
           })}
           {users.length > 3 && (

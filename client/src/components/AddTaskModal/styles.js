@@ -69,7 +69,4 @@ export const NameInput = withStyles({
       marginLeft: "3px",
     },
   },
-  input: {
-    fontSize: "0.875rem",
-  },
 })(TextField);

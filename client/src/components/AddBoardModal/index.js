@@ -147,6 +147,7 @@ const AddBoardModal = ({ open, setOpen }) => {
                   ? coverImageRegular
                   : placeholder
               }
+              alt="unsplash"
             />
           </Grid>
           <Grid

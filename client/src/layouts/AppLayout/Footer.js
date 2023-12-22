@@ -1,12 +1,6 @@
 import React from "react";
 import { footerStyles } from "./styles";
-import {
-  Grid,
-  CssBaseline,
-  Typography,
-  Divider,
-  Link,
-} from "@material-ui/core";
+import { Grid, CssBaseline, Typography, Divider } from "@material-ui/core";
 import { UIContext } from "provider/UIProvider";
 
 const Footer = () => {
