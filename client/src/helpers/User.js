@@ -1,4 +1,4 @@
-import firebase from "firebase/app";
+import firebase from "firebase";
 import { FetchUserData } from "api/User";
 import { BoardHelpers } from "helpers/";
 

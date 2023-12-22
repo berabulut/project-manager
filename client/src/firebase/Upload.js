@@ -1,4 +1,4 @@
-import firebase from "firebase/app";
+import firebase from "firebase";
 
 const storage = firebase.storage();
 const storageRef = storage.ref();
